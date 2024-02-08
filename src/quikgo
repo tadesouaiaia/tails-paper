@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo #$
+
+if [ "$#" -eq 1 ]; then
+    TEX=$1
+    TE=$(echo $TEX | awk -F\. '{print $1}')
+else
+	TEX=tails.tex
+	TE=tails
+fi
+echo "COMPILING "$TE 
+
+pdflatex $TEX  
+bibtex   $TE       > p.log
+pdflatex $TEX >> p.log
+bibtex $TE >> p.log 
+pdflatex $TEX >> p.log 
+echo "FINISHED"
+exit 
+#evince $TE".pdf" 
+
+exit
+

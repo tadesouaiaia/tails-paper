@@ -1,0 +1,987 @@
+\RequirePackage[2020-02-02]{latexrelease}  
+\documentclass[times]{zHenriquesLab-StyleBioRxiv}
+\usepackage{relsize, multirow, xcolor,xargs, placeins}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, siunitx} % For math fonts, symbols and environments
+\usepackage[normalem]{ulem}
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\usepackage{environ, etoolbox}
+\definecolor{sunyGray}{RGB}{131,134,135} \definecolor{sunyBlue}{RGB}{0,76,147}     \definecolor{sunyCyan}{RGB}{0,148,254}                                                            
+\newcommandx{\cyansub}[1]{\large\textcolor{sunyCyan} \noindent \textcolor{sunyBlue} {\noindent\textbf{#1}}}                             
+% The toggles are initially false  Fig. 
+\newtoggle{showFig}
+\togglefalse{showFig} \toggletrue{showFig}
+\NewEnviron{maybe}[1]{\iftoggle{#1}{\BODY}{}}
+\newcommand{\myemph}[1]{\textbf{\textit{#1}}}
+\definecolor{sunyWhite}{RGB}{0,0,0}       \definecolor{sunyGray}{RGB}{131,134,135}                                                                                                  
+\definecolor{sunyBlue}{RGB}{0,76,147}     \definecolor{sunyCyan}{RGB}{0,158,224}                                                                                                    
+\newcommandx{\cnote}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{Clive: #2}}                                                                              
+\newcommandx{\pnote}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{Paul: #2}}                                                                            
+\newcommandx{\tnote}[2][1=]{\todo[linecolor=green,backgroundcolor=green!25,bordercolor=green,#1]{Tade: #2}}                                                                         
+\newcommand{\Ga}{\mbox{Ga}} \newcommand{\N}{\mathcal{N}} \newcommand{\E}{\mbox{E}}                                                                                                                                                           
+%\newcommand{\V}{\mbox{V}}  \newcommand{\Wi}{\mbox{Wi}}                                                                                                                                                         
+\newcommand\eref[1]{{\textbf{\textit{Equation \ref{#1}}}}{}}                                                                                                                        
+\newcommand\erefs[2]{\textbf{\textit{Equations \ref{#1} \& \ref{#2}}}}                                                                                                              
+\newcommand\fref[1]{\normalsize{\textbf{\textit{Figure \ref{#1}}}}\normalsize{}}                                                                                                    
+\newcommand\dref[2]{\normalsize{\textbf{\textit{Figure \ref{#1}#2}}}\normalsize{}}                                                                                                  
+\newcommand\sref[1]{\normalsize{\textbf{\textit{Supplemental Figure \ref{#1}}}}\normalsize{}}                                                                                       
+\newcommand\tref[1]{\normalsize{\textbf{\textit{Table \ref{#1}}}}\normalsize{}}                                                                                                     
+\newcommand\need[1]{\textbf{\textcolor{red}{NEED: #1}}}                                                                                                                             
+\DeclareCaptionType[fileext=ext]{Supplementary-Fig}                                                                                                                                 
+\newcommand{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}                                                                                     
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}                                                                                 
+\newcommandx{\info}[2][1=]{\todo[linecolor=green,backgroundcolor=red!25,bordercolor=green,#1]{#2}}                                                                                  
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=orange,backgroundcolor=orange!25,bordercolor=orange,#1]{#2}}                                                                      
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}                                                                                                                        
+\newcommand\mainpoint[1]{\textbf{\textcolor{blue}{MAINPOINT: #1\\}}}                                                                                                                
+\newcommand\question[1]{\textbf{\textcolor{red}{QUESTION: #1}}}                                                                                                                     
+\newcommand\minipoint[1]{\smaller{\textbf{\textcolor{purple}{MINIPOINT: #1}}}\normalsize{}}                                                                                         
+\newcommand\note[1]{\textbf{\textcolor{red}{\scriptsize{NOTE: #1}}}}                                                                                                                
+\newcommand\btext[1]{\textcolor{purple}{Beatrice Draft: \scriptsize{#1}}}                                                                                                           
+\newcommand\bmore[1]{\textcolor{purple}{\scriptsize{#1}}}         
+
+\setlength\parindent{0.50cm}
+%\leadauthor{Souaiaia} 
+\leadauthor{Author} 
+\begin{document}
+\title{Tail Analysis Indicates Lost Signal} 
+\shorttitle{Tails}
+%\author[1,\Letter]{Tade Souaiaia}
+%\author[2]{Hei Man Wu} 
+%\author[2,\Letter,*]{Clive Hoggart} 
+%\author[2,\Letter,*]{Paul O'Reilly} 
+%\affil[1]{Department of Cell Biology, Suny Downstate Health Sciences, Brooklyn, NY, USA} 
+%\affil[2]{Department of Genetics and Genomic Sciences, Icahn School of Medicine, Mount Sinai, 1 Gustave L Levy Pl, NY, NY, USA} 
+%\affil[*]{These authors contributed equally to this work} 
+\onecolumn \maketitle
+\vspace*{-5mm} 
+%\begin{corrauthor} \texttt{\small tade.souaiaia\at downstate.edu, clive.hoggary\at mssm.edu, paul.oreilly\at mssm.edu} \end{corrauthor}
+\noindent\textcolor{sunyGray}{\rule{17.25cm}{1mm}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END PREAMBLE  %%%%%%%%%%%%%%%%%%%%%
+% 
+%  PREV: PREAMBLE, NEXT: ABSTRACT
+%  PREV: PREAMBLE, NEXT: ABSTRACT
+% 
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT  %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract} %\normalsize
+\noindent\cyansub{Abstract}$\,$ Complex polygenic traits are typically modeled as the additive sum of 
+many variants of limited effect alongside rare risk alleles of substantial penetrence. This distinction 
+likely reflects a balance between long-range selection pressure and the limited ability of trait-altering 
+mutant alleles to persist over multiple generations.  Identification of individuals with extreme trait values as  
+probable carriers of rare high-impact variants has led sequencing strategies to focus on individuals in the tails 
+of the trait distribution.  Tail trait values can also result from extreme polygenic burden created by 
+recombination and reassortment.  Therefore, to enhance the efficency of sequencing studies, 
+it is imperative to be able to discriminate between these different etiologies.  
+    
+One indicatation that rare variants may play a significant role in the
+tails of the trait distribution can be reflected in the reliability of
+polygenic risk scores (PRS) in the tails.  If highly penetrant rare
+variants not included in GWAS determine the tails of the trait
+distribution such individuals will not be assigned appropriate risk
+scores.  In this study, we develop a \textit{polygenic
+  regression-to-mean} (PRM) statistical test that compares the PRS in
+the tails of the trait distribution to expectation PRS under a
+polygenic model.  Applying this test to hundreds of traits in the UK
+Biobank reveals that the majority of quantitive traits exhibit
+significant PRM in one or both tails.
+
+Next we examine whether rare variants in exome studies are enriched in trait tails with significant tail 
+regression and demonstrate that such tails are more likely to be under negative selection.  Further examining 
+these trait tails we find an association between PRM and other measures of fitness that may be influenced by rare 
+variants including the lifetime number of illnesses and still births.  We then compare these 
+results to a simulation and find that they match. 
+
+Finally, we assess whether the predictions of a complex trait architecture derived from a conditional sibling model align with the observed diversity 
+in the architecture of trait extremes. The concordance between these measures underscores the need to 
+consider the role of rare variants in the analysis of trait tails.  The PRS and sibling analyses presented here 
+offer valuable tools for the targeted selection of traits and samples likely to harbor de novo or rare 
+deleterious alleles and represent an approach that has the potential to significantly enhance the 
+effectiveness and design of sequencing studies.
+\end {abstract}
+\noindent\textcolor{sunyGray}{\rule{17.25cm}{1mm}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END ABSTRACT  %%%%%%%%%%%%%%%%%%%
+% 
+% 
+% 
+% 
+% 
+% 
+%  PREV: ABSTRACT, NEXT: INTRO
+% 
+% 
+% 
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRO  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introduction} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% INTRO  PARAGRAPH 1 %%%%%%%%%%%%%%%%%
+Genome-wide association studies (GWAS) are instrumental in
+understanding the genetic architecture of complex traits.  These
+studies typically identify numerous common genetic variants, each of
+small individual effect \citep{gwas} that can be used in summation to
+make predictions. The idea that these common variants adequately
+represent the genetic architecture is supported by evolutionary
+theory, which suggests that many human traits (e.g., height, birth
+weight) are under stabilizing selection, which reduces the fitness
+impact of large-effect variants \citep{v_select}.
+
+A recent hope for advancing personalized medicine is in the potential
+of polygenic risk scores to identify high-risk individuals who may
+benefit from early interventions, such as adoption of specific
+lifestyle regimes or increased screening \citep{bt_7, bt_8, bt_9,
+  bt_10}.  However, this strategy will be underpowered when applied to
+traits or diseases with reduced PRS in the tail of the distribution
+due to reduced common polygenicity. To overcome this problem, the
+genetic aetiology underlying the tails of phenotype distributions must
+be investigated and better characterized \citep{bt_1}.  Polygenic
+prediction models use these common small-effect variants to generate
+polygenic risk scores (PRS) whose performance making out-of-sample
+predictions is usually evaluated with aggregate estimates like
+\emph{variance explained} ($R^2$).  However, new evidence has
+suggested that this level of analysis may not be adequate because the
+preformance of prediction models is not uniform across the trait
+distribution.  This non-uniformity results because the contribution of
+small effect common variants relative to highly penetrant rare
+variants and the environment is not equal across the trait
+distribution \citep{bt_1, bt_2}.
+
+This negative correlation between effect size and minor allele
+frequency reflects the interplay between long term selection against
+extreme trait values and the ability of mutant alleles with
+significant effects to escape this trend through chance or short term
+environmental changes. Recent or ongoing selection can leave distinct
+genetic signatures, such as an enrichment of rare variants in the
+tails of trait distributions during directional or stabilizing
+selection. The expectation that individuals with extreme trait values
+are more likely to carry rare large-effect variants has led to
+strategies that priorize sequencing of individuals in the tails of the
+trait distribution \citep{bt_3, bt_4}.  However, tail trait values can
+also result from extreme polygenic burden created by recombination and
+reassortment, and a more efficient approach would involve considering
+more lines of individuals to allow the selection of individuals with
+strongest evidence of rare variant architecture for sequencing.
+
+Here we attempt to distinguish whether the tails of the distribution
+of different traits are primarily driven by common polygenicity or by
+a more "monogenic-type" architecture. We accomplish this by developing
+a statistical test that measures the fit of the polygenic model across
+the trait-PRS distribution and identifies non-polygencity in each tail
+and applying it to over a thousand UK Biobank traits (see
+\fref{fig:intro}).  Next we consider whether evidence of negative 
+exists in a subset of uncorrelated traits and show that the trait
+tails under negative selection are more likely to be associated with
+rare variants.  We further triangulate evidence for selective
+constraint leading to reduced common polygenicity, by testing for the
+fertility of individuals in the tails based on their known measures of
+fitness that correlate with de novo mutations \citep{bt_5, bt_6}.
+
+
+\noindent Finally, we assess whether the predictions of a complex
+trait architecture derived from a conditional sibling model align with
+the observed diversity in the architecture of trait extremes. The
+striking concordance between these measures underscores the need to
+consider the role of rare variants in the analysis of trait tails.
+The PRS and sibling analyses presented here offer valuable tools for
+the targeted selection of traits and samples likely to harbor de novo
+or rare deleterious alleles and represent an approach that has the
+potential to significantly enhance the effectiveness and design of
+sequencing studies.
+
+We use PRS to assess the contribution of rare large-effect variants on
+extreme trait values. Rare variants are typically not included in PRS,
+leading to reduced accuracy of the PRS for individuals with rare
+large-effect variants. This inaccuracy will be most apparent in the
+tails of the trait distribution where individuals with large-effect
+variants are most likely to reside. Specifically, PRS values will tend
+to converge toward the mean PRS in the tails -- {\em PRS-regression to the mean}.
+
+
+
+\FloatBarrier \begin{figure}[!h] \centering \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/tailsLogo.pdf} \end{maybe} 
+\caption{\footnotesize{\textbf{Placeholder for Schematic}}} \label{fig:intro} \end{figure} \FloatBarrier 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END INTRO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS - START  %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS - START  %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS - START  %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS - START  %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS - START  %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS - START  %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS - START  %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage \newpage 
+\section*{Results} \label{sec:results} 
+
+The primary goal of this study is to identify and characterize \emph{polygenic-regression to the mean} (PRM), 
+which occurs when individuals in the tails of the quantitive trait distribution exhibit polygenic risk that is closer to 
+the mean risk score than expected.  To quantify this phenomenon we developed a quantitive trait statistical test 
+(PRM-test - see methods) that estimates effect size, direction, and signficance of movement away from the 
+expected polygenic load for individuals in the lower and upper 1\% of the population.  Applying this test to the 
+UKB reveals that 400 of 1,185 heritiable ($h^2>0.01$) quantitive traits have signficant ($p<0.05$) movement from 
+expectation in one or both tails and that 95\% of the time this movement is toward the mean (see - Supplement). 
+Observing that many of these tests are underpowered due to insufficient sample size and poor polygenic 
+prediction ($R^2$), we identify a set of 75 high-powered ($h^2>0.05$,$R^2>0.01$) non-redundant, quality-controlled 
+traits for further analysis (see Methods - QC).  Using these 75 traits we perform PRM-Testing, rare-variant analysis, analysis of selection to help elucidate 
+the mechanism that may be behind PRM.  We then replicate these results using a sibling model and different datasets. 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Polygenic Regression To The Mean (PRM) is Common} ~\\ 
+\noindent Running our PRM-Test on our 75 QC'ed traits reveals that the 79\% of 
+tails (118 of 150, FDR level 0.05) exhibit movement away from expectation 
+and that 97\% (115 of 118) of the time the movement that occurs is regression 
+toward the mean.  The majority of traits (47 of 75) were classified as "Dual Tail" 
+(significant regression to the mean in both tails), while 16 were classified 
+as "Lower Tail" and 8 were classified as "Upper Tail" (see \dref{fig:prs}{b}).  
+For illustrative purposes we identified four "index traits" to represent 
+"No Regression" (Triglycerides - the highest $h^2$ of any trait without tail 
+regression), "Lower Tail" (Haemoglobin Concentration - most signficant), 
+"Upper Tail" (RBC Distribution Width - most significant), and "Dual Tail" 
+(Sitting Height - most significant maximum pvalue).  The tail dynamics 
+observed in each of these traits can be illustrated in \dref{fig:prs}{a}. 
+
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig2_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
+\caption{\footnotesize{
+\textbf{(a)} Four traits the demonstrate PRS tail regression (clockwise: No Tail Regression, Upper Tail, Lower Tail, Dual Tail).
+\textbf{(b)} Miami plots demonstrates that dual tail regression is dominant tail regression observed. 
+\textbf{(c)} Trumpet plot reveal highly penetrant rare variants in many of the trait tails where PRM is obersved. 
+\textbf{(d)} Tail regression is associated with greater a number of penentrant rare variants. 
+\textbf{(e)} Age of Menopause is a counterexample.
+}} \label{fig:prs} \end{figure} \FloatBarrier 
+
+
+\subsection*{The Role of Rare Variants in PRM} ~\\ 
+\noindent The exclusion of rare variants from PRS (traditionally cutoff is 1\% MAF) has been shown to reduce 
+model performance \citep{rares1}.  To investigate whether PRM is a consequence of rare variants of large effect 
+that drive individuals into the tails of the trait distribution we created trumpet plots (\fref{fig:prs}{c}) to 
+visualize the impact and direction of of rare variants from GWAS \citep{neale} and exome studies \citep{backman}.  
+Focusing on our single tail index traits, we notice that there are a greater number of rare variants in the lower tail of 
+\emph{Haemoglobin Concentration} and in the upper tail for \emph{Red Blood Cell Distribution Width}.   Additionally, 
+for \emph{Sitting Height} there are more rare variants in the lower tail (where the PRM Effect is greatest) and 
+in \emph{Triglycerides} there are also more rare variants in the lower tail (where PRM Effect is greatest, albiet non-signficant). 
+This result is consistent with the hypothesis that rare variants of large effect that not accounted for in the 
+common-variant PRS responsible for the tail specific PRM.  In \fref{fig:prs}{d} we observe that there is a small 
+but signficiant relationship between the magnitude of regression and the number rare variants in the tail but 
+that that for many traits the tail with more signficant PRM shows almost no rare variants (see \fref{fig:prs}{e}) 
+suggesting that strong selection may result in private variants that cannot be identified using population based sequencing. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig3_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
+\caption{\footnotesize{
+\textbf{(a)} Relative Lifetime Reproductive Success used to approximate trait selection.
+\textbf{(b)} Association between negative tail selection and PRS regression. 
+\textbf{(b)} Health Effects 
+\textbf{(c)} Simulaton by Anil. 
+\textbf{(d)} Simulation by Anil. 
+}} \label{fig:evo} \end{figure} \FloatBarrier 
+
+
+
+\subsection*{The Impact of Selection on PRM} ~\\ 
+\noindent Using adjusted lifetime reproductive success \citep{v_select, v_select2} 
+as a proxy for selection we classify (see Methods - LRS) each trait with 
+respect to whether it is under 
+\emph{Stabilizing, Positive, Negative, or Neutral/Disruptive} and 
+produce results in agreement with a more comprehensive sex-specific 
+analysis (See \fref{fig:vishy}).  The majority of traits analyzed here 
+(56 of 75) are classified as under stabilizing selection which is characterized by lower 
+fecundity in both tails of the trait distribution. Stabilizing selection may be the result of 
+general fitness favoring the trait mean or the result of sex specific selection that 
+averages to produce this relationship \citep{v_select}.  Seven traits were classified as positive 
+selection and seven traits were classified as negative selection.  We also classified four traits as under 
+neutral selection (no signficant relationship with LRS) and one trait as divergent/disruptive selection where fecundity 
+is higher in both tails that at the mean of the distribution (\fref{fig:evo}{a}).  We find a significant relationship 
+between selection classification and PRM classifition (\fref{fig:evo}{b}), whereby traits under stabilizing selection are enriched 
+in "Dual Tail Regression" ($p< 2.5 \times 10^{-5}$), traits under positive selection are enriched in 
+"Lower Tail Regression ($p < 2.4 \times 10 ^{-4}$), and traits under negative selection are enriched 
+in "Upper Tail Regression ($p < 0.024$).  Focusing on each tail separately we find an even stronger 
+relationship insofar as the in the 118 trait tails which exhibit PRM, the tail is selected against 110 times 
+(93\%) while in the 32 tails which do not exhibit PRM the tail is only selected against 16 times (50\%) ($pv < 0.001$). 
+
+
+
+
+
+\subsubsection*{Simulating Selection} ~\\  
+In \fref{fig:evo}{d} we confirm this result using a simulation. \need{more}  
+
+\subsubsection*{Tail Fitness Concordance} ~\\ 
+\need{Should we redo this?} 
+We examined each tail across all traits to observe if there was a relationship with \emph{PRM} and our five proxy features in the expected direction.  We performed a 
+rank correlation between test statistics from our regression test and the t-statistic from our t-test.  For the number of illnesses, paternal age, and miscarriages 
+and still birth the expected direction of the correlation is positive (ie. tails of traits associated with more illnesses expected to have more extreme EPF) while 
+for children fathered and number of live births we expect that the association is negative (ie tails of traits associated with less fecundity are expected to have more extreme EPF). 
+
+In our primary analysis using the full UKB Biobank we observe expected and significant association between \emph{PRM} and both tails for number of illnesses (pvalue $< 0.005$), for the 
+and in the lower tail for paternal age.  We observe the expected but not significant result for other traits. 
+
+In our analysis using the european subsample we observe expected and significant association between both tails for number of illnesses (lower pvalue $<$ 0.05, upper tail pvalue $<0.0005$)
+as well the the lower tail for children fathered ($<0.0005$).   Fot all other traits except the upper tail of children fathered (non-significant, wrong direction), 
+the association is in the expected direction but non-significant. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage \newpage
+\subsection*{\emph{Replication in Siblings}} ~\\
+Discordance between siblings in the tails of the trait distribution is 
+indictive non-polygenic inheritance \cite{avi}.  The conditional 
+sibling distribution under polygenicity can be used to both to estimate 
+heritability and to estimate the impact that rare variants have on 
+tail genetic architecture \cite{t_sibs}. In \fref{fig:sib}{a} the 
+expected impact of polygenicity, de novo, and mendelian rare variants are illustrated.  
+
+Applying this model to the sibling data in the UKB to estimate $h^2$, 
+we find a correlation between snp h2 and sibling h2 \fref{fig:sib}{b}.  
+In our index traits we use this model to infer the presence of rare 
+variant architecture in the tails and find that lower tail discordance 
+in \emph{Haemoglobin Concentration}, upper tail discordance in 
+\emph{Red Blood Cell Distribution Width} and dual ail discordance 
+in \emph{Sitting Height}, all of which match the result from our PRM 
+test.  Overall we find a significant relationship between our sibling 
+test pvalue and the pvalue from our PRM-test \fref{fig:sib}{d}. 
+
+
+
+
+
+
+\FloatBarrier \begin{figure}[!h] 
+    \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig4_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
+\caption{\footnotesize{
+\textbf{(a)} Sibling Model 
+\textbf{(b)} Association between SNP heritability and Sibling Heritability 
+\textbf{(c)} Sibling Concordance Tests 
+\textbf{(d)} Relationship Between Sibling Test and PRM-Test 
+}} \label{fig:sib} \end{figure} \FloatBarrier 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage \newpage
+\subsection*{\emph{Replication Analysis}} ~\\
+
+To better understand the power of our tests we performed a psuedo-replication using random 
+subsets of the target population for each of our 75 QC traits. These tests that while 
+the PRM-test is underpowered at lower sample sizes (fewer than half of tails of identified 
+as nominally signficant at 10k), we do see significant replication across the effect size 
+distribution.  
+
+We applied our test to the UKB-Non-European and All Of Us. \need{Some help Here}. 
+
+
+
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig5_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
+\caption{\footnotesize{
+\textbf{(a)} Sibling Model 
+\textbf{(b)} Association between SNP heritability and Sibling Heritability 
+\textbf{(c)} Sibling Concordance Tests 
+\textbf{(d)} Relationship Between Sibling Test and PRM-Test 
+}} \label{fig:sib} \end{figure} \FloatBarrier 
+
+
+
+\newpage \clearpage
+
+%  PREV: RESULTS, NEXT: DISCUSSION
+%  PREV: RESULTS, NEXT: DISCUSSION
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   DISCUSSION - START  %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   DISCUSSION - START  %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   DISCUSSION - START  %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage \newpage
+\section*{Discussion} \label{sec:discussion}
+
+In this study, we propose the use of PRS Regression-to-the-Mean (RM) Test as a way to identify traits that are enriched for rare or de novo – more “monogenic-type” effects (MTE) in extreme. 
+We applied this method to a list of quantitative traits available in UKB. In addition to genotype
+data, we also incorporated the rich source of UKB information including the sibling data (Sibling RM Test), and paternal age (Paternal Age Test) and number of children (Fecundity Test) into our analyses. 
+We found directional consistency in most of the tests performed, providing converging
+evidence for the feasibility of using PRS as a strategy to identify traits with potential MTE. 
+In our analyses, the PRS RM test can be used to identify both the “polygenic” and “MTE” event, we hypothesize that for a highly polygenic trait, 
+samples with extreme trait values (ETV) are expected to have extreme PRS correspondingly. Deviation from the expectation may suggest samples at
+the extreme tails are enriched for MTE that are under selection. Our results show significant correlation in the ranking traits from least to most evidence of 
+common polygenicity in the tails of their distributions between the PRS RM test and Fecundity test. Furthermore, the results of the
+PRS RM test are supported by the Sibling RM test of which we use the sibling phenotype data to investigate the common polygenicity in different traits. 
+Sib-pairs are expected to have similar trait value under the influence of common polygenicity. On the other hand, if the ETV in sib A is
+contributed by de novo mutations, we expect sib B to be discordant phenotypically. An alternative explanation for discordant phenotype in sib-pairs could be 
+due to the non-shared environment factors with large effect.
+
+
+
+One major limitation of these tests is that they are highly sensitive to measurement errors. Measurement errors would result in the same PRS/ sibling departure at the extreme ends, 
+because the PRS is no longer reflective by one’s phenotypic measurement. In addition, both the PRS RM and
+sibling RM Test cannot distinguish between large effect mediated by environmental factors and MTE. For example, if a person with extremely low levels of LDL but normal PRS can be caused by malnutrition. 
+Therefore, collection of the associated environmental factors and the corresponding
+adjustment becomes vital to alleviate this problem when applying these tests. Moreover, these tests are only applicable to quantitative traits, more work is needed to develop for testing binary outcome. 
+In this study, we identified traits with evidence to be influenced by MTE at the trait tail(s), however, we did not identify or confirm the corresponding de novo mutation. Despite the lack of parent-offspring trios which is essential for the identification of de novo mutations, it is
+technically challenging to define a list of candidate genes and variants for every trait we investigated. Further investigation is warranted to validate this finding. 
+In conclusion, we propose a novel way of using polygenic risk score to look for evidence of de novo/ rare mutations. This can be used as a method to identify traits that are more likely influenced by de novo mutations, and select samples who are more likely carry de novo mutations,
+potentially maximizing the power of a sequencing study. This method can be applied to any traits with continuous measure such as age of onset, disease severity and rate of disease progression.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END DISCUSSION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  PREV: DICUSSION, NEXT: METHODS
+%  PREV: DICUSSION, NEXT: METHODS
+%  PREV: DICUSSION, NEXT: METHODS
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   METHODS - START     %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage \newpage 
+\section*{Methods} 
+%%%%%%%%%%%%%%   METHODS 1- DATA PROCESSING %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 1- DATA PROCESSING %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 1- DATA PROCESSING %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 1- DATA PROCESSING %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 1- DATA PROCESSING %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 1- DATA PROCESSING %%%%%%%%%%%%
+
+\subsection*{Data Processing} ~\\
+\vspace*{-0.5cm} 
+\subsubsection*{Sample Extraction} ~\\
+The UK Biobank is a prospective cohort study that included
+approximately 500,000 participants with measurements of 4,000
+phenotypes, recruited across the United Kingdom from 2006 to 2010
+\citep{ukb}.  The genetic dataset consists of 488,377 samples
+genotyped at 805,426 SNPs. To determine population ancestries, 4-means
+clustering analysis was conducted on the first two Principal
+Components (PCs) of the genotype data. Each cluster's ancestry was
+determined based on the majority of individuals' country of birth
+(field ID: 20115) within that cluster.
+
+Subsequent to clustering, standard quality control (QC) procedures
+were applied independently to each ancestry cluster. SNPs with a minor
+allele frequency $<$ 0.01, genotype missingness > 0.02, or
+Hardy-Weinberg equilibrium test P-value $< 10^{-8}$ were
+excluded. Samples exhibiting high levels of missingness or
+heterozygosity, inconsistencies in genetic-inferred and self-reported
+sex, or displaying aneuploidy of the sex chromosomes were removed in
+accordance with recommendations from the UKB data processing team. A
+greedy algorithm was employed to remove related individuals that
+maximizes samples retention while removing all third-degree relatives
+(kinship coefficient > 0.044) \citep{erase}.  It has been shown that
+both the mean and variance of PRS varies across ancestry groups
+\citep{global}. Therefore primary analyses were performed on over 410k
+unrelated European samples ($>94\%$ of the cohort) identified using
+this methodology.  We also repeated the analysis using over 432k
+unrelated samples of all ancestries and replicated our results using 
+only the 22k samples classified as Non-European Ancestry.
+
+Sibling pairs were selected by first identifying first degree
+relatives defined as those with kinship coefficient within the range
+0.177 and 0.354, this range either side of the expected value of 0.25
+was used to account for the expected variation in within-pair
+similarity \citep{sib1}. The proportion of SNPs with zero
+identity-by-state (IBS0) was used to distinguish sibling pairs from
+parent-offspring pairs since parent–offspring pairs have
+IBS0$\approx$0. It has been shown in the UKB there is good separation
+between pairs of first degree relatives at IBS0=0.00112\citep{sib1}
+thus sibling pairs were selected as those that exceeded this
+threshold, this gave a total of 17,869 sibling pairs (17,289 of European ancestry, 
+that were used in our primary analysis).
+
+
+
+\subsubsection*{Quantiative Trait QC} ~\\
+Quantiative traits were selected in UKB as those with at least 10
+distinct values, heritability $h^2>0.02$ (measured by LD score
+\citep{ldsc} applied to publicly available UKB GWAS summary statistics
+\citep{neale}) and $>$50,000 observation in unrelated samples, this
+gave 1,121 traits. Traits values more than six standard deviations
+from the mean were removed. Traits were then standardised as follows:
+(1) linear regression models were applied to each trait, with
+covariates for age, sex, recruitment centre, genotyping batches, and
+the first 40 genetic principal components, (2) standardised values
+were obtained by inverse normal transforming the rank of the
+residuals.
+
+Results are presented in the Supplementary Material for the
+PRS-regression test on all 1,121 continuous traits.  However, our
+analyses assume the transformed trait values are Gaussian distributed
+with primarily additive polygenic architecture.  Therefore the traits
+were further thinned by enforcing the following criteria.
+\textbf{Continuity:} top two modal untransformed trait values include
+less than half of samples. \textbf{Unimodal:} Dip-Test (\citep{dip}) 
+P-value $>$ 0.05 applied to untransformed trait values.
+\textbf{Non-skewed:} skew of untransformed trait values $<$ 2.
+\textbf{Polygenic:} Maxmimum single variant $r^2$ < 0.5\%. Finally, to
+ensure a minimum power threshold, traits with PRS $r^2 <$ 0.5\% were
+removed. This resulted in 151 traits.  Traits that were genetic
+duplicates ($r_g > 99\%$) were then removed using same the data
+maximization algorithm \citep{erase} applied to extract unrelated
+individuals, this resulted in a total of 92 traits.
+
+
+\subsection*{Genome-wide association analyses and PRS estimation}
+European UKB samples were split randomly into 50\% base and 50\%
+target data sets. GWASs were applied to the base data using PLINK-1.9
+\citep{bt_10} applying a linear additive model to the standardised
+trait values. PRScice-2(v2.3.4) \citep{bt_11} was applied to the GWAS
+summary statistics of each trait with high-resolution scoring to
+select the most predictive P-value threshold. Individual
+risk scores were calculated for UKB samples in the target data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+%%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
+
+
+\clearpage \newpage 
+\subsection*{Data Analysis} ~\\
+\vspace*{-0.5cm} 
+\subsubsection*{The PRS-regression to the mean (PRM) test}~\\
+The PRM-test first applies a regression of PRS
+on standardised trait values. For each trait, the residuals from the
+regression are then split into quantiles according to the trait
+distribution and t-tests are applied to test whether the residuals
+are: (1) significantly less than zero for individuals with trait
+values in the upper tail and (2) significantly greater than zero for
+individuals with trait values in the lower tail using t-tests. The
+tests were applied to individiuals in the top and bottom 1\% of the
+trait distribution.
+
+To avoid false positive associations arising from unusual trait
+distributions, the residuals of samples in the middle of the trait
+distribution were tested for departure from the null of zero
+mean. Specifically, for each trait, two-sided t-tests for zero mean
+were applied to the residuals assigned in each of the middle 80 centiles of
+the trait distribution. Traits were deemed to fail QC if the smallest
+P-value was significant at a Bonferroni-corrected level of 0.05 (P
+$le$ 0.05/80). A robust empirical P-value for deviation in trait tails
+was calculated as follows: for each centile of trait one-sided t-tests for
+residuals less than and greater than zero were calculated.  The
+P-value for regression to the mean in the upper tail was calculated
+from the rank of the tests for residuals significantly less than zero
+and the lower tail empirical P-value from the greater than zero
+tests. The tests were performed on all 1,121 continuous traits in UKB.
+
+\subsubsection*{Rare Variant Analysis: Trumpet plots} ~\\
+Trumpet plots show the effect sizes and MAF of independent genome-wide
+significant variants. Common variants (MAF$>$1\%) were selected as the
+most significant variant (P$\le 5\times 10^{-8}$) in 1Mb windows from
+publicly available GWAS summary statistics generated using UKB samples
+of European ancestry \cite{neale}. Exome sequencing associations from
+the analysis of UKB European ancestry samples were downloaded
+\cite{backman}. Results are plotted for the most significant
+deleterious, missense or predicted loss of functions in each gene
+(P$\le 2.18\times 10^{-11}$, one association per gene). Genome-wide
+significant burden associations are shown where no signal variant
+within the gene is genome-wide significant.
+
+
+
+
+
+\clearpage \newpage
+%%%%%%%%%%%   Selection Analysis   %%%%%%%%%%%%
+%%%%%%%%%%%   Selection Analysis   %%%%%%%%%%%%
+%%%%%%%%%%%   Selection Analysis   %%%%%%%%%%%%
+%%%%%%%%%%%   Selection Analysis   %%%%%%%%%%%%
+%%%%%%%%%%%   Selection Analysis   %%%%%%%%%%%%
+%%%%%%%%%%%   LRS   %%%%%%%%%%%%
+%%%%%%%%%%%   LRS   %%%%%%%%%%%%
+%%%%%%%%%%%   LRS   %%%%%%%%%%%%
+%%%%%%%%%%%   LRS   %%%%%%%%%%%%
+%%%%%%%%%%%   LRS   %%%%%%%%%%%%
+%%%%%%%%%%%   LRS   %%%%%%%%%%%%
+\subsubsection*{Selection Analysis: Relative Lifetime Reproductive Success} ~\\ 
+The number of offspring is recorded in the UKB for both females and
+males, fields \textit{2734} and \textit{2405} respectively.  We
+followed the method first described by Beauchamp \citep{v_select2} and
+later applied by Sanjak et al \citep{v_select} which involves
+splitting samples into four birth cohorts (1934-42, 1943-48, 1949-55,
+1956-65) and dividing the number of offspring of each individual by
+the cohort mean to calculate relative lifetime reproductive success
+($Y_{rLRS}$). The pressence of selective pressure acting on the traits
+is assessed by fitting the following regression model to relative
+lifetime reproductive success \citep{v_select}
+\begin{equation}
+  Y_{rLRS} = \beta_0 + \beta z + \gamma z^2 \label{math:MgivenS}
+\end{equation}
+where $z$ denotes the residualized and normalized trait values
+and $\beta$ and $\gamma$ are linear and quadratic regression
+parameters. The pressence of selection is inferred from the regression
+parametrers as folows:
+\begin{itemize}
+\item If the P-value associated with the quadratic parameter $\gamma$
+  is nominally significant ($<$0.05), then:
+\begin{itemize}
+\item If $\gamma < 0$, the trait is classified as under stabilizing selection.
+  (i.e. negative selection both tails).
+\item If $\gamma > 0$, the trait is classified as under disruptive selection 
+  (i.e. negative selection is not occuring in either tail).
+\end{itemize}
+\item If only the p-value associated with the linear parameter $\beta$
+  is nominally significant ($<$0.05), then:
+\begin{itemize}
+\item If $\beta < 0$, trait is classified as under negative directional selection
+  (i.e. negative selection in the upper tail).
+\item If $\beta > 0$, trait is classified as under positive directional selection
+  (i.e. negative selection in the lower tail).
+\end{itemize}
+\item If neither parameter is nominally significant, trait is classified as under neutral selection 
+(i.e negative selection is not occuring in either tail. 
+\end{itemize}
+
+
+
+
+%%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
+%%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
+%%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
+%%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
+%%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
+\subsubsection*{Selection Analysis: Measuring Fitness in the Tails} ~\\ 
+\need{Think we just need details of test here, not clear what this is,
+  rather than motivation / interpretation}
+In addition to lifetime reproductive success, we consider four 
+additional measures that might be associated with 
+{\em PRM} if rare-variants are present: 
+
+\begin{itemize} 
+\item{\textbf{Illnesses:}} In the UKB the number of self-reported
+  non-cancer illnesses (UKB Field 20002) is a proxy for individual
+  fitness. Increased number of illnesses may co-occur with reduced
+  polygenic signal if both are caused by rare large-effect variants.
+  Additionally, downstream effects of illness could also cause extreme
+  trait values.
+  
+\item{\textbf{Miscarriages and Still Births:}} The number of still
+  births (UKB Field 3829, N = 88,026) and the number of miscarriages
+  (UKB Field 3839, N = 88,026) are a proxy for reduced fitness and may
+  share rare variant etiology with each other as well as with \emph{PRM}.  
+
+\item{\textbf{Paternal Age:}} In the UKB father’s age is recorded for
+  114,666 individuals of European ancestry. If advanced paternal age
+  is resposible for de novo mutations \citep{pat} that cause
+  \emph{PRM} in some traits then we expect individuals of the tails of
+  those traits to be enriched with older fathers. Father’s age at
+  birth was derived by subtracting the father’s age (UKB data field:
+  2946) from the age of the participant at recruitment (UKB data
+  field: 21022).
+\end{itemize}
+
+
+For each trait tail (upper and lower 1\%), \need{we calculate the rank
+correlation between the P-value associated with {\em PRM} each tail and the
+average value in the tail for each measure. We hypothesize positive
+association for illnesses, still-births, miscarriages, and paternal
+age with PRM in the pressence of rare large-effect variants.}
+
+ 
+
+
+
+\subsubsection*{Selection Analysis: Simulating Stabilizing Selection using SLiM} ~\\ 
+Using SLiM v4.0 \citep{anil1}, we simulated a quantitative polygenic trait under a 
+standard Wright-Fisher model of stabilizing selection. Stabilizing selection 
+assumes the optimal phenotype is at the mean of the population and 
+that fitness decreases as individual’s phenotype moves
+away from that optimum. Briefly, we first established a population of N=10,000 
+individuals and simulated a 10N generation long burn-in period to reach an 
+equilibrium state of mutation–drift balance \citep{anil2}.  
+
+After neutral genetic diversity was achieved, stabilizing selection on the 
+phenotype was introduced for 1N generations. We used a mutational target 
+size of 1Mb with a constant mutation of $2.36 * 10-8$ per base pair (bp) and 
+recombination rate of $1.00 * 10-8$ per bp. To simulate new mutations across 
+the mutational target, we implemented a gamma distribution. This is similar 
+to other models of genetic variation in humans that assume a gamma distribution \citep{anil3}, 
+reflecting a long-tail distribution that combines mostly small effects with 
+a small number of relatively large effects. The gamma was parameterized with mean and shape equal to $0.01026$ and $0.186$. 
+Each mutation that was drawn was multiplied by $\delta$ where ($\delta \in {-1,1}$) with equal probability, to
+reflect a symmetrical effect size distribution commonly seen with complex traits. 
+Mutation effect sizes were furthermore multiplied by 1x, 5x, or 10x, to simulate different 
+ranges of mutation effect size. Trait heritability was set to 1.0 which means that the phenotypic 
+variance in the population is fully determined by genetic effects. At each generation, 
+an individual’s phenotype (i.e., polygenic score) was defined by the sum of the number of alleles of each mutation, weighted by its effect size.
+
+After the burn-in period, stabilizing selection was implemented through a gaussian fitness function,
+
+\begin{equation} 
+	f_t(x) = baseline + \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(x-\mu)^2}{2\sigma^2}\right\} \times factor
+\end{equation}
+
+where x is the phenotype of the individual at a specific generation t, $\mu$ is the phenotypic mean of the population at t 
+and $\sigma$ the phenotypic standard deviation at the start of selection (i.e., $t=10N$). The baseline and factor 
+parameters were set at 1 unless otherwise specified. The fitness of each individual was calculated and updated at 
+the end of each generation. Stabilizing selection was simulated until generation 11N after which the simulation was completed.
+
+Simulation data was collected by logging, at each generation, the phenotypic mean and standard deviation of the population, 
+statistics of mutations present in the populations, including allele frequencies and effect sizes, and the mutational profile of each individual. To
+investigate the contribute of low-frequency variants, a second genetic value was calculate using only variants with $MAF > 1\%$.
+
+
+\clearpage \newpage 
+\subsection*{Sibling Concordance: Assessing the contribution of rare large-effect variants on extreme trait values}~\\
+The conditional distribution under polygenicity of an individual's
+trait value given their siblings trait value is predicted by theory \cite{t_sibs}
+\begin{equation} p(s_2 \mid s_1 ) \sim \N\left(\frac{1}{2}s_1h^2,
+1-\frac{h^4}{4}\right) \label{math:S2givenS1}
+\end{equation}
+where $s_1$ and $s_2$ denote the index and conditional-sibling trait
+values respectively and $h^2$ is the trait heritability. Rare
+large-effect variants can lead to deviations from this distribution,
+particularly in the tails.  Specifically, rare large-effect variants
+within families, {\em Mendelian effects}, will result in excess
+concordance between siblings when they both inherit the effect
+variant. Conversely, a large effect {\em de novo} mutation in one
+sibling will result in excess discordance. The sibling test for {\em
+Mendelian} effects applies a binomial test for a greater than
+expected number of sibling pairs both lying in a defined quantile of
+the tail of the trait distribution by calculating the following
+z-statistic
+\begin{align*}
+z&=\frac{r-n\pi_0}{\sqrt{n\pi_0(1-\pi_0)}}
+\intertext{where $n$ is the number of index siblings in the quantile $q$ 
+under test, $r$ is the number of siblings pairs both in $q$ and $\pi_0$ 
+is the expected proportion of sibling-pairs in the quantile under polygenicity}
+\pi_0&=\frac{1}{n}\sum_{i\in A_q} \left( 1 - \Phi \left(
+\frac{\Phi^{-1}(q)  - \frac{s_1^{(i)}
+h^2}{2}}{\sqrt{1-\frac{h^4}{4}}} \right)\right)
+\end{align*}
+where $A_q$ is the set of index siblings in trait quantile $q$,
+$\Phi$ is the normal normal cumulative density function, $\Phi^{-1}$
+is its inverse and $n$ is the number of sibling pairs.
+
+The sibling test for {\em de novo} effects constructs a z-statistic
+for the distance between index siblings in the tail of the trait
+distribution and their conditional siblings as follows
+\begin{align*}
+  z&=\frac{\sum_{i\in A_q}s_2^{(i)}-\frac{1}{2}s_1^{(i)}h^2} {\sqrt{n(1-\frac{h^4}{4})}}
+\end{align*}
+For index siblings in the lower and upper tails the alternative
+hypotheses of $H_1: z>0$ and $H_1: z<0$ are tested respectively. For
+further details see Souaiaia et al \citep{t_sibs}.  Heritability $h^2$ 
+required for the {\em Mendelian} and {\em de novo} tests is estimated 
+from the sibling pairs by taking the maximum likelihood of $h^2$ 
+under the null hypotheses of both tests
+\begin{equation*} \log \mathcal{L} \propto -n\log\left(1 -
+    \frac{h^4}{4}\right) - \frac{1}{1-\frac{h^4}{4}} \sum_{i=1}^n
+  \left( s_{2}^{(i)} - \frac{s_1^{(i)} h^2}{2}
+  \right)^2
+\end{equation*}
+
+For each trait P-values from the {\em Mendelian} and {\em de novo} tests are
+combined using Fisher's method to give a $\chi^2$ statistic with 4 degrees of freedom,
+\begin{align*} \chi^2_4 = -2(\log p_{Mendelian} + \log p_{de novo}) \end{align*}
+that can be used to generate a meta-analysis p-value to be compared to the PRM-Test. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage \newpage 
+\subsection*{Replication} ~\\
+
+\subsubsection*{Bootstrap Analysis using Target Subsets} ~\\ 
+
+Our QC-valid traits had an average of 307k total samples and a minimum of 103k due to 
+a requirement that at least 100k totals samples be present (50k target samples for the PRM-Test). 
+To test how our PRM-Test performed on lower sample sizes we repeatedly sampled subsets 
+of between 5k and 50k target samples for each trait and performed our PRM-Test using these samples. 
+For each value between 5k and 50k (counting by 5k) we performed 100 trials and across each of the 
+150 trait tail tests we calculated: 
+\begin{enumerate} 
+    \item Discovery Parameters 
+        \begin{enumerate} 
+        \item Number of nominally significant results indicitive of regression to the mean 
+        \item Number of nominally significant results indicitive of "progression away from the mean." 
+        \item Number of null results 
+        \end{enumerate} 
+    \item Replication Parameters 
+        \begin{enumerate} 
+        \item The linear correlation between full dataset effect sizes and the subset effect sizes 
+        \item The rank correlation between full dataset effect sizes and the subset effect sizes 
+        \end{enumerate} 
+    \end{enumerate} 
+
+
+\subsubsection*{Non-European Ancestry Individuals in the UKB} ~\\
+\need{\em From Beatrice} 
+Genotype and phenotype QC.
+
+\subsubsection*{All of US} ~\\
+\need{\em From Beatrice} 
+Genotype and phenotype QC.
+
+
+
+
+\clearpage \newpage
+\bibliography{refs}
+\clearpage \newpage
+\section*{Supplement} \label{sec:discussion}
+
+
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/methodFlow.pdf} \end{maybe}
+\caption{\footnotesize{\textbf{Sample and SNP Workflow}}} \label{fig:qcFlow} \end{figure} \FloatBarrier
+
+
+
+\begin{figure}[!ht] \centering \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=16.5cm]{Figures/qctable.pdf} \end{maybe} \label{fig:m2} \caption{\scriptsize Secondary QC} \end{figure} 
+\clearpage \newpage
+
+
+\FloatBarrier \begin{figure}[!h] \centering \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=16.5cm]{Figures/vishtable.pdf} \end{maybe} 
+\caption{\footnotesize{\textbf{Comparison of Selection Estimates}}} \label{fig:vishy} \end{figure} \FloatBarrier 
+
+%
+%
+%
+%
+%
+%
+\clearpage \newpage
+\end{document}
