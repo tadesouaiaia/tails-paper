@@ -38,6 +38,8 @@
 \newcommand\note[1]{\textbf{\textcolor{red}{\scriptsize{NOTE: #1}}}}                                                                                                                
 \newcommand\btext[1]{\textcolor{purple}{Beatrice Draft: \scriptsize{#1}}}                                                                                                           
 \newcommand\bmore[1]{\textcolor{purple}{\scriptsize{#1}}}         
+\newcommand\pcomment[1]{\textcolor{blue}{\textbf{Issues:} \footnotesize{#1}}}                                                                                                           
+\newcommand\tfix[1]{\textcolor{purple}{\textbf{Solutions:} \footnotesize{#1}}}                                                                                                           
 
 \setlength\parindent{0.50cm}
 %\leadauthor{Souaiaia} 
@@ -559,6 +561,21 @@ potentially maximizing the power of a sequencing study. This method can be appli
 \subsection*{Data Processing} ~\\
 \vspace*{-0.5cm} 
 \subsubsection*{Sample Extraction} ~\\
+
+\pcomment{
+\begin{itemize} 
+\item  More specifics on the numbers. 
+\item  Explain ancestry clustering more specifically (which ancestries?
+\item  What PC values chosen?). Nobody could repeat this accurately as written. 
+\item  Some loose language in places. Several places where citations needed e.g. “recommended by the UK Biobank team.” i
+\item Need some better context - e.g. In the primary analyses in unrelated individuals (Figures 2, 3, 5)...
+\item In the analyses performed on siblings (Figure 4)... 
+\item Not sure if Mixed ancestry results needed anymore?
+\end{itemize}
+}
+
+
+
 The UK Biobank is a prospective cohort study that included
 approximately 500,000 participants with measurements of 4,000
 phenotypes, recruited across the United Kingdom from 2006 to 2010
@@ -603,11 +620,45 @@ that were used in our primary analysis).
 
 
 \subsubsection*{Quantiative Trait QC} ~\\
+
+\pcomment{
+\begin{enumerate} 
+\item h2 > 0.02 - why? 
+\item Seems a bit unusual to describe the QC, then the residualisation/normalisation,
+and then some further QC steps on the untransformed data. Is this the best order? 
+\item I think the reduction from 151 to 92 traits due to rg<0.99 cut-off is likely to raise alarm bells - how many
+more would’ve been lost if you’d used 0.98, 0.95, 0.9 instead? 
+\item There are a lot of P-values reported in the paper dependent on a test of many traits.. but if those are highly correlated
+then the overall P-value reported will be inflated. We’ve talked about this before I know but
+isn’t this still a problem!?
+\end{enumerate} 
+}
+
+\tfix{
+\begin{enumerate} 
+\item Typo - 0.01, still arbitrary, but better. 
+\item I don't know.  But basically Clives PRM-QC finds non-linearities 
+    but we know our normalization can hide them, so it does make sense to
+    be conservative here. 
+\item Filtering on Clives QC first and doing genetically correlations 
+last (as we should), it hardly makes a difference, I changed it to 0.95 
+and gave some numbers that should calm alarm bells. 
+\item They are not highly correlated - but I think we have done 
+enough in the methods to make people calm.
+\item This does need to be talked about in the discussion - the 
+whole point of the paper is TAILS, and the tails are 
+nothing like the main part of the distribution, so highly 
+correlated body doesn't mean much about the tails. 
+\end{enumerate}
+}
+
+
+
 Quantiative traits were selected in UKB as those with at least 10
-distinct values, heritability $h^2>0.02$ (measured by LD score
+distinct values, heritability $h^2>0.01$ (measured by LD score
 \citep{ldsc} applied to publicly available UKB GWAS summary statistics
-\citep{neale}) and $>$50,000 observation in unrelated samples, this
-gave 1,121 traits. Traits values more than six standard deviations
+\citep{neale}) and $>$10,000 observation in unrelated samples, this
+gave 1,158 traits. Traits values more than six standard deviations
 from the mean were removed. Traits were then standardised as follows:
 (1) linear regression models were applied to each trait, with
 covariates for age, sex, recruitment centre, genotyping batches, and
@@ -616,20 +667,34 @@ were obtained by inverse normal transforming the rank of the
 residuals.
 
 Results are presented in the Supplementary Material for the
-PRS-regression test on all 1,121 continuous traits.  However, our
-analyses assume the transformed trait values are Gaussian distributed
-with primarily additive polygenic architecture.  Therefore the traits
-were further thinned by enforcing the following criteria.
+PRS-regression test on all 1,158 continuous traits, 1,103 of which 
+were sufficiently linear after transformation to produce an 
+estimate of effect size.  Our analyses assume that the transformed 
+trait values are Gaussian distributed with primarily additive 
+polygenic architecture.  Therefore the 1,103 traits that passed our 
+PRM-test QC were further thinned by enforcing the following criteria.
 \textbf{Continuity:} top two modal untransformed trait values include
 less than half of samples. \textbf{Unimodal:} Dip-Test (\citep{dip}) 
 P-value $>$ 0.05 applied to untransformed trait values.
 \textbf{Non-skewed:} skew of untransformed trait values $<$ 2.
-\textbf{Polygenic:} Maxmimum single variant $r^2$ < 0.5\%. Finally, to
-ensure a minimum power threshold, traits with PRS $r^2 <$ 0.5\% were
-removed. This resulted in 151 traits.  Traits that were genetic
-duplicates ($r_g > 99\%$) were then removed using same the data
-maximization algorithm \citep{erase} applied to extract unrelated
-individuals, this resulted in a total of 92 traits.
+\textbf{Polygenic:} Maxmimum single variant $r^2$ < 0.5\%. 
+Finally, to ensure a minimum power threshold, traits with 
+PRS $r^2 <$ 1\% or fewer than 50,000 samples in the target data
+(after filtering outliers) were removed.  This resulted in 122 traits.
+To ensure a non-redundant survey of traits, pairwise genetic 
+correlation were calculated using \cite{ldsc} and 60 traits were 
+identified as gentically unique (no pair w $r_g > 95\%$, average top 
+match = $0.60$, standard-deviation = $0.2$) and kept in the analysis.  
+Additionally, 14 traits has a single almost identical match 
+(eg: "Standing Height" (ID:50) and "Height Measured Prior to 
+Imaging"  (ID:12144)), in these cases the trait with greater 
+sample size was priotized.  The other 48 traits were part of larger 
+clusters of genetically similar traits, the largest of which related to 
+measurements related to of body-mass (eg: body fat percentage, leg mass, 
+arm mass, etc) and heel bone mineral density.  Using the same data 
+maximization algorithm applied to extra unrelated individuals
+\citep{erase}, we were able to select 9 of these traits which resulted 
+in a set of 75 genetically non-redudant traits.  
 
 
 \subsection*{Genome-wide association analyses and PRS estimation}
@@ -962,7 +1027,7 @@ Genotype and phenotype QC.
 \clearpage \newpage
 \bibliography{refs}
 \clearpage \newpage
-\section*{Supplement} \label{sec:discussion}
+\section*{Supplement} \label{sec:supplement}
 
 
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/methodFlow.pdf} \end{maybe}
