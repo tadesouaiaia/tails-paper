@@ -291,9 +291,9 @@ the mechanism that may be behind PRM.  We then replicate these results using a s
 %%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Polygenic Regression To The Mean (PRM) is Common} ~\\ 
-\noindent Running our PRM-Test on our 75 QC'ed traits reveals that the 79\% of 
-tails (118 of 150, FDR level 0.05) exhibit movement away from expectation 
-and that 97\% (115 of 118) of the time the movement that occurs is regression 
+\noindent Running our PRM-Test on our 75 QC'ed traits reveals that the 80\% of 
+tails (121 of 150, FDR level 0.05) exhibit movement away from expectation 
+and that 98\% (118 of 121) of the time the movement that occurs is regression 
 toward the mean.  The majority of traits (47 of 75) were classified as "Dual Tail" 
 (significant regression to the mean in both tails), while 15 were classified 
 as "Lower Tail" and 9 were classified as "Upper Tail" (see \dref{fig:prs}{b}).  
@@ -325,10 +325,11 @@ Focusing on our single tail index traits, we notice that there are a greater num
 for \emph{Sitting Height} there are more rare variants in the lower tail (where the PRM Effect is greatest) and 
 in \emph{Triglycerides} there are also more rare variants in the lower tail (where PRM Effect is greatest, albiet non-signficant). 
 This result is consistent with the hypothesis that rare variants of large effect that not accounted for in the 
-common-variant PRS responsible for the tail specific PRM.  In \fref{fig:prs}{d} we observe that there is a small 
-but signficiant relationship between the magnitude of regression and the number rare variants in the tail but 
-that that for many traits the tail with more signficant PRM shows almost no rare variants (see \fref{fig:prs}{e}) 
-suggesting that strong selection may result in private variants that cannot be identified using population based sequencing. 
+common-variant PRS responsible for the tail specific PRM.  In \fref{fig:prs}{d} we observe a small 
+but signficiant relationship between the magnitude of regression and the number rare variants in the tail. 
+However, for many traits the tail with more PRM shows almost no rare variants (see \fref{fig:prs}{e}) 
+suggesting that strong selection may result in private variants that cannot be identified using 
+population based sequencing. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -344,9 +345,9 @@ suggesting that strong selection may result in private variants that cannot be i
 \caption{\footnotesize{
 \textbf{(a)} Relative Lifetime Reproductive Success used to approximate trait selection.
 \textbf{(b)} Association between negative tail selection and PRS regression. 
-\textbf{(b)} Health Effects 
-\textbf{(c)} Simulaton by Anil. 
-\textbf{(d)} Simulation by Anil. 
+\textbf{(c)} Tail Fitness Association. 
+\textbf{(d)} Simulaton by Anil. 
+\textbf{(e)} Simulation by Anil. 
 }} \label{fig:evo} \end{figure} \FloatBarrier 
 
 
@@ -355,44 +356,62 @@ suggesting that strong selection may result in private variants that cannot be i
 \noindent Using adjusted lifetime reproductive success \citep{v_select, v_select2} 
 as a proxy for selection we classify (see Methods - LRS) each trait with 
 respect to whether it is under 
-\emph{Stabilizing, Positive, Negative, or Neutral/Disruptive} and 
+\emph{Stabilizing, Positive, Negative, or Neutral/Disruptive} to 
 produce results in agreement with a more comprehensive sex-specific 
 analysis (See \fref{fig:vishy}).  The majority of traits analyzed here 
-(56 of 75) are classified as under stabilizing selection which is characterized by lower 
-fecundity in both tails of the trait distribution. Stabilizing selection may be the result of 
-general fitness favoring the trait mean or the result of sex specific selection that 
-averages to produce this relationship \citep{v_select}.  Seven traits were classified as positive 
-selection and seven traits were classified as negative selection.  We also classified four traits as under 
-neutral selection (no signficant relationship with LRS) and one trait as divergent/disruptive selection where fecundity 
-is higher in both tails that at the mean of the distribution (\fref{fig:evo}{a}).  We find a significant relationship 
-between selection classification and PRM classifition (\fref{fig:evo}{b}), whereby traits under stabilizing selection are enriched 
-in "Dual Tail Regression" ($p< 2.5 \times 10^{-5}$), traits under positive selection are enriched in 
-"Lower Tail Regression ($p < 2.4 \times 10 ^{-4}$), and traits under negative selection are enriched 
-in "Upper Tail Regression ($p < 0.024$).  Focusing on each tail separately we find an even stronger 
-relationship insofar as the in the 118 trait tails which exhibit PRM, the tail is selected against 110 times 
-(93\%) while in the 32 tails which do not exhibit PRM the tail is only selected against 16 times (50\%) ($pv < 0.001$). 
+(55 of 75) are classified as under stabilizing selection 
+which is characterized by lower fecundity in both tails of 
+the trait distribution. Stabilizing selection may be the result of 
+general fitness favoring the trait mean or the result of sex 
+specific selection that averages to produce this relationship \citep{v_select}.  
+Eight traits were classified as being under positive 
+selection and seven traits were classified as being under 
+negative selection.  We also classified four traits as under 
+neutral selection (no signficant relationship with LRS) and 
+one trait as divergent/disruptive selection where fecundity 
+is higher in both tails that at the mean of the distribution (\fref{fig:evo}{a}).  
+We find a significant relationship between selection classification and PRM classifition (\fref{fig:evo}{b}), 
+whereby traits under stabilizing selection are enriched in "Dual Tail Regression" ($p< 2.5 \times 10^{-5}$), 
+traits under positive selection are enriched in 
+"Lower Tail Regression ($p < 2.4 \times 10 ^{-4}$), and traits under 
+negative selection are enriched in "Upper Tail Regression ($p < 0.024$).  
+Focusing on each tail separately we find an even stronger 
+relationship insofar as the in the 118 trait tails which exhibit PRM, 
+the tail is selected against 110 times (93\%) while in the 32 tails which 
+do not exhibit PRM the tail is only selected against 16 times (50\%) ($pv < 0.001$). 
 
 
 
 
 
-\subsubsection*{Simulating Selection} ~\\  
-In \fref{fig:evo}{d} we confirm this result using a simulation. \need{more}  
 
-\subsubsection*{Tail Fitness Concordance} ~\\ 
-\need{Should we redo this?} 
-We examined each tail across all traits to observe if there was a relationship with \emph{PRM} and our five proxy features in the expected direction.  We performed a 
-rank correlation between test statistics from our regression test and the t-statistic from our t-test.  For the number of illnesses, paternal age, and miscarriages 
-and still birth the expected direction of the correlation is positive (ie. tails of traits associated with more illnesses expected to have more extreme EPF) while 
-for children fathered and number of live births we expect that the association is negative (ie tails of traits associated with less fecundity are expected to have more extreme EPF). 
+\subsubsection*{Tail Fitness} ~\\ 
+\noindent In addition to \emph{lifetime reproductive success}, we analyzed four measures of fitness that 
+are likely to be associated with reduced fitness and rare variant or \emph{de novo} etiology.  
+Here, we note that under the hypothesis that rare variants under 
+negative selection are responsible for PRM, we predict that trait 
+tails with large effect PRM will have lower average 
+\emph{lifetime reproductive success} and higher average numbers of \emph{Still Births} 
+and \emph{Miscarriages}.  Additionally, traits tails with large effect PRM are 
+predicted to have more standarized illnesses because both result from 
+large effect variants, although it is possible that downstream effects of 
+illnesses results in extreme trait values.  Finally, if paternal age 
+is associated with more \emph{de novo} mutations \citep{pat} it should 
+also be associated with PRM. 
 
-In our primary analysis using the full UKB Biobank we observe expected and significant association between \emph{PRM} and both tails for number of illnesses (pvalue $< 0.005$), for the 
-and in the lower tail for paternal age.  We observe the expected but not significant result for other traits. 
+In \fref{fig:evo}{c} the rank correlation for the average tail fitness 
+measure and the PRM effect size across the trait tails is shown. 
+We observe that the direction of rank association is in line with the 
+rare-variant hypothesis in every case, although the association between 
+PRM and the number of miscarriages and paternal age are not significantly associated. 
 
-In our analysis using the european subsample we observe expected and significant association between both tails for number of illnesses (lower pvalue $<$ 0.05, upper tail pvalue $<0.0005$)
-as well the the lower tail for children fathered ($<0.0005$).   Fot all other traits except the upper tail of children fathered (non-significant, wrong direction), 
-the association is in the expected direction but non-significant. 
 
+
+
+\subsubsection*{Simulating Selection (Anil's Result)} ~\\  
+In \fref{fig:evo}{d} we confirm this result using a simulation (see \emph{Methods}) 
+where we simulate many generations of stablilzing selection, after which the ratio 
+of contribution to heritability by rare variants goes up and PRM is observed. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -440,38 +459,84 @@ test pvalue and the pvalue from our PRM-test \fref{fig:sib}{d}.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4 Replication  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4 Replication  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4 Replication  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4 Replication  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4 Replication  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4 Replication  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage \newpage
-\subsection*{\emph{Replication Analysis}} ~\\
+\subsection*{\emph{Replication}} ~\\
 
-To better understand the power of our tests we performed a psuedo-replication using random 
-subsets of the target population for each of our 75 QC traits. These tests that while 
-the PRM-test is underpowered at lower sample sizes (fewer than half of tails of identified 
-as nominally signficant at 10k), we do see significant replication across the effect size 
-distribution.  
+We performed three \emph{flavours} of replication. 
 
-We applied our test to the UKB-Non-European and All Of Us. \need{Some help Here}. 
+\begin{enumerate}                                                                               
+\item \textbf{Repeated Subsets of The Target Data:} Assess the reliability of our PRM-test in smaller samples
+\item \textbf{Non-European Ancestry Inviduals in UKB:}  PRM replication across ancestry (within biobank) 
+\item \textbf{European Ancestry Individuals in All Of Us:} PRM replication across biobank (within ancestry) 
+\end{enumerate} 
+
+
+\subsubsection*{Bootstrap Analysis using Target Subsets} ~\\ 
+
+\noindent To assess the performance of our PRM-test using smaller samples 
+we re-sampled small subsets of our target populations, and performed our 
+PRM-test on these subsets. In \ref{fig:rep}{d} we notice that even the 
+correlation of effect sizes was approximately 0.70 even when the subset 
+size was only 5k, however concordance in discovery was poor at these levels. 
+
+
+\subsubsection*{Out of Sample Replication} ~\\
+
+\noindent The correlation between PRM effect-sizes was greater in the UKB Non-European Ancestry 
+data despite smaller sample sizes, although the number of true positives identified 
+was lower (underpowered).  This suggests that even if PRS isn't portable across ancestry, 
+that regression to the mean is portable and in fact may be even more than portable.
+
 
 
 
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig5_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
 \caption{\footnotesize{
-\textbf{(a)} Sibling Model 
-\textbf{(b)} Association between SNP heritability and Sibling Heritability 
-\textbf{(c)} Sibling Concordance Tests 
-\textbf{(d)} Relationship Between Sibling Test and PRM-Test 
-}} \label{fig:sib} \end{figure} \FloatBarrier 
-
-
+\textbf{(a)} Four Index Traits are replicated In UKB Non-European Cohort and the All Of Us Cohort. 
+\textbf{(b)} Miami plots demonstrating replication across 25 Traits available in UKB-Non-European and All Of Us Cohort, plus hemoglobin 
+\textbf{(c)} Simulated Signal Replication: Increasing larger subsets were sampled and the replicability relative to our UKB result was calculated 
+\textbf{(d)} Same thing but correlation 
+\textbf{(e,f)} Replication In Non-European 
+\textbf{(g,h)} Replication In All Of Us 
+}} \label{fig:rep} \end{figure} \FloatBarrier 
 
 \newpage \clearpage
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END RESULTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
 %  PREV: RESULTS, NEXT: DISCUSSION
 %  PREV: RESULTS, NEXT: DISCUSSION
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -546,6 +611,46 @@ potentially maximizing the power of a sequencing study. This method can be appli
 %
 %
 %
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   METHODS - START     %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -568,9 +673,9 @@ potentially maximizing the power of a sequencing study. This method can be appli
 \item  Explain ancestry clustering more specifically (which ancestries?
 \item  What PC values chosen?). Nobody could repeat this accurately as written. 
 \item  Some loose language in places. Several places where citations needed e.g. “recommended by the UK Biobank team.” i
-\item Need some better context - e.g. In the primary analyses in unrelated individuals (Figures 2, 3, 5)...
-\item In the analyses performed on siblings (Figure 4)... 
-\item Not sure if Mixed ancestry results needed anymore?
+\item  Need some better context - e.g. In the primary analyses in unrelated individuals (Figures 2, 3, 5)...
+\item  In the analyses performed on siblings (Figure 4)... 
+\item  Not sure if Mixed ancestry results needed anymore?
 \end{itemize}
 }
 
@@ -593,16 +698,15 @@ Hardy-Weinberg equilibrium test P-value $< 10^{-8}$ were
 excluded. Samples exhibiting high levels of missingness or
 heterozygosity, inconsistencies in genetic-inferred and self-reported
 sex, or displaying aneuploidy of the sex chromosomes were removed in
-accordance with recommendations from the UKB data processing team. A
-greedy algorithm was employed to remove related individuals that
+accordance with recommendations from the UKB data processing team \citep{ukb_qc}. 
+A greedy algorithm was employed to remove related individuals that
 maximizes samples retention while removing all third-degree relatives
 (kinship coefficient > 0.044) \citep{erase}.  It has been shown that
 both the mean and variance of PRS varies across ancestry groups
 \citep{global}. Therefore primary analyses were performed on over 410k
-unrelated European samples ($>94\%$ of the cohort) identified using
-this methodology.  We also repeated the analysis using over 432k
-unrelated samples of all ancestries and replicated our results using 
-only the 22k samples classified as Non-European Ancestry.
+unrelated European samples ($>94\%$ of the cohort) and replicated using 
+the 22k samples classified as Non-European Ancestry. 
+
 
 Sibling pairs were selected by first identifying first degree
 relatives defined as those with kinship coefficient within the range
@@ -652,9 +756,10 @@ correlated body doesn't mean much about the tails.
 \end{enumerate}
 }
 
+\clearpage 
+\newpage
 
-
-Quantiative traits were selected in UKB as those with at least 10
+\noindent Quantiative traits were selected in UKB as those with at least 10
 distinct values, heritability $h^2>0.01$ (measured by LD score
 \citep{ldsc} applied to publicly available UKB GWAS summary statistics
 \citep{neale}) and $>$10,000 observation in unrelated samples, this
@@ -812,7 +917,7 @@ parameters. The pressence of selection is inferred from the regression
 parametrers as folows:
 \begin{itemize}
 \item If the P-value associated with the quadratic parameter $\gamma$
-  is nominally significant ($<$0.05), then:
+is significant (FDR 5\%), then:
 \begin{itemize}
 \item If $\gamma < 0$, the trait is classified as under stabilizing selection.
   (i.e. negative selection both tails).
@@ -820,7 +925,7 @@ parametrers as folows:
   (i.e. negative selection is not occuring in either tail).
 \end{itemize}
 \item If only the p-value associated with the linear parameter $\beta$
-  is nominally significant ($<$0.05), then:
+is signficant (FDR 5\%), then: 
 \begin{itemize}
 \item If $\beta < 0$, trait is classified as under negative directional selection
   (i.e. negative selection in the upper tail).
@@ -840,43 +945,33 @@ parametrers as folows:
 %%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
 %%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
 \subsubsection*{Selection Analysis: Measuring Fitness in the Tails} ~\\ 
-\need{Think we just need details of test here, not clear what this is,
-  rather than motivation / interpretation}
-In addition to lifetime reproductive success, we consider four 
-additional measures that might be associated with 
-{\em PRM} if rare-variants are present: 
+%\need{Think we just need details of test here, not clear what this is,
+%  rather than motivation / interpretation}
+
+\noindent In addition to lifetime reproductive success, we consider four 
+additional measures of fitness that are likely associated with negative selection and 
+rare variants: 
+
 
 \begin{itemize} 
-\item{\textbf{Illnesses:}} In the UKB the number of self-reported
-  non-cancer illnesses (UKB Field 20002) is a proxy for individual
-  fitness. Increased number of illnesses may co-occur with reduced
-  polygenic signal if both are caused by rare large-effect variants.
-  Additionally, downstream effects of illness could also cause extreme
-  trait values.
-  
-\item{\textbf{Miscarriages and Still Births:}} The number of still
-  births (UKB Field 3829, N = 88,026) and the number of miscarriages
-  (UKB Field 3839, N = 88,026) are a proxy for reduced fitness and may
-  share rare variant etiology with each other as well as with \emph{PRM}.  
-
-\item{\textbf{Paternal Age:}} In the UKB father’s age is recorded for
-  114,666 individuals of European ancestry. If advanced paternal age
-  is resposible for de novo mutations \citep{pat} that cause
-  \emph{PRM} in some traits then we expect individuals of the tails of
-  those traits to be enriched with older fathers. Father’s age at
-  birth was derived by subtracting the father’s age (UKB data field:
-  2946) from the age of the participant at recruitment (UKB data
-  field: 21022).
-\end{itemize}
+\item{\textbf{Adj. Illnesses:}} Trait Field 2002: The number of self-reported non-cancer illnesses is standardized 
+                                                  by applying a regression model with covariates for age, sex, 
+                                                  recruitment center and obtaining residuals. 
+\item{\textbf{Miscarriages:}}   Trait Field 3829: The number of miscarriages reported. 
+\item{\textbf{Still-Births:}}   Trait Field 3839: The number of still-births reported. 
+\item{\textbf{Paternal Age:}}   Paricipant Age (Field 21022) is substracted from Father's Age (Field 2946) to 
+                                acquire the paternal age at birth. %Trait Field 2946 (Fathers Age) Father’s age is recorded for
+\end{itemize} 
 
 
-For each trait tail (upper and lower 1\%), \need{we calculate the rank
-correlation between the P-value associated with {\em PRM} each tail and the
-average value in the tail for each measure. We hypothesize positive
-association for illnesses, still-births, miscarriages, and paternal
-age with PRM in the pressence of rare large-effect variants.}
 
- 
+\noindent To test the hypothesis that rare-variants reduce fitness and 
+cause PRM regression the the mean, we caculate the rank correlation 
+between PRM effect size and each fitness measure across every 
+trait-tail pair (the upper and lower 1\%). 
+
+
+
 
 
 
@@ -992,32 +1087,40 @@ that can be used to generate a meta-analysis p-value to be compared to the PRM-T
 
 \subsubsection*{Bootstrap Analysis using Target Subsets} ~\\ 
 
-Our QC-valid traits had an average of 307k total samples and a minimum of 103k due to 
-a requirement that at least 100k totals samples be present (50k target samples for the PRM-Test). 
-To test how our PRM-Test performed on lower sample sizes we repeatedly sampled subsets 
-of between 5k and 50k target samples for each trait and performed our PRM-Test using these samples. 
-For each value between 5k and 50k (counting by 5k) we performed 100 trials and across each of the 
-150 trait tail tests we calculated: 
-\begin{enumerate} 
-    \item Discovery Parameters 
-        \begin{enumerate} 
-        \item Number of nominally significant results indicitive of regression to the mean 
-        \item Number of nominally significant results indicitive of "progression away from the mean." 
-        \item Number of null results 
-        \end{enumerate} 
-    \item Replication Parameters 
-        \begin{enumerate} 
-        \item The linear correlation between full dataset effect sizes and the subset effect sizes 
-        \item The rank correlation between full dataset effect sizes and the subset effect sizes 
-        \end{enumerate} 
-    \end{enumerate} 
+\noindent Our 75 QC-validated traits were required to have at least 100k total samples.  
+In the target sample (half the total), after outlier removal our QC-validated traits had 
+between of 50,085 and 185,362 (average 142k) target samples.  To explore whether our 
+PRM-test results replicate with smaller sample sizes, we repeatedly sampled subsets of between 
+5k and 50k target samples and performed our PRM-test on these subsets.  For each 
+value between 5k and 50k (counting by 5k) we performed 100 trials across each of the 150 trait 
+tails and calculated the \textbf{(1)} relative accuracy (true and false positives and negatives) 
+relative to our full dataset (FDR 5\%) and \textbf{(2)} the linear and the rank correlation of for the regression 
+effect size across all the tails. 
 
 
-\subsubsection*{Non-European Ancestry Individuals in the UKB} ~\\
-\need{\em From Beatrice} 
-Genotype and phenotype QC.
+\subsubsection*{Replication: Non-European Ancestry Individuals in the UKB} ~\\
 
-\subsubsection*{All of US} ~\\
+\noindent Our Non-European Ancestry samples in the UKB have between 3,150 and 13,037 (average 10k) total samples for 
+our 75 QC-validated traits.  Applying our PRM-test using the European Ancestry PRS to the Non-European 
+target, 71 traits passed our PRM-QC.  For these 142 tails we calculated the replication accuracy and 
+replication association as described above. 
+
+
+
+%\need{\em From Beatrice} 
+%Genotype and phenotype QC.
+
+
+\subsubsection*{Replication: All of US} ~\\
+
+\noindent All Of Us in biobank that contains XX binary and XX continuous traits from individuals of multiple 
+ancestries.  Trait matches were found with an initial database search and then were inspected by 
+eye to determine if trait descriptions were sufficiently similar.  This process yielded 32 traits, 
+25 that passed our PRM-QC. These traits had between 8595 and 127677 total samples (average 73k) 
+in the European Ancestry cohort.  For these 50 tails the replication accuracy and replication 
+association was calculated as described above. 
+
+
 \need{\em From Beatrice} 
 Genotype and phenotype QC.
 
