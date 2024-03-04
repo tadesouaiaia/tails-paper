@@ -129,6 +129,15 @@ Jonathan~P Beauchamp.
 \newblock \emph{Proceedings of the National Academy of Sciences}, 113\penalty0
   (28):\penalty0 7774--7779, 2016.
 
+\bibitem[Kong et~al.(2012)Kong, Frigge, Masson, Besenbacher, Sulem, Magnusson,
+  Gudjonsson, Sigurdsson, Jonasdottir, Jonasdottir, et~al.]{pat}
+Augustine Kong, Michael~L Frigge, Gisli Masson, Soren Besenbacher, Patrick
+  Sulem, Gisli Magnusson, Sigurjon~A Gudjonsson, Asgeir Sigurdsson, Aslaug
+  Jonasdottir, Adalbjorg Jonasdottir, et~al.
+\newblock Rate of de novo mutations and the importance of father’s age to
+  disease risk.
+\newblock \emph{Nature}, 488\penalty0 (7412):\penalty0 471--475, 2012.
+
 \bibitem[Reichenberg et~al.(2016)Reichenberg, Cederl{\"o}f, McMillan,
   Trzaskowski, Kapra, Fruchter, Ginat, Davidson, Weiser, Larsson, et~al.]{avi}
 Abraham Reichenberg, Martin Cederl{\"o}f, Andrew McMillan, Maciej Trzaskowski,
@@ -142,7 +151,7 @@ Abraham Reichenberg, Martin Cederl{\"o}f, Andrew McMillan, Maciej Trzaskowski,
 \bibitem[Souaiaia et~al.(2023)Souaiaia, Wu, Hoggart, and O'Reilly]{t_sibs}
 Tade Souaiaia, Hei~Man Wu, Clive Hoggart, and Paul O'Reilly.
 \newblock Sibling similarity can reveal key insights into genetic architecture.
-\newblock jun 2023.
+\newblock \emph{eLife}, feb 2023.
 \newblock \doi{10.7554/elife.87522.1}.
 
 \bibitem[Sudlow et~al.(2015{\natexlab{b}})Sudlow, Gallacher, Allen, Beral,
@@ -154,15 +163,16 @@ Cathie Sudlow, John Gallacher, Naomi Allen, Valerie Beral, Paul Burton, John
 \newblock \emph{PLoS medicine}, 12\penalty0 (3):\penalty0 e1001779,
   2015{\natexlab{b}}.
 
+\bibitem[for Researchers(2015)]{ukb_qc}
+Information for Researchers.
+\newblock Ukb genotyping and quality control (v.1.2):
+  https://biobank.ctsu.ox.ac.uk/crystal/crystal/docs/genotyping\_qc.pdf, 2015.
+
 \bibitem[Choi et~al.(2023)Choi, Mak, Hoggart, and O'Reilly]{erase}
 Shing~Wan Choi, Timothy Shin~Heng Mak, Clive~J Hoggart, and Paul~F O'Reilly.
 \newblock Erasor: a software tool to eliminate inflation caused by sample
   overlap in polygenic score analyses.
 \newblock \emph{GigaScience}, 12:\penalty0 giad043, 2023.
-
-\bibitem[glo(2013)]{global}
-Discovery and refinement of loci associated with lipid levels.
-\newblock \emph{Nature genetics}, 45\penalty0 (11):\penalty0 1274--1283, 2013.
 
 \bibitem[Cheesman et~al.(2020)Cheesman, Coleman, Rayner, Purves,
   Morneau-Vaillancourt, Glanville, Choi, Breen, and Eley]{sib1}
@@ -191,15 +201,6 @@ John~A Hartigan and Pamela~M Hartigan.
 Shing~Wan Choi and Paul~F O'Reilly.
 \newblock Prsice-2: Polygenic risk score software for biobank-scale data.
 \newblock \emph{Gigascience}, 8\penalty0 (7):\penalty0 giz082, 2019.
-
-\bibitem[Kong et~al.(2012)Kong, Frigge, Masson, Besenbacher, Sulem, Magnusson,
-  Gudjonsson, Sigurdsson, Jonasdottir, Jonasdottir, et~al.]{pat}
-Augustine Kong, Michael~L Frigge, Gisli Masson, Soren Besenbacher, Patrick
-  Sulem, Gisli Magnusson, Sigurjon~A Gudjonsson, Asgeir Sigurdsson, Aslaug
-  Jonasdottir, Adalbjorg Jonasdottir, et~al.
-\newblock Rate of de novo mutations and the importance of father’s age to
-  disease risk.
-\newblock \emph{Nature}, 488\penalty0 (7412):\penalty0 471--475, 2012.
 
 \bibitem[Haller and Messer(2019)]{anil1}
 Benjamin~C Haller and Philipp~W Messer.

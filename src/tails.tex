@@ -780,35 +780,67 @@ from the mean were removed. Traits were then standardised as follows:
 covariates for age, sex, recruitment centre, genotyping batches, and
 the first 40 genetic principal components, (2) standardised values
 were obtained by inverse normal transforming the rank of the
-residuals.
+residuals.  
 
-\need{Order as implemented and group similar QC metrics}
+\need{should we mention PLINK and PRScice here?  They haven't been introduced yet?} 
 
-Results are presented in the Supplementary Material for the
-PRS-regression test on all 1,158 continuous traits.  Our analyses
-assume that the transformed trait values are Gaussian distributed with
-primarily additive polygenic architecture.  Therefore the 1,103 traits
-that passed our PRM-test QC were further thinned by enforcing the
-following criteria.  \textbf{Continuity:} top two modal untransformed
-trait values include less than half of samples. \textbf{Unimodal:}
-Dip-Test (\citep{dip}) P-value $>$ 0.05 applied to untransformed trait
-values.  \textbf{Non-skewed:} skew of untransformed trait values $<$
-2.  \textbf{Polygenic:} Maxmimum single variant $r^2$ < 0.5\%.
-Finally, to ensure a minimum power threshold, traits with PRS $r^2 <$
-1\% or fewer than 50,000 samples in the target data (after filtering
-outliers) were removed.  This resulted in 122 traits.  To ensure a
+Samples were then split randomly into 50\% base and 50\% target 
+data sets and GWAS and PRScice were applied and our PRM-regression 
+test was ran on all 1,158 continuous traits (see Supplementary Material). 
+Our analyses involve top and bottom 1\% and require sufficient sample 
+size and additive polygenicity and assume a Gaussian distribution. 
+
+Therefore, we focused on the 136 traits with 50k target samples 
+and PRS $R^2>1\%$ and then further applied the following filters: 
+
+\begin{itemize} 
+\item \textbf{Continuity:} top two modal untransformed trait values include less than half of samples. (2, 1s)
+\item \textbf{Unimodal:} Dip-Test (\citep{dip}) P-value $>$ 0.05 applied to untransformed trait values. (1 1s)
+\item \textbf{Non-skewed:} skew of untransformed trait values $<$2.  (7,4*) 
+\item \textbf{Polygenic:} Maxmimum single variant $r^2$ < 0.5\%. (3, 1s) 
+\end{itemize} 
+
+
+
+
+%Finally, to ensure a minimum power threshold, traits with PRS $r^2 <$
+%1\% or fewer than 50,000 samples in the target data (after filtering
+%outliers) were removed.  This resulted in 122 traits.  To ensure a
+%\item 50k Target Samples, PRS $R^2>1\%$ (136 Traits) 
+%\item 50k Target Samples, PRS $R^2>1\%$ 
+%\need{Order as implemented and group similar QC metrics}
+%Results are presented in the Supplementary Material for the
+%PRS-regression test on all 1,158 continuous traits.  
+%Our analyses
+%assume that the transformed trait values are Gaussian distributed with
+%primarily additive polygenic architecture.  
+%Therefore the 1,103 traits
+%that passed our PRM-test QC were further thinned by enforcing the
+%following criteria.  \textbf{Continuity:} top two modal untransformed
+%trait values include less than half of samples. \textbf{Unimodal:}
+%Dip-Test (\citep{dip}) P-value $>$ 0.05 applied to untransformed trait
+%values.  \textbf{Non-skewed:} skew of untransformed trait values $<$
+%2.  \textbf{Polygenic:} Maxmimum single variant $r^2$ < 0.5\%.
+%Finally, to ensure a minimum power threshold, traits with PRS $r^2 <$
+%1\% or fewer than 50,000 samples in the target data (after filtering
+%outliers) were removed.  This resulted in 122 traits. 
+
+This futher thinned our traits to 123. To ensure a
 non-redundant survey of traits, pairwise genetic correlation were
-calculated using LDscore\cite{ldsc} and 60 traits did not have a pair with $r_g > 95\%$, average top match = $0.60$,
-standard-deviation = $0.2$) and kept in the analysis.  Additionally,
-14 traits has a single almost identical match (eg: "Standing Height"
+calculated using LDscore\cite{ldsc} and 61 traits did not have a pair with $r_g > 95\%$,
+average top match = $0.60$,standard-deviation = $0.2$) and kept in the analysis.  Additionally,
+10 traits has a single almost identical match (eg: "Standing Height"
 (ID:50) and "Height Measured Prior to Imaging" (ID:12144)), in these
-cases the trait with greater sample size was priotized.  The other 48
+cases the trait with greater sample size was priotized.  The other 52
 traits were part of larger clusters of genetically similar traits, the
 largest of which related to measurements related to of body-mass (eg:
 body fat percentage, leg mass, arm mass, etc) and heel bone mineral
 density.  Using the same data maximization algorithm applied to extra
-unrelated individuals \citep{erase}, we were able to select 9 of these
-traits which resulted in a set of 75 genetically non-redudant traits.
+unrelated individuals \citep{erase}, we were able to select 11 of these
+traits which resulted in a set of 77 genetically non-redudant traits.
+
+\need{Should we mention here that 2 of these failed clives QC?} 
+
 
 \subsubsection*{All of US} ~\\
 \noindent All Of Us in biobank that contains XX binary and XX
