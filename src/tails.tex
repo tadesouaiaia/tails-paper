@@ -787,17 +787,19 @@ residuals.
 Samples were then split randomly into 50\% base and 50\% target 
 data sets and GWAS and PRScice were applied and our PRM-regression 
 test was ran on all 1,158 continuous traits (see Supplementary Material). 
-Our analyses involve top and bottom 1\% and require sufficient sample 
-size and additive polygenicity and assume a Gaussian distribution. 
-
-Therefore, we focused on the 136 traits with 50k target samples 
-and PRS $R^2>1\%$ and then further applied the following filters: 
+Strong association between target sample size and nominal 
+PRM signficance ($R=0.5$, p-value$<10^{-70}$), suggests that many 
+of our tests were underpowered.  For this reason we focused all primary 
+analyses on the 136 traits with 50k target samples and PRS $R^2>1\%$.  (%new correlation = 0.2, pvalue = 0.012%) 
+Furthermore, our test assumes that transformation to continuous Gaussian distribution 
+is appropriate and that the underlying genetic architecture is primarily polygenic, 
+therefore we impose the following additional requirements: 
 
 \begin{itemize} 
-\item \textbf{Continuity:} top two modal untransformed trait values include less than half of samples. (2, 1s)
-\item \textbf{Unimodal:} Dip-Test (\citep{dip}) P-value $>$ 0.05 applied to untransformed trait values. (1 1s)
-\item \textbf{Non-skewed:} skew of untransformed trait values $<$2.  (7,4*) 
-\item \textbf{Polygenic:} Maxmimum single variant $r^2$ < 0.5\%. (3, 1s) 
+\item \textbf{Continuity:} top two modal untransformed trait values include less than half of samples. (2 traits removed)
+\item \textbf{Unimodal:} Dip-Test (\citep{dip}) P-value $>$ 0.05 applied to untransformed trait values. (1 trait removed)
+\item \textbf{Non-skewed:} skew of untransformed trait values $<$2.  (7 traits removed) 
+\item \textbf{Polygenic:} Maxmimum single variant $r^2$ < 0.5\%. (3 traits removed) 
 \end{itemize} 
 
 
@@ -839,7 +841,6 @@ density.  Using the same data maximization algorithm applied to extra
 unrelated individuals \citep{erase}, we were able to select 11 of these
 traits which resulted in a set of 77 genetically non-redudant traits.
 
-\need{Should we mention here that 2 of these failed clives QC?} 
 
 
 \subsubsection*{All of US} ~\\
@@ -1130,8 +1131,55 @@ Genotype and phenotype QC.
 \clearpage \newpage
 \bibliography{refs}
 \clearpage \newpage
+
+
+
 \section*{Supplement} \label{sec:supplement}
 
+
+
+\section*{Addendum 1: PRS Prediction} \label{sec:supplement}
+
+In this manuscript we have focused on polygenic regression to the mean, which can be observed when plotting 
+the average PRS score (Y) across the quantiles of the trait distribution (X) (see \fref{fig:sup1}{a}).  
+Importantly, when we visualize the relationship between the average phenotype (Y) across the quantiles 
+of the PRS distribution the effect isn't visible in mean (see \fref{fig:sup1}{o}) and can only be observed 
+in variance (see \fref{fig:sup1}{r}) because non-polygenic influences on the trait appear independent from 
+the PRS distribution*** and thus are uniformly distributed. (*THIS IS IMPORTANT -suggests non-additive). 
+
+Here we provide an example of the effect that PRM can have on disease prediction using the continuous trait 
+RBC distribution width (see \fref{fig:sup1}{x}), namely that, a PRS score in the bottom 5\% of the PRS 
+increases the probability of being in the bottom 50\%, bottom 25\%, bottom 5\%, bottom 1\%, and bottom 0.1\% 
+of the trait distribution by 1.4, 1.8, 2.8, 3.2, and 3.5 times.  Consider the other side of the trait 
+distribution, a bottom 5\% PRS score reduces the probability of trait score in the top 50\% (0.595), 
+top 25\% (0.495), top 5\% (0.62), and top 1\% (0.855) but does not reduce the probability of being 
+in the top 0.1\% (1.2x). 
+
+Continuing, a PRS score in the top 5\% of the PRS, increses the risk of being in the 
+top 50\% (1.4), top 25\% (1.7), top 5\% (1.78), top 1\% (1.4x), but does not increase the risk 
+of being in the top 0.1\% (0.816). 
+
+
+To summarize, for this trait the predictive value of polygenic scores is: 
+
+\begin{itemize} 
+\item Low PRS increases probability of very low trait scores 
+\item Low PRS descreases probability of moderately high trait scores 
+\item High PRS increases probability of moderately high trait score but not very high trait score
+\end{itemize} 
+
+\noindent Consequently, if disease state occurs for the top 0.1\% of the trait distribution, PRS is not 
+predictive. 
+
+
+
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/checkplot_30070.pdf} \end{maybe}
+\caption{\footnotesize{\textbf{Sample and SNP Workflow}}} \label{fig:sup1} \end{figure} \FloatBarrier
+
+\clearpage \newpage
+
+\section*{Addendum 2: QC Figures} \label{sec:supplement}
 
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/methodFlow.pdf} \end{maybe}
 \caption{\footnotesize{\textbf{Sample and SNP Workflow}}} \label{fig:qcFlow} \end{figure} \FloatBarrier
@@ -1141,10 +1189,12 @@ Genotype and phenotype QC.
 \begin{figure}[!ht] \centering \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=16.5cm]{Figures/qctable.pdf} \end{maybe} \label{fig:m2} \caption{\scriptsize Secondary QC} \end{figure} 
 \clearpage \newpage
 
+\section*{Addendum 3: Lifetime Reproductive Success} \label{sec:supplement}
 
 \FloatBarrier \begin{figure}[!h] \centering \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=16.5cm]{Figures/vishtable.pdf} \end{maybe} 
 \caption{\footnotesize{\textbf{Comparison of Selection Estimates}}} \label{fig:vishy} \end{figure} \FloatBarrier 
 
+\clearpage \newpage
 %
 %
 %
