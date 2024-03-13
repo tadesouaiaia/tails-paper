@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.7.31)  12 MAR 2024 13:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.7.31)  13 MAR 2024 14:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1915,7 +1915,26 @@ Package newfloat Info: New float `Supplementary-Fig' with options `fileext=ext'
 \newfloat@ftype=\count355
 Package newfloat Info: float type `Supplementary-Fig'=8 on input line 29.
 
-(./tails.aux)
+(./tails.aux
+
+LaTeX Warning: Label `sec:supplement' multiply defined.
+
+
+LaTeX Warning: Label `sec:supplement@cref' multiply defined.
+
+
+LaTeX Warning: Label `sec:supplement' multiply defined.
+
+
+LaTeX Warning: Label `sec:supplement@cref' multiply defined.
+
+
+LaTeX Warning: Label `sec:supplement' multiply defined.
+
+
+LaTeX Warning: Label `sec:supplement@cref' multiply defined.
+
+)
 \openout1 = `tails.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
@@ -1935,8 +1954,7 @@ LaTeX Font Info:    ... okay on input line 47.
 LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 47.
 LaTeX Font Info:    Trying to load font information for LGR+cmr on input line 4
 7.
-
-(/usr/local/texlive/2020/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
 File: lgrcmr.fd 2017/07/29 v1.2 Greek European Computer Regular
 )
 LaTeX Font Info:    ... okay on input line 47.
@@ -2202,123 +2220,129 @@ LaTeX Warning: No \author given.
 <Figures/tailsLogo.pdf, id=64, 794.97pt x 216.81pt>
 File: Figures/tailsLogo.pdf Graphic file (type pdf)
 <use Figures/tailsLogo.pdf>
-Package pdftex.def Info: Figures/tailsLogo.pdf  used on input line 206.
+Package pdftex.def Info: Figures/tailsLogo.pdf  used on input line 207.
 (pdftex.def)             Requested size: 492.19374pt x 134.23885pt.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 7.59998pt on input line 207.
+(Font)              scaled to size 7.59998pt on input line 208.
  [2 <./Figures/tailsLogo.pdf>]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 9.49997pt on input line 293.
+(Font)              scaled to size 9.49997pt on input line 256.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 9.49997pt on input line 293.
+(Font)              scaled to size 9.49997pt on input line 256.
 <Figures/Fig2_eur_qc_0_version1_dedupe.pdf, id=81, 3613.5pt x 2529.45pt>
 File: Figures/Fig2_eur_qc_0_version1_dedupe.pdf Graphic file (type pdf)
 <use Figures/Fig2_eur_qc_0_version1_dedupe.pdf>
 Package pdftex.def Info: Figures/Fig2_eur_qc_0_version1_dedupe.pdf  used on inp
-ut line 308.
+ut line 272.
 (pdftex.def)             Requested size: 492.19374pt x 344.51012pt.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 291.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 291.
 
-Underfull \vbox (badness 1348) has occurred while \output is active []
 
- [3
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
- <./Figures/Fig2_eur_qc_0_version1_dedupe.pdf>]
-<Figures/Fig3_eur_qc_0_version1_dedupe.pdf, id=122, 2312.64pt x 1879.02pt>
+[3
+
+]
+<Figures/Fig3_eur_qc_0_version1_dedupe.pdf, id=95, 2312.64pt x 1879.02pt>
 File: Figures/Fig3_eur_qc_0_version1_dedupe.pdf Graphic file (type pdf)
 <use Figures/Fig3_eur_qc_0_version1_dedupe.pdf>
 Package pdftex.def Info: Figures/Fig3_eur_qc_0_version1_dedupe.pdf  used on inp
-ut line 353.
+ut line 322.
 (pdftex.def)             Requested size: 492.19374pt x 399.88141pt.
- [4 <./Figures/Fig3_eur_qc_0_version1_dedupe.pdf>]
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[4 <./Figures/Fig2_eur_qc_0_version1_dedupe.pdf>]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.54997pt on input line 397.
+(Font)              scaled to size 8.54997pt on input line 364.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <9> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 397.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 364.
 LaTeX Font Info:    Font shape `T1/phv/b/sl' will be
-(Font)              scaled to size 8.54997pt on input line 397.
- [5]
+(Font)              scaled to size 8.54997pt on input line 364.
+ [5 <./Figures/Fig3_eur_qc_0_version1_dedupe.pdf>] [6]
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 437.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 396.
 LaTeX Font Info:    Font shape `T1/phv/b/sl' will be
-(Font)              scaled to size 9.49997pt on input line 437.
-<Figures/Fig4_eur_qc_0_version1_dedupe.pdf, id=197, 2168.1pt x 1445.4pt>
+(Font)              scaled to size 9.49997pt on input line 396.
+<Figures/Fig4_eur_qc_0_version1_dedupe.pdf, id=202, 2168.1pt x 1445.4pt>
 File: Figures/Fig4_eur_qc_0_version1_dedupe.pdf Graphic file (type pdf)
 <use Figures/Fig4_eur_qc_0_version1_dedupe.pdf>
 Package pdftex.def Info: Figures/Fig4_eur_qc_0_version1_dedupe.pdf  used on inp
-ut line 461.
+ut line 417.
 (pdftex.def)             Requested size: 492.19374pt x 328.11223pt.
- [6
+ [7
 
  <./Figures/Fig4_eur_qc_0_version1_dedupe.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 478--479
+Underfull \hbox (badness 10000) in paragraph at lines 436--437
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 489--490
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 498--499
-
- []
-
-<Figures/Fig5_eur_qc_0_version1_dedupe.pdf, id=227, 3613.5pt x 4336.2pt>
+<Figures/Fig5_eur_qc_0_version1_dedupe.pdf, id=235, 3613.5pt x 4336.2pt>
 File: Figures/Fig5_eur_qc_0_version1_dedupe.pdf Graphic file (type pdf)
 <use Figures/Fig5_eur_qc_0_version1_dedupe.pdf>
 Package pdftex.def Info: Figures/Fig5_eur_qc_0_version1_dedupe.pdf  used on inp
-ut line 508.
+ut line 466.
 (pdftex.def)             Requested size: 492.19374pt x 590.58879pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[7
+[8
 
-] [8 <./Figures/Fig5_eur_qc_0_version1_dedupe.pdf>] [9
+]
+
+LaTeX Warning: Text page 9 contains only floats.
+
+[9 <./Figures/Fig5_eur_qc_0_version1_dedupe.pdf>] [10
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 677--678
+Underfull \hbox (badness 10000) in paragraph at lines 566--567
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 737--738
+Underfull \hbox (badness 10000) in paragraph at lines 626--627
 
  []
 
-[10
-
-] [11
+[11
 
 ] [12
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 960--963
+] [13
 
- []
-
-[13
-
-] [14
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 1092--1093
+] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 863--864
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1094--1095
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1107--1108
+Underfull \hbox (badness 10000) in paragraph at lines 904--907
 
  []
 
 [15
+
+] [16]
+Underfull \hbox (badness 10000) in paragraph at lines 969--970
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 971--972
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--985
+
+ []
+
+[17
 
 ] (./tails.bbl
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
@@ -2327,86 +2351,68 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 11.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
 (Font)              scaled to size 5.69998pt on input line 11.
-) [16
+) [18
 
 ]
-
-LaTeX Warning: Reference `fig:sup1' on page 17 undefined on input line 1138.
-
-
-LaTeX Warning: Reference `fig:sup1' on page 17 undefined on input line 1140.
-
-
-LaTeX Warning: Reference `fig:sup1' on page 17 undefined on input line 1141.
-
-
-LaTeX Warning: Reference `fig:sup1' on page 17 undefined on input line 1145.
-
-<Figures/checkplot_30070.pdf, id=353, 5058.9pt x 3613.5pt>
+<Figures/checkplot_30070.pdf, id=367, 5058.9pt x 3613.5pt>
 File: Figures/checkplot_30070.pdf Graphic file (type pdf)
 <use Figures/checkplot_30070.pdf>
-Package pdftex.def Info: Figures/checkplot_30070.pdf  used on input line 1171.
+Package pdftex.def Info: Figures/checkplot_30070.pdf  used on input line 1048.
 (pdftex.def)             Requested size: 492.19374pt x 351.5567pt.
-[17
-
- <./Figures/checkplot_30070.pdf>]
-<Figures/methodFlow.pdf, id=501, 1084.05pt x 289.08pt>
-File: Figures/methodFlow.pdf Graphic file (type pdf)
-<use Figures/methodFlow.pdf>
-Package pdftex.def Info: Figures/methodFlow.pdf  used on input line 1178.
-(pdftex.def)             Requested size: 492.19374pt x 131.2493pt.
-<Figures/qctable.pdf, id=503, 1156.32pt x 289.08pt>
-File: Figures/qctable.pdf Graphic file (type pdf)
-<use Figures/qctable.pdf>
-Package pdftex.def Info: Figures/qctable.pdf  used on input line 1183.
-(pdftex.def)             Requested size: 469.47046pt x 117.36787pt.
- [18
-
- <./Figures/methodFlow.pdf> <./Figures/qctable.pdf>]
-<Figures/vishtable.pdf, id=561, 939.51pt x 1084.05pt>
-File: Figures/vishtable.pdf Graphic file (type pdf)
-<use Figures/vishtable.pdf>
-Package pdftex.def Info: Figures/vishtable.pdf  used on input line 1188.
-(pdftex.def)             Requested size: 469.47046pt x 541.69286pt.
  [19
 
- <./Figures/vishtable.pdf>] 
+ <./Figures/checkplot_30070.pdf>]
+<Figures/methodFlow.pdf, id=516, 1084.05pt x 289.08pt>
+File: Figures/methodFlow.pdf Graphic file (type pdf)
+<use Figures/methodFlow.pdf>
+Package pdftex.def Info: Figures/methodFlow.pdf  used on input line 1055.
+(pdftex.def)             Requested size: 492.19374pt x 131.2493pt.
+<Figures/qctable.pdf, id=518, 1156.32pt x 289.08pt>
+File: Figures/qctable.pdf Graphic file (type pdf)
+<use Figures/qctable.pdf>
+Package pdftex.def Info: Figures/qctable.pdf  used on input line 1060.
+(pdftex.def)             Requested size: 469.47046pt x 117.36787pt.
+ [20
+
+ <./Figures/methodFlow.pdf> <./Figures/qctable.pdf>]
+<Figures/vishtable.pdf, id=577, 939.51pt x 1084.05pt>
+File: Figures/vishtable.pdf Graphic file (type pdf)
+<use Figures/vishtable.pdf>
+Package pdftex.def Info: Figures/vishtable.pdf  used on input line 1065.
+(pdftex.def)             Requested size: 469.47046pt x 541.69286pt.
+ [21
+
+ <./Figures/vishtable.pdf>]
+
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1199.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 1199.
-(./tails.xwm)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-(./tails.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1199.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1199.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1076.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 1076.
+(./tails.xwm) (./tails.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1076.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1076.
 
 Package rerunfilecheck Info: File `tails.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: There were multiply-defined labels.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1199.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1076.
  )
 (\end occurred when \ifdefined on line 31 was incomplete) 
 Here is how much of TeX's memory you used:
- 33219 strings out of 480608
- 644032 string characters out of 5903630
- 945193 words of memory out of 5000000
- 48345 multiletter control sequences out of 15000+600000
- 660043 words of font info for 143 fonts, out of 8000000 for 9000
+ 33239 strings out of 480608
+ 644247 string characters out of 5903630
+ 946778 words of memory out of 5000000
+ 48358 multiletter control sequences out of 15000+600000
+ 673803 words of font info for 156 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 65i,14n,88p,1003b,741s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 65i,14n,88p,1401b,747s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/20
 20/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2020/texmf-dist/f
-onts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips
-/lm/lm-mathit.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mat
-hex.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</
+onts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/d
+vips/lm/lm-mathex.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm
+-rm.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</
 usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
 sr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr
 /local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
@@ -2423,19 +2429,21 @@ nts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/p
 ublic/lm/lmmi7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lm
 r10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr6.pfb></us
 r/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texl
-ive/2020/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/t
-exmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2020/texmf-dist/f
-onts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/ty
-pe1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/ur
-w/helvetic/uhvr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/helve
-tic/uhvro8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8
-a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></u
-sr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/t
-exlive/2020/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on tails.pdf (19 pages, 3070363 bytes).
+ive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2020/tex
+mf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/texmf-dist/fo
+nts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/p
+ublic/lm/lmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/helvetic
+/uhvb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/helvetic/uhvbo8
+a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><
+/usr/local/texlive/2020/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/l
+ocal/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texli
+ve/2020/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2020/t
+exmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/
+fonts/type1/urw/times/utmri8a.pfb>
+Output written on tails.pdf (21 pages, 3099442 bytes).
 PDF statistics:
- 669 PDF objects out of 1000 (max. 8388607)
- 401 compressed objects within 5 object streams
- 73 named destinations out of 1000 (max. 500000)
+ 689 PDF objects out of 1000 (max. 8388607)
+ 417 compressed objects within 5 object streams
+ 75 named destinations out of 1000 (max. 500000)
  208 words of extra memory for PDF output out of 10000 (max. 10000000)
 
