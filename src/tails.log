@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.7.31)  13 MAR 2024 14:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.7.31)  13 MAR 2024 18:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2258,26 +2258,29 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [4 <./Figures/Fig2_eur_qc_0_version1_dedupe.pdf>]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.54997pt on input line 364.
+(Font)              scaled to size 8.54997pt on input line 374.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <9> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 364.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 374.
 LaTeX Font Info:    Font shape `T1/phv/b/sl' will be
-(Font)              scaled to size 8.54997pt on input line 364.
+(Font)              scaled to size 8.54997pt on input line 374.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [5 <./Figures/Fig3_eur_qc_0_version1_dedupe.pdf>] [6]
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 396.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 406.
 LaTeX Font Info:    Font shape `T1/phv/b/sl' will be
-(Font)              scaled to size 9.49997pt on input line 396.
+(Font)              scaled to size 9.49997pt on input line 406.
 <Figures/Fig4_eur_qc_0_version1_dedupe.pdf, id=202, 2168.1pt x 1445.4pt>
 File: Figures/Fig4_eur_qc_0_version1_dedupe.pdf Graphic file (type pdf)
 <use Figures/Fig4_eur_qc_0_version1_dedupe.pdf>
 Package pdftex.def Info: Figures/Fig4_eur_qc_0_version1_dedupe.pdf  used on inp
-ut line 417.
+ut line 427.
 (pdftex.def)             Requested size: 492.19374pt x 328.11223pt.
  [7
 
  <./Figures/Fig4_eur_qc_0_version1_dedupe.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 436--437
+Underfull \hbox (badness 10000) in paragraph at lines 446--447
 
  []
 
@@ -2285,27 +2288,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 436--437
 File: Figures/Fig5_eur_qc_0_version1_dedupe.pdf Graphic file (type pdf)
 <use Figures/Fig5_eur_qc_0_version1_dedupe.pdf>
 Package pdftex.def Info: Figures/Fig5_eur_qc_0_version1_dedupe.pdf  used on inp
-ut line 466.
+ut line 476.
 (pdftex.def)             Requested size: 492.19374pt x 590.58879pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [8
 
-]
+] [9 <./Figures/Fig5_eur_qc_0_version1_dedupe.pdf>] [10
 
-LaTeX Warning: Text page 9 contains only floats.
-
-[9 <./Figures/Fig5_eur_qc_0_version1_dedupe.pdf>] [10
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 566--567
+Underfull \hbox (badness 10000) in paragraph at lines 579--580
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 626--627
+Underfull \hbox (badness 10000) in paragraph at lines 639--640
 
  []
 
@@ -2316,29 +2316,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 626--627
 ] [13
 
 ] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 863--864
+Underfull \hbox (badness 10000) in paragraph at lines 885--886
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 904--907
+Underfull \hbox (badness 10000) in paragraph at lines 926--929
 
  []
 
 [15
 
 ] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 969--970
+Underfull \hbox (badness 10000) in paragraph at lines 991--992
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 971--972
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 984--985
+Underfull \hbox (badness 10000) in paragraph at lines 993--994
 
  []
 
@@ -2357,7 +2352,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
 <Figures/checkplot_30070.pdf, id=367, 5058.9pt x 3613.5pt>
 File: Figures/checkplot_30070.pdf Graphic file (type pdf)
 <use Figures/checkplot_30070.pdf>
-Package pdftex.def Info: Figures/checkplot_30070.pdf  used on input line 1048.
+Package pdftex.def Info: Figures/checkplot_30070.pdf  used on input line 1054.
 (pdftex.def)             Requested size: 492.19374pt x 351.5567pt.
  [19
 
@@ -2365,12 +2360,12 @@ Package pdftex.def Info: Figures/checkplot_30070.pdf  used on input line 1048.
 <Figures/methodFlow.pdf, id=516, 1084.05pt x 289.08pt>
 File: Figures/methodFlow.pdf Graphic file (type pdf)
 <use Figures/methodFlow.pdf>
-Package pdftex.def Info: Figures/methodFlow.pdf  used on input line 1055.
+Package pdftex.def Info: Figures/methodFlow.pdf  used on input line 1061.
 (pdftex.def)             Requested size: 492.19374pt x 131.2493pt.
 <Figures/qctable.pdf, id=518, 1156.32pt x 289.08pt>
 File: Figures/qctable.pdf Graphic file (type pdf)
 <use Figures/qctable.pdf>
-Package pdftex.def Info: Figures/qctable.pdf  used on input line 1060.
+Package pdftex.def Info: Figures/qctable.pdf  used on input line 1066.
 (pdftex.def)             Requested size: 469.47046pt x 117.36787pt.
  [20
 
@@ -2378,18 +2373,18 @@ Package pdftex.def Info: Figures/qctable.pdf  used on input line 1060.
 <Figures/vishtable.pdf, id=577, 939.51pt x 1084.05pt>
 File: Figures/vishtable.pdf Graphic file (type pdf)
 <use Figures/vishtable.pdf>
-Package pdftex.def Info: Figures/vishtable.pdf  used on input line 1065.
+Package pdftex.def Info: Figures/vishtable.pdf  used on input line 1071.
 (pdftex.def)             Requested size: 469.47046pt x 541.69286pt.
  [21
 
  <./Figures/vishtable.pdf>]
 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1076.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 1076.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1082.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 1082.
 (./tails.xwm) (./tails.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1076.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1076.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1082.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1082.
 
 Package rerunfilecheck Info: File `tails.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
@@ -2397,17 +2392,17 @@ Package rerunfilecheck Info: File `tails.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1076.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1082.
  )
 (\end occurred when \ifdefined on line 31 was incomplete) 
 Here is how much of TeX's memory you used:
  33239 strings out of 480608
  644247 string characters out of 5903630
- 946778 words of memory out of 5000000
+ 948124 words of memory out of 5000000
  48358 multiletter control sequences out of 15000+600000
  673803 words of font info for 156 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 65i,14n,88p,1401b,747s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 65i,14n,88p,1569b,747s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/20
 20/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2020/texmf-dist/f
 onts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/d
@@ -2440,7 +2435,7 @@ ocal/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texli
 ve/2020/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2020/t
 exmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/
 fonts/type1/urw/times/utmri8a.pfb>
-Output written on tails.pdf (21 pages, 3099442 bytes).
+Output written on tails.pdf (21 pages, 3100191 bytes).
 PDF statistics:
  689 PDF objects out of 1000 (max. 8388607)
  417 compressed objects within 5 object streams

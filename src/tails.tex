@@ -320,15 +320,25 @@ using population based sequencing.
 
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig3_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
-\caption{\footnotesize{
-\textbf{(a)} Relative Lifetime Reproductive Success used to approximate trait selection.
-\textbf{(b)} Association between negative tail selection and PRS regression. 
-\textbf{(c)} Tail Fitness Association. 
-\textbf{(d)} Simulaton by Anil. 
-\textbf{(e)} Simulation by Anil. 
-}} \label{fig:evo} \end{figure} \FloatBarrier 
-
-
+\caption{\footnotesize{{\bf Selection analyses in real and simulated
+      data.} \textbf{(a)} Residualised trait value plotted against
+    relative lifetime reproductive success for 16 {\bf cherry picked
+      traits}, quadratic best fit to the data is shown by dashed
+    lines.  \textbf{(b)} Number of traits with inferred type of PRS
+    tail regression and inferred type selection for 75 UKB traits
+    passing QC. Tail regression is inferred if P-value for regression
+    to the mean in the tail is significant... \textbf{(c)} Spearman
+    rank correlation between the standardised mean proxy measures of
+    fitness of individuals in the upper and lower 1\% tails and
+    PRS-test effect size for the corresponding tail across 75 traits
+    in UKB passing QC.  \textbf{(d)} \need{not sure this is
+      needed}. \textbf{(e)} Trumpet plots (minor allele frequency v
+    effect size) for simulated data without and with selection. All
+    variants are included in the plot. \textbf{(e)} PRS quantile (in
+    1\% increments) plotted agaisnt mean trait value in quantile in
+    simulated data without and with selection. PRS calculated from all
+    variants with MAF>1\%.  }} \label{fig:evo} \end{figure}
+\FloatBarrier
 
 \subsection*{The Impact of Selection on PRM} ~\\ 
 \noindent Using adjusted lifetime reproductive success
@@ -481,10 +491,13 @@ portable.
       correlation. \textbf{(e)}. \textbf{(f)} PRS-test effect sizes
       estimated in: UKB European ancestry samples v UKB non-European
       ancestry samples for X traits passing PRS-test QC in both
-      cohorts. \textbf{(g)}. \textbf{(h)} PRS-test effect sizes
-      estimated in: UKB European ancestry samples v All Of Us European
-      ancestry samples for 24 overlapping traits passing PRS-test QC
-      in both cohorts.}  } \label{fig:rep} \end{figure} \FloatBarrier
+      cohorts. Triangles shaded relative to the non-European sample
+      size for the trait. Pearson correlation shown\textbf{(g)}. \textbf{(h)} PRS-test effect
+      sizes estimated in: UKB European ancestry samples v All Of Us
+      European ancestry samples for 24 overlapping traits passing
+      PRS-test QC in both cohorts. Triangles shaded relative to the
+      All of Us sample size for the trait.}
+  } \label{fig:rep} \end{figure} \FloatBarrier
 
 \newpage \clearpage
 
@@ -604,8 +617,8 @@ After this QC there 432k unrelated individuals remained.
 %It has been shown that both the mean and variance of PRS varies
 %across ancestry groups \citep{global}.
 Primary analyses were performed on over 410k unrelated European
-samples and replicated was performed using the 22k samples classified
-as non-European ancestry.
+samples and replication analyses was performed on the remaining 22k
+samples classified as non-European ancestry.
 
 For the sibling based analyses sibling pairs were selected by first
 identifying first degree relatives defined as those with kinship
@@ -716,32 +729,41 @@ therefore we impose the following additional requirements:
 %1\% or fewer than 50,000 samples in the target data (after filtering
 %outliers) were removed.  This resulted in 122 traits. 
 
-This futher thinned our traits to 123. To ensure a
-non-redundant survey of traits, pairwise genetic correlation were
-calculated using LDscore\cite{ldsc} and 61 traits did not have a pair with $r_g > 95\%$,
-average top match = $0.60$,standard-deviation = $0.2$) and kept in the analysis.  Additionally,
-10 traits has a single almost identical match (eg: "Standing Height"
-(ID:50) and "Height Measured Prior to Imaging" (ID:12144)), in these
-cases the trait with greater sample size was priotized.  The other 52
-traits were part of larger clusters of genetically similar traits, the
-largest of which related to measurements related to of body-mass (eg:
-body fat percentage, leg mass, arm mass, etc) and heel bone mineral
-density.  Using the same data maximization algorithm applied to extra
-unrelated individuals \citep{erase}, we were able to select 11 of these
-traits which resulted in a set of 77 genetically non-redudant traits.
+This futher thinned our traits to 123. To ensure a non-redundant
+survey of traits, pairwise genetic correlation were calculated using
+LDscore\cite{ldsc} and 61 traits did not have a pair with
+$r_g > 95\%$, average top match = $0.60$,standard-deviation = $0.2$)
+and kept in the analysis.  Additionally, 10 traits has a single almost
+identical match (eg: "Standing Height" (ID:50) and "Height Measured
+Prior to Imaging" (ID:12144)), in these cases the trait with greater
+sample size was priotized.  The other 52 traits were part of larger
+clusters of genetically similar traits, the largest of which related
+to measurements related to of body-mass (eg: body fat percentage, leg
+mass, arm mass, etc) and heel bone mineral density.  Using the same
+data maximization algorithm applied to extra unrelated individuals
+\citep{erase}, we were able to select 11 of these traits which
+resulted in a set of 77 genetically non-redudant traits.
 
+\subsubsection*{Non-European Ancestry Individuals in the UKB} ~\\
+\noindent Non-European Ancestry samples in the UKB have between
+3,150 and 13,037 (average 10k) total samples for our 75 QC-validated
+traits.  Applying our PRM-test using the European Ancestry PRS to the
+Non-European target, 71 traits passed our PRM-QC. For these 142 tails
+we calculated the replication accuracy and replication association as
+described above.
 
+\need{\em From Beatrice} 
+Genotype and phenotype QC.
 
 \subsubsection*{All of US} ~\\
-\noindent All Of Us in biobank that contains XX binary and XX
-continuous traits from individuals of multiple ancestries.  Trait
-matches were found with an initial database search and then were
-inspected by eye to determine if trait descriptions were sufficiently
-similar.  This process yielded 32 traits, 25 that passed our
-PRM-QC. These traits had between 8595 and 127677 total samples
-(average 73k) in the European Ancestry cohort.  For these 50 tails the
-replication accuracy and replication association was calculated as
-described above.
+\noindent All Of Us in biobank contains XX binary and XX continuous
+traits from individuals of multiple ancestries.  Trait matches were
+found with an initial database search and then were inspected by eye
+to determine if trait descriptions were sufficiently similar.  This
+process yielded 32 traits, 25 that passed our PRM-QC. These traits have
+between 8595 and 127677 observations (average 73k) in the European
+ancestry samples.  For these 50 tails the replication accuracy and
+replication association was calculated as described above.
 
 \subsection*{Genome-wide association analyses and PRS estimation}
 European UKB samples were split randomly into 50\% base and 50\%
@@ -979,22 +1001,6 @@ value between 5k and 50k (counting by 5k) we performed 100 trials across each of
 tails and calculated the \textbf{(1)} relative accuracy (true and false positives and negatives) 
 relative to our full dataset (FDR 5\%) and \textbf{(2)} the linear and the rank correlation of for the regression 
 effect size across all the tails. 
-
-
-\subsubsection*{Replication: Non-European Ancestry Individuals in the UKB} ~\\
-
-\noindent Our Non-European Ancestry samples in the UKB have between 3,150 and 13,037 (average 10k) total samples for 
-our 75 QC-validated traits.  Applying our PRM-test using the European Ancestry PRS to the Non-European 
-target, 71 traits passed our PRM-QC.  For these 142 tails we calculated the replication accuracy and 
-replication association as described above. 
-
-
-
-%\need{\em From Beatrice} 
-%Genotype and phenotype QC.
-
-\need{\em From Beatrice} 
-Genotype and phenotype QC.
 
 
 
