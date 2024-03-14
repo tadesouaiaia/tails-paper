@@ -188,14 +188,7 @@ known measures of fitness and PRS regression to the mean in the tails. \citep{bt
 Finally, we assess whether the predictions of a complex
 trait architecture derived from a conditional sibling model align with
 the observed diversity in the architecture of trait extremes inferred
-from population level analyses. The
-striking concordance between these measures underscores the need to
-consider the role of rare variants in the analysis of trait tails.
-The PRS and sibling analyses presented here offer valuable tools for
-the targeted selection of traits and samples likely to harbor de novo
-or rare deleterious alleles and represent an approach that has the
-potential to significantly enhance the effectiveness and design of
-sequencing studies.
+from population level analyses.
 
 
 \FloatBarrier \begin{figure}[!h] \centering \begin{maybe}{showFig} 
@@ -216,37 +209,35 @@ large-effect variants. This inaccuracy will be most apparent in the
 tails of the trait distribution where individuals with large-effect
 variants are most likely to reside. Specifically, PRS values will tend
 to converge toward the mean PRS in the tails -- {\em PRS-regression to the mean}.
-
-We first identify and characterize \emph{polygenic-regression to the
-  mean} (PRM), which occurs when individuals in the tails of the
-quantitive trait distribution exhibit polygenic risk that is closer to
-the mean risk score than expected.  To quantify this phenomenon we
-develope a quantitive trait statistical test that estimates effect
+% We first identify and characterize \emph{polygenic-regression to the
+%   mean} (PRM), which occurs when individuals in the tails of the
+% quantitive trait distribution exhibit polygenic risk that is closer to
+% the mean risk score than expected.
+To quantify this we develop a statistical test that estimates effect
 size, direction, and signficance of movement away from the expected
 polygenic load for individuals in the lower and upper 1\% of the trait
-distribution. Specifically, a regression is fit... The
-regression effect size is defined as
-\[
-  \beta = \mbox{abs(expected mean trait value in tail) -
-    abs(observed mean trait value in tail)}
-\]
-where the the expected mean trait value in tail is calculated from the
-regression fit. Using this definition, positive
-values in both the upper and lower tails correspond to regression to
-the mean, whereas negative values correspond to regression away from
-the mean.
+distribution. Specifically, a regression of PRS on standardised trait
+values is fit. The regression effect size in the tail is defined as
+the mean of the residuals in the lower tail and minus the mean of the
+residuals in the upper tail. Using this definition, positive values
+in both the upper and lower tails correspond to regression to the
+mean, whereas negative values correspond to regression away from the
+mean.
 
-Applying this test to the UKB reveals that 400 of 1,185 heritiable
-($h^2>0.01$) quantitive traits have signficant ($p<0.05$) movement
-from expectation in one or both tails and that 95\% of the time this
-movement is toward the mean (see - Supplement).  Observing that many
-of these tests are underpowered due to insufficient sample size and
-poor polygenic prediction ($R^2$), we identify a set of 75
-high-powered ($h^2>0.05$,$R^2>0.01$) non-redundant, quality-controlled
-traits for further analysis (see Methods - QC).  Using these 75 traits
-we perform PRM-Testing, rare-variant analysis, analysis of selection
-to help elucidate the mechanism that may be behind PRM.  We then
-replicate these results using a sibling model and different datasets.
+% Applying this test to the UKB reveals that 400 of 1,185 heritiable
+% ($h^2>0.01$) quantitive traits have signficant ($p<0.05$) movement
+% from expectation in one or both tails and that 95\% of the time this
+% movement is toward the mean (see - Supplement).  Observing that many
+% of these tests are underpowered due to insufficient sample size and
+% poor polygenic prediction ($R^2$)
+
+The test is applied to 75 continuous UKB traits with heritabilty
+$>0.05$, PRS $R^2>0.01$, sample size $>$ 10,000 and thinned such that
+the maximum pairwise trait correlation $<$, see Methods for further
+details of trait QC. Using these 75 traits we perform PRM-Testing,
+rare-variant analysis, analysis of selection to help elucidate the
+mechanism that may be behind PRM.  We then replicate these results
+using a sibling model and different datasets.
 
 
 
@@ -310,7 +301,7 @@ greatest) and in \emph{Triglycerides} there are also more rare
 variants in the lower tail (where PRM Effect is greatest, albiet
 non-signficant).  This result is consistent with the hypothesis that
 rare variants of large effect that not accounted for in the
-common-variant PRS responsible for the tail specific PRM.  In
+common-variant PRS responsible for the tail specific PRM. In
 \fref{fig:prs}{d} we observe a small but signficiant relationship
 between the magnitude of regression and the number rare variants in
 the tail.  However, for many traits the tail with more PRM shows
@@ -541,7 +532,13 @@ we expect sib B to be discordant phenotypically. An alternative
 explanation for discordant phenotype in sib-pairs could be due to the
 non-shared environment factors with large effect.
 
-
+The striking concordance between these measures underscores the need
+to consider the role of rare variants in the analysis of trait tails.
+The PRS and sibling analyses presented here offer valuable tools for
+the targeted selection of traits and samples likely to harbor de novo
+or rare deleterious alleles and represent an approach that has the
+potential to significantly enhance the effectiveness and design of
+sequencing studies.
 
 One major limitation of these tests is that they are highly sensitive
 to measurement errors. Measurement errors would result in the same
@@ -786,16 +783,21 @@ target data.
 \clearpage \newpage 
 \subsection*{Data Analysis} ~\\
 \vspace*{-0.5cm} 
-\subsubsection*{The PRS-regression to the mean (PRM) test}~\\
-The PRM-test first applies a regression of PRS on standardised trait
-values. For each trait, the residuals from the regression are then
-split into quantiles according to the trait distribution and t-tests
-are applied to test whether the residuals are: (1) significantly less
-than zero for individuals with trait values in the upper tail and (2)
-significantly greater than zero for individuals with trait values in
-the lower tail using t-tests. \need{are we now applying two-sided
-  tests?}  The tests were applied to individiuals in the top and
-bottom 1\% of the trait distribution.
+\subsubsection*{The PRS-regression tail test}~\\
+The PRS-test first applies a regression of PRS on trait values where
+both the PRS and trait are standardised to have standard deviation of
+1. For each trait, the residuals from the regression are then split
+into quantiles according to the trait distribution and two-tailed
+t-tests are applied to test whether the residuals are significantly
+different to zero.  The tests were applied to individiuals in the top
+and bottom 1\% of the trait distribution. The effect size in each tail
+is defined such that a positive effect is indicative of regression to
+the mean in both the upper and lower tails as follows
+\[
+\frac{1}{n}\sum_i^n |{f(y_i)}| - |{PRS_i}|
+\]
+where $f(y)$ is the predicted PRS from the regression given trait
+value $y$ and $n$ is the number of observations.
 
 To avoid false positive associations arising from unusual trait
 distributions, the residuals of samples in the middle of the trait
