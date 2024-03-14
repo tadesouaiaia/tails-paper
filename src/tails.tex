@@ -169,22 +169,26 @@ for sequencing.
 
 Here we attempt to distinguish whether the tails of the distribution
 of different traits are primarily driven by common polygenicity or by
-a more "monogenic-type" architecture. We accomplish this by developing
-a statistical test that measures the fit of the polygenic model across
+a more "monogenic-type" architecture \need{monogenic literally means
+  single-gene disorder}.  We accomplish this by developing a
+statistical test that measures the fit of the polygenic model across
 the trait-PRS distribution and identifies non-polygencity in each tail
 and applying it to over a \need{thousand} UK Biobank traits (see
-\fref{fig:intro}).  Next we consider whether evidence of negative selection
-exists in a subset of uncorrelated traits and show that the trait
-tails under negative selection are more likely to be associated with
-rare variants.  We further triangulate evidence for selective
-constraint leading to reduced common polygenicity, by testing for the
-fertility of individuals in the tails based on their known measures of
-fitness that correlate with de novo mutations \citep{bt_5, bt_6}.
+\fref{fig:intro}) \need{sentence is too long and "trait-PRS
+  distribution" is inaccurate description}.  Next we consider whether
+evidence of negative selection exists in a subset of uncorrelated
+traits \need{we use all 75 traits, these are not uncorrelated}
+and show that the trait tails under negative selection are more
+likely to be associated with \need{PRS regression to the mean which
+  may imply existence of rare variants}.  We further triangulate
+evidence for selective constraint leading to reduced contribution of common
+polygenicity in the tails, by testing for the associations between
+known measures of fitness and PRS regression to the mean in the tails. \citep{bt_5, bt_6}.
 
-
-\noindent Finally, we assess whether the predictions of a complex
+Finally, we assess whether the predictions of a complex
 trait architecture derived from a conditional sibling model align with
-the observed diversity in the architecture of trait extremes. The
+the observed diversity in the architecture of trait extremes inferred
+from population level analyses. The
 striking concordance between these measures underscores the need to
 consider the role of rare variants in the analysis of trait tails.
 The PRS and sibling analyses presented here offer valuable tools for
@@ -192,15 +196,6 @@ the targeted selection of traits and samples likely to harbor de novo
 or rare deleterious alleles and represent an approach that has the
 potential to significantly enhance the effectiveness and design of
 sequencing studies.
-
-We use PRS to assess the contribution of rare large-effect variants on
-extreme trait values. Rare variants are typically not included in PRS,
-leading to reduced accuracy of the PRS for individuals with rare
-large-effect variants. This inaccuracy will be most apparent in the
-tails of the trait distribution where individuals with large-effect
-variants are most likely to reside. Specifically, PRS values will tend
-to converge toward the mean PRS in the tails -- {\em PRS-regression to the mean}.
-
 
 
 \FloatBarrier \begin{figure}[!h] \centering \begin{maybe}{showFig} 
@@ -214,6 +209,13 @@ to converge toward the mean PRS in the tails -- {\em PRS-regression to the mean}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage \newpage 
 \section*{Results} \label{sec:results}
+We use PRS to assess the contribution of rare large-effect variants on
+extreme trait values. Rare variants are typically not included in PRS,
+leading to reduced accuracy of the PRS for individuals with rare
+large-effect variants. This inaccuracy will be most apparent in the
+tails of the trait distribution where individuals with large-effect
+variants are most likely to reside. Specifically, PRS values will tend
+to converge toward the mean PRS in the tails -- {\em PRS-regression to the mean}.
 
 We first identify and characterize \emph{polygenic-regression to the
   mean} (PRM), which occurs when individuals in the tails of the
@@ -275,17 +277,17 @@ observed in each of these traits can be illustrated in
       distributions.}  \textbf{(a)} PRS quantile (in 1\% increments)
     plotted agaisnt mean trait value in quantile for four traits with
     different types of PRS tail regression (clockwise: No Tail
-    Regression, Upper Tail, Lower Tail, Dual Tail). \textbf{(b)} PRM
-    effect sizes in the upper and lower 1\% tails for all traits (of
-    the 77 passing trait QC) which exhibit significant regression to
-    the mean in one or both tails (Bonferroni p-value<0.05 $\equiv$
-    P<0.05/154).  \textbf{(c)} Trumpet plots -- minor allele frequency
-    plotted against effect size of genome-wide significant variants
-    for traits shown in (a). \textbf{(d)} Tail effect sizes plotted
-    against number of genome-wide significant variants with MAF<1\%
-    for X traits with overlapping exome sequence results. For upper
-    tails positive variant effects are counted and for lower tail
-    negative variant effects are counted. Correlation and significance
+    Regression, Upper Tail, Lower Tail, Dual Tail). \textbf{(b)}
+    PRS-test tail effect sizes in the upper and lower 1\% tails for
+    all traits (of the 75 passing QC) which exhibit significant
+    regression to the mean in one or both tails at FDR of 0.05.
+    \textbf{(c)} Trumpet plots (minor allele frequency v effect size)
+    of genome-wide significant variants for traits shown in
+    (a). \textbf{(d)} PRS-test tail effect sizes plotted against
+    number of genome-wide significant variants with MAF<1\% for X
+    traits with overlapping exome sequence results. For upper tails
+    positive variant effects are counted and for lower tails negative
+    variant effects are counted. Correlation and significance
     calculated using Spearman rank correlation. \textbf{(e)} Age of
     menopause: PRS quantile v trait mean and trumpet plot.
   }} \label{fig:prs} \end{figure} \FloatBarrier
@@ -325,10 +327,10 @@ using population based sequencing.
     relative lifetime reproductive success for 16 {\bf cherry picked
       traits}, quadratic best fit to the data is shown by dashed
     lines.  \textbf{(b)} Number of traits with inferred type of PRS
-    tail regression and inferred type selection for 75 UKB traits
-    passing QC. Tail regression is inferred if P-value for regression
-    to the mean in the tail is significant... \textbf{(c)} Spearman
-    rank correlation between the standardised mean proxy measures of
+    tail regression and inferred type of selection for 75 UKB traits
+    passing QC. Tail regression is inferred if tail effect is
+    significant at an FDR of 0.05. \textbf{(c)} Spearman
+    rank correlation between standardised mean proxy measures of
     fitness of individuals in the upper and lower 1\% tails and
     PRS-test effect size for the corresponding tail across 75 traits
     in UKB passing QC.  \textbf{(d)} \need{not sure this is
@@ -436,8 +438,10 @@ test pvalue and the pvalue from our PRM-test \fref{fig:sib}{d}.
         trait quantile (in 1\% increments) plotted agaisnt mean trait
         value of conditional sibling in quantile for four traits with
         different types of PRS tail regression. \textbf{(d)} PRS-test
-        P-values plotted against sibling meta test P-values on $-\log_{10}$
-        scale for upper and lower tails of X traits.}}
+        P-values plotted against sibling meta test P-values on
+        $-\log_{10}$ scale for upper and lower tails of X
+        traits. Correlation \need{and significance} calculated using Spearman
+        rank correlation.}}
     \label{fig:sib} \end{figure} \FloatBarrier
 
 
@@ -483,21 +487,21 @@ portable.
       with different types of PRS tail regression.  \textbf{(b)}
       PRS-test tail effect estimates in UKB European ancestry samples,
       UKB non-European ancestry samples and All of Us Euroepan
-      ancestry samples for all 25 traits overlapping with All of US
-      and pass PRS-test quality control in the three cohorts.
-      \textbf{(c)} Simulated Signal Replication: Increasing larger
-      subsets were sampled and the replicability relative to our UKB
-      result was calculated \textbf{(d)} Same thing but
+      ancestry samples for 25 traits measured and passing PRS-test
+      quality control in the three cohorts.  \textbf{(c)} Simulated
+      Signal Replication: Increasing larger subsets were sampled and
+      the replicability relative to our UKB result was calculated
+      \textbf{(d)} Same thing but
       correlation. \textbf{(e)}. \textbf{(f)} PRS-test effect sizes
       estimated in: UKB European ancestry samples v UKB non-European
       ancestry samples for X traits passing PRS-test QC in both
       cohorts. Triangles shaded relative to the non-European sample
-      size for the trait. Pearson correlation shown\textbf{(g)}. \textbf{(h)} PRS-test effect
-      sizes estimated in: UKB European ancestry samples v All Of Us
-      European ancestry samples for 24 overlapping traits passing
-      PRS-test QC in both cohorts. Triangles shaded relative to the
-      All of Us sample size for the trait.}
-  } \label{fig:rep} \end{figure} \FloatBarrier
+      size for the trait. Pearson correlation
+      shown\textbf{(g)}. \textbf{(h)} PRS-test effect sizes estimated
+      in: UKB European ancestry samples v All Of Us European ancestry
+      samples for 24 overlapping traits passing PRS-test QC in both
+      cohorts. Triangles shaded relative to the All of Us sample size
+      for the trait.}  } \label{fig:rep} \end{figure} \FloatBarrier
 
 \newpage \clearpage
 

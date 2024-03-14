@@ -1,0 +1,13 @@
+Fig 2d. shading and best fit line should be removed, I assume spearman
+was used and this does not give best fit line. y-axis – number of
+genome-wide significant variants with MAF<1%
+
+Fig 3d. Remove? Best described in text?
+
+Figs 3e and f. Axis labels. Legend for shading indicating age of
+mutations.
+
+Figs 4d, 5f and 5h Legends should include triangles indicating
+positive / negative effects
+
+Fig 5c, d, e and g. Not sure if these are needed
