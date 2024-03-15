@@ -203,8 +203,7 @@ from population level analyses.
 \clearpage \newpage 
 \section*{Results} \label{sec:results}
 \subsection*{Population-level data analyses for rare variants of large
-  effect affecting the tails of trait
-  distributions.} ~\\
+  effect affecting the tails of trait distributions.} ~\\
 We use PRS to assess the contribution of rare large-effect variants on
 extreme trait values. Rare variants are typically not included in PRS,
 leading to reduced accuracy of the PRS for individuals with rare
@@ -235,9 +234,19 @@ mean.
 % of these tests are underpowered due to insufficient sample size and
 % poor polygenic prediction ($R^2$)
 
-The test is applied to 77 unique continuous UKB traits with
-heritabilty $>0.05$, PRS $R^2>0.01$ and sample size $>$10,000, see
-Methods for further details of trait QC.
+We first applied our test to UKB samples of European ancestry.
+Available samples were split equally, one half of the data was used
+for GWAS to estimate PRS via PRSice and the remaining samples for
+testing, see Methods for further details of sample selection and
+genotype QC. Continuous traits with heritabilty $>0.05$, PRS
+$R^2>0.01$ and sample size $>$10,000 were selected for analysis. After
+removal of strongly correlated traits (maximum pairwise correlation
+$R^2<$0.95 ) 77 traits remained for analysis, see Methods for further
+details of trait QC and selection. Of these traits, two failed our
+test QC indicating significant departure from predicted values from
+the regression in the middle 90\% or the trait distribution, leaving
+75 traits (150 tails) for analysis. Extended Data Table 1 lists all 77
+traits and their available sanple sizes.
 
 % Using these 75 traits we perform PRM-Testing, rare-variant analysis,
 % analysis of selection to help elucidate the mechanism that may be
@@ -379,11 +388,12 @@ possible that downstream effects of illnesses results in extreme trait
 values.  Finally, if paternal age is associated with more \emph{de
   novo} mutations \citep{pat} it should also be associated with PRM.
 
-In \fref{fig:evo}{c} the rank correlation for the average tail fitness 
-measure and the PRM effect size across the trait tails is shown. 
-We observe that the direction of rank association is in line with the 
-rare-variant hypothesis in every case, although the association between 
-PRM and the number of miscarriages and paternal age are not significantly associated. 
+In \fref{fig:evo}{c} the rank correlation for the average tail fitness
+measure and the PRM effect size across the trait tails is shown.  We
+observe that the direction of rank association is in line with the
+rare-variant hypothesis in every case, although the association
+between PRM and the number of miscarriages and paternal age are not
+significantly associated.
 
 
 
@@ -877,12 +887,12 @@ under the null hypotheses of both tests
   \right)^2
 \end{equation*}
 
-For each trait P-values from the {\em Mendelian} and {\em de novo} tests are
-combined using Fisher's method to give a $\chi^2$ statistic with 4 degrees of freedom,
+The sibling meta P-value was calculated by combining P-values from the
+{\em Mendelian} and {\em de novo} tests using Fisher's method to give
+a $\chi^2$ statistic with 4 degrees of freedom,
 \begin{align*}
   \chi^2_4 = -2(\log p_{Mendelian} + \log p_{de novo})
 \end{align*}
-that can be used to generate a meta-analysis p-value to be compared to the PRM-Test. 
 
 
 %%%%%%%%%%%   LRS   %%%%%%%%%%%%
@@ -928,12 +938,8 @@ is signficant (FDR 5\%), then:
 
 %%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
 \subsubsection*{Measuring Fitness in the Tails} ~\\ 
-%\need{Think we just need details of test here, not clear what this is,
-%  rather than motivation / interpretation}
-
-\noindent In addition to lifetime reproductive success, we consider four 
-additional measures of fitness that are likely associated with negative selection and 
-rare variants: 
+The following proxy measures of fitness were tested for association
+with PRM in tails:
 \begin{itemize} 
 \item{\textbf{Adjusted number of illnesses:}} The number of
   self-reported non-cancer illnesses (UKB trait Field 2002) is
@@ -945,14 +951,12 @@ rare variants:
   substracted from father's Age (Field 2946) to give the paternal age
   at birth.
 \end{itemize}
-
-\noindent We test whether decreased fitness, as defined by the above
-proxies of fitness, are assocaited with increased PRM as follows. For
-each trait, the mean value of the four proxies of selection are
-calculated for individuals in the upper and lower 1\% of the trait
-distribution separately. Spearman's rank correlation between
-the mean values for each proxy and the PRM effect size is then
-calculated across all trait tails.
+Association between these measures and PRM was calculated as
+follows. For each trait, the mean value of the four proxies of
+selection are calculated for individuals in the upper and lower 1\% of
+the trait distribution separately. Association is then measured by
+Spearman's rank correlation between the mean tail values for each
+proxy and the PRM effect size across all trait tails.
 
 \subsubsection*{Simulating Stabilizing Selection using SLiM} ~\\
 Using SLiM v4.0 (1), we simulated a quantitative polygenic trait under
@@ -964,10 +968,10 @@ $10^{-8}$ per bp under neutrallity. Mutations were assigned effect
 sizes simulated from a gamma distribution with shape parameter 0.186
 and mean 0.01026 and subsequently multiplied by -1 with probability
 0.5 to give a symmetrical effect size distribution. This distribution
-has been used previously to simulate genetic effects in humans; it
-reflects a prior belief in a small number of large effects and many small
-effects. Trait values were determined by the sum of all genetic
-effects.
+has been used previously to simulate genetic effects in humans
+\need{ref} and reflects a prior belief in a small number of large
+effects and many small effects \need{ref}. Individual trait values
+were determined by the sum of all genetic effects.
 
 After neutral genetic diversity was achieved (10N generations),
 stabilising selection on the trait was introduced for 1N
