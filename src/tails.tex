@@ -238,10 +238,13 @@ We first applied our test to UKB samples of European ancestry.
 Available samples were split equally, one half of the data was used
 for GWAS to estimate PRS via PRSice and the remaining samples for
 testing, see Methods for further details of sample selection and
-genotype QC. Continuous traits with heritabilty $>0.05$, PRS
-$R^2>0.01$ and sample size $>$10,000 were selected for analysis. After
-removal of strongly correlated traits (maximum pairwise correlation
-$R^2<$0.95 ) 77 traits remained for analysis, see Methods for further
+genotype QC. Unimodal, non-skewed, continuous traits with heritabilty
+$>0.05$, PRS $R^2>0.01$ and sample size $>$50,000 were selected for
+analysis. After removal of strongly correlated traits (maximum
+pairwise correlation $R^2<$0.95 ) 77 traits remained for
+analysis. Traits were standardised, removing effects of age, sex,
+recruitment centre, genotyping batch, and principal components and
+transformed to be normally distributed, see Methods for further
 details of trait QC and selection. Of these traits, two failed our
 test QC indicating significant departure from predicted values from
 the regression in the middle 90\% or the trait distribution, leaving
@@ -256,19 +259,32 @@ traits and their available sanple sizes.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\noindent Running our PRM-Test on our 75 QC'ed traits reveals that the 80\% of 
-tails (121 of 150, FDR level 0.05) exhibit movement away from expectation 
-and that 98\% (118 of 121) of the time the movement that occurs is regression 
-toward the mean.  The majority of traits (47 of 75) were classified as "Dual Tail" 
-(significant regression to the mean in both tails), while 15 were classified 
-as "Lower Tail" and 9 were classified as "Upper Tail" (see \dref{fig:prs}{b}).  
-For illustrative purposes we identified four "index traits" to represent 
-"No Regression" (Triglycerides - the highest $h^2$ of any trait without tail 
-regression), "Lower Tail" (Haemoglobin Concentration - most signficant), 
-"Upper Tail" (RBC Distribution Width - most significant), and "Dual Tail" 
-(Sitting Height - most significant maximum pvalue).  The tail dynamics 
-observed in each of these traits can be illustrated in
-\dref{fig:prs}{a}.
+\dref{fig:prs}{a} shows 
+
+the most significant trait examples of how
+tail regression is classified: no tails regression exhibited by
+triglycerides (chosen as the trait with highest $h^2$ of any trait
+without tail regression), only lower tail regression exhibited by
+haemoglobin concentration, only upper tail exhibited by red blood cell
+distribution width and dual tail exhibited by sitting height.
+
+Running our PRS-test on all 75 traits reveals that the 80\% of tails
+(121 of 150, FDR level 0.05) exhibit significant (FDR$<$0.05) movement
+away from expectation and that 98\% (118 of 121) of the time the
+movement that occurs is regression toward the mean. \dref{fig:prs}{b})
+shows results for all traits with significant movement towards the mean.
+
+The majority of
+traits (47 of 75) were classified as "Dual Tail" (significant
+regression to the mean in both tails), while 15 were classified as
+"Lower Tail" and 9 were classified as "Upper Tail" (see
+\dref{fig:prs}{b}). For illustrative purposes we identified four
+"index traits" to represent "No Regression" (Triglycerides - the
+highest $h^2$ of any trait without tail regression), "Lower Tail"
+(Haemoglobin Concentration - most signficant), "Upper Tail" (RBC
+Distribution Width - most significant), and "Dual Tail" (Sitting
+Height - most significant maximum pvalue).  The tail dynamics observed
+in each of these traits can be illustrated in \dref{fig:prs}{a}.
   
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig2_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
@@ -405,7 +421,6 @@ of contribution to heritability by rare variants goes up and PRM is observed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage \newpage
 \subsection*{\emph{Replication in Siblings}} ~\\
 Discordance between siblings in the tails of the trait distribution is 
 indictive non-polygenic inheritance \cite{avi}.  The conditional 
@@ -447,7 +462,6 @@ test pvalue and the pvalue from our PRM-test \fref{fig:sib}{d}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4 Replication  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage \newpage
 \subsection*{\emph{Replication}} ~\\
 
 We performed three \emph{flavours} of replication. 
@@ -503,8 +517,6 @@ portable.
       samples for 24 overlapping traits passing PRS-test QC in both
       cohorts. Triangles shaded relative to the All of Us sample size
       for the trait.}  } \label{fig:rep} \end{figure} \FloatBarrier
-
-\newpage \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END RESULTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -651,20 +663,21 @@ analysis).
 
 \pcomment{
 \begin{enumerate} 
-\item h2 > 0.02 - why? 
-\item Seems a bit unusual to describe the QC, then the residualisation/normalisation,
-and then some further QC steps on the untransformed data. Is this the best order? 
-\item I think the reduction from 151 to 92 traits due to rg<0.99 cut-off is likely to raise alarm bells - how many
-more would’ve been lost if you’d used 0.98, 0.95, 0.9 instead? 
-\item There are a lot of P-values reported in the paper dependent on a test of many traits.. but if those are highly correlated
-then the overall P-value reported will be inflated. We’ve talked about this before I know but
-isn’t this still a problem!?
+\item Seems a bit unusual to describe the QC, then the
+  residualisation/normalisation, and then some further QC steps on the
+  untransformed data. Is this the best order?
+\item I think the reduction from 151 to 92 traits due to rg<0.99
+  cut-off is likely to raise alarm bells - how many more would’ve been
+  lost if you’d used 0.98, 0.95, 0.9 instead?
+\item There are a lot of P-values reported in the paper dependent on a
+  test of many traits.. but if those are highly correlated then the
+  overall P-value reported will be inflated. We’ve talked about this
+  before I know but isn’t this still a problem!?
 \end{enumerate} 
 }
 
 \tfix{
 \begin{enumerate} 
-\item Typo - 0.01, still arbitrary, but better. 
 \item I don't know.  But basically Clives PRM-QC finds non-linearities 
     but we know our normalization can hide them, so it does make sense to
     be conservative here. 
@@ -682,8 +695,7 @@ correlated body doesn't mean much about the tails.
 
 \clearpage 
 \newpage
-
-\noindent Quantiative traits were selected in UKB as those with at least 10
+Quantiative traits were selected in UKB as those with at least 10
 distinct values, heritability $h^2>1\%$ (measured by LD score
 \citep{ldsc} applied to publicly available UKB GWAS summary statistics
 \citep{neale}) and $>$10,000 observation in unrelated samples, this
@@ -695,18 +707,18 @@ the first 40 genetic principal components, (2) standardised values
 were obtained by inverse normal transforming the rank of the
 residuals.  
 
-\need{should we mention PLINK and PRScice here?  They haven't been introduced yet?} 
-
-Samples were then split randomly into 50\% base and 50\% target 
-data sets and GWAS and PRScice were applied and our PRM-regression 
-test was ran on all 1,158 continuous traits (see Supplementary Material). 
-Strong association between target sample size and nominal 
-PRM signficance ($R=0.5$, p-value$<10^{-70}$), suggests that many 
-of our tests were underpowered.  For this reason we focused all primary 
-analyses on the 136 traits with 50k target samples and PRS $R^2>1\%$.  (%new correlation = 0.2, pvalue = 0.012%) 
-Furthermore, our test assumes that transformation to continuous Gaussian distribution 
-is appropriate and that the underlying genetic architecture is primarily polygenic, 
-therefore we impose the following additional requirements: 
+Samples were then split randomly into 50\% base and 50\% target data
+sets and GWAS and PRScice were applied and our PRM-regression test was
+ran on all 1,158 continuous traits (see Supplementary Material).
+Strong association between target sample size and nominal PRM
+signficance ($R=0.5$, p-value$<10^{-70}$), suggests that many of our
+tests were underpowered.  For this reason we focused all primary
+analyses on the 136 traits with 50k target samples and PRS $R^2>1\%$.
+(%new correlation = 0.2, pvalue = 0.012%)
+Furthermore, our test assumes that transformation to continuous
+Gaussian distribution is appropriate and that the underlying genetic
+architecture is primarily polygenic, therefore we impose the following
+additional requirements:
 
 \begin{itemize} 
 \item \textbf{Continuity:} top two modal untransformed trait values include less than half of samples. (2 traits removed)
