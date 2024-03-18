@@ -234,7 +234,7 @@ mean.
 % of these tests are underpowered due to insufficient sample size and
 % poor polygenic prediction ($R^2$)
 
-We first applied our test to UKB samples of European ancestry.
+We first apply our test to UKB samples of European ancestry.
 Available samples were split equally, one half of the data was used
 for GWAS to estimate PRS via PRSice and the remaining samples for
 testing, see Methods for further details of sample selection and
@@ -258,33 +258,28 @@ traits and their available sanple sizes.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\dref{fig:prs}{a} shows 
+%%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-the most significant trait examples of how
-tail regression is classified: no tails regression exhibited by
-triglycerides (chosen as the trait with highest $h^2$ of any trait
-without tail regression), only lower tail regression exhibited by
-haemoglobin concentration, only upper tail exhibited by red blood cell
+% Figures should be referenced in text as they are labelled, i.e. Fig
+% 1a, Fig1b, Fig 2,....
+
+\dref{fig:prs}{a} illustrates the three broad types of tail regression
+by plotting trait quantile, in 1\% increments, versus mean PRS in the
+quantile: no tails regression exhibited by triglycerides (chosen as
+the trait with highest $h^2$ of any trait without tail regression to
+the mean), only lower tail regression exhibited by haemoglobin
+concentration, only upper tail exhibited by red blood cell
 distribution width and dual tail exhibited by sitting height.
 
-Running our PRS-test on all 75 traits reveals that the 80\% of tails
-(121 of 150, FDR level 0.05) exhibit significant (FDR$<$0.05) movement
-away from expectation and that 98\% (118 of 121) of the time the
-movement that occurs is regression toward the mean. \dref{fig:prs}{b})
-shows results for all traits with significant movement towards the mean.
-
-The majority of
-traits (47 of 75) were classified as "Dual Tail" (significant
-regression to the mean in both tails), while 15 were classified as
-"Lower Tail" and 9 were classified as "Upper Tail" (see
-\dref{fig:prs}{b}). For illustrative purposes we identified four
-"index traits" to represent "No Regression" (Triglycerides - the
-highest $h^2$ of any trait without tail regression), "Lower Tail"
-(Haemoglobin Concentration - most signficant), "Upper Tail" (RBC
-Distribution Width - most significant), and "Dual Tail" (Sitting
-Height - most significant maximum pvalue).  The tail dynamics observed
-in each of these traits can be illustrated in \dref{fig:prs}{a}.
+Across the 75 traits analysed, 80\% (121 of 150 tails exhibited
+significant (FDR$<$0.05) movement away from expectation and that 98\%
+(118 of 121) of the time the movement that occurs is regression to
+the mean. \dref{fig:prs}{b}) shows results for all traits with
+significant movement to the mean in at least one tail. The
+majority of traits (47 of 75) were classified as "Dual Tail"
+(significant, (FDR$<$0.05, regression to the mean in both tails), 15
+were classified as "Lower Tail" and 9 were classified as "Upper Tail"
+(see \dref{fig:prs}{b}).
   
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig2_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
@@ -294,19 +289,19 @@ in each of these traits can be illustrated in \dref{fig:prs}{a}.
     plotted agaisnt mean trait value in quantile for four traits with
     different types of PRS tail regression (clockwise: No Tail
     Regression, Upper Tail, Lower Tail, Dual Tail). \textbf{(b)}
-    PRS-test tail effect sizes in the upper and lower 1\% tails for
-    all traits (of the 75 passing QC) which exhibit significant
-    regression to the mean in one or both tails at FDR of 0.05.
-    \textbf{(c)} Trumpet plots (minor allele frequency v effect size)
-    of genome-wide significant variants for traits shown in
-    (a). \textbf{(d)} PRS-test tail effect sizes plotted against
-    number of genome-wide significant variants with MAF<1\% for X
-    traits with overlapping exome sequence results. For upper tails
-    positive variant effects are counted and for lower tails negative
-    variant effects are counted. Correlation and significance
-    calculated using Spearman rank correlation. \textbf{(e)} Age of
-    menopause: PRS quantile v trait mean and trumpet plot.
-  }} \label{fig:prs} \end{figure} \FloatBarrier
+    PRS-test tail effect sizes and \need{95\% confidence intervals} in
+    the upper and lower 1\% tails for all traits (of the 75 passing
+    QC) which exhibit significant regression to the mean in one or
+    both tails at FDR of 0.05.  \textbf{(c)} Trumpet plots (minor
+    allele frequency v effect size) of genome-wide significant
+    variants for traits shown in (a). \textbf{(d)} PRS-test tail
+    effect sizes plotted against number of genome-wide significant
+    variants with MAF<1\% for X traits with overlapping exome sequence
+    results. For upper tails positive variant effects are counted and
+    for lower tails negative variant effects are counted. Correlation
+    and significance calculated using Spearman rank correlation.
+    \textbf{(e)} Age of menopause: PRS quantile v trait mean and
+    trumpet plot.  }} \label{fig:prs} \end{figure} \FloatBarrier
 
 
 \subsection*{The Role of Rare Variants in PRM} ~\\ 
