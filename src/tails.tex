@@ -216,16 +216,17 @@ to converge toward the mean PRS in the tails -- {\em PRS-regression to
 %   mean} (PRM), which occurs when individuals in the tails of the
 % quantitive trait distribution exhibit polygenic risk that is closer to
 % the mean risk score than expected.
-To quantify this we develop a statistical test that estimates effect
-size, direction, and signficance of movement away from the expected
-polygenic load for individuals in the lower and upper 1\% of the trait
-distribution. Specifically, a regression of PRS on standardised trait
-values is fit. The regression effect size in the tail is defined as
-the mean of the residuals in the lower tail and minus the mean of the
-residuals in the upper tail. Using this definition, positive values
-in both the upper and lower tails correspond to regression to the
-mean, whereas negative values correspond to regression away from the
-mean.
+To quantify this we develop and apply a statistical test that
+estimates effect size, direction, and signficance of movement away
+from the expected PRS for individuals in the lower and upper 1\% of
+the trait distribution. Specifically, a regression of PRS on
+standardised trait values is fit. The regression effect size in the
+tail is defined as the mean of the residuals in the lower tail and
+minus the mean of the residuals in the upper tail. Using this
+definition, positive values in both the upper and lower tails
+correspond to regression to the mean, indicative of rare variants of
+large effect in individuals in the trait tails. \need{Negative values
+correspond to regression away from the mean.....}
 
 % Applying this test to the UKB reveals that 400 of 1,185 heritiable
 % ($h^2>0.01$) quantitive traits have signficant ($p<0.05$) movement
@@ -236,20 +237,20 @@ mean.
 
 We first apply our test to UKB samples of European ancestry.
 Available samples were split equally, one half of the data was used
-for GWAS to estimate PRS via PRSice and the remaining samples for
-testing, see Methods for further details of sample selection and
-genotype QC. Unimodal, non-skewed, continuous traits with heritabilty
-$>0.05$, PRS $R^2>0.01$ and sample size $>$50,000 were selected for
-analysis. After removal of strongly correlated traits (maximum
-pairwise correlation $R^2<$0.95 ) 77 traits remained for
-analysis. Traits were standardised, removing effects of age, sex,
-recruitment centre, genotyping batch, and principal components and
-transformed to be normally distributed, see Methods for further
+for GWAS to estimate PRS via PRSice and our PRS-test was applied to
+the remaining samples, see Methods for further details of sample
+selection and genotype QC. Unimodal, non-skewed, continuous traits
+with heritabilty $>0.05$, PRS $R^2>0.01$ and sample size $>$50,000
+were selected for analysis. After removal of strongly correlated
+traits (maximum pairwise correlation $R^2<$0.95 ) 77 traits remained
+for analysis. Traits were standardised, regressing out effects of age,
+sex, recruitment centre, genotyping batch, and principal components
+and transformed to be normally distributed, see Methods for further
 details of trait QC and selection. Of these traits, two failed our
 test QC indicating significant departure from predicted values from
-the regression in the middle 90\% or the trait distribution, leaving
-75 traits (150 tails) for analysis. Extended Data Table 1 lists all 77
-traits and their available sanple sizes.
+the regression in the middle 90\% or the trait distribution (see
+Methods) leaving 75 traits (150 tails) for analysis. Extended Data
+Table 1 lists all 77 traits and their available sanple sizes.
 
 % Using these 75 traits we perform PRM-Testing, rare-variant analysis,
 % analysis of selection to help elucidate the mechanism that may be
@@ -267,19 +268,20 @@ traits and their available sanple sizes.
 by plotting trait quantile, in 1\% increments, versus mean PRS in the
 quantile: no tails regression exhibited by triglycerides (chosen as
 the trait with highest $h^2$ of any trait without tail regression to
-the mean), only lower tail regression exhibited by haemoglobin
-concentration, only upper tail exhibited by red blood cell
-distribution width and dual tail exhibited by sitting height.
-
-Across the 75 traits analysed, 80\% (121 of 150 tails exhibited
-significant (FDR$<$0.05) movement away from expectation and that 98\%
-(118 of 121) of the time the movement that occurs is regression to
-the mean. \dref{fig:prs}{b}) shows results for all traits with
-significant movement to the mean in at least one tail. The
+the mean), only lower tail regression to the mean (haemoglobin
+concentration), only upper tail regresion to the mean (red blood cell
+distribution width) and dual tail regression to the mean (sitting
+height). Across the 75 traits analysed, the mean PRS in 121 of 150
+upper and lower 1\% tails of trait distributions showed significant
+deviation (FDR$<$0.05) away from the expected PRS. Of these 121
+significant tail associations, 118 were regression to the
+mean. \dref{fig:prs}{b} shows the PRS-test tail effect sizes for all traits
+with significant regression to the mean in at least one tail. The
 majority of traits (47 of 75) were classified as "Dual Tail"
-(significant, (FDR$<$0.05, regression to the mean in both tails), 15
-were classified as "Lower Tail" and 9 were classified as "Upper Tail"
-(see \dref{fig:prs}{b}).
+(FDR$<$0.05 regression to the mean in both tails), 15 were classified
+as "Lower Tail" and 9 were classified as "Upper Tail". \need{The three
+  trait tail with significant regression away fromn the mean... The
+  two traits failling test QC.....}
   
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig2_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
@@ -305,7 +307,7 @@ were classified as "Lower Tail" and 9 were classified as "Upper Tail"
 
 
 \subsection*{The Role of Rare Variants in PRM} ~\\ 
-\noindent The exclusion of rare variants from PRS (traditionally a
+The exclusion of rare variants from PRS (traditionally a
 cutoff of minor allele frequency (MAF)$>$1\%) has been shown to reduce
 model performance \citep{rares1}.  To investigate whether PRM is a
 consequence of rare variants of large effect that drive individuals
@@ -321,13 +323,14 @@ greatest) and in \emph{Triglycerides} there are also more rare
 variants in the lower tail (where PRM Effect is greatest, albiet
 non-signficant).  This result is consistent with the hypothesis that
 rare variants of large effect that not accounted for in the
-common-variant PRS responsible for the tail specific PRM. In
-\fref{fig:prs}{d} we observe a small but signficiant relationship
-between the magnitude of regression and the number rare variants in
-the tail.  However, for many traits the tail with more PRM shows
-almost no rare variants (see \fref{fig:prs}{e}) suggesting that strong
-selection may result in private variants that cannot be identified
-using population based sequencing.
+common-variant PRS responsible for the tail specific PRM.
+
+In \fref{fig:prs}{d} we observe a small but signficiant relationship
+between the magnitude of regression to the mean and the number of rare
+variants in the tail. However, for some traits the tail with more PRM
+shows almost no rare variants (see \fref{fig:prs}{e}) suggesting that
+strong selection may result in private variants that cannot be
+identified using population based sequencing.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -353,17 +356,17 @@ using population based sequencing.
     variants with MAF>1\%.  }} \label{fig:evo} \end{figure}
 \FloatBarrier
 
-\subsection*{The Impact of Selection on PRM} ~\\ 
-\noindent Using adjusted lifetime reproductive success
-\citep{v_select, v_select2} as a proxy for selection we classify (see
-Methods - LRS) each trait with respect to whether it is under
-\emph{Stabilizing, Positive, Negative, or Neutral/Disruptive} to
-produce results in agreement with a more comprehensive sex-specific
-analysis (See \fref{fig:vishy}).  The majority of traits analyzed here
-(55 of 75) are classified as under stabilizing selection which is
-characterized by lower fecundity in both tails of the trait
-distribution. Stabilizing selection may be the result of general
-fitness favoring the trait mean or the result of sex specific
+\subsection*{The Impact of Selection on PRM} ~\\
+Using adjusted lifetime reproductive success \citep{v_select,
+  v_select2} as a proxy for selection we classify (see Methods - LRS)
+each trait with respect to whether it is under \emph{Stabilizing,
+  Positive, Negative, or Neutral/Disruptive} selection (these results
+are in agreement with a more comprehensive sex-specific analysis (See
+\fref{fig:vishy}).  The majority of traits analyzed here (55 of 75)
+are classified as under stabilizing selection which is characterized
+by lower fecundity for individuals with traits values in either tail
+of the trait distribution. Stabilizing selection may be the result of
+general fitness favoring the trait mean or the result of sex specific
 selection that averages to produce this relationship \citep{v_select}.
 Eight traits were classified as being under positive selection and
 seven traits were classified as being under negative selection.  We
