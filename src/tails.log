@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.7.31)  19 MAR 2024 15:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.7.31)  19 MAR 2024 17:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2233,7 +2233,7 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 File: Figures/Fig2_eur_qc_0_version1_dedupe.pdf Graphic file (type pdf)
 <use Figures/Fig2_eur_qc_0_version1_dedupe.pdf>
 Package pdftex.def Info: Figures/Fig2_eur_qc_0_version1_dedupe.pdf  used on inp
-ut line 287.
+ut line 290.
 (pdftex.def)             Requested size: 492.19374pt x 344.51012pt.
 
 
@@ -2246,7 +2246,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: Figures/Fig3_eur_qc_0_version1_dedupe.pdf Graphic file (type pdf)
 <use Figures/Fig3_eur_qc_0_version1_dedupe.pdf>
 Package pdftex.def Info: Figures/Fig3_eur_qc_0_version1_dedupe.pdf  used on inp
-ut line 338.
+ut line 341.
 (pdftex.def)             Requested size: 492.19374pt x 399.88141pt.
 
 
@@ -2254,43 +2254,43 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [4 <./Figures/Fig2_eur_qc_0_version1_dedupe.pdf>]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.54997pt on input line 390.
+(Font)              scaled to size 8.54997pt on input line 393.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <9> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 390.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 393.
 LaTeX Font Info:    Font shape `T1/phv/b/sl' will be
-(Font)              scaled to size 8.54997pt on input line 390.
+(Font)              scaled to size 8.54997pt on input line 393.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5 <./Figures/Fig3_eur_qc_0_version1_dedupe.pdf>]
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 422.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 425.
 LaTeX Font Info:    Font shape `T1/phv/b/sl' will be
-(Font)              scaled to size 9.49997pt on input line 422.
-<Figures/Fig4_eur_qc_0_version1_dedupe.pdf, id=195, 2168.1pt x 1445.4pt>
+(Font)              scaled to size 9.49997pt on input line 425.
+<Figures/Fig4_eur_qc_0_version1_dedupe.pdf, id=197, 2168.1pt x 1445.4pt>
 File: Figures/Fig4_eur_qc_0_version1_dedupe.pdf Graphic file (type pdf)
 <use Figures/Fig4_eur_qc_0_version1_dedupe.pdf>
 Package pdftex.def Info: Figures/Fig4_eur_qc_0_version1_dedupe.pdf  used on inp
-ut line 443.
+ut line 453.
 (pdftex.def)             Requested size: 492.19374pt x 328.11223pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 458.
+(Font)              <8> on input line 468.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 458.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 468.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 463--464
+Underfull \hbox (badness 10000) in paragraph at lines 473--474
 
  []
 
-<Figures/Fig5_eur_qc_0_version1_dedupe.pdf, id=207, 3613.5pt x 4336.2pt>
+<Figures/Fig5_eur_qc_0_version1_dedupe.pdf, id=209, 3613.5pt x 4336.2pt>
 File: Figures/Fig5_eur_qc_0_version1_dedupe.pdf Graphic file (type pdf)
 <use Figures/Fig5_eur_qc_0_version1_dedupe.pdf>
 Package pdftex.def Info: Figures/Fig5_eur_qc_0_version1_dedupe.pdf  used on inp
-ut line 493.
+ut line 503.
 (pdftex.def)             Requested size: 492.19374pt x 590.58879pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -2300,12 +2300,12 @@ ersion1_dedupe.pdf>] [9
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 600--601
+Underfull \hbox (badness 10000) in paragraph at lines 610--611
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 660--661
+Underfull \hbox (badness 10000) in paragraph at lines 670--671
 
  []
 
@@ -2316,12 +2316,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 660--661
 ] [12
 
 ] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 1007--1008
+Underfull \hbox (badness 10000) in paragraph at lines 1017--1018
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1009--1010
+Underfull \hbox (badness 10000) in paragraph at lines 1019--1020
 
  []
 
@@ -2335,42 +2335,42 @@ LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
 ) [15
 
 ]
-<Figures/checkplot_30070.pdf, id=353, 5058.9pt x 3613.5pt>
+<Figures/checkplot_30070.pdf, id=355, 5058.9pt x 3613.5pt>
 File: Figures/checkplot_30070.pdf Graphic file (type pdf)
 <use Figures/checkplot_30070.pdf>
-Package pdftex.def Info: Figures/checkplot_30070.pdf  used on input line 1070.
+Package pdftex.def Info: Figures/checkplot_30070.pdf  used on input line 1080.
 (pdftex.def)             Requested size: 492.19374pt x 351.5567pt.
  [16
 
  <./Figures/checkplot_30070.pdf>]
-<Figures/methodFlow.pdf, id=501, 1084.05pt x 289.08pt>
+<Figures/methodFlow.pdf, id=503, 1084.05pt x 289.08pt>
 File: Figures/methodFlow.pdf Graphic file (type pdf)
 <use Figures/methodFlow.pdf>
-Package pdftex.def Info: Figures/methodFlow.pdf  used on input line 1077.
+Package pdftex.def Info: Figures/methodFlow.pdf  used on input line 1087.
 (pdftex.def)             Requested size: 492.19374pt x 131.2493pt.
-<Figures/qctable.pdf, id=503, 1156.32pt x 289.08pt>
+<Figures/qctable.pdf, id=505, 1156.32pt x 289.08pt>
 File: Figures/qctable.pdf Graphic file (type pdf)
 <use Figures/qctable.pdf>
-Package pdftex.def Info: Figures/qctable.pdf  used on input line 1082.
+Package pdftex.def Info: Figures/qctable.pdf  used on input line 1092.
 (pdftex.def)             Requested size: 469.47046pt x 117.36787pt.
  [17
 
  <./Figures/methodFlow.pdf> <./Figures/qctable.pdf>]
-<Figures/vishtable.pdf, id=562, 939.51pt x 1084.05pt>
+<Figures/vishtable.pdf, id=564, 939.51pt x 1084.05pt>
 File: Figures/vishtable.pdf Graphic file (type pdf)
 <use Figures/vishtable.pdf>
-Package pdftex.def Info: Figures/vishtable.pdf  used on input line 1087.
+Package pdftex.def Info: Figures/vishtable.pdf  used on input line 1097.
 (pdftex.def)             Requested size: 469.47046pt x 541.69286pt.
  [18
 
  <./Figures/vishtable.pdf>]
 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1098.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 1098.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1108.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 1108.
 (./tails.xwm) (./tails.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1098.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1098.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1108.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1108.
 
 Package rerunfilecheck Info: File `tails.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
@@ -2378,7 +2378,7 @@ Package rerunfilecheck Info: File `tails.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1098.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1108.
  )
 (\end occurred when \ifdefined on line 31 was incomplete) 
 Here is how much of TeX's memory you used:
@@ -2421,10 +2421,10 @@ ocal/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texli
 ve/2020/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2020/t
 exmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/
 fonts/type1/urw/times/utmri8a.pfb>
-Output written on tails.pdf (18 pages, 3099917 bytes).
+Output written on tails.pdf (18 pages, 3100840 bytes).
 PDF statistics:
- 672 PDF objects out of 1000 (max. 8388607)
- 403 compressed objects within 5 object streams
+ 674 PDF objects out of 1000 (max. 8388607)
+ 405 compressed objects within 5 object streams
  70 named destinations out of 1000 (max. 500000)
  208 words of extra memory for PDF output out of 10000 (max. 10000000)
 

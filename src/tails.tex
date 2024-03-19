@@ -151,7 +151,7 @@ variants and the environment is not equal across the trait
 distribution \citep{bt_1, bt_2}.
 
 This negative correlation between effect size and minor allele
-frequency reflects the interplay between long term selection against
+frequency (MAF) reflects the interplay between long term selection against
 extreme trait values and the ability of mutant alleles with
 significant effects to escape this trend through chance or short term
 environmental changes. Recent or ongoing selection can leave distinct
@@ -238,12 +238,15 @@ correspond to regression away from the mean.....}
 We first apply our test to UKB samples of European ancestry.
 Available samples were split equally, one half of the data was used
 for GWAS to estimate PRS via PRSice and our PRS-test was applied to
-the remaining samples, see Methods for further details of sample
-selection and genotype QC. Unimodal, non-skewed, continuous traits
-with heritabilty $>0.05$, PRS $R^2>0.01$ and sample size $>$50,000
-were selected for analysis. After removal of strongly correlated
-traits (maximum pairwise correlation $R^2<$0.95 ) 77 traits remained
-for analysis. Traits were standardised, regressing out effects of age,
+the remaining samples. Throughout, PRS were estimated with variants
+with MAF $>$ 1\%, see Methods for further details. Unimodal,
+non-skewed, continuous traits with heritabilty $>0.05$, PRS $R^2>0.01$
+and sample size $>$50,000 were selected for analysis. \need{Also
+  removed 3 traits with single variants with $r^2>0.5$, is this
+  necessray? Could just group and discuss with other two traits which
+  fail PRS-test QC}. After removal of strongly correlated traits
+(maximum pairwise correlation $R^2<$0.95) 77 traits remained for
+analysis. Traits were standardised, regressing out effects of age,
 sex, recruitment centre, genotyping batch, and principal components
 and transformed to be normally distributed, see Methods for further
 details of trait QC and selection. Of these traits, two failed our
@@ -338,7 +341,7 @@ identified using population based sequencing.
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig3_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
 \caption{\footnotesize{{\bf Selection analyses in real and simulated
       data.} \textbf{(a)} Residualised trait value plotted against
-    relative lifetime reproductive success for 16 {\bf cherry picked
+    relative lifetime reproductive success for 16 \need{cherry picked
       traits}, quadratic best fit to the data is shown by dashed
     lines.  \textbf{(b)} Number of traits with inferred type of PRS
     tail regression and inferred type of selection for 75 UKB traits
@@ -420,12 +423,19 @@ of contribution to heritability by rare variants goes up and PRM is observed.
 %%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection*{\emph{Replication in Siblings}} ~\\
-Discordance between siblings in the tails of the trait distribution is 
-indictive non-polygenic inheritance \cite{avi}.  The conditional 
-sibling distribution under polygenicity can be used to both to estimate 
-heritability and to estimate the impact that rare variants have on 
-tail genetic architecture \cite{t_sibs}. In \fref{fig:sib}{a} the 
-expected impact of polygenicity, de novo, and mendelian rare variants are illustrated.  
+Discordance between siblings in the tails of the trait distribution is
+indictive non-polygenic inheritance \cite{avi}. Furthermore, excess
+trait concordance between siblings can be indicative of shared
+Mendelian effects \cite{t_sibs}. \fref{fig:sib}{a} illustartes the
+expected impact of polygenicity, de novo, and Mendelian rare variants
+within sibling pairs. Expected sibling pair concordance under
+polygenicity can be used to test for (1) excess discordance between
+siblings in tails of trait distribution, indicative of de novo
+mutations of large in one sibling and (2) excess concordance between
+siblings in tails of trait distribution, indicative of shared
+Mendelian effects \cite{t_sibs}. These tests are derived from the
+conditional sibling distribution under polygenicity, this distribution
+also allows heritability to be estimated \cite{t_sibs}.
 
 Applying this model to the sibling data in the UKB to estimate $h^2$, 
 we find a correlation between snp h2 and sibling h2 \fref{fig:sib}{b}.  
