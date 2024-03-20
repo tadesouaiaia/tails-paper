@@ -1,12 +1,15 @@
 Fig 2d. shading and best fit line should be removed, I assume spearman
 was used and this does not give best fit line. y-axis – number of
 genome-wide significant variants with MAF<1%.
+
 Fig 2. All abreviations need to be defined in the legend.
 
 Fig 3d. Remove? Best described in text?
 
 Figs 3e and f. Axis labels. Legend for shading indicating age of
 mutations.
+
+Fig 4b. Seems a side issue and not directly relevant to paper
 
 Figs 4d, 5f and 5h Legends should include triangles indicating
 positive / negative effects
