@@ -647,21 +647,22 @@ third-degree relatives (kinship coefficient > 0.044) \citep{erase}.
 After this QC there 432k unrelated individuals remained.
 %It has been shown that both the mean and variance of PRS varies
 %across ancestry groups \citep{global}.
-Primary analyses were performed on over 410k unrelated European
-samples and replication analyses was performed on the remaining 22k
-samples classified as non-European ancestry.
+Primary analyses were performed on the over 410k unrelated European 
+samples that comprised the largest ancestry cluster and replication analyses 
+were performed on the remaining 22k samples that represented multiple 
+non-European ancestry ancestries. 
 
 For the sibling based analyses sibling pairs were selected by first
 identifying first degree relatives defined as those with kinship
-coefficient within the range 0.177 and 0.354, this range either side
-of the expected value of 0.25 was used to account for the expected
-variation in within-pair similarity \citep{sib1}. The proportion of
-SNPs with zero identity-by-state (IBS0) was used to distinguish
+coefficient within the range 0.177 and 0.354, this range on either 
+side of the expected value of 0.25 was used to account for the 
+expected variation in within-pair similarity \citep{sib1}. The proportion 
+of SNPs with zero identity-by-state (IBS0) was used to distinguish
 sibling pairs from parent-offspring pairs since parent–offspring pairs
-have IBS0$\approx$0. It has been shown in the UKB there is good
-separation between pairs of first degree relatives at
-IBS0=0.00112\citep{sib1} thus sibling pairs were selected as those
-that exceeded this threshold, this gave a total of 17,869 sibling
+have IBS0$\approx$0. As it has been shown in the UKB that there 
+is good separation between pairs of first degree relatives at
+IBS0=0.00112 \citep{sib1}, sibling pairs were selected as those
+exceeding this threshold, this gave a total of 17,869 sibling
 pairs (17,289 of European ancestry, that were used in our primary
 analysis).
 
@@ -703,12 +704,14 @@ correlated body doesn't mean much about the tails.
 
 \clearpage 
 \newpage
+
 Quantiative traits were selected in UKB as those with at least 10
 distinct values, heritability $h^2>1\%$ (measured by LD score
 \citep{ldsc} applied to publicly available UKB GWAS summary statistics
 \citep{neale}) and $>$10,000 observation in unrelated samples, this
-gave 1,158 traits. Traits values more than six standard deviations
-from the mean were removed. Traits were then standardised as follows:
+gave 1,158 traits.  Traits values more than six standard deviations
+from the mean were removed (???? DOES THIS HAPPEN BEFORE OR AFTER WE REMOVE SAMPLES - SHOULD BE AFTER?). 
+Traits were then standardised as follows:
 (1) linear regression models were applied to each trait, with
 covariates for age, sex, recruitment centre, genotyping batches, and
 the first 40 genetic principal components, (2) standardised values
@@ -911,7 +914,7 @@ The sibling meta P-value was calculated by combining P-values from the
 {\em Mendelian} and {\em de novo} tests using Fisher's method to give
 a $\chi^2$ statistic with 4 degrees of freedom,
 \begin{align*}
-  \chi^2_4 = -2(\log p_{Mendelian} + \log p_{de novo})
+    \chi^2_4 = -2(\log(p_{Mendelian}) + \log(p_{de novo}))
 \end{align*}
 
 
@@ -921,40 +924,82 @@ a $\chi^2$ statistic with 4 degrees of freedom,
 The number of offspring is recorded in the UKB for both females and
 males, fields \textit{2734} and \textit{2405} respectively.  We
 followed the methodology of Beauchamp \citep{v_select2} and
-later applied by Sanjak et al \citep{v_select} which involves
-splitting samples into four birth cohorts (1934-42, 1943-48, 1949-55,
+involves splitting samples into four birth cohorts (1934-42, 1943-48, 1949-55,
 1956-65) and dividing the number of offspring of each individual by
 the cohort mean to calculate relative lifetime reproductive success
-($Y_{rLRS}$). The pressence of selective pressure acting on the traits
-is assessed by fitting the following regression model to relative
-lifetime reproductive success \citep{v_select}
+($Y_{rLRS}$). Sanjak et al \citep{v_select} relied on this method to 
+infer the presence and direction of selective pressure acting on the 
+trait by fitting the following regression model: 
 \begin{equation}
-  Y_{rLRS} = \beta_0 + \beta z + \gamma z^2 \label{math:MgivenS}
+Y_{rLRS} = \beta_o + \beta z + \gamma z^2 \label{math:LRS}
 \end{equation}
 where $z$ denotes the residualized and normalized trait values and
 $\beta$ and $\gamma$ are linear and quadratic regression
-parameters. The pressence and type of selection is inferred from the
-regression parametrers as folows:
+parameters.  Here, we are interested in whether negative selection 
+enriches highly penetrant rare variants and reduces polygenicity.  
+Thus, to classify whether negative selection is acting in each trait tail 
+we use AIC to select the top performing sub-model of \eref{math:LRS} 
+under the following framework: 
+
+
 \begin{itemize}
-\item If the P-value associated with the quadratic parameter $\gamma$
-is significant (FDR 5\%), then:
-\begin{itemize}
-\item If $\gamma < 0$, the trait is classified as under stabilizing selection.
-  (i.e. negative selection both tails).
-\item If $\gamma > 0$, the trait is classified as under disruptive selection 
-  (i.e. negative selection is not occuring in either tail).
-\end{itemize}
-\item If only the p-value associated with the linear parameter $\beta$
-is signficant (FDR 5\%), then: 
-\begin{itemize}
-\item If $\beta < 0$, trait is classified as under negative directional selection
-  (i.e. negative selection in the upper tail).
-\item If $\beta > 0$, trait is classified as under positive directional selection
-  (i.e. negative selection in the lower tail).
-\end{itemize}
-\item If neither parameter is nominally significant, trait is classified as under neutral selection 
-(i.e negative selection is not occuring in either tail. 
-\end{itemize}
+    \item \textbf{$Y_{rLRS} = \beta_o$} (No Selection)  
+        \begin{itemize} 
+        \setlength{\itemindent}{1em}
+        \item If the selected model does not include a linear or quadratic parameter, then the traits 
+              is classified as under no selection and rare variant enrichment is not expected in either tail. 
+        \end{itemize} 
+    \item \textbf{$Y_{rLRS} = \beta_o + \beta{z}$} (Linear Selection) 
+        \begin{itemize} 
+        \setlength{\itemindent}{1em}
+        \item If the selected model includes only a linear parameter, then $\beta<0$ indicates 
+              negative selection and rare variant enrichment is expected in the upper tail, while $\beta>0$ indicates 
+              positive selection and rare variant enrichment is expected in the lower tail. 
+        \end{itemize}
+    \item \textbf{$Y_{rLRS} = \beta_0 + \gamma z^2 $} (Quadratic Selection) 
+        \begin{itemize}
+            \setlength{\itemindent}{1em}
+            \item If the selected model includes only a quadratic parameter, then $\gamma<0$ indicates 
+              stabilizing selection and rare variant enrichment is expected in the both tail, while $\gamma>0$ indicates 
+              divergent selection and rare variant enrichment is expected in the neither tail. 
+        \end{itemize}
+    \item \textbf{$Y_{rLRS} = \beta_0 + \beta{z} + \gamma z^2 $} (Full Model) 
+        \begin{itemize} 
+        \setlength{\itemindent}{1em}
+        \item If the selected model includes both a linear and quadratic parameter, then, if $\gamma<0$ and $\beta<0$  
+              selection is both stabilizing and negative and greater rare variant enrichment is expected in the upper tail, 
+              if $\gamma<0$ and $\beta>0$ selection is stabilizing and positive and greater rare variant is expected in the 
+              lower tail.   If $\gamma>0$ then rare variant enrichment is not expected in either tail. 
+        \end{itemize}
+\end{itemize} 
+
+%To determine the direction and degree of selection 
+%in each tail we fit the data to four sub-models and used selected the 
+%best performing model using AIC: 
+
+
+%The pressence and type of selection is inferred from the
+%regression parametrers as folows:
+%\begin{itemize}
+%\item If the P-value associated with the quadratic parameter $\gamma$
+%is significant (FDR 5\%), then:
+%\begin{itemize}
+%\item If $\gamma < 0$, the trait is classified as under stabilizing selection.
+%  (i.e. negative selection both tails).
+%\item If $\gamma > 0$, the trait is classified as under disruptive selection 
+%  (i.e. negative selection is not occurring in either tail).
+%\end{itemize}
+%\item If only the p-value associated with the linear parameter $\beta$
+%is signficant (FDR 5\%), then: 
+%\begin{itemize}
+%\item If $\beta < 0$, trait is classified as under negative directional selection
+%  (i.e. negative selection in the upper tail).
+%\item If $\beta > 0$, trait is classified as under positive directional selection
+%  (i.e. negative selection in the lower tail).
+%\end{itemize}
+%\item If neither parameter is nominally significant, trait is classified as under neutral selection 
+%(i.e negative selection is not occuring in either tail. 
+%\end{itemize}
 
 %%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
 \subsubsection*{Measuring Fitness in the Tails} ~\\ 
