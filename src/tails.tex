@@ -704,20 +704,27 @@ correlated body doesn't mean much about the tails.
 
 \clearpage 
 \newpage
-After genetic QC, quantitative, unimodal, non-skewed traits were
-selected for analysis as follows: at least 10 distinct values, top two
-modal trait values include less than half of the samples, dip-test
-(\citep{dip}) P-value for unimodality $>$ 0.05 and skew $<$2.  To
-ensure our analyses were well powered, traits were further thinnned by
-selecting those with heritability $h^2>1\%$ (measured by LD score
-\citep{ldsc} applied to publicly available UKB GWAS summary statistics
-\citep{neale}) and $>$50,000 observation in unrelated
-samples. Furthermore, we selected polygenic traits by removing traits
-which had a single variant $r^2$ > 0.5\%, leaving 123 traits.
+After genetic QC, cancer patients, etc were removed.....  Quantitative
+traits were selected for analysis, defined as at least 10 distinct
+values and top two modal trait values include less than half of the
+samples. To ensure our analyses were well powered, traits with
+heritability $h^2<5\%$ (measured by LD score \citep{ldsc} applied to
+publicly available UKB GWAS summary statistics \citep{neale}) and
+$<$50,000 observation in unrelated samples were removed. Traits values
+more than six standard deviations from the mean were removed. Traits
+values were then standardised as follows: (1) linear regression models
+were applied to each trait, with covariates for age, sex, recruitment
+centre, genotyping batche, and the first 40 genetic principal
+components.  Subsequently, traits with skewed ($>2$) or multimodal
+residuals were removed (dip-test\citep{dip} P-value for unimodality
+$>$ 0.05). Standardised values were obtained by inverse normal
+transforming the rank of the residuals. Furthermore, we selected
+polygenic traits by removing traits which had a single variant $r^2 >
+0.5\%$, leaving 123 traits.
 
 To ensure the traits analysed were unique, pairwise genetic
 correlation was calculated using LDscore\cite{ldsc}. Sixty one traits
-did not have a pair with $r_g > 95\%$ and were kept for analysis.
+did not have a pair with $r_g>98\%$ and were kept for analysis.
 Additionally, 10 traits has a single almost identical match (eg:
 "Standing Height" (ID:50) and "Height Measured Prior to Imaging"
 (ID:12144)), in these cases the trait with greater sample size was
@@ -728,13 +735,6 @@ mass, arm mass, etc) and heel bone mineral density.  Using the same
 data maximization algorithm to select unrelated individuals
 \citep{erase}, 11 traits were selected resulting in a set of 77
 genetically unique traits for analysis.
-
-In the selected 77 traits, values more than six standard deviations from
-the mean were removed.  Traits values were then standardised as follows: (1)
-linear regression models were applied to each trait, with covariates
-for age, sex, recruitment centre, genotyping batche, and the first 40
-genetic principal components, (2) standardised values were obtained by
-inverse normal transforming the rank of the residuals.
 
 \subsubsection*{Non-European Ancestry Individuals in the UKB} ~\\
 \noindent Non-European Ancestry samples in the UKB have between
