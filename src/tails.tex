@@ -651,20 +651,18 @@ cluster. Replication analyses were performed on the remaining
 22k\need{exact number} samples that represented multiple non-European
 ancestries.
 
-For the sibling analyses, sibling pairs were selected by first
-identifying first degree relatives defined as those with kinship
-coefficient within the range 0.177 and 0.354, this range on either 
-side of the expected value of 0.25 was used to account for the 
-expected variation in within-pair similarity \citep{sib1}. The proportion 
-of SNPs with zero identity-by-state (IBS0) was used to distinguish
-sibling pairs from parent-offspring pairs since parent–offspring pairs
-have IBS0$\approx$0. It has been shown in the UKB that there 
-is good separation between pairs of first degree relatives at
-IBS0=0.00112 \citep{sib1}, therefore, sibling pairs were selected as those
-exceeding this threshold, this gave a total of 17,869 sibling
-pairs (17,289 of European ancestry, that were used in our primary
-analysis).\need{not clear from this if all sib pairs or just EUR sib
-  pairs were used?}
+For the sibling analyses, sibling pairs of European ancestry were
+selected by first identifying first degree relatives defined as those
+with kinship coefficient within the range 0.177 and 0.354, this range
+on either side of the expected value of 0.25 was used to account for
+the expected variation in within-pair similarity \citep{sib1}. The
+proportion of SNPs with zero identity-by-state (IBS0) was used to
+distinguish sibling pairs from parent-offspring pairs since
+parent–offspring pairs have IBS0$\approx$0. It has been shown in the
+UKB that there is good separation between pairs of first degree
+relatives at IBS0=0.00112 \citep{sib1}, therefore, sibling pairs were
+selected as those exceeding this threshold, this gave a total of
+17,289.
 
 
 
@@ -704,23 +702,24 @@ correlated body doesn't mean much about the tails.
 
 \clearpage 
 \newpage
-After genetic QC, cancer patients, etc were removed.....  Quantitative
-traits were selected for analysis, defined as at least 10 distinct
-values and top two modal trait values include less than half of the
-samples. To ensure our analyses were well powered, traits with
-heritability $h^2<5\%$ (measured by LD score \citep{ldsc} applied to
-publicly available UKB GWAS summary statistics \citep{neale}) and
-$<$50,000 observation in unrelated samples were removed. Traits values
-more than six standard deviations from the mean were removed. Traits
-values were then standardised as follows: (1) linear regression models
-were applied to each trait, with covariates for age, sex, recruitment
-centre, genotyping batche, and the first 40 genetic principal
-components.  Subsequently, traits with skewed ($>2$) or multimodal
-residuals were removed (dip-test\citep{dip} P-value for unimodality
-$>$ 0.05). Standardised values were obtained by inverse normal
-transforming the rank of the residuals. Furthermore, we selected
-polygenic traits by removing traits which had a single variant $r^2 >
-0.5\%$, leaving 123 traits.
+After genetic QC, cancer patients, \need{etc were removed.....}
+Quantitative traits were selected for analysis, we defined
+quantitative traits as those having as at least 10 distinct values and
+top two modal trait values having less than half of the samples. To
+ensure our analyses were well powered, traits with heritability
+$h^2<5\%$ (measured by LD score \citep{ldsc} applied to publicly
+available UKB GWAS summary statistics \citep{neale}) and $<$50,000
+observation in unrelated samples were removed. Trait specific QC first
+first removed traits values more than six standard deviations from the
+mean. Trait values were then standardised by applying linear
+regression model to each trait, with covariates for age, sex,
+recruitment centre, genotyping batch, and the first 40 genetic
+principal components.  Subsequently, traits with skewed ($>2$) or
+multimodal residuals were removed (dip-test \citep{dip} P-value for
+unimodality $>$ 0.05). Standardised values were obtained by inverse
+normal transforming the rank of the residuals. To ensure selected
+traits were polygenic traits which had a single variant $r^2 > 0.5\%$
+were removed.
 
 To ensure the traits analysed were unique, pairwise genetic
 correlation was calculated using LDscore\cite{ldsc}. Sixty one traits
