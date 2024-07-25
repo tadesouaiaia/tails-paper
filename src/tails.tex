@@ -622,7 +622,7 @@ progression.
 }
 
 The UK Biobank (UKB) is a prospective cohort study of approximately 500,000 
-participants, involving baseline and follow-up surveys and assaying of biological measures across thousands of phenotypes, as well as linkage to health and disease record data, recruited across  the United Kingdom from 2006 to 2010 \citep{ukb}. The genetic dataset consists of 488,377 \need{correct number} samples genotyped at 805,426 SNPs. To determine 
+participants, involving baseline and follow-up surveys and assaying of biological measures across thousands of phenotypes, as well as linkage to health and disease record data, recruited across  the United Kingdom from 2006 to 2010 \citep{ukb}. The genetic dataset consists of 488,377 samples genotyped at 805,426 SNPs. To determine 
 population ancestries, 4-means clustering analysis was conducted on the 
 first two Principal Components (PCs) of the genotype data. Each cluster's 
 ancestry was defined according to the country of birth (field ID: 20115) of 
@@ -643,13 +643,13 @@ accordance with recommendations from the UKB data processing team
 algorithm was employed to remove related individuals that maximises 
 sample retention while removing all
 third-degree relatives (kinship coefficient > 0.044) \citep{erase}.
-After this QC 432k \need{exact number} unrelated individuals remained.
+After this QC 411,949 unrelated individuals remained.
 %It has been shown that both the mean and variance of PRS varies
 %across ancestry groups \citep{global}.
-Primary analyses were performed on the over 410k \need{exact number}
+Primary analyses were performed on the over 387,235
 unrelated European samples that comprised the largest ancestry
 cluster. Replication analyses were performed on the remaining
-22k \need{exact number} samples that comprised multiple non-European
+24,476 samples that comprised multiple non-European
 ancestries.
 
 For the sibling analyses, sibling pairs were selected by first identifying first-degree relatives, defined as those with kinship coefficient within the range 0.177 and 0.354 (expected value for siblings is 0.25) to account for the expected variation in within-pair similarity \citep{sib1}. Only individuals of European ancestry were included in the sibling analyses because there are too few siblings of non-European ancestry for sufficient power for meaningful interpretation of results and we consider it important to perform 
@@ -739,7 +739,7 @@ were normalised jointly as above.
 
 \subsubsection*{Replication in All of Us Cohort} ~\\
 \noindent All Of Us is a biobank containing XX binary and XX
-continuous traits from individuals of multiple ancestries from across
+continuous traits  \need{we don't have this information about the numbers of traits in all of us} from individuals of multiple ancestries from across
 the United States of America. Traits matching those from the 75 traits
 of the primary analyses (performed in the UK) were identified through
 an initial database search and were then interrogated manually to
@@ -753,7 +753,7 @@ European UKB samples were split randomly into 50\% base and 50\%
 target data sets. GWASs were applied to the base data using PLINK-1.9
 \citep{bt_10} applying a linear additive model to the standardised
 trait values. PRScice-2(v2.3.4) \citep{bt_11} was applied to the GWAS
-summary statistics of each trait with high-resolution scoring to
+summary statistics of each trait with fast-scoring to
 select the most predictive P-value threshold \need{using the target
   data}. Individual risk scores were calculated for UKB samples in the
 target data.
