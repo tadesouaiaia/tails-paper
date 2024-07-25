@@ -691,45 +691,62 @@ correlated body doesn't mean much about the tails.
 \end{enumerate}
 }
 
-\clearpage 
-\newpage
 After genetic QC, cancer patients, \need{etc were removed.....}
 Quantitative traits were selected for analysis as follows. We defined
-quantitative traits as those having at least 10 distinct values and for which
-the top two modal trait values combined comprised fewer than half of the samples. To ensure that our analyses were well-powered, traits with heritability $h^2<5\%$ (estimated by LD score \citep{ldsc} applied to publicly available UKB GWAS summary statistics \citep{neale}) and $<$50,000 unrelated samples with observed trait measures were removed. Trait specific QC was then performed to first remove trait values more than six standard deviations from the mean, so that extreme outliers did not impact results. TO MINIMISE THE EFFECT OF ENVIRONMENTAL RISK FACTORS ON THE RESULTS??, trait values were then standardised by applying a linear regression model to each trait, with covariates for age, sex, recruitment centre, genotyping batch, and the first 40 genetic principal components [WHAT ABOUT AGE2 ETC AND THE FULL REGRESSION THAT WAS PERFORMED??]. 
-Subsequently, traits with skewed ($>2$) or
-multimodal residuals were removed (dip-test \citep{dip} $P$-value for
-unimodality $>$ 0.05). Residualised trait values were then normalised 
-by inverse normal transforming the rank of the residuals [MAYBE EXPLAIN WHY THIS WAS DONE]. 
-Utilising these standardised trait values, further trait-based QC was then 
-performed [IS THIS RIGHT TO SAY??]. To ensure that selected traits were polygenic, traits for which a single common variant explains more than an estimated 0.5\% of trait variance ($r^2 > 0.5\%$) were removed. 
-To ensure that the traits analysed were meaningly different from each other, we calculated pairwise genetic correlations using LDscore\cite{ldsc}. THE REMAINING SENTENCES OF THIS PARAGRAPH ARE A MESS AND NEED FIXING. Sixty one traits did not have a pair with $r_g>98\%$ and were retained for analyses. Additionally, 10 traits had a single almost identical match (eg:
-"Standing Height" (ID:50) and "Height Measured Prior to Imaging"
-(ID:12144)), and in these cases the trait with greater sample size was
-prioritised.  The other 52 traits were part of larger clusters of
-genetically similar traits, the largest of which related to
-measurements related to of body-mass (eg: body fat percentage, leg
-mass, arm mass, etc) and heel bone mineral density.  Using the same
-data maximisation algorithm used to select unrelated individuals
-\citep{erase}, 11 such traits were then selected, resulting in a set of 77
-genetically different traits for analysis.
+quantitative traits as those having at least 10 distinct values and
+for which the top two modal trait values combined comprised fewer than
+half of the samples. To ensure that our analyses were well-powered,
+traits with heritability $h^2<5\%$ (estimated by LD score \citep{ldsc}
+applied to publicly available UKB GWAS summary statistics
+\citep{neale}) and $<$50,000 unrelated samples with observed trait
+measures were removed. Trait specific QC was then performed to first
+remove trait values more than six standard deviations from the mean,
+so that extreme outliers did not impact results. TO MINIMISE THE
+EFFECT OF ENVIRONMENTAL RISK FACTORS ON THE RESULTS??, trait values
+were then standardised by applying a linear regression model to each
+trait, with covariates for age, sex, recruitment centre, genotyping
+batch, and the first 40 genetic principal components [WHAT ABOUT AGE2
+ETC AND THE FULL REGRESSION THAT WAS PERFORMED??].  Subsequently,
+traits with skewed ($>2$) or multimodal residuals were removed
+(dip-test \citep{dip} $P$-value for unimodality $>$
+0.05). Residualised trait values were then normalised by inverse
+normal transforming the rank of the residuals [MAYBE EXPLAIN WHY THIS
+WAS DONE].  Utilising these standardised trait values, further
+trait-based QC was then performed [IS THIS RIGHT TO SAY??]. To ensure
+that selected traits were polygenic, traits for which a single common
+variant explains more than an estimated 0.5\% of trait variance
+($r^2 > 0.5\%$) were removed.  To ensure that the traits analysed were
+meaningly different from each other, we calculated pairwise genetic
+correlations using LDscore\cite{ldsc}. THE REMAINING SENTENCES OF THIS
+PARAGRAPH ARE A MESS AND NEED FIXING. Sixty one traits did not have a
+pair with $r_g>98\%$ and were retained for analyses. Additionally, 10
+traits had a single almost identical match (eg: "Standing Height"
+(ID:50) and "Height Measured Prior to Imaging" (ID:12144)), and in
+these cases the trait with greater sample size was prioritised.  The
+other 52 traits were part of larger clusters of genetically similar
+traits, the largest of which related to measurements related to of
+body-mass (eg: body fat percentage, leg mass, arm mass, etc) and heel
+bone mineral density.  Using the same data maximisation algorithm used
+to select unrelated individuals \citep{erase}, 11 such traits were
+then selected, resulting in a set of 77 genetically different traits
+for analysis.
 
 \subsubsection*{Replication in Non-European Ancestry Individuals (UKB data)} ~\\
-\noindent Non-European Ancestry samples in the UKB have between
-3,150 and 13,037 (mean ~10k \need{exact number}) total samples for our 
-75 \need{exact number} QC-selected traits of the primary analysis (see above).  
-Applying our PRM-test (READER DOESN'T KNOW WHAT THIS IS) using the European Ancestry PRS to the Non-European target, 71 traits passed our PRM-QC. For these 142 tails we calculated the replication accuracy and replication association as
-described above (NOT DESCRIBED ABOVE). \need{\em From Beatrice} Genotype and phenotype QC.
+\noindent Non-European ancestry samples in the UKB have between 3,150
+and 13,037 (mean ~10k \need{exact number}) total samples for our 75
+\need{exact number}. Trait values of all non-European ancestry samples
+were normalised jointly as above.
 
 \subsubsection*{Replication in All of Us Cohort} ~\\
-\noindent All Of Us is a biobank containing XX binary and XX continuous
-traits from individuals of multiple ancestries from across the United States of
-America. Traits matching those from the 75 traits of the primary analyses (performed
-in the UK) were identified through an initial database search and were 
-then interrogated manually to determine if trait descriptions were sufficiently 
-similar. This process yielded 32 overlapping traits, 25 of which passed our
-PRM-QC (WHICH READERS DON'T KNOW). These traits have between 
-8595 and 127677 observations (mean ~73k \need{exact number}) in the European ancestry samples. \need{ancestry of samples used in }. Only individuals of European ancestry were included in the All of Us replication analysis because there are too few individuals of non-European ancestry for sufficient replication power. 
+\noindent All Of Us is a biobank containing XX binary and XX
+continuous traits from individuals of multiple ancestries from across
+the United States of America. Traits matching those from the 75 traits
+of the primary analyses (performed in the UK) were identified through
+an initial database search and were then interrogated manually to
+determine if trait descriptions were sufficiently
+similar. \need{European ancestry individuals were extract by....}.
+\need{Trait values were normalised by...}  There are too few
+individuals of non-European ancestry for sufficient replication power.
 
 \subsection*{Genome-wide association analyses and PRS estimation}
 European UKB samples were split randomly into 50\% base and 50\%
@@ -744,8 +761,6 @@ target data.
 
 %%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
 
-
-\clearpage \newpage 
 \subsection*{Data Analysis} ~\\
 \vspace*{-0.5cm} 
 \subsubsection*{The PRS-regression tail test}~\\
@@ -764,6 +779,7 @@ the mean in both the upper and lower tails as follows
 where $f(y)$ is the predicted PRS from the regression given trait
 value $y$ and $n$ is the number of observations.
 
+\subsubsection*{The PRS-regression test QC}~\\
 To avoid false positive associations arising from unusual trait
 distributions, the residuals of samples in the middle of the trait
 distribution were tested for departure from the null of zero
@@ -852,81 +868,60 @@ a $\chi^2$ statistic with 4 degrees of freedom,
 
 %%%%%%%%%%%   LRS   %%%%%%%%%%%%
 \subsection*{Selection Analyses}
-\subsubsection*{Relative Lifetime Reproductive Success} ~\\ 
+\subsubsection*{Relative Lifetime Reproductive Success} ~\\
 The number of offspring is recorded in the UKB for both females and
-males, fields \textit{2734} and \textit{2405} respectively.  We
-followed the methodology of Beauchamp \citep{v_select2} and
-involves splitting samples into four birth cohorts (1934-42, 1943-48, 1949-55,
-1956-65) and dividing the number of offspring of each individual by
-the cohort mean to calculate relative lifetime reproductive success
-($Y_{rLRS}$). Sanjak et al \citep{v_select} relied on this method to 
-infer the presence and direction of selective pressure acting on the 
-trait by fitting the following regression model: 
+males, fields \textit{2734} and \textit{2405} respectively.  Following
+the methodology of Beauchamp \citep{v_select2}, samples were split
+into four birth cohorts (1934-42, 1943-48, 1949-55,
+1956-65). Individual relative
+lifetime reproductive success, $Y_{rLRS}$, was then calculated by
+dividing the number of offspring of each individual by the cohort
+mean. Following Sanjak et al \citep{v_select}, the presence and
+direction of selective pressure acting on traits was determined by
+fitting the following regression model:
 \begin{equation}
 Y_{rLRS} = \beta_o + \beta z + \gamma z^2 \label{math:LRS}
 \end{equation}
 where $z$ denotes the residualised and normalised trait values and
 $\beta$ and $\gamma$ are linear and quadratic regression parameters.
-The Bayesian information criteria was used to select the best fitting
-model for each trait, enabling the classification of the selective
-pressure (directional, stabilining, no selection) acting on each trait
-as follows:
-\begin{itemize}
-    \item \textbf{$Y_{rLRS} = \beta_o$} $\Rightarrow$ no selection
-        \begin{itemize} 
-        \setlength{\itemindent}{1em}
-      \item If the selected model does not include a linear or
-        quadratic parameter, then the traits is classified as under no
-        selection and rare variant enrichment is not expected in
-        either tail.
-        \end{itemize} 
-    \item \textbf{$Y_{rLRS} = \beta_o + \beta{z}$} $\Rightarrow$ directional selection
-        \begin{itemize} 
-        \setlength{\itemindent}{1em}
-      \item If the selected model includes only the linear parameter
-        $\beta$, $\beta<0$ indicates negative selection and rare variant
-        enrichment is expected in the upper tail, while $\beta>0$
-        indicates positive selection and rare variant enrichment is
-        expected in the lower tail.
-        \end{itemize}
-    \item \textbf{$Y_{rLRS} = \beta_0 + \gamma z^2 $} $\Rightarrow$ stabilising selection
-        \begin{itemize}
-            \setlength{\itemindent}{1em}
-          \item If the selected model includes only the quadratic
-            parameter $\gamma$, and $\gamma<0$ stabilising selection
-            is inferred and the mean trait value in the population is
-            at its optimum. Rare variant enrichment is expected in the
-            both tails. If $\gamma>0$ implies divergent selection
-            and rare variant enrichment is expected in neither
-            tail.
-        \end{itemize}
-      \item \textbf{$Y_{rLRS} = \beta_0 + \beta{z} + \gamma z^2 $}
-        $\Rightarrow$ stabilising selection and directional selection
-        \begin{itemize} 
-        \setlength{\itemindent}{1em}
-      \item If the selected model includes both linear and quadratic
-        parameters and $\gamma<0$ stabilising selection is inferred,
-        but the population trait mean is moving towards an optimal
-        value. If $\beta<0$ selection is causing the trait mean to
-        decrease and greater rare variant enrichment is expected in
-        the upper tail. If $\beta>0$ selection is causing the trait
-        mean to decrease and greater rare variant enrichment is
-        expected in the lower tail.  If $\gamma>0$ then rare variant
-        enrichment is not expected in either tail.
-        \end{itemize}
-\end{itemize}
-Concordance between inferred selection and PRM for traits classified
-as exhibiting both stabilising and directional selection was tested by
-a Fisher exact test comparing binary categories $\beta<0$ / $\beta>0$
-with PRM effect size greater in upper / lower tail.
-For traits classified as no selection, directional selection and
-stabilising selection, concordance with PRM used the PRM
-classifications of no / lower / upper / dual tail regression. Fisher
-exact tests were constructed separately for negative, postive and
-stablising selection for enrichment in the expected PRM
-classification, lower / upper / dual respectively, by collapsing the
-other categories, traits classified as exhibiting both stabilising and
-directional selection were excluded from these tests.
+
+The Bayesian information criteria (BIC) was used to select the best
+fitting model for each trait from which the selective pressure acting
+on trait was inferred. If the selected model did not include a linear
+or quadratic parameter, no selection was inferred, here rare variant
+enrichment is not expected in either tail. If the selected model
+included only the linear parameter $\beta$, negative selection was
+inferred if $\beta<0$ and rare variant enrichment is expected in the
+upper tail, while positive selection was inferred if $\beta>0$ and
+rare variant enrichment is expected in the lower tail. If the selected
+model included only the quadratic parameter $\gamma$, with $\gamma<0$,
+stabilising selection is inferred and the mean trait value in the
+population is at its optimum and rare variant enrichment is expected
+in the both tails. Divergent selection is implied by $\gamma>0$, in
+this scenario rare variant enrichment is not expected in either
+tail. If the selected model included both linear and quadratic
+parameters with $\gamma<0$ stabilising selection was inferred, but the
+population trait mean is moving towards an optimal value. With
+$\beta<0$ it is inferred that selection is causing the trait mean to
+decrease and greater rare variant enrichment is expected in the upper
+tail. Conversely, with $\beta>0$ it is inferred that selection is
+causing the trait mean to decrease and greater rare variant enrichment
+is expected in the lower tail.  If $\gamma>0$ then rare variant
+enrichment is not expected in either tail.
+
+Concordance between inferred selection and the PRS test for traits
+classified as exhibiting both stabilising and directional selection
+was tested by a Fisher exact test, comparing binary categories
+$\beta<0$ / $\beta>0$ with PRS-test effect size greater in upper /
+lower tail.  For traits classified as no selection, directional
+selection and stabilising selection, concordance with PRS-test used
+the PRS-test classifications of no / lower / upper / dual tail
+regression. Fisher exact tests were constructed separately for
+negative, postive and stablising selection for enrichment in the
+expected PRS-test classification, lower / upper / dual respectively,
+by collapsing the other categories, traits classified as exhibiting
+both stabilising and directional selection were excluded from these
+tests.
 
 %%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
 \subsubsection*{Measuring Fitness in the Tails} ~\\ 
