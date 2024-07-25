@@ -780,20 +780,24 @@ where $f(y)$ is the predicted PRS from the regression given trait
 value $y$ and $n$ is the number of observations.
 
 \subsubsection*{The PRS-regression test QC}~\\
-To avoid false positive associations arising from unusual trait
-distributions, the residuals of samples in the middle of the trait
-distribution were tested for departure from the null of zero
-mean. Specifically, for each trait, two-sided t-tests for zero mean
-were applied to the residuals assigned in each of the middle 80 centiles of
+An additional trait QC was applied to ensure the robustness of the
+PRS-test by testing the residuals of samples in the middle of the
+trait distribution for departure from the null of zero mean.
+Specifically, for each trait, two-sided t-tests for zero mean were
+applied to the residuals assigned in each of the middle 80 centiles of
 the trait distribution. Traits were deemed to fail QC if the smallest
 P-value was significant at a Bonferroni-corrected level of 0.05 (P
-$\le$ 0.05/80). A robust empirical P-value for deviation in trait tails
-was calculated as follows: for each centile of trait one-sided t-tests for
-residuals less than and greater than zero were calculated.  The
-P-value for regression to the mean in the upper tail was calculated
-from the rank of the tests for residuals significantly less than zero
-and the lower tail empirical P-value from the greater than zero
-tests. The tests were performed on all 1,121 continuous traits in UKB.
+$\le$ 0.05/80).
+
+\subsubsection*{Empirical PRS-regression test}~\\
+\need{is this still needed for the paper?}\\
+A robust empirical P-value for deviation in trait tails was calculated
+as follows: for each centile of trait one-sided t-tests for residuals
+less than and greater than zero were calculated.  The P-value for
+regression to the mean in the upper tail was calculated from the rank
+of the tests for residuals significantly less than zero and the lower
+tail empirical P-value from the greater than zero tests. The tests
+were performed on all 1,121 continuous traits in UKB.
 
 \subsubsection*{Trumpet plots} ~\\
 Trumpet plots show the effect sizes and MAF of independent genome-wide
@@ -924,26 +928,20 @@ both stabilising and directional selection were excluded from these
 tests.
 
 %%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
-\subsubsection*{Measuring Fitness in the Tails} ~\\ 
-The following proxy measures of fitness were tested for association
-with PRM in tails:
-\begin{itemize} 
-\item{\textbf{Adjusted number of illnesses:}} The number of
-  self-reported non-cancer illnesses (UKB trait Field 2002) is
-  standardized by applying a regression model with covariates for age,
-  sex, recruitment centre and obtaining residuals.
-\item{\textbf{Number of miscarriages:}} Trait Field 3829.
-\item{\textbf{Number of still-births:}} Trait Field 3839.
-\item{\textbf{Paternal Age:}} Paricipant age (Field 21022) is
-  substracted from father's Age (Field 2946) to give the paternal age
-  at birth.
-\end{itemize}
-Association between these measures and PRM was calculated as
-follows. For each trait, the mean value of the four proxies of
-selection are calculated for individuals in the upper and lower 1\% of
-the trait distribution separately. Association is then measured by
-Spearman's rank correlation between the mean tail values for each
-proxy and the PRM effect size across all trait tails.
+\subsubsection*{Association between PRS-test and proxy measures of fitness}
+Four proxy measures of fitness were considered. (1) Standardised
+self-reported non-cancer illnesses (UKB trait field 2002) determined
+by the residuals of a regression with covariates for age, sex and
+recruitment centre. (2) Number of miscarriages (trait field
+38290). (3) Number of still-births (trait field 3839). (4) Paternal
+age at birth.
+
+Association between these measures and the PRS-test was tested by
+calculating the mean value of the four proxies of selection separately
+in the upper and lower 1\% of the trait distribution. Association is
+then tested by Spearman's rank correlation test between the mean tail
+values for each proxy and the PRS-test effect size across all trait
+tails.
 
 \subsubsection*{Simulating Stabilizing Selection using SLiM} ~\\
 Using SLiM v4.0 (1), we simulated a quantitative polygenic trait under
@@ -981,19 +979,21 @@ investigate the contributopn of low-frequency variants and mimic a PRS
 based on common variants, a second genetic value was calculate using
 only variants with $MAF > 1\%$.
 
-\subsection*{Replication} ~\\
-
-\subsubsection*{Bootstrap Analysis using Target Subsets} ~\\ 
-
-\noindent Our 75 QC-validated traits were required to have at least 100k total samples.  
-In the target sample (half the total), after outlier removal our QC-validated traits had 
-between of 50,085 and 185,362 (average 142k) target samples.  To explore whether our 
-PRM-test results replicate with smaller sample sizes, we repeatedly sampled subsets of between 
-5k and 50k target samples and performed our PRM-test on these subsets.  For each 
-value between 5k and 50k (counting by 5k) we performed 100 trials across each of the 150 trait 
-tails and calculated the \textbf{(1)} relative accuracy (true and false positives and negatives) 
-relative to our full dataset (FDR 5\%) and \textbf{(2)} the linear and the rank correlation of for the regression 
-effect size across all the tails. 
+\subsection*{Replication}
+\need{check numbers!}
+\subsubsection*{Bootstrap Analysis using Target Subsets}
+Our 75 QC-validated traits were required to have at least 100k total
+samples.  In the target sample (half the total), after outlier removal
+our QC-validated traits had between of 50,085 and 185,362 (average
+142k) target samples.  To explore whether our PRM-test results
+replicate with smaller sample sizes, we repeatedly sampled subsets of
+between 5k and 50k target samples and performed our PRM-test on these
+subsets.  For each value between 5k and 50k (counting by 5k) we
+performed 100 trials across each of the 150 trait tails and calculated
+the \textbf{(1)} relative accuracy (true and false positives and
+negatives) relative to our full dataset (FDR 5\%) and \textbf{(2)} the
+linear and the rank correlation of for the regression effect size
+across all the tails.
 
 
 
