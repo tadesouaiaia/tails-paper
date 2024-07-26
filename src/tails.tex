@@ -621,13 +621,18 @@ progression.
 \end{itemize}
 }
 
-The UK Biobank (UKB) is a prospective cohort study of approximately 500,000 
-participants, involving baseline and follow-up surveys and assaying of biological measures across thousands of phenotypes, as well as linkage to health and disease record data, recruited across  the United Kingdom from 2006 to 2010 \citep{ukb}. The genetic dataset consists of 488,377 samples genotyped at 805,426 SNPs. To determine 
-population ancestries, 4-means clustering analysis was conducted on the 
-first two Principal Components (PCs) of the genotype data. 1000 Genome was used to project the ancestry category estimate, resulting in 461,931 EUR, 11,074 SAS, 7,935 AFR, 2,585 WAS, 2,550 EAS, 1,619 Admix, 543 Others. WOULD BE GOOD TO STATE 
-NUMBER IN EACH ANCESTRY DEFINED THIS WAY HERE (also because 
-readers won't know at this point what kind and number of ancestries is being
-considered here).
+The UK Biobank (UKB) is a prospective cohort study of approximately
+500,000 participants, involving baseline and follow-up surveys and
+assaying of biological measures across thousands of phenotypes, as
+well as linkage to health and disease record data, recruited across
+the United Kingdom from 2006 to 2010 \citep{ukb}. The genetic dataset
+consists of 488,377 samples genotyped at 805,426 SNPs. To determine
+population ancestries, 4-means clustering analysis was conducted on
+the first two Principal Components (PCs) of the genotype
+data. Samples were then projected onto 1000
+Genomes PCs to determine ancestry, resulting
+in 461,931 EUR, 11,074 SAS, 7,935 AFR, 2,585 WAS, 2,550 EAS, 1,619
+admixed, 543 Others.
 
 Subsequent to clustering, standard quality control (QC) procedures
 were applied independently to each ancestry cluster. SNPs with a minor
@@ -689,25 +694,36 @@ correlated body doesn't mean much about the tails.
 \end{enumerate}
 }
 
-For all the trait, we removed individuals on insulin, and pregant women at baseline. For traits under blood biochemisty and blood count, we removed individuals who undertook statin and cholesterol lowering drugs, For selected traits \need {}
-After genetic QC, cancer patients, \need{etc were removed.....}
-Quantitative traits were selected for analysis as follows. We defined
-quantitative traits as those having at least 10 distinct values and
-for which the top two modal trait values combined comprised fewer than
-half of the samples. To ensure that our analyses were well-powered,
-traits with heritability $h^2<5\%$ (estimated by LD score \citep{ldsc}
-applied to publicly available UKB GWAS summary statistics
-\citep{neale}) and $<$50,000 unrelated samples with observed trait
-measures were removed. Trait specific QC was then performed to first
-remove trait values more than six standard deviations from the mean,
-so that extreme outliers did not impact results. TO MINIMISE THE
-EFFECT OF ENVIRONMENTAL RISK FACTORS ON THE RESULTS??, trait values
-were then standardised by applying a linear regression model to each
-trait, with covariates for age, sex, recruitment centre, genotyping
-batch, and the first 40 genetic principal components [WHAT ABOUT AGE2
-ETC AND THE FULL REGRESSION THAT WAS PERFORMED??].  Subsequently,
-traits with skewed ($>2$) or multimodal residuals were removed
-(dip-test \citep{dip} $P$-value for unimodality $>$
+\subsubsection*{Individual level QC}
+After genetic QC, individuals on insulin and pregant women at baseline
+were removed from all trait analyses. For blood count and biochemisty
+traits, individuals on statins and other cholesterol lowering drugs
+were removed. \need{Cancer patients traits were removed from the
+  following traits analyses.... Individuals on beta-blockers were
+removed from from pulse rate traits.}
+
+\subsubsection*{Trait selection}
+Quantitative traits were selected for analysis as those with at least
+10 distinct values and for which the top two modal trait values
+combined comprised less than 50\% of the trait distribution. To ensure
+that our analyses were well-powered, traits with heritability
+$h^2<5\%$ (estimated by LD score \citep{ldsc} applied to publicly
+available UKB GWAS summary statistics \citep{neale}) and $<$50,000
+unrelated samples with observed trait measures were removed.
+
+\subsubsection*{Trait QC}
+Trait specific QC was then performed, first, to ensure extreme
+outliers did not impact results, trait values more than six
+standard deviations from the mean were removed. To minimise the effect
+of environmental risk factors on the results,, trait values were then
+standardised by applying a linear regression model to each trait, with
+covariates for age, sex, recruitment centre, genotyping batch, and the
+first 40 genetic principal components [WHAT ABOUT AGE2 ETC AND THE
+FULL REGRESSION THAT WAS PERFORMED??].
+
+\subsubsection*{Further trait selection}
+Subsequently, traits with skewed ($>2$) or multimodal residuals were
+removed (dip-test \citep{dip} $P$-value for unimodality $>$
 0.05). Residualised trait values were then normalised by inverse
 normal transforming the rank of the residuals [MAYBE EXPLAIN WHY THIS
 WAS DONE].  Utilising these standardised trait values, further
