@@ -624,9 +624,7 @@ progression.
 The UK Biobank (UKB) is a prospective cohort study of approximately 500,000 
 participants, involving baseline and follow-up surveys and assaying of biological measures across thousands of phenotypes, as well as linkage to health and disease record data, recruited across  the United Kingdom from 2006 to 2010 \citep{ukb}. The genetic dataset consists of 488,377 samples genotyped at 805,426 SNPs. To determine 
 population ancestries, 4-means clustering analysis was conducted on the 
-first two Principal Components (PCs) of the genotype data. Each cluster's 
-ancestry was defined according to the country of birth (field ID: 20115) of 
-the majority of individuals' within the cluster. WOULD BE GOOD TO STATE 
+first two Principal Components (PCs) of the genotype data. 1000 Genome was used to project the ancestry category estimate, resulting in 461,931 EUR, 11,074 SAS, 7,935 AFR, 2,585 WAS, 2,550 EAS, 1,619 Admix, 543 Others. WOULD BE GOOD TO STATE 
 NUMBER IN EACH ANCESTRY DEFINED THIS WAY HERE (also because 
 readers won't know at this point what kind and number of ancestries is being
 considered here).
@@ -691,6 +689,7 @@ correlated body doesn't mean much about the tails.
 \end{enumerate}
 }
 
+For all the trait, we removed individuals on insulin, and pregant women at baseline. For traits under blood biochemisty and blood count, we removed individuals who undertook statin and cholesterol lowering drugs, For selected traits \need {}
 After genetic QC, cancer patients, \need{etc were removed.....}
 Quantitative traits were selected for analysis as follows. We defined
 quantitative traits as those having at least 10 distinct values and
