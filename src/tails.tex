@@ -702,6 +702,20 @@ were removed. \need{Cancer patients traits were removed from the
   following traits analyses.... Individuals on beta-blockers were
 removed from from pulse rate traits.}
 
+
+\subsubsection*{Class Selection} 
+
+I removed: 
+\begin{enumerate} 
+    \item \textit{Raw acceleromter statistics} 
+    \item \textit{Population Characteristics, Local Environment} (Air Pollution) 
+    \item \textit{MRI and NMR} 
+    \item \textit{Diet by 24-hour Recall} (unreliable)  
+    \item \textit{Derived OCT measures} 
+\end{enumerate} 
+
+
+
 \subsubsection*{Trait selection}
 Quantitative traits were selected for analysis as those with at least
 10 distinct values and for which the top two modal trait values
@@ -709,7 +723,10 @@ combined comprised less than 50\% of the trait distribution. To ensure
 that our analyses were well-powered, traits with heritability
 $h^2<5\%$ (estimated by LD score \citep{ldsc} applied to publicly
 available UKB GWAS summary statistics \citep{neale}) and $<$50,000
-unrelated samples with observed trait measures were removed.
+unrelated samples with observed trait measures were removed.  Result is 175 traits. 
+
+
+
 
 \subsubsection*{Trait QC}
 Trait specific QC was then performed, first, to ensure extreme
@@ -722,6 +739,15 @@ first 40 genetic principal components [WHAT ABOUT AGE2 ETC AND THE
 FULL REGRESSION THAT WAS PERFORMED??].
 
 \subsubsection*{Further trait selection}
+
+
+
+
+
+
+%100026 Daily_dietary_data_not_credible Diet_by_24-hour_recall Diet_by_24-hour_recall MINIMAL NA
+
+
 Subsequently, traits with skewed ($>2$) or multimodal residuals were
 removed (dip-test \citep{dip} $P$-value for unimodality $>$
 0.05). Residualised trait values were then normalised by inverse
