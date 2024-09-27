@@ -287,24 +287,22 @@ as "Lower Tail" and 9 were classified as "Upper Tail". \need{The three
   two traits failling test QC.....}
   
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
-\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig2_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/fig2.pdf} \end{maybe} 
 \caption{\footnotesize{{\bf Population-level data analyses for rare
       variants of large effect affecting the tails of trait
       distributions.}  \textbf{(a)} PRS quantile (in 1\% increments)
     plotted agaisnt mean trait value in quantile for four traits with
-    different types of PRS tail regression (clockwise: No Tail
-    Regression, Upper Tail, Lower Tail, Dual Tail). \textbf{(b)}
-    PRS-test tail effect sizes and \need{95\% confidence intervals} in
-    the upper and lower 1\% tails for all traits (of the 75 passing
-    QC) which exhibit significant regression to the mean in one or
-    both tails at FDR of 0.05.  \textbf{(c)} Trumpet plots (minor
-    allele frequency v effect size) of genome-wide significant
-    variants for traits shown in (a). \textbf{(d)} PRS-test tail
+    different PRM results (clockwise: No Tail Regression, Upper Tail, Lower Tail, Dual Tail). 
+    \textbf{(b)} PRS-test tail effect sizes and in
+    the upper and lower 1\% tails for all 74 traits analyzed. 
+    Tail regression effects associated with nominal pvalue $<0.05$ not shown. 
+    \textbf{(c)} Trumpet plots (minor allele frequency v effect size) of genome-wide significant
+    variants for traits shown in (a). \textbf{(d)} PRM-test tail
     effect sizes plotted against number of genome-wide significant
     variants with MAF<1\% for X traits with overlapping exome sequence
     results. For upper tails positive variant effects are counted and
     for lower tails negative variant effects are counted. Correlation
-    and significance calculated using Spearman rank correlation.
+    and significance calculated using pearson correlation.
     \textbf{(e)} Age of menopause: PRS quantile v trait mean and
     trumpet plot.  }} \label{fig:prs} \end{figure} \FloatBarrier
 
@@ -338,20 +336,21 @@ identified using population based sequencing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
-\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig3_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/fig3.pdf} \end{maybe} 
 \caption{\footnotesize{{\bf Selection analyses in real and simulated
       data.} \textbf{(a)} Residualised trait value plotted against
-    relative lifetime reproductive success for 16 \need{cherry picked
-      traits}, quadratic best fit to the data is shown by dashed
-    lines.  \textbf{(b)} Number of traits with inferred type of PRS
-    tail regression and inferred type of selection for 75 UKB traits
-    passing QC. Tail regression is inferred if tail effect is
-    significant at an FDR of 0.05. \textbf{(c)} Spearman
+    relative lifetime reproductive success for 16 example traits, quadratic best fit to the data is shown by dashed
+    lines.  \textbf{(b)} Model selection on lifetime reproductive success is performed using BIC, most traits are assigned 
+    to a quadratic model with a negative gamma parameter - stabilising selection. 
+    \textbf{(c)} Directionality of selection paramter is associated with tail regression in the opposite direction.  
+    Traits estimated to be under negative selection have greater negative PRM (pvalue $2*10^-7$).  Traits under 
+    positive selection have negative PRM (pvalue $0.02$).   
+    \textbf{(d)} Spearman
     rank correlation between standardised mean proxy measures of
     fitness of individuals in the upper and lower 1\% tails and
-    PRS-test effect size for the corresponding tail across 75 traits
-    in UKB passing QC.  \textbf{(d)} \need{not sure this is
-      needed}. \textbf{(e)} Trumpet plots (minor allele frequency v
+    PRS-test effect size for the corresponding tail across 74 traits
+    in UKB passing QC.  
+    \textbf{(e)} \need{Coming Soon} Trumpet plots (minor allele frequency v
     effect size) for simulated data without and with selection. All
     variants are included in the plot. \textbf{(e)} PRS quantile (in
     1\% increments) plotted agaisnt mean trait value in quantile in
@@ -450,7 +449,7 @@ test pvalue and the pvalue from our PRM-test \fref{fig:sib}{d}.
 
 
 \FloatBarrier \begin{figure}[!h] 
-    \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig4_eur_qc_0_version1_dedupe.pdf} \end{maybe} 
+    \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/fig4.pdf} \end{maybe} 
     \caption{\footnotesize{{\bf Sibling analyses for rare variants of
           large effect affecting the tails of trait distribution.}
         \textbf{(a)} Schematic of relationship of sibling trait values
@@ -464,8 +463,7 @@ test pvalue and the pvalue from our PRM-test \fref{fig:sib}{d}.
         different types of PRS tail regression. \textbf{(d)} PRS-test
         P-values plotted against sibling meta test P-values on
         $-\log_{10}$ scale for upper and lower tails of X
-        traits. Correlation \need{and significance} calculated using Spearman
-        rank correlation.}}
+        traits. Correlation calculated using pearson correlation.}}
     \label{fig:sib} \end{figure} \FloatBarrier
 
 
