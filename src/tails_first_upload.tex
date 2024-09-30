@@ -95,12 +95,16 @@ these trait tails we find an association between PRM and other measures of fitne
 variants including the lifetime number of illnesses and still births.  We then compare these 
 results to a simulation and find that they match. 
 
-Finally, we assess whether the predictions of a complex trait architecture derived from a conditional sibling model align with the observed diversity 
-in the architecture of trait extremes. The concordance between these measures underscores the need to 
-consider the role of rare variants in the analysis of trait tails.  The PRS and sibling analyses presented here 
-offer valuable tools for the targeted selection of traits and samples likely to harbor de novo or rare 
-deleterious alleles and represent an approach that has the potential to significantly enhance the 
-effectiveness and design of sequencing studies.
+Finally, we assess whether the predictions of a complex trait
+architecture derived from a conditional sibling model align with the
+observed diversity in the architecture of trait extremes. The
+concordance between these measures underscores the need to consider
+the role of rare variants in the analysis of trait tails.  The PRS and
+sibling analyses presented here offer valuable tools for the targeted
+selection of traits and samples likely to harbor de novo or rare
+deleterious alleles and represent an approach that has the potential
+to significantly enhance the effectiveness and design of sequencing
+studies.
 \end {abstract}
 \noindent\textcolor{sunyGray}{\rule{17.25cm}{1mm}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END ABSTRACT  %%%%%%%%%%%%%%%%%%%
@@ -225,8 +229,7 @@ tail is defined as the mean of the residuals in the lower tail and
 minus the mean of the residuals in the upper tail. Using this
 definition, positive values in both the upper and lower tails
 correspond to regression to the mean, indicative of rare variants of
-large effect in individuals in the trait tails. \need{Negative values
-correspond to regression away from the mean.....}
+large effect in individuals in the trait tails.
 
 % Applying this test to the UKB reveals that 400 of 1,185 heritiable
 % ($h^2>0.01$) quantitive traits have signficant ($p<0.05$) movement
@@ -235,25 +238,26 @@ correspond to regression away from the mean.....}
 % of these tests are underpowered due to insufficient sample size and
 % poor polygenic prediction ($R^2$)
 
-We first apply our test to UKB samples of European ancestry.
+We first applied our test to UKB samples of European ancestry.
 Available samples were split equally, one half of the data was used
-for GWAS to estimate PRS via PRSice and our PRS-test was applied to
-the remaining samples. Throughout, PRS were estimated with variants
-with MAF $>$ 1\%, see Methods for further details. Unimodal,
-non-skewed, continuous traits with heritabilty $>0.05$, PRS $R^2>0.01$
-and sample size $>$50,000 were selected for analysis. \need{Also
-  removed 3 traits with single variants with $r^2>0.5$, is this
-  necessray? Could just group and discuss with other two traits which
-  fail PRS-test QC}. After removal of strongly correlated traits
-(maximum pairwise correlation $R^2<$0.95) 77 traits remained for
-analysis. Traits were standardised, regressing out effects of age,
-sex, recruitment centre, genotyping batch, and principal components
-and transformed to be normally distributed, see Methods for further
-details of trait QC and selection. Of these traits, two failed our
-test QC indicating significant departure from predicted values from
-the regression in the middle 90\% or the trait distribution (see
-Methods) leaving 75 traits (150 tails) for analysis. Extended Data
-Table 1 lists all 77 traits and their available sanple sizes.
+for GWAS and subsequently estimate PRS via PRSice and our PRS-test was
+applied to the remaining 50\% of samples. Throughout, PRS were
+estimated with variants with MAF$>$1\%, see Methods for further
+details of genotype quality control. Unimodal, non-skewed, continuous
+traits with heritabilty $>0.05$, PRS $R^2>0.01$ and sample size
+$>$50,000 were selected for analysis. Strongly correlated traits
+(maximum pairwise correlation $R^2<$0.95) were identified and the
+trait with the smaller sample size was removed, leaving 77 traits for
+analysis. Traits were standardised by regressing out the effects of
+age, sex, recruitment centre, genotyping batch, and the top 40
+principal components in a linear regression model and quantile normal
+transforming the residuals to give values for analysis, see Methods
+for further details of trait QC and selection. We then applied a
+quality control metric specific to our test that tests for significant
+departure from predicted values from the regression in the middle 90\%
+or the trait distribution (see Methods). Two traits failed this test
+leaving 75 traits (150 tails) for analysis. Extended Data Table 1
+lists all 77 traits and their available sanple sizes.
 
 % Using these 75 traits we perform PRM-Testing, rare-variant analysis,
 % analysis of selection to help elucidate the mechanism that may be
@@ -510,19 +514,14 @@ portable.
       discovery and replication cohorts.  \textbf{(b)} PRS-test effect
       size in discovery and replication cohorts across 25 traits
       measured and passing PRS-test quality control in all cohorts.
-      \textbf{(c)} Simulated Signal Replication: Increasing larger
-      subsets were sampled and the replicability relative to our UKB
-      result was calculated \textbf{(d)} Same thing but
-      correlation. \textbf{(e)}. \textbf{(f)} PRS-test effect sizes
-      estimated in: UKB European ancestry samples v UKB non-European
-      ancestry samples for X traits passing PRS-test QC in both
-      cohorts. Triangles shaded relative to the non-European sample
-      size for the trait. Pearson correlation
-      shown\textbf{(g)}. \textbf{(h)} PRS-test effect sizes estimated
-      in: UKB European ancestry samples v All Of Us European ancestry
-      samples for 24 overlapping traits passing PRS-test QC in both
-      cohorts. Triangles shaded relative to the All of Us sample size
-      for the trait.}  } \label{fig:rep} \end{figure} \FloatBarrier
+      \textbf{(c-e)} PRS-test effect sizes estimated in UKB European
+      ancestry discovery samples and replication cohort: \textbf{(c)}
+      UKB European ancestry sample repeated measures, \textbf{(d)} UKB
+      non-European ancestry samples and (e) AllofUs European
+      ancestry. Triangles shaded relative to the replication sample
+      size for the trait. Pearson correlation shown.
+      samples. \textbf{(f)}....}  } \label{fig:rep} \end{figure}
+\FloatBarrier
 
 
 
