@@ -445,8 +445,6 @@ between PRM and the number of miscarriages and paternal age are not
 significantly associated.
 
 
-
-
 \subsubsection*{Simulating Selection (Anil's Result)} ~\\  
 In \fref{fig:evo}{d} we confirm this result using a simulation (see \emph{Methods}) 
 where we simulate many generations of stablilzing selection, after which the ratio 
@@ -553,16 +551,6 @@ portable.
 
 
 
-
-
-
-
-
-
-
-
-
-
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/fig6.pdf} \end{maybe} 
   \caption{\footnotesize{{\bf Analysis of POPout Impact on PRS 
         Prediction} Repeated for Three Traits.  
@@ -573,52 +561,6 @@ portable.
         (10\%, 5\%, 1\%, 0.5\%) as case status, log-odds relative to the middle 
         PRS-quantile is calculated for each of twenty PRS quantiles. 
         }  } \label{fig:pred} \end{figure} \FloatBarrier
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END RESULTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -717,17 +659,18 @@ progression.
 }
 
 The UK Biobank (UKB) is a prospective cohort study of approximately
-500,000 participants, involving baseline and follow-up surveys and
-assaying of biological measures across thousands of phenotypes, as
-well as linkage to health and disease record data, recruited across
-the United Kingdom from 2006 to 2010 \citep{ukb}. The genetic dataset
-consists of 488,377 samples genotyped at 805,426 SNPs. To determine
-population ancestries, 4-means clustering analysis was conducted on
-the first two Principal Components (PCs) of the genotype
-data. Samples were then projected onto 1000
-Genomes PCs to determine ancestry, resulting
-in 461,931 EUR, 11,074 SAS, 7,935 AFR, 2,585 WAS, 2,550 EAS, 1,619
-admixed, 543 Others.
+500,000 participants recruited across the United Kingdom from 2006 to
+2010 \citep{ukb}. Phenotype data of anthropometric, biological and
+lifestyle measures was collected at baseline and follow-up surveys, with
+further linkage to health and disease record data. The genetic dataset
+consists of 488,377 samples genotyped at 805,426 SNPs.
+
+To determine population ancestries, 4-means clustering analysis was
+conducted on the first two Principal Components (PCs) of the genotype
+data. Samples were then projected onto 1000 Genomes PCs to determine
+ancestry, resulting in 461,931 European, 11,074 South Asian, 7,935
+African, 2,585 West Asian, 2,550 East Asian, 1,619 and admixed
+samples.
 
 Subsequent to clustering, standard quality control (QC) procedures
 were applied independently to each ancestry cluster. SNPs with a minor
@@ -737,22 +680,28 @@ excluded. Samples exhibiting high levels of missingness or
 heterozygosity, inconsistencies in genetic-inferred and self-reported
 sex, or displaying aneuploidy of the sex chromosomes were removed in
 accordance with recommendations from the UKB data processing team
-\citep{ukb_qc}.  For the analyses on the general population, a greedy 
-algorithm was employed to remove related individuals that maximises 
-sample retention while removing all
-third-degree relatives (kinship coefficient > 0.044) \citep{erase}.
-After this QC 411,949 unrelated individuals remained.
-%It has been shown that both the mean and variance of PRS varies
-%across ancestry groups \citep{global}.
-Primary analyses were performed on the over 387,235
-unrelated European samples that comprised the largest ancestry
-cluster. Replication analyses were performed on the remaining
-24,476 samples that comprised multiple non-European
-ancestries.
+\citep{ukb_qc}.  For the analyses on the general population, a greedy
+algorithm was employed to remove related individuals that maximises
+sample retention while removing all third-degree relatives (kinship
+coefficient > 0.044) \citep{erase}.  After this QC 411,949 unrelated
+individuals remained.  Primary analyses were performed on the over
+387,235 unrelated European samples that comprised the largest ancestry
+cluster. Replication analyses were performed on the remaining 24,476
+samples that comprised multiple non-European ancestries.
 
-For the sibling analyses, sibling pairs were selected by first identifying first-degree relatives, defined as those with kinship coefficient within the range 0.177 and 0.354 (expected value for siblings is 0.25) to account for the expected variation in within-pair similarity \citep{sib1}. Only individuals of European ancestry were included in the sibling analyses because there are too few siblings of non-European ancestry for sufficient power for meaningful interpretation of results and we consider it important to perform 
-ancestry-stratified analyses until the generalisability of such analyses 
-are better understood. The proportion of SNPs with zero identity-by-state (IBS0) was used to distinguish sibling pairs from parent-offspring pairs, since parent–offspring pairs have IBS0$\approx$0 across the autosomes. It has been shown in the UKB that there is good separation between pairs of first degree relatives at IBS0=0.00112 \citep{sib1} and, thus, sibling pairs were selected as those exceeding this threshold, giving a total of 17,289 sibling pairs of European ancestry in total. 
+For the sibling analyses, sibling pairs were selected by first
+identifying first-degree relatives, defined as those with kinship
+coefficient within the range 0.177 and 0.354 (expected value for
+siblings is 0.25) to account for the expected variation in within-pair
+similarity \citep{sib1}. Only individuals of European ancestry were
+included in the sibling analyses. The proportion of SNPs with zero
+identity-by-state (IBS0) was used to distinguish sibling pairs from
+parent-offspring pairs, since parent–offspring pairs have
+IBS0$\approx$0 across the autosomes. It has been shown in the UKB that
+there is good separation between pairs of first degree relatives at
+IBS0=0.00112 \citep{sib1} and, thus, sibling pairs were selected as
+those exceeding this threshold, giving a total of 17,289 sibling pairs
+of European ancestry for analysis.
 
 
 \subsubsection*{Quantitative Trait QC} ~\\
@@ -818,7 +767,8 @@ combined comprised less than 50\% of the trait distribution. To ensure
 that our analyses were well-powered, traits with heritability
 $h^2<5\%$ (estimated by LD score \citep{ldsc} applied to publicly
 available UKB GWAS summary statistics \citep{neale}) and $<$50,000
-unrelated samples with observed trait measures were removed.  Result is 175 traits. 
+unrelated samples with observed trait measures were removed, this gave
+175 traits.
 
 
 
@@ -827,30 +777,19 @@ unrelated samples with observed trait measures were removed.  Result is 175 trai
 Trait specific QC was then performed, first, to ensure extreme
 outliers did not impact results, trait values more than six
 standard deviations from the mean were removed. To minimise the effect
-of environmental risk factors on the results,, trait values were then
+of environmental risk factors on the results, trait values were then
 standardised by applying a linear regression model to each trait, with
 covariates for age, sex, recruitment centre, genotyping batch, and the
 first 40 genetic principal components [WHAT ABOUT AGE2 ETC AND THE
 FULL REGRESSION THAT WAS PERFORMED??].
 
-\subsubsection*{Further trait selection}
-
-
-
-
-
-
-%100026 Daily_dietary_data_not_credible Diet_by_24-hour_recall Diet_by_24-hour_recall MINIMAL NA
-
-
-Subsequently, traits with skewed ($>2$) or multimodal residuals were
-removed (dip-test \citep{dip} $P$-value for unimodality $>$
-0.05). Residualised trait values were then normalised by inverse
-normal transforming the rank of the residuals [MAYBE EXPLAIN WHY THIS
-WAS DONE].  Utilising these standardised trait values, further
-trait-based QC was then performed [IS THIS RIGHT TO SAY??]. To ensure
-that selected traits were polygenic, traits for which a single common
-variant explains more than an estimated 0.5\% of trait variance
+Subsequently, traits with skew $>2$ and multimodal residuals (dip-test
+\citep{dip} $P$-value for unimodality $>$ 0.05) were
+removed. Residualised trait values were then normalised by inverse
+normal transforming the rank of the residuals to give normally
+distributed traits for analysis.  To ensure
+that the selected traits were polygenic, traits for which a single
+variant explains more than 0.5\% of trait variance
 ($r^2 > 0.5\%$) were removed.  To ensure that the traits analysed were
 meaningly different from each other, we calculated pairwise genetic
 correlations using LDscore\cite{ldsc}. THE REMAINING SENTENCES OF THIS
@@ -868,7 +807,7 @@ then selected, resulting in a set of 77 genetically different traits
 for analysis.
 
 \subsubsection*{Replication in Non-European Ancestry Individuals (UKB data)} ~\\
-\noindent Non-European ancestry samples in the UKB have between 3,150
+Non-European ancestry samples in the UKB have between 3,150
 and 13,037 (mean ~10k \need{exact number}) total samples for our 75
 \need{exact number}. Trait values of all non-European ancestry samples
 were normalised jointly as above.
