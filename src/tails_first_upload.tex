@@ -201,26 +201,29 @@ from population level analyses.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS - START  %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage \newpage 
-\section*{Results} \label{sec:results}
-
-The traits analyzed in the following section were arrived at by first considering 
-all continuous (at least 10 unique values) traits in the UK Biobank from three major categories: 
-\textit{Biomarkers}, \textit{Physical Measures} and the \textit{Touchscreen Questionnaire \& Cognitive Tests}.  
-Initially, using only UKB samples of European ancestry, traits were standardised by regressing out the 
-effects of age, sex, and known environmental and technical factors (see \textit{Methods1}).  Then samples 
-were split in half and GWAS analysis was carried out using plink \cite{plink} and heritability and pairwise genetic correlation was 
-estimated using LDscore \cite{ldsc}.  Applying quality controls for sample size, heritability, 
-skew, and removing strongly correlated traits left 74 four traits for analysis (see \textit{Methods2}), which 
-were analyzed for POPout and associated analyses across large number of European ancestry samples in the UK Biobank. 
-This result was replicated across the subset of repeated measures European ancestry samples in the UK Biobank, 
-across the subset of non-European ancestry samples in the UK Biobank, and, where applicable across European ancestry 
-samples in the All Of Us Biobank (see \textit{Replication}).  
+\section*{Results} \label{sec:results} The traits analyzed in the
+following section were selected by first considering all continuous
+(at least 10 unique values) traits in the UK Biobank (UKB) from three
+major categories: \textit{Biomarkers}, \textit{Physical Measures} and
+the \textit{Touchscreen Questionnaire \& Cognitive Tests}.  Traits
+were standardised by regressing out the effects of age, sex, and known
+environmental and technical factors and inverse-normal transforming
+(see \textit{Methods}).  Samples were split in half, GWAS
+was carried out using plink \cite{bt_10} and heritability and
+pairwise genetic correlation was estimated using LDscore \cite{ldsc}.
+Applying quality controls for sample size, heritability, skew, and
+removing strongly correlated traits left 74 four traits for analysis
+(see \textit{Methods2}), which were analyzed for POPout and associated
+analyses across large number of European ancestry samples in the UK
+Biobank.  This result was replicated across the subset of repeated
+measures European ancestry samples in the UK Biobank, across the
+subset of non-European ancestry samples in the UK Biobank, and, where
+applicable across European ancestry samples in the All Of Us Biobank
+(see \textit{Replication}).
 
 
 
 \subsection*{The POPout Test} ~\\ 
-
-
 The POPout tests identifies traits where the samples in one or both tails 
 (the lower and upper 1\% of the distribution) have expectedly large or 
 small average PRS values.   Applying this test to the European ancestry 
@@ -342,7 +345,7 @@ as "Lower Tail" and 9 were classified as "Upper Tail". \need{The three
 Typically, variants included in PRS have minor allele frequency
 (MAF)$>$1\%.  The exclusion of rare variants from PRS has been shown
 to reduce PRS performance \citep{rares1}. \fref{fig:prs}{c} shows
-Trumpet plots, MAF vrersus effect size, for genome-wide significant
+MAF vrersus effect size, for genome-wide significant
 associations from GWAS \citep{neale} and exome analyses
 \citep{backman} of UKB for our four foucus traits. For Haemoglobin
 Concentration which exhibits lower tail regression we see a greater
@@ -372,18 +375,18 @@ sequencing.
 \caption{\footnotesize{{\bf Selection analyses in real and simulated
       data.} \textbf{(a)} Residualised trait value plotted against
     relative lifetime reproductive success for 16 example traits.
-    Best model fit to the data, of all models with and without linear
-    and quadratic terms, selected by BIC, are shown by dashed
+    Best model fit to the data, selected by BIC considering all models
+    with and without linear and quadratic terms, are shown by dashed
     lines. Model selected by BIC used to classify selective pressure
     acting on the traits. \textbf{(b)} PRS-test effect size shown by
     trait selection category, with PRS-test effect size meta-analysis
     for each category. \textbf{(c)} Spearman rank correlation between
     four proxy measures of fitness and PRS-test effect size. For each
-    fitness measure correlation was calculated between the mean of
-    the fitness measure in individuals in the upper and lower 1\%
-    tails and PRS-test effect size for the corresponding tail across
-    74 traits in UKB passing QC. Fitness measures were standardised
-    by...  \textbf{(e)} \need{Coming Soon} Trumpet plots (minor allele
+    fitness measure correlation was calculated between the mean of the
+    fitness measure in individuals in the upper and lower 1\% tails
+    and PRS-test effect size for the corresponding tail across 74
+    traits in UKB passing QC. Fitness measures were standardised by...
+    \textbf{(e)} \need{Coming Soon} Trumpet plots (minor allele
     frequency v effect size) for simulated data without and with
     selection. All variants are included in the plot. \textbf{(e)} PRS
     quantile (in 1\% increments) plotted agaisnt mean trait value in
@@ -486,7 +489,7 @@ test pvalue and the pvalue from our PRM-test \fref{fig:sib}{d}.
       \textbf{(a)} Schematic of relationship of sibling trait values
       under polygenicity, de novo variants of large effect in one
       sibling and rare inherited variant of large effect,
-      Mendelian. \textbf{(b)} {\it LDscore regression} SNP
+      Mendelian. \textbf{(b)} LDscore regression SNP
       heritability plotted against heritability estimated from sibling
       pair trait similarity using European UKB samples.  \textbf{(c)}
       Index sibling trait quantile (in 1\% increments) plotted agaisnt
@@ -784,7 +787,7 @@ first 40 genetic principal components [WHAT ABOUT AGE2 ETC AND THE
 FULL REGRESSION THAT WAS PERFORMED??].
 
 Subsequently, traits with skew $>2$ and multimodal residuals (dip-test
-\citep{dip} $P$-value for unimodality $>$ 0.05) were
+\citep{dip} $P$-value for unimodality $<$ 0.05) were
 removed. Residualised trait values were then normalised by inverse
 normal transforming the rank of the residuals to give normally
 distributed traits for analysis.  To ensure
@@ -806,24 +809,6 @@ to select unrelated individuals \citep{erase}, 11 such traits were
 then selected, resulting in a set of 77 genetically different traits
 for analysis.
 
-\subsubsection*{Replication in Non-European Ancestry Individuals (UKB data)} ~\\
-Non-European ancestry samples in the UKB have between 3,150
-and 13,037 (mean ~10k \need{exact number}) total samples for our 75
-\need{exact number}. Trait values of all non-European ancestry samples
-were normalised jointly as above.
-
-\subsubsection*{Replication in All of Us Cohort} ~\\
-All of Us is a biobank of individuals of multiple ancestries from
-across the United States of America. Traits matching those analysed in
-the primary UKB analysis were identified through an initial database
-search and were then interrogated manually to determine if trait
-descriptions were sufficiently similar.  All of Us provide ancestry
-categories, corresponding to definitions used within gnomAD, the Human
-Genome Diversity Project, and 1000 Genome, European ancestry
-individuals were extracted for analysis. There were too few
-individuals of non-European ancestry for sufficient replication power.
-\need{Trait values were normalised by...}
-
 \subsection*{Genome-wide association analyses and PRS estimation in UKB}
 European UKB samples were split randomly into 50\% base and 50\%
 target data sets. GWASs were applied to the base data using PLINK-1.9
@@ -833,7 +818,35 @@ summary statistics of each trait with fast-scoring to select the most
 predictive P-value threshold within the target data. Individual risk
 scores were calculated for UKB target samples.
 
-\subsection*{PRS estimation in All of US}
+\subsection*{Replication}
+\subsubsection*{Bootstrap Analysis using Target Subsets}
+Our 75 QC-validated traits were required to have at least 100k total
+samples.  In the target sample (half the total), after outlier removal
+our QC-validated traits had between of 50,085 and 185,362 (average
+142k) target samples.  To explore whether our PRM-test results
+replicate with smaller sample sizes, we repeatedly sampled subsets of
+between 5k and 50k target samples and performed our PRM-test on these
+subsets.  For each value between 5k and 50k (counting by 5k) we
+performed 100 trials across each of the 150 trait tails and calculated
+the \textbf{(1)} relative accuracy (true and false positives and
+negatives) relative to our full dataset (FDR 5\%) and \textbf{(2)} the
+linear and the rank correlation of for the regression effect size
+across all the tails.
+
+\subsubsection*{Repeated measures replication} ~\\
+\need{Details...}
+
+\subsubsection*{Replication in All of Us Cohort} ~\\
+All of Us is a biobank of individuals of multiple ancestries from
+across the United States of America. Traits matching those analysed in
+the primary UKB analysis were identified through an initial database
+search and were then interrogated manually to determine if trait
+descriptions were sufficiently similar.  All of Us provide ancestry
+categories, corresponding to definitions used within gnomAD, the Human
+Genome Diversity Project, and 1000 Genome, \need {XX,XXX} European ancestry
+individuals were extracted for analysis. There were too few
+individuals of non-European ancestry for sufficient replication power.
+\need{Trait values were normalised by...} \need{Genotype data....}
 
 %%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
 
@@ -865,15 +878,14 @@ the trait distribution. Traits were deemed to fail QC if the smallest
 P-value was significant at a Bonferroni-corrected level of 0.05 (P
 $\le$ 0.05/80).
 
-\subsubsection*{Empirical PRS-regression test}~\\
-\need{is this still needed for the paper?}\\
-A robust empirical P-value for deviation in trait tails was calculated
-as follows: for each centile of trait one-sided t-tests for residuals
-less than and greater than zero were calculated.  The P-value for
-regression to the mean in the upper tail was calculated from the rank
-of the tests for residuals significantly less than zero and the lower
-tail empirical P-value from the greater than zero tests. The tests
-were performed on all 1,121 continuous traits in UKB.
+%\subsubsection*{Empirical PRS-regression test}~\\
+%A robust empirical P-value for deviation in trait tails was calculated
+%as follows: for each centile of trait one-sided t-tests for residuals
+%less than and greater than zero were calculated.  The P-value for
+%regression to the mean in the upper tail was calculated from the rank
+%of the tests for residuals significantly less than zero and the lower
+%tail empirical P-value from the greater than zero tests. The tests
+%were performed on all 1,121 continuous traits in UKB.
 
 \subsubsection*{Trumpet plots} ~\\
 Trumpet plots show the effect sizes and MAF of independent genome-wide
@@ -888,7 +900,7 @@ deleterious, missense or predicted loss of function variants in each gene
 significant burden associations are shown where no single variant
 within the gene is genome-wide significant.
 
-\subsubsection*{Sibling concordance tests}
+\subsubsection*{Sibling concordance tests}~\\
 The conditional distribution under polygenicity of an individual's
 trait value given their siblings trait value is predicted by theory
 \cite{t_sibs}
@@ -1005,7 +1017,7 @@ both stabilising and directional selection were excluded from these
 tests.
 
 %%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
-\subsubsection*{Association between PRS-test and proxy measures of fitness}
+\subsubsection*{Association between PRS-test and proxy measures of fitness}~\\
 Four proxy measures of fitness were considered. (1) Standardised
 self-reported non-cancer illnesses (UKB trait field 2002) determined
 by the residuals of a regression with covariates for age, sex and
@@ -1013,12 +1025,12 @@ recruitment centre. (2) Number of miscarriages (trait field
 38290). (3) Number of still-births (trait field 3839). (4) Paternal
 age at birth.
 
-Association between these measures and the PRS-test was tested by
-calculating the mean value of the four proxies of selection separately
-in the upper and lower 1\% of the trait distribution. Association is
-then tested by Spearman's rank correlation test between the mean tail
-values for each proxy and the PRS-test effect size across all trait
-tails.
+Association between these measures and the PRS-test was tested as
+follows.  The mean value of the four proxies of selection was
+calculated separately in the upper and lower 1\% of the trait
+distribution, association was then tested by Spearman's rank
+correlation across all trait tails of the mean tail values for each
+proxy and the PRS-test effect size.
 
 \subsubsection*{Simulating Stabilizing Selection using SLiM} ~\\
 Using SLiM v4.0 (1), we simulated a quantitative polygenic trait under
@@ -1030,10 +1042,10 @@ $10^{-8}$ per bp under neutrallity. Mutations were assigned effect
 sizes simulated from a gamma distribution with shape parameter 0.186
 and mean 0.01026 and subsequently multiplied by -1 with probability
 0.5 to give a symmetrical effect size distribution. This distribution
-has been used previously to simulate genetic effects in humans
-\need{ref} and reflects a prior belief in a small number of large
-effects and many small effects \need{ref}. Individual trait values
-were determined by the sum of all genetic effects.
+has been used previously to simulate genetic effects in humans and
+reflects a prior belief in a small number of large effects and many
+small effects \cite{anil3}. Individual trait values were determined by
+the sum of all genetic effects.
 
 After neutral genetic diversity was achieved (10N generations),
 stabilising selection on the trait was introduced for 1N
@@ -1043,10 +1055,8 @@ generations through a Gaussian fitness function
 \end{equation}
 where $x$ is the phenotype of an individual at generation $t$, $\mu$
 and $\sigma$ are the trait mean and standard deviation at the start of
-selection (i.e., $t=10N$). The number of offspring each individual
- \need{contributed to the next generation was...}
-Stabilizing selection was simulated for a further 1N generations
-after the 10N burn-in generations.
+selection (i.e., $t=10N$). Stabilizing selection was simulated for a
+further 1N generations after the 10N burn-in generations.
 
 Simulation data was collected by logging, at each generation, the
 phenotypic mean and standard deviation of the population, statistics
@@ -1055,25 +1065,6 @@ and effect sizes, and the mutational profile of each individual. To
 investigate the contributopn of low-frequency variants and mimic a PRS
 based on common variants, a second genetic value was calculate using
 only variants with $MAF > 1\%$.
-
-\subsection*{Replication}
-\need{check numbers!}
-\subsubsection*{Bootstrap Analysis using Target Subsets}
-Our 75 QC-validated traits were required to have at least 100k total
-samples.  In the target sample (half the total), after outlier removal
-our QC-validated traits had between of 50,085 and 185,362 (average
-142k) target samples.  To explore whether our PRM-test results
-replicate with smaller sample sizes, we repeatedly sampled subsets of
-between 5k and 50k target samples and performed our PRM-test on these
-subsets.  For each value between 5k and 50k (counting by 5k) we
-performed 100 trials across each of the 150 trait tails and calculated
-the \textbf{(1)} relative accuracy (true and false positives and
-negatives) relative to our full dataset (FDR 5\%) and \textbf{(2)} the
-linear and the rank correlation of for the regression effect size
-across all the tails.
-
-
-
 
 \clearpage \newpage
 \bibliography{refs}
