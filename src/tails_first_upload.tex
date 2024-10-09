@@ -201,124 +201,61 @@ from population level analyses.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS - START  %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage \newpage 
-\section*{Results} \label{sec:results} The traits analyzed in the
-following section were selected by first considering all continuous
-(at least 10 unique values) traits in the UK Biobank (UKB) from three
-major categories: \textit{Biomarkers}, \textit{Physical Measures} and
-the \textit{Touchscreen Questionnaire \& Cognitive Tests}.  Traits
-were standardised by regressing out the effects of age, sex, and known
-environmental and technical factors and inverse-normal transforming
-(see \textit{Methods}).  Samples were split in half, GWAS
-was carried out using plink \cite{bt_10} and heritability and
-pairwise genetic correlation was estimated using LDscore \cite{ldsc}.
-Applying quality controls for sample size, heritability, skew, and
-removing strongly correlated traits left 74 four traits for analysis
-(see \textit{Methods2}), which were analyzed for POPout and associated
-analyses across large number of European ancestry samples in the UK
-Biobank.  This result was replicated across the subset of repeated
-measures European ancestry samples in the UK Biobank, across the
-subset of non-European ancestry samples in the UK Biobank, and, where
-applicable across European ancestry samples in the All Of Us Biobank
-(see \textit{Replication}).
+\section*{Results} \label{sec:results} 
+The traits analyzed in the following section were selected 
+from the UK-Biobank categories \textit{Biomarkers}, \textit{Physical Measures}, 
+\textit{Touchscreen Questionnaire} and  \textit{Cognitive Tests}.  
+Continuous traits from these categories were standardised by regressing 
+out the effects of age, sex, and known environmental and technical factors 
+and then applying an inverse-normal transformation (see \textit{Methods}).  
+Samples were then split in half, GWAS was carried out using Plink \cite{bt_10}, 
+and heritability and pairwise genetic correlation was estimated using LDscore \cite{ldsc}.
+Applying quality controls for sample size, heritability, skew, and oligogenicity and 
+removing strongly correlated traits resulted in the set of 74 traits (see \textit{Methods2}), 
+used for POPout associated analyses across the large number of European 
+ancestry samples in the UK Biobank. POPout results were replicated three-ways: 
+across a subset of repeated measures European ancestry samples in the UK Biobank, 
+acorss a subset of non-European ancestry samples in the UK Biobank, and, where applicable, 
+across European ancestry samples in the All Of Us Biobank (see \textit{Replication}).
 
 
 
 \subsection*{The POPout Test} ~\\ 
-The POPout tests identifies traits where the samples in one or both tails 
-(the lower and upper 1\% of the distribution) have expectedly large or 
-small average PRS values.   Applying this test to the European ancestry 
-samples in the UK Biobank reveals widespread POPout effect
+
+Conceptually, POPout occurs when when samples in the tails of the trait phenotype 
+distribution have polygenic scores that significantly depart from expectation.  
+To quantify this phenomenon we have developed the \textit{POPout test} which regresses
+PRS-On-Phenotype to estimate the effect size, direction, and significance of departure from expected PRS 
+for individuals in the lower and upper 1\% of the trait distribution (see \textit{Methods}).  
+
+%#29 1 tail #39 2 tail #68 1/2 tail % 90% 
+%# defaultdict(<class 'int'>, {'reg': 97, 'pro': 10})
+
+Applying this test to the European ancestry samples in the UK-biobank reveals widespread departure 
+from expectation across the 74 traits analysed.  Correcting for multiple tests (5\% false discovery threshold), 
+68 of 74 traits have significant POPout effects in one or both tails and that the vast majority (90\%) of these 
+effects are positive - i.e. reflect regression to the mean or unexpectedly mild risk scores - 
+which is consistent with rare variants of large effects in individuals of the trait tails. 
+\dref{fig:prs}{a} illustrates the three broad types of tail effects by plotting trait quantile, 
+in 1\% increments, versus mean PRS in the quantile for four index traits: 
+\begin{itemize} 
+    \item \textit{Ankle Spacing Width} - No POPout Effect in either tail, selected due to highest $h^2$ among such traits, 
+    \item \textit{Haemoglobin Concentration} - selected for most significant POPout regression in lower tail only, 
+    \item \textit{Red Blood Cell Distribution Width} - selected for most significant POPout regression in upper tail only, 
+    \item \textit{Sitting Height} - selected for most significant POPout regression in both tails (minimum value).   
+\end{itemize} 
+        
+
+\noindent \dref{fig:prs}{b} displays the POPout effects for all traits analyzed, separated into three logical UKB categories, \textit{Biomarkers}, \textit{Physical Measures} 
+and \textit{Questionnaire/Cognitive}.  Again positive POPout effects (regression to the mean) predominate, especially with respect to larger effects: 22 tails have 
+positive POPout effects greater than 0.25 while none have negative POPout effects less than 0.25.  Here we also observe that POPout regression is 
+most common in \textit{Biomarkers} category (79\% of tails) and least common in \textit{Questionnaire/Cognitive} category (43\% of tails). Overall 
+we observe a moderate relationship ($R=0.23,Pv=0.018$) between POPout regression and trait heritability, suggesting that POPout regression is 
+not driven primarily by environemntal effects.  
 
 
 
-Applying the POPout test to 74 Traits to the  European ancestry samples in the UK Biobank reveals that 
 
-
-
-%We use PRS to assess the contribution of rare large-effect variants on
-%extreme trait values. Rare variants are typically not included in PRS,
-%leading to reduced accuracy of the PRS for individuals with rare
-%large-effect variants. This inaccuracy will be most apparent in the
-%tails of the trait distribution where individuals with large-effect
-%variants are most likely to reside. Specifically, PRS values will tend
-%to converge toward the mean PRS in the tails -- {\em PRS-regression to
-%  the mean}.
-% We first identify and characterize \emph{polygenic-regression to the
-%   mean} (PRM), which occurs when individuals in the tails of the
-% quantitive trait distribution exhibit polygenic risk that is closer to
-% the mean risk score than expected.
-To quantify this we develop and apply a statistical test that
-estimates effect size, direction, and signficance of movement away
-from the expected PRS for individuals in the lower and upper 1\% of
-the trait distribution. Specifically, a regression of PRS on
-standardised trait values is fit. The regression effect size in the
-tail is defined as the mean of the residuals in the lower tail and
-minus the mean of the residuals in the upper tail. Using this
-definition, positive values in both the upper and lower tails
-correspond to regression to the mean, indicative of rare variants of
-large effect in individuals in the trait tails.
-
-% Applying this test to the UKB reveals that 400 of 1,185 heritiable
-% ($h^2>0.01$) quantitive traits have signficant ($p<0.05$) movement
-% from expectation in one or both tails and that 95\% of the time this
-% movement is toward the mean (see - Supplement).  Observing that many
-% of these tests are underpowered due to insufficient sample size and
-% poor polygenic prediction ($R^2$)
-
-%We first applied our test to UKB samples of European ancestry.
-%Available samples were split equally, one half of the data was used
-%for GWAS and subsequently estimate PRS via PRSice and our PRS-test was
-%applied to the remaining 50\% of samples. Throughout, PRS were
-%estimated with variants with MAF$>$1\%, see Methods for further
-%details of genotype quality control. Unimodal, non-skewed, continuous
-%traits with heritabilty $>0.05$, PRS $R^2>0.01$ and sample size
-%$>$50,000 were selected for analysis. Strongly correlated traits
-%(maximum pairwise correlation $R^2<$0.95) were identified and the
-%trait with the smaller sample size was removed, leaving 77 traits for
-%analysis. 
-
-
-%Traits were standardised by regressing out the effects of
-%age, sex, recruitment centre, genotyping batch, and the top 40
-%principal components in a linear regression model and quantile normal
-%transforming the residuals to give values for analysis, see Methods
-%for further details of trait QC and selection. We then applied a
-%quality control metric specific to our test that tests for significant
-%departure from predicted values from the regression in the middle 90\%
-%or the trait distribution (see Methods). Two traits failed this test
-%leaving 75 traits (150 tails) for analysis. Extended Data Table 1
-%lists all 77 traits and their available sanple sizes.
-
-% Using these 75 traits we perform PRM-Testing, rare-variant analysis,
-% analysis of selection to help elucidate the mechanism that may be
-% behind PRM.  We then replicate these results using a sibling model and
-% different datasets.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Figures should be referenced in text as they are labelled, i.e. Fig
-% 1a, Fig1b, Fig 2,....
-
-\dref{fig:prs}{a} illustrates the three broad types of tail regression
-by plotting trait quantile, in 1\% increments, versus mean PRS in the
-quantile: no tails regression exhibited by triglycerides (chosen as
-the trait with highest $h^2$ of any trait without tail regression to
-the mean), only lower tail regression to the mean (haemoglobin
-concentration), only upper tail regresion to the mean (red blood cell
-distribution width) and dual tail regression to the mean (sitting
-height). Across the 75 traits analysed, the mean PRS in 121 of 150
-upper and lower 1\% tails of trait distributions showed significant
-deviation (FDR$<$0.05) away from the expected PRS. Of these 121
-significant tail associations, 118 were regression to the
-mean. \dref{fig:prs}{b} shows the PRS-test tail effect sizes for all traits
-with significant regression to the mean in at least one tail. The
-majority of traits (47 of 75) were classified as "Dual Tail"
-(FDR$<$0.05 regression to the mean in both tails), 15 were classified
-as "Lower Tail" and 9 were classified as "Upper Tail". \need{The three
-  trait tail with significant regression away fromn the mean... The
-  two traits failling test QC.....}
   
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/fig2.pdf} \end{maybe} 
@@ -341,31 +278,37 @@ as "Lower Tail" and 9 were classified as "Upper Tail". \need{The three
     trumpet plot.  }} \label{fig:prs} \end{figure} \FloatBarrier
 
 
-\subsection*{The Role of Rare Variants in PRM} ~\\
-Typically, variants included in PRS have minor allele frequency
-(MAF)$>$1\%.  The exclusion of rare variants from PRS has been shown
-to reduce PRS performance \citep{rares1}. \fref{fig:prs}{c} shows
-MAF vrersus effect size, for genome-wide significant
+\subsection*{The Role of Rare Variants} ~\\
+
+\noindent The genetic mechanism proposed to explain POPout involves the confluence 
+of genetic selection away from one or both tails, an enrichment of 
+rare variants in those tails, and PRS methods that typically restrict 
+to common variants (MAF $>1\%$) that suffers in such tails.  Indeed, 
+the exclusion of rare variants from PRS has already been shown to 
+reduce PRS performance \citep{rares1}. \fref{fig:prs}{c} shows
+MAF versus effect size, for genome-wide significant
 associations from GWAS \citep{neale} and exome analyses
-\citep{backman} of UKB for our four foucus traits. For Haemoglobin
-Concentration which exhibits lower tail regression we see a greater
-number of rare variants in the lower tail and for Red Blood Cell
-Distribution Width which exhibits upper tail regression we see a
+\citep{backman} of UKB for our four index traits. For \textit{Haemoglobin
+Concentration} which exhibits lower tail regression we see a greater
+number of rare variants in the lower tail and for \textit{Red Blood Cell
+Distribution Width} which exhibits upper tail regression we see a
 greater number of rare variants in the upper tail. Sitting height,
 which exhibits dual tail regression, has a number of rare variants in
 both tails, however, there are more rare variants in the lower tail
-where the PRM Effect is greatest. For ankle spacing width which does
-not exhibit PRM in either tail there are just three significant rare
-effect variants.  This result is consistent with the hypothesis that
+where the POPout effect is greatest. For \textit{Ankle Spacing Width} which does
+not exhibit POPout in either tail there are just three significant rare
+effect variants.  These results are consistent with the hypothesis that
 rare variants of large effect that not accounted for in the
-common-variant PRSare responsible for the tail specific PRM.
+common-variant PRS are responsible for tail POPout effects. 
 
+Indeed this relationship holds up across all 74 traits analysed.  In 
 In \fref{fig:prs}{d} we observe a small but signficiant relationship
-between the magnitude of regression to the mean and the number of rare
-variants in the tail across all 150 trait tails analysed. However, for
-some traits the tail with more PRM shows almost no rare variants (see
-\fref{fig:prs}{e}) suggesting that strong selection may result in
-private variants that cannot be identified using population based
+between the magnitude of POPOut regression in the tail and the number of rare
+variants in the tail across all 148 trait tails analysed. However, we note that 
+while statistically significant, there are multiple traits with signficant 
+POPout very significant regression scores for which almost no rare variants 
+of substantially large effect have been identified (see \fref{fig:prs}{e}).  
+This suggesting that strong selection may result in private variants that cannot be identified using population based
 sequencing.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
