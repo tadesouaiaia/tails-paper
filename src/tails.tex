@@ -111,7 +111,26 @@ effectiveness and design of sequencing studies.
 % 
 % 
 % 
-%  PREV: ABSTRACT, NEXT: INTRO
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
 % 
 % 
 % 
@@ -120,7 +139,6 @@ effectiveness and design of sequencing studies.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRO  %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Introduction} 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% INTRO  PARAGRAPH 1 %%%%%%%%%%%%%%%%%
 Genome-wide association studies (GWAS) are instrumental in
 understanding the genetic architecture of complex traits.  These
 studies typically identify numerous common genetic variants, each of
@@ -236,8 +254,16 @@ from population level analyses.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS - START  %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%% FIG1: POPOUT  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage \newpage 
 \section*{Results} \label{sec:results} 
@@ -251,11 +277,11 @@ Samples were then split in half, GWAS was carried out using Plink \cite{bt_10},
 and heritability and pairwise genetic correlation was estimated using LDscore \cite{ldsc}.
 Applying quality controls for sample size, heritability, skew, and oligogenicity and 
 removing strongly correlated traits resulted in the set of 74 traits (see \textit{Methods2}), 
-used for POPout associated analyses across the large number of European 
-ancestry samples in the UK Biobank. POPout results were replicated three-ways: 
+used for the POPout associated analyses conducted across the large number of European ancestry 
+samples in the UK Biobank and replicated three ways: 
 across a subset of repeated measures European ancestry samples in the UK Biobank, 
 acorss a subset of non-European ancestry samples in the UK Biobank, and, where applicable, 
-across European ancestry samples in the All Of Us Biobank (see \textit{Replication}).
+across European ancestry samples in the All Of Us Biobank (see \textit{Replication}). 
 
 
 \subsection*{The POPout Test} ~\\ 
@@ -314,7 +340,7 @@ Shown in \fref{sup:fi0}, we performed four \emph{flavours} of replication and va
 \end{enumerate} 
 
 In \fref{fig:rep}{a} trait quantile is plotted in 1\% increments versus mean PRS in the quantile of our index traits, with 
-\textit{Height} and \textit{Weight} subsituting for \textit{Ankle Spacing Width} and \textit{Sitting Height} which are 
+\textit{Height} and \textit{Weight} subsituting for \textit{Phosphate} and \textit{Sitting Height} which are 
 not available in the the \textit{All Of Us} dataset.  Visual concordance can be observed across the European ancestry 
 repeated measures, the non-European samples and the \textit{All Of Us} dataset.  In \fref{fig:rep}{b} POPout effect 
 sizes and confidence intervals are shown for all traits avaialble across the biobanks.  In \fref{fig:rep}{c-e} the 
@@ -332,15 +358,15 @@ our target population (\fref{fig:rep}{f}), demonstrating that we are not that fa
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 
 
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-2: SIBS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection*{\emph{Replication in Siblings}} ~\\
 Discordance between siblings in the tails of the trait distribution is
@@ -410,13 +436,9 @@ pearson correlation.}}
 
 
 
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection*{The Role of Rare Variants} ~\\
 
@@ -434,7 +456,7 @@ Distribution Width} which exhibits upper tail regression we see a
 greater number of rare variants in the upper tail. Sitting height,
 which exhibits dual tail regression, has a number of rare variants in
 both tails, however, there are more rare variants in the lower tail
-where the POPout effect is greatest. For \textit{Ankle Spacing Width} which does
+where the POPout effect is greatest. For \textit{Phosphate} which does
 not exhibit POPout in either tail there are just three significant rare
 effect variants.  These results are consistent with the hypothesis that
 rare variants of large effect that not accounted for in the
@@ -721,7 +743,6 @@ Replication analysis was restricted to the 63 of the 74 traits where there were 
 least 1000 repeated measures.
 
 
-
 \paragraph*{Non-European Ancestry Individuals} ~\\
 Approximately 22k Non-European ancestry individuals were normalised along with the 
 European ancestry samples but also held out of the GWAS base dataset after trait normalisation.  
@@ -729,7 +750,7 @@ They were used to replicate the POPout results on the 70 of 74 traits where ther
 a thousand samples. 
 
 
-\paragraph*{Replication in All of Us Cohort} ~\\
+\paragraph*{All of Us Cohort} ~\\
 \textit{All of Us} is a multi-ancestry biobank from the United States 
 that make use of electronic health record (EHR) data from a much wider age range than the UKB ($\mu,\sigma$= 55.8,17.1 vs 56.5,8.1). 
 Traits matching those analysed in our primary UKB analysis 
@@ -759,8 +780,6 @@ threshold that was trained in the UKB European ancestry analysis described above
 for which fewer than 1000 samples remained this left us witih 33 trait phenotype and PRS pairs for replication 
 in All Of Us. 
 
-
-
 \paragraph*{Bootstrap Analysis using European Ancestry Target Subsets} ~\\
 Our 74 QC-validated traits were required to have at least 100k total
 samples.  In the target sample (half the total), after outlier removal
@@ -786,167 +805,10 @@ across all the tails.
 \subsection*{Data Analysis} ~\\
 \vspace*{-0.5cm} 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsubsection*{The POPout Test}~\\
-The POPout test first applies a regression of PRS on trait values where
-both the PRS and trait are standardised to have standard deviation of
-1. For each trait, the residuals from the regression are split
-into quantiles according to the trait distribution and two-tailed
-t-tests are applied to test whether the residuals are significantly
-different from zero.  The tests were applied to individiuals in the top
-and bottom 1\% of the trait distribution. The effect size in each tail
-is defined such that a positive effect is indicative of regression to
-the mean in both the upper and lower tails as follows
-\[
-\frac{1}{n}\sum_i^n |{f(y_i)}| - |{PRS_i}|
-\]
-where $f(y)$ is the predicted PRS from the regression given trait
-value $y$ and $n$ is the number of observations.
-
-\subsubsection*{POPout regression test QC} ~\\
-An additional trait QC was applied to ensure the robustness of the
-PRS-test by testing the residuals of samples in the middle of the
-trait distribution for departure from the null of zero mean.
-Specifically, for each trait, two-sided t-tests for zero mean were
-applied to the residuals assigned in each of the middle 80 centiles of
-the trait distribution. Traits were deemed to fail QC if the smallest
-P-value was significant at a Bonferroni-corrected level of 0.05 (P
-$\le$ 0.05/80).
-
-%\subsubsection*{Empirical PRS-regression test}~\\
-%A robust empirical P-value for deviation in trait tails was calculated
-%as follows: for each centile of trait one-sided t-tests for residuals
-%less than and greater than zero were calculated.  The P-value for
-%regression to the mean in the upper tail was calculated from the rank
-%of the tests for residuals significantly less than zero and the lower
-%tail empirical P-value from the greater than zero tests. The tests
-%were performed on all 1,121 continuous traits in UKB.
-
-\subsubsection*{Trumpet plots} ~\\
-Trumpet plots show the effect sizes and MAF of independent genome-wide
-significant variants. Common variants (MAF$>$1\%) were selected as the
-most significant variant (P$\le 5\times 10^{-8}$) in 1Mb windows from
-publicly available GWAS summary statistics generated using UKB samples
-of European ancestry \cite{neale}. Exome sequencing associations from
-the analysis of UKB European ancestry samples were downloaded
-\cite{backman}. Results are plotted for the most significant
-deleterious, missense or predicted loss of function variants in each gene
-(P$\le 2.18\times 10^{-11}$, one association per gene). Genome-wide
-significant burden associations are shown where no single variant
-within the gene is genome-wide significant.
-
-
-
-\subsubsection*{POPout Rare Variant Associations} ~\\
-Backman et al \cite{backman} provides exome sequencing analysis across 
-3994 UKB traits including 65 of the 74 traits analysed in our target set. 
-For each of these 65 traits, in each tail (positive and negative effect), 
-the number of genes with at least one significant (P$\le 2.18\times 10^{-11}$) 
-variant (deleterious, missense, predicted loss of function) or a genome-wide 
-significant burden association are counted.  Across the 130 trait tails, the 
-pearson correlation between the number of exome variants and the $POPout$ 
-effect size is then calculated. 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection*{Selection Analyses}
-\subsubsection*{Relative Lifetime Reproductive Success} ~\\
-The number of offspring is recorded in the UKB for both females and
-males, fields \textit{2734} and \textit{2405} respectively.  Following
-the methodology of Beauchamp \citep{v_select2}, samples were split
-into four birth cohorts (1934-42, 1943-48, 1949-55,
-1956-65). Individual relative
-lifetime reproductive success, $Y_{rLRS}$, was then calculated by
-dividing the number of offspring of each individual by the cohort
-mean. Following Sanjak et al \citep{v_select}, the presence and
-direction of selective pressure acting on traits was determined by
-fitting the following regression model:
-\begin{equation}
-Y_{rLRS} = \beta_o + \beta z + \gamma z^2 \label{math:LRS}
-\end{equation}
-where $z$ denotes the residualised and normalised trait values and
-$\beta$ and $\gamma$ are linear and quadratic regression parameters.
-
-Bayesian information criteria (BIC) was used to select the best
-fitting model for each trait from which the selective pressure acting
-on trait was inferred. If the selected model did not include a linear
-or quadratic parameter, no selection was inferred, here rare variant
-enrichment is not expected in either tail. If the selected model
-included only the linear parameter $\beta$, negative selection was
-inferred if $\beta<0$ and rare variant enrichment is expected in the
-upper tail, while positive selection was inferred if $\beta>0$ and
-rare variant enrichment is expected in the lower tail. If the selected
-model included only the quadratic parameter $\gamma$, with $\gamma<0$,
-stabilising selection is inferred and the mean trait value in the
-population is at its optimum and rare variant enrichment is expected
-in the both tails. Disruptive selection is implied by $\gamma>0$, in
-this scenario rare variant enrichment is not expected in either
-tail. Where the selected model included both non-zero linear and quadratic
-parameters then the $\beta$ parameter is used to determine our expectation 
-where $\beta<0$ and $\beta>0$ suggests greater relative rare variant enrichment 
-in the upper and lower tails respectively. 
-
-\subsubsection*{Association between POPout Test and LRS Models} ~\\ 
-% NO THIS IS WRONG -- WILL FIX THIS TADE 
-
-Traits are separated into four classes. The first two of the four classes are 
-non-directional, \textbf{(1)} no selection ($\beta=0,\gamma>=0$) 
-where no rare variant enrichment is expected and \textbf{(2)} neutral 
-stabilising selection ($\beta=0,\gamma<0$) where an equal amount of rare 
-variant enrichment is expected each tail.  The third and fourth class 
-are directional, and include \textbf{(3)} positive selection ($\beta>0$) where more rare variant 
-enrichment is expected in the lower tail and \textbf{(4)} negative 
-selection ($\beta>0$) where more rare variant enrichment is expected 
-int he upper tail.  For each class the mean $POPout$ effect is calculated 
-in each tail and the mean values are compared using a T-Test. 
-
-
-
-
-%Concordance between inferred selection and the PRS test for traits
-%classified as exhibiting both stabilising and directional selection
-%was tested by a Fisher exact test, comparing binary categories
-%$\beta<0$ / $\beta>0$ with PRS-test effect size greater in upper /
-%lower tail.  For traits classified as no selection, directional
-%selection and stabilising selection, concordance with PRS-test used
-%the PRS-test classifications of no / lower / upper / dual tail
-%regression. Fisher exact tests were constructed separately for
-%negative, postive and stablising selection for enrichment in the
-%expected PRS-test classification, lower / upper / dual respectively,
-%by collapsing the other categories, traits classified as exhibiting
-%both stabilising and directional selection were excluded from these
-%tests.
-
-\subsubsection*{Association between POPout tests and proxy measures of fitness}~\\
-% NO THIS IS WRONG -- WILL FIX THIS TADE 
-Five proxy measures of fitness were considered, \textbf{(1)} Male and \textbf{(2)} female 
-fecundity (Trait-Ids: 2405 and 2734), \textbf{(3)} 
-self-reported non-cancer illnesses (Trait-Id: 2002), 
-\textbf{(4)} miscarriages and still-births (Trait-Ids: 39290 and 3839), 
-and \textbf{(5)} paternal age which is calculated as the difference 
-between fathers age (Trait-Id 2946) and participant age at recruitment (Trait-Id 21022).
-
-%determined
-%by the residuals of a regression with covariates for age, sex and
-%recruitment centre. (2) Number of miscarriages (trait field
-%38290). (3) Number of still-births (trait field 3839). (4) Paternal
-%age at birth.
-
-Association between these measures and $POPout$ effect was tested as
-follows.  The mean value of the five proxies of selection was
-calculated separately in the upper and lower 1\% of the trait
-distribution, association was then tested by Spearman's rank
-correlation across all trait tails of the mean tail values for each
-proxy and the $POPout$ effect size.
-
 
 \subsubsection*{Simulating Stabilizing Selection using SLiM} ~\\
 Using SLiM v4.0 (1), we simulated a quantitative polygenic trait under
@@ -985,8 +847,59 @@ only variants with $MAF > 1\%$.
 
 
 
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection*{The POPout Test}~\\
+The POPout test first applies a regression of PRS on trait values where
+both the PRS and trait are standardised to have standard deviation of
+1. For each trait, the residuals from the regression are split
+into quantiles according to the trait distribution and two-tailed
+t-tests are applied to test whether the residuals are significantly
+different from zero.  The tests were applied to individiuals in the top
+and bottom 1\% of the trait distribution. The effect size in each tail
+is defined such that a positive effect is indicative of regression to
+the mean in both the upper and lower tails as follows
+\[
+\frac{1}{n}\sum_i^n |{f(y_i)}| - |{PRS_i}|
+\]
+where $f(y)$ is the predicted PRS from the regression given trait
+value $y$ and $n$ is the number of observations.
+
+\subsubsection*{POPout regression test QC} ~\\
+An additional trait QC was applied to ensure the robustness of the
+PRS-test by testing the residuals of samples in the middle of the
+trait distribution for departure from the null of zero mean.
+Specifically, for each trait, two-sided t-tests for zero mean were
+applied to the residuals assigned in each of the middle 80 centiles of
+the trait distribution. Traits were deemed to fail QC if the smallest
+P-value was significant at a Bonferroni-corrected level of 0.05 (P
+$\le$ 0.05/80).
+
+
+\subsubsection*{Simulating Case/Control Performance}~\\ 
+
+The predictive value of PRS in the tails of the distribution 
+can be calculated by setting a tail threshold and calculating the 
+odds-ratio under a pseudo case-control analysis.  Here we separate 
+samples accoriding to PRS quantiles that include the lowest 5\%, between 
+5-15\%, 15-25\%, 25-35\%, 45-55\%,55-65\%, 65-75\%, 75-85\%, 85-95\% and 
+the top 95\%.  Then for each trait threshold k (where case status is 
+defined as being more extreme than k), the odds ratio and 95\% confidence 
+interval is calculated for each quantile by comparing it to the 45-55\% quantile. 
+
+
+\subsubsection*{Replicating the $POPout$ Results}~\\ 
+Write a few lines 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -1050,26 +963,98 @@ a $\chi^2$ statistic with 4 degrees of freedom,
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-\subsubsection*{Pseudo Case Control Analyses}~\\ 
-
-The predictive value of PRS in the tails of the distribution 
-can be calculated by setting a tail threshold and calculating the 
-odds-ratio under a pseudo case-control analysis.  Here we separate 
-samples accoriding to PRS quantiles that include the lowest 5\%, between 
-5-15\%, 15-25\%, 25-35\%, 45-55\%,55-65\%, 65-75\%, 75-85\%, 85-95\% and 
-the top 95\%.  Then for each trait threshold k (where case status is 
-defined as being more extreme than k), the odds ratio and 95\% confidence 
-interval is calculated for each quantile by comparing it to the 45-55\% quantile. 
-
-
-
+\subsubsection*{Trumpet plots} ~\\
+Trumpet plots show the effect sizes and MAF of independent genome-wide
+significant variants. Common variants (MAF$>$1\%) were selected as the
+most significant variant (P$\le 5\times 10^{-8}$) in 1Mb windows from
+publicly available GWAS summary statistics generated using UKB samples
+of European ancestry \cite{neale}. Exome sequencing associations from
+the analysis of UKB European ancestry samples were downloaded
+\cite{backman}. Results are plotted for the most significant
+deleterious, missense or predicted loss of function variants in each gene
+(P$\le 2.18\times 10^{-11}$, one association per gene). Genome-wide
+significant burden associations are shown where no single variant
+within the gene is genome-wide significant.
 
 
+
+\subsubsection*{$POPout$ Rare Variant Associations} ~\\
+Backman et al \cite{backman} provides exome sequencing analysis across 
+3994 UKB traits including 65 of the 74 traits analysed in our target set. 
+For each of these 65 traits, in each tail (positive and negative effect), 
+the number of genes with at least one significant (P$\le 2.18\times 10^{-11}$) 
+variant (deleterious, missense, predicted loss of function) or a genome-wide 
+significant burden association are counted.  Across the 130 trait tails, the 
+pearson correlation between the number of exome variants and the $POPout$ 
+effect size is then calculated. 
+
+
+\subsection*{Selection Analyses}
+\subsubsection*{Relative Lifetime Reproductive Success} ~\\
+The number of offspring is recorded in the UKB for both females and
+males, fields \textit{2734} and \textit{2405} respectively.  Following
+the methodology of Beauchamp \citep{v_select2}, samples were split into 
+four birth cohorts (1934-42, 1943-48, 1949-55, 1956-65). Individual relative
+lifetime reproductive success, $Y_{rLRS}$, was then calculated by
+dividing the number of offspring of each individual by the cohort
+mean. Following Sanjak et al \citep{v_select}, the presence and
+direction of selective pressure acting on traits was determined by
+fitting the following regression model:
+\begin{equation}
+Y_{rLRS} = \beta_o + \beta z + \gamma z^2 \label{math:LRS}
+\end{equation}
+where $z$ denotes the residualised and normalised trait values and
+$\beta$ and $\gamma$ are linear and quadratic regression parameters.
+
+Bayesian information criteria (BIC) was used to select the best
+fitting model for each trait from which the selective pressure acting
+on trait was inferred. If the selected model did not include a linear
+or quadratic parameter, no selection was inferred, here rare variant
+enrichment is not expected in either tail. If the selected model
+included only the linear parameter $\beta$, negative selection was
+inferred if $\beta<0$ and rare variant enrichment is expected in the
+upper tail, while positive selection was inferred if $\beta>0$ and
+rare variant enrichment is expected in the lower tail. If the selected
+model included only the quadratic parameter $\gamma$, with $\gamma<0$,
+stabilising selection is inferred and the mean trait value in the
+population is at its optimum and rare variant enrichment is expected
+in the both tails. Disruptive selection is implied by $\gamma>0$, in
+this scenario rare variant enrichment is not expected in either
+tail. Where the selected model included both non-zero linear and quadratic
+parameters then the $\beta$ parameter is used to determine our expectation 
+where $\beta<0$ and $\beta>0$ suggests greater relative rare variant enrichment 
+in the upper and lower tails respectively. 
+
+\subsubsection*{Association between POPout Test and LRS Models} ~\\ 
+
+Traits are separated into four classes. The first two of the four classes are 
+non-directional, \textbf{(1)} no selection ($\beta=0,\gamma>=0$) 
+where no rare variant enrichment is expected and \textbf{(2)} neutral 
+stabilising selection ($\beta=0,\gamma<0$) where an equal amount of rare 
+variant enrichment is expected each tail.  The third and fourth class 
+are directional, and include \textbf{(3)} positive selection ($\beta>0$) where more rare variant 
+enrichment is expected in the lower tail and \textbf{(4)} negative 
+selection ($\beta>0$) where more rare variant enrichment is expected 
+int he upper tail.  For each class the mean $POPout$ effect is calculated 
+in each tail and the mean values are compared using a T-Test. 
+
+\subsubsection*{Association between POPout tests and proxy measures of fitness}~\\
+Five proxy measures of fitness were considered, \textbf{(1)} Male and \textbf{(2)} female 
+fecundity (Trait-Ids: 2405 and 2734), \textbf{(3)} 
+self-reported non-cancer illnesses (Trait-Id: 2002), 
+\textbf{(4)} miscarriages and still-births (Trait-Ids: 39290 and 3839), 
+and \textbf{(5)} paternal age which is calculated as the difference 
+between fathers age (Trait-Id 2946) and participant age at recruitment (Trait-Id 21022).
+Association between these measures and $POPout$ effect was tested as
+follows.  The mean value of the five proxies of selection was
+calculated separately in the upper and lower 1\% of the trait
+distribution, association was then tested by Spearman's rank
+correlation across all trait tails of the mean tail values for each
+proxy and the $POPout$ effect size.
 
 
 \clearpage \newpage
