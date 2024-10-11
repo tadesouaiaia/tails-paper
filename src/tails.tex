@@ -5,7 +5,8 @@
 \usepackage[normalem]{ulem}
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 \usepackage{environ, etoolbox}
-\definecolor{sunyGray}{RGB}{131,134,135} \definecolor{sunyBlue}{RGB}{0,76,147}     \definecolor{sunyCyan}{RGB}{0,148,254}                                                            
+\definecolor{sunyGray}{RGB}{131,134,135} \definecolor{sunyBlue}{RGB}{0,76,147}     
+\definecolor{sunyCyan}{RGB}{0,148,254}                                                            
 \newcommandx{\cyansub}[1]{\large\textcolor{sunyCyan} \noindent \textcolor{sunyBlue} {\noindent\textbf{#1}}}                             
 % The toggles are initially false  Fig. 
 \newtoggle{showFig}
@@ -95,8 +96,8 @@ these trait tails we find an association between PRM and other measures of fitne
 variants including the lifetime number of illnesses and still births.  We then compare these 
 results to a simulation and find that they match. 
 
-Finally, we assess whether the predictions of a complex trait architecture derived from a conditional sibling model align with the observed diversity 
-in the architecture of trait extremes. The concordance between these measures underscores the need to 
+Finally, we assess whether the predictions of a complex trait architecture derived from a conditional sibling 
+model align with the observed diversity in the architecture of trait extremes. The concordance between these measures underscores the need to 
 consider the role of rare variants in the analysis of trait tails.  The PRS and sibling analyses presented here 
 offer valuable tools for the targeted selection of traits and samples likely to harbor de novo or rare 
 deleterious alleles and represent an approach that has the potential to significantly enhance the 
@@ -192,235 +193,154 @@ from population level analyses.
 
 
 \FloatBarrier \begin{figure}[!h] \centering \begin{maybe}{showFig} 
-\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/tailsLogo.pdf} \end{maybe} 
-\caption{\footnotesize{\textbf{Placeholder for Schematic}}} \label{fig:intro} \end{figure} \FloatBarrier 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig1.pdf} \end{maybe} 
+\caption{\footnotesize{\textbf{Model Schematic and Simulated Results}}} 
+\textbf{(d)} Simulated Result: Distribution after stabilising selection. 
+\textbf{(e)} Simulated Result: Trumpet plot before and after stabilising selection.  
+\textbf{(f)} Simulated Result: Contribution of rare variants across the distribution under stabilising selection. 
+\textbf{(g)} Simulated Result: Trait quantile vs mean quantile calculated using all variants (top) and only variants with MAF>1\%. 
+\label{fig:intro} \end{figure} \FloatBarrier 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END INTRO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%
+%
+%
+%
+%  PREV: INTRO, NEXT: RESULTS 
+%
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+%
+% 
+% 
+%  PREV: INTRO, NEXT: RESULTS 
+% 
+% 
+% 
+% 
+% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS - START  %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% FIG1: POPOUT  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \clearpage \newpage 
-\section*{Results} \label{sec:results}
-\subsection*{Population-level data analyses for rare variants of large
-  effect affecting the tails of trait distributions.} ~\\
-We use PRS to assess the contribution of rare large-effect variants on
-extreme trait values. Rare variants are typically not included in PRS,
-leading to reduced accuracy of the PRS for individuals with rare
-large-effect variants. This inaccuracy will be most apparent in the
-tails of the trait distribution where individuals with large-effect
-variants are most likely to reside. Specifically, PRS values will tend
-to converge toward the mean PRS in the tails -- {\em PRS-regression to
-  the mean}.
-% We first identify and characterize \emph{polygenic-regression to the
-%   mean} (PRM), which occurs when individuals in the tails of the
-% quantitive trait distribution exhibit polygenic risk that is closer to
-% the mean risk score than expected.
-To quantify this we develop and apply a statistical test that
-estimates effect size, direction, and signficance of movement away
-from the expected PRS for individuals in the lower and upper 1\% of
-the trait distribution. Specifically, a regression of PRS on
-standardised trait values is fit. The regression effect size in the
-tail is defined as the mean of the residuals in the lower tail and
-minus the mean of the residuals in the upper tail. Using this
-definition, positive values in both the upper and lower tails
-correspond to regression to the mean, indicative of rare variants of
-large effect in individuals in the trait tails. \need{Negative values
-correspond to regression away from the mean.....}
-
-% Applying this test to the UKB reveals that 400 of 1,185 heritiable
-% ($h^2>0.01$) quantitive traits have signficant ($p<0.05$) movement
-% from expectation in one or both tails and that 95\% of the time this
-% movement is toward the mean (see - Supplement).  Observing that many
-% of these tests are underpowered due to insufficient sample size and
-% poor polygenic prediction ($R^2$)
-
-We first apply our test to UKB samples of European ancestry.
-Available samples were split equally, one half of the data was used
-for GWAS to estimate PRS via PRSice and our PRS-test was applied to
-the remaining samples. Throughout, PRS were estimated with variants
-with MAF $>$ 1\%, see Methods for further details. Unimodal,
-non-skewed, continuous traits with heritabilty $>0.05$, PRS $R^2>0.01$
-and sample size $>$50,000 were selected for analysis. \need{Also
-  removed 3 traits with single variants with $r^2>0.5$, is this
-  necessray? Could just group and discuss with other two traits which
-  fail PRS-test QC}. After removal of strongly correlated traits
-(maximum pairwise correlation $R^2<$0.95) 77 traits remained for
-analysis. Traits were standardised, regressing out effects of age,
-sex, recruitment centre, genotyping batch, and principal components
-and transformed to be normally distributed, see Methods for further
-details of trait QC and selection. Of these traits, two failed our
-test QC indicating significant departure from predicted values from
-the regression in the middle 90\% or the trait distribution (see
-Methods) leaving 75 traits (150 tails) for analysis. Extended Data
-Table 1 lists all 77 traits and their available sanple sizes.
-
-% Using these 75 traits we perform PRM-Testing, rare-variant analysis,
-% analysis of selection to help elucidate the mechanism that may be
-% behind PRM.  We then replicate these results using a sibling model and
-% different datasets.
+\section*{Results} \label{sec:results} 
+The traits analyzed in the following section were selected 
+from the UK-Biobank categories \textit{Biomarkers}, \textit{Physical Measures}, 
+\textit{Touchscreen Questionnaire} and  \textit{Cognitive Tests}.  
+Continuous traits from these categories were standardised by regressing 
+out the effects of age, sex, and known environmental and technical factors 
+and then applying an inverse-normal transformation (see \textit{Methods}).  
+Samples were then split in half, GWAS was carried out using Plink \cite{bt_10}, 
+and heritability and pairwise genetic correlation was estimated using LDscore \cite{ldsc}.
+Applying quality controls for sample size, heritability, skew, and oligogenicity and 
+removing strongly correlated traits resulted in the set of 74 traits (see \textit{Methods2}), 
+used for POPout associated analyses across the large number of European 
+ancestry samples in the UK Biobank. POPout results were replicated three-ways: 
+across a subset of repeated measures European ancestry samples in the UK Biobank, 
+acorss a subset of non-European ancestry samples in the UK Biobank, and, where applicable, 
+across European ancestry samples in the All Of Us Biobank (see \textit{Replication}).
 
 
+\subsection*{The POPout Test} ~\\ 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-1  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Conceptually, POPout occurs when when samples in the tails of the trait phenotype 
+distribution have polygenic scores that significantly depart from expectation.  
+To quantify this phenomenon we have developed the \textit{POPout test} which regresses
+PRS-On-Phenotype to estimate the effect size, direction, and significance of departure from expected PRS 
+for individuals in the lower and upper 1\% of the trait distribution (see \textit{Methods}).  
 
-% Figures should be referenced in text as they are labelled, i.e. Fig
-% 1a, Fig1b, Fig 2,....
+Applying this test to the European ancestry samples in the UK-biobank reveals widespread departure 
+from expectation across the 74 traits analysed.  Correcting for multiple tests (5\% false discovery threshold), 
+68 of 74 traits have significant POPout effects in one or both tails and that the vast majority (90\%) of these 
+effects are positive - i.e. reflect regression to the mean or unexpectedly mild risk scores - 
+which is consistent with rare variants of large effects in individuals of the trait tails. 
+\dref{fig:prs}{a} illustrates the three broad types of tail effects by plotting trait quantile, 
+in 1\% increments, versus mean PRS in the quantile for four index traits: 
+\begin{itemize} 
+\item \textit{Phosphate} - No POPout Effect in either tail, selected due to highest $h^2$ among such traits, 
+\item \textit{Haemoglobin Concentration} - selected for most significant POPout regression in lower tail only, 
+\item \textit{Red Blood Cell Distribution Width} - selected for most significant POPout regression in upper tail only, 
+\item \textit{Sitting Height} - selected for most significant POPout regression in both tails (minimum value).   
+\end{itemize} 
+        
 
-\dref{fig:prs}{a} illustrates the three broad types of tail regression
-by plotting trait quantile, in 1\% increments, versus mean PRS in the
-quantile: no tails regression exhibited by triglycerides (chosen as
-the trait with highest $h^2$ of any trait without tail regression to
-the mean), only lower tail regression to the mean (haemoglobin
-concentration), only upper tail regresion to the mean (red blood cell
-distribution width) and dual tail regression to the mean (sitting
-height). Across the 75 traits analysed, the mean PRS in 121 of 150
-upper and lower 1\% tails of trait distributions showed significant
-deviation (FDR$<$0.05) away from the expected PRS. Of these 121
-significant tail associations, 118 were regression to the
-mean. \dref{fig:prs}{b} shows the PRS-test tail effect sizes for all traits
-with significant regression to the mean in at least one tail. The
-majority of traits (47 of 75) were classified as "Dual Tail"
-(FDR$<$0.05 regression to the mean in both tails), 15 were classified
-as "Lower Tail" and 9 were classified as "Upper Tail". \need{The three
-  trait tail with significant regression away fromn the mean... The
-  two traits failling test QC.....}
+\noindent \dref{fig:prs}{b} displays the POPout effects for all traits analyzed, separated into three logical UKB categories, \textit{Biomarkers}, \textit{Physical Measures} 
+and \textit{Questionnaire/Cognitive}.  Again positive POPout effects (regression to the mean) predominate, especially with respect to larger effects: 22 tails have 
+positive POPout effects greater than 0.25 while none have negative POPout effects less than 0.25.  Here we also observe that POPout regression is 
+most common in \textit{Biomarkers} category (79\% of tails) and least common in \textit{Questionnaire/Cognitive} category (43\% of tails). Overall 
+we observe a moderate relationship ($R=0.23,Pv=0.018$) between POPout regression and trait heritability, suggesting that POPout regression is 
+not driven primarily by environemntal effects.  
+
+
   
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
-\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/fig2.pdf} \end{maybe} 
-\caption{\footnotesize{{\bf Population-level data analyses for rare
-      variants of large effect affecting the tails of trait
-      distributions.}  \textbf{(a)} PRS quantile (in 1\% increments)
-    plotted agaisnt mean trait value in quantile for four traits with
-    different PRM results (clockwise: No Tail Regression, Upper Tail, Lower Tail, Dual Tail). 
-    \textbf{(b)} PRS-test tail effect sizes and in
-    the upper and lower 1\% tails for all 74 traits analyzed. 
-    Tail regression effects associated with nominal pvalue $<0.05$ not shown. 
-    \textbf{(c)} Trumpet plots (minor allele frequency v effect size) of genome-wide significant
-    variants for traits shown in (a). \textbf{(d)} PRM-test tail
-    effect sizes plotted against number of genome-wide significant
-    variants with MAF<1\% for X traits with overlapping exome sequence
-    results. For upper tails positive variant effects are counted and
-    for lower tails negative variant effects are counted. Correlation
-    and significance calculated using pearson correlation.
-    \textbf{(e)} Age of menopause: PRS quantile v trait mean and
-    trumpet plot.  }} \label{fig:prs} \end{figure} \FloatBarrier
-
-
-\subsection*{The Role of Rare Variants in PRM} ~\\ 
-The exclusion of rare variants from PRS (traditionally a
-cutoff of minor allele frequency (MAF)$>$1\%) has been shown to reduce
-model performance \citep{rares1}.  To investigate whether PRM is a
-consequence of rare variants of large effect that drive individuals
-into the tails of the trait distribution we created trumpet plots
-(\fref{fig:prs}{c}) to visualize the impact and direction of of rare
-variants from GWAS \citep{neale} and exome studies \citep{backman}.
-Focusing on our single tail index traits, we notice that there are a
-greater number of rare variants in the lower tail of \emph{Haemoglobin
-  Concentration} and in the upper tail for \emph{Red Blood Cell
-  Distribution Width}.  Additionally, for \emph{Sitting Height} there
-are more rare variants in the lower tail (where the PRM Effect is
-greatest) and in \emph{Triglycerides} there are also more rare
-variants in the lower tail (where PRM Effect is greatest, albiet
-non-signficant).  This result is consistent with the hypothesis that
-rare variants of large effect that not accounted for in the
-common-variant PRS responsible for the tail specific PRM.
-
-In \fref{fig:prs}{d} we observe a small but signficiant relationship
-between the magnitude of regression to the mean and the number of rare
-variants in the tail. However, for some traits the tail with more PRM
-shows almost no rare variants (see \fref{fig:prs}{e}) suggesting that
-strong selection may result in private variants that cannot be
-identified using population based sequencing.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-2  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
-\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/fig3.pdf} \end{maybe} 
-\caption{\footnotesize{{\bf Selection analyses in real and simulated
-      data.} \textbf{(a)} Residualised trait value plotted against
-    relative lifetime reproductive success for 16 example traits.
-    Best model fit to the data, of all models with and without linear
-    and quadratic terms, selected by BIC, are shown by dashed
-    lines. Model selected by BIC used to classify selective pressure
-    acting on the traits. \textbf{(b)} PRS-test effect size shown by
-    trait selection category, with PRS-test effect size meta-analysis
-    for each category. \textbf{(c)} Spearman rank correlation between
-    four proxy measures of fitness and PRS-test effect size. For each
-    fitness measure correlation was calculated between the mean of
-    the fitness measure in individuals in the upper and lower 1\%
-    tails and PRS-test effect size for the corresponding tail across
-    74 traits in UKB passing QC. Fitness measures were standardised
-    by...  \textbf{(e)} \need{Coming Soon} Trumpet plots (minor allele
-    frequency v effect size) for simulated data without and with
-    selection. All variants are included in the plot. \textbf{(e)} PRS
-    quantile (in 1\% increments) plotted agaisnt mean trait value in
-    quantile in simulated data without and with selection. PRS
-    calculated from all variants with MAF>1\%.
-  }} \label{fig:evo} \end{figure} \FloatBarrier
-
-\subsection*{The Impact of Selection on PRM} ~\\
-Using adjusted lifetime reproductive success \citep{v_select,
-  v_select2} as a proxy for selection we classify (see Methods - LRS)
-each trait with respect to whether it is under \emph{Stabilizing,
-  Positive, Negative, or Neutral/Disruptive} selection (these results
-are in agreement with a more comprehensive sex-specific analysis (See
-\fref{fig:vishy}).  The majority of traits analyzed here (55 of 75)
-are classified as under stabilizing selection which is characterized
-by lower fecundity for individuals with traits values in either tail
-of the trait distribution. Stabilizing selection may be the result of
-general fitness favoring the trait mean or the result of sex specific
-selection that averages to produce this relationship \citep{v_select}.
-Eight traits were classified as being under positive selection and
-seven traits were classified as being under negative selection.  We
-also classified four traits as under neutral selection (no signficant
-relationship with LRS) and one trait as divergent/disruptive selection
-where fecundity is higher in both tails that at the mean of the
-distribution (\fref{fig:evo}{a}).  We find a significant relationship
-between selection classification and PRM classifition
-(\fref{fig:evo}{b}), whereby traits under stabilizing selection are
-enriched in "Dual Tail Regression" ($p< 2.5 \times 10^{-5}$), traits
-under positive selection are enriched in "Lower Tail Regression
-($p < 2.4 \times 10 ^{-4}$), and traits under negative selection are
-enriched in "Upper Tail Regression ($p < 0.024$).  Focusing on each
-tail separately we find an even stronger relationship insofar as the
-in the 118 trait tails which exhibit PRM, the tail is selected against
-110 times (93\%) while in the 32 tails which do not exhibit PRM the
-tail is only selected against 16 times (50\%) ($pv < 0.001$).
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig2.pdf} \end{maybe} 
+\caption{\footnotesize{{\bf Tail POPout.} 
+\textbf{(a)} PRS quantile (in 1\% increments) plotted agaisnt mean trait value for four traits with
+different POP-out results (clockwise: No $POPout$ Effects, $POPout$ in Upper Tail, Lower Tail, Dual Tail). 
+\textbf{(b)} POPout results for all 74 traits separated  by category. 
+\textbf{(c)} Case Control Accuracy Test 
+\textbf{(d)} Replication 
+}} \label{fig:prs} \end{figure} \FloatBarrier
 
 
 
-\subsubsection*{Tail Fitness} ~\\ 
-\noindent In addition to \emph{lifetime reproductive success}, we
-analyzed four measures of fitness that are likely to be associated
-with reduced fitness and rare variant or \emph{de novo} etiology.
-Here, we note that under the hypothesis that rare variants under
-negative selection are responsible for PRM, we predict that trait
-tails with large effect PRM will have lower average \emph{lifetime
-  reproductive success} and higher average numbers of \emph{Still
-  Births} and \emph{Miscarriages}.  Additionally, traits tails with
-large effect PRM are predicted to have more standarized illnesses
-because both result from large effect variants, although it is
-possible that downstream effects of illnesses results in extreme trait
-values.  Finally, if paternal age is associated with more \emph{de
-  novo} mutations \citep{pat} it should also be associated with PRM.
+\subsection*{\emph{Replication and Validation}} ~\\
 
-In \fref{fig:evo}{c} the rank correlation for the average tail fitness
-measure and the PRM effect size across the trait tails is shown.  We
-observe that the direction of rank association is in line with the
-rare-variant hypothesis in every case, although the association
-between PRM and the number of miscarriages and paternal age are not
-significantly associated.
+Shown in \fref{sup:fi0}, we performed four \emph{flavours} of replication and validation. 
+
+\begin{enumerate}                                                                               
+\item \textbf{Repeated Measures (averaged) on European Ancestry Individuals in the UKB:} Assess whether POPout signal results from random measurement error. 
+\item \textbf{Non-European Ancestry Inviduals in UKB:}  Replicate the POPout results across ancestry (within biobank) 
+\item \textbf{European Ancestry Individuals in All Of Us:} Replicate the POPout result across biobank (within ancestry) 
+\item \textbf{Repeated Subsets of The Target Data:} Assess the reliability and power of the POPout test in smaller samples. 
+\end{enumerate} 
+
+In \fref{fig:rep}{a} trait quantile is plotted in 1\% increments versus mean PRS in the quantile of our index traits, with 
+\textit{Height} and \textit{Weight} subsituting for \textit{Ankle Spacing Width} and \textit{Sitting Height} which are 
+not available in the the \textit{All Of Us} dataset.  Visual concordance can be observed across the European ancestry 
+repeated measures, the non-European samples and the \textit{All Of Us} dataset.  In \fref{fig:rep}{b} POPout effect 
+sizes and confidence intervals are shown for all traits avaialble across the biobanks.  In \fref{fig:rep}{c-e} the 
+significant correlations across averaged measures, non-European samples, and \textit{All Of Us} are shown.  Interestingly, 
+the correlation across ancestry (UKB European and non-European) samples is higher than the correlation across biobanks 
+but within ancestry which suggests that despite accurate PRS prediction not being portable across ancestry that 
+POPout regression is still portable across ancestry groups. 
+
+Finally, to put these numbers in perspective we perform bootstrap analyses using repeated sampling of 
+our target population (\fref{fig:rep}{f}), demonstrating that we are not that far from the upper bound. 
 
 
 
 
-\subsubsection*{Simulating Selection (Anil's Result)} ~\\  
-In \fref{fig:evo}{d} we confirm this result using a simulation (see \emph{Methods}) 
-where we simulate many generations of stablilzing selection, after which the ratio 
-of contribution to heritability by rare variants goes up and PRM is observed. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-2: SIBS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection*{\emph{Replication in Siblings}} ~\\
 Discordance between siblings in the tails of the trait distribution is
@@ -438,163 +358,178 @@ conditional sibling distribution under polygenicity, this distribution
 also allows heritability to be estimated \cite{t_sibs}.
 
 Applying this model to the sibling data in the UKB to estimate $h^2$, 
-we find a correlation between snp h2 and sibling h2 \fref{fig:sib}{b}.  
-In our index traits we use this model to infer the presence of rare 
-variant architecture in the tails and find that lower tail discordance 
+we find a correlation between snp h2 and sibling h2 in \fref{fig:sib}{b}.  
+As shown in \fref{fig:sib}{c}, we use this model to infer the presence of rare variant 
+architecture in our index traits and find lower tail discordance 
 in \emph{Haemoglobin Concentration}, upper tail discordance in 
 \emph{Red Blood Cell Distribution Width} and dual ail discordance 
-in \emph{Sitting Height}, all of which match the result from our PRM 
-test.  Overall we find a significant relationship between our sibling 
-test pvalue and the pvalue from our PRM-test \fref{fig:sib}{d}. 
+in \emph{Sitting Height}, all of which match the result of the POPout analyses. 
+We also find an overall significant relationship between sibling test pvalue and the POPout pvalue across all 74 traits \fref{fig:sib}{d}. 
+Interestingly, this relationship varies across category, pearson correlation is $0.80$ across the \textit{Biomarker} group, 
+$0.60$ across the \textit{Physical Measures} and insignificant the lower heritability \textit{Questionnaire/Cognitive} category suggesting again 
+that concordance between POPout effects and sibling discordance is not the result environmental causes alone. 
 
+
+
+
+
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig3.pdf} \end{maybe} 
+\caption{\footnotesize{{\bf $POPout$ Replication in Siblings.} 
+\textbf{(a)} Schematic of relationship of sibling trait values
+under polygenicity, de novo variants of large effect in one
+sibling and rare inherited variant of large effect,
+Mendelian. \textbf{(b)} LDscore regression SNP
+heritability plotted against heritability estimated from sibling
+pair trait similarity using European UKB samples.  \textbf{(c)}
+Index sibling trait quantile (in 1\% increments) plotted agaisnt
+mean trait value of conditional sibling in quantile for four
+traits with different types of PRS tail regression. \textbf{(d)}
+PRS-test P-values plotted against sibling de novo and Mendelian
+test meta analysis P-values on $-\log_{10}$ scale for upper and
+lower tails of all 74 traits.  Correlation calculated using
+pearson correlation.}} 
+\label{fig:sib} \end{figure} \FloatBarrier
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTS-3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{The Role of Rare Variants} ~\\
+
+\noindent The genetic mechanism proposed to explain POPout involves the confluence 
+of genetic selection away from one or both tails, an enrichment of rare variants in those tails, 
+and PRS methods that typically restrict to common variants (MAF $>1\%$) that suffers in such tails.  
+Indeed, the exclusion of rare variants from PRS has already been shown to 
+reduce PRS performance \citep{rares1}. \fref{fig:prs}{c} shows
+the relationship between MAF and effect sizes from significant
+associations derived from GWAS \citep{neale} and exome analyses
+\citep{backman} of UKB for our four index traits. For \textit{Haemoglobin
+Concentration} which exhibits lower tail regression we see a greater
+number of rare variants in the lower tail and for \textit{Red Blood Cell
+Distribution Width} which exhibits upper tail regression we see a
+greater number of rare variants in the upper tail. Sitting height,
+which exhibits dual tail regression, has a number of rare variants in
+both tails, however, there are more rare variants in the lower tail
+where the POPout effect is greatest. For \textit{Ankle Spacing Width} which does
+not exhibit POPout in either tail there are just three significant rare
+effect variants.  These results are consistent with the hypothesis that
+rare variants of large effect that not accounted for in the
+common-variant PRS are responsible for tail POPout effects. 
+
+Indeed this relationship holds up across all traits analysed.  In 
+In \fref{fig:prs}{d} we observe a small but signficiant relationship
+between the magnitude of POPOut regression in the tail and the number of rare
+variants in the tail across all trait tails analysed. However, we note that 
+while statistically significant, there are multiple traits with signficant 
+POPout scores for which almost no rare variants of substantially large effect 
+have been identified (see \fref{fig:prs}{e}).  This suggests that strong selection 
+may result in private variants that cannot be identified using population based sequencing.
 
 
 \FloatBarrier \begin{figure}[!h] 
-  \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/fig4.pdf} \end{maybe} 
-  \caption{\footnotesize{{\bf Sibling analyses for rare variants of
-        large effect affecting the tails of trait distribution.}
-      \textbf{(a)} Schematic of relationship of sibling trait values
-      under polygenicity, de novo variants of large effect in one
-      sibling and rare inherited variant of large effect,
-      Mendelian. \textbf{(b)} {\it LDscore regression} SNP
-      heritability plotted against heritability estimated from sibling
-      pair trait similarity using European UKB samples.  \textbf{(c)}
-      Index sibling trait quantile (in 1\% increments) plotted agaisnt
-      mean trait value of conditional sibling in quantile for four
-      traits with different types of PRS tail regression. \textbf{(d)}
-      PRS-test P-values plotted against sibling de novo and Mendelian
-      test meta analysis P-values on $-\log_{10}$ scale for upper and
-      lower tails of \need{X} traits. Correlation calculated using
-      pearson correlation.}}
-    \label{fig:sib} \end{figure} \FloatBarrier
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS-4 Replication  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{\emph{Replication}} ~\\
-
-We performed three \emph{flavours} of replication. 
-
-\begin{enumerate}                                                                               
-\item \textbf{Repeated Subsets of The Target Data:} Assess the reliability of our PRM-test in smaller samples
-\item \textbf{Non-European Ancestry Inviduals in UKB:}  PRM replication across ancestry (within biobank) 
-\item \textbf{European Ancestry Individuals in All Of Us:} PRM replication across biobank (within ancestry) 
-\end{enumerate} 
-
-
-\subsubsection*{Bootstrap Analysis using Target Subsets} ~\\ 
-\noindent To assess the performance of our PRM-test using smaller samples 
-we re-sampled small subsets of our target populations, and performed our 
-PRM-test on these subsets. In \ref{fig:rep}{d} we notice that even the 
-correlation of effect sizes was approximately 0.70 even when the subset 
-size was only 5k, however concordance in discovery was poor at these levels. 
-
-
-\subsubsection*{Out of Sample Replication} ~\\
-\noindent The correlation between PRM effect-sizes was greater in the
-UKB Non-European Ancestry data despite smaller sample sizes, although
-the number of true positives identified was lower (underpowered).
-This suggests that even if PRS isn't portable across ancestry, that
-regression to the mean is portable and in fact may be even more than
-portable.
-
-
-
-
-
-\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/fig5.pdf} \end{maybe} 
-  \caption{\footnotesize{{\bf PRS test replication results in UKB
-        repeated measures, UKB non-European samples, All of Us
-        European ancestry.} \textbf{(a)} PRS quantile (in 1\%
-      increments) plotted agaisnt mean trait value in quantile for
-      four traits with different types of PRS tail regression for
-      discovery and replication cohorts.  \textbf{(b)} PRS-test effect
-      size in discovery and replication cohorts across 25 traits
-      measured and passing PRS-test quality control in all cohorts.
-      \textbf{(c)} Simulated Signal Replication: Increasing larger
-      subsets were sampled and the replicability relative to our UKB
-      result was calculated \textbf{(d)} Same thing but
-      correlation. \textbf{(e)}. \textbf{(f)} PRS-test effect sizes
-      estimated in: UKB European ancestry samples v UKB non-European
-      ancestry samples for X traits passing PRS-test QC in both
-      cohorts. Triangles shaded relative to the non-European sample
-      size for the trait. Pearson correlation
-      shown\textbf{(g)}. \textbf{(h)} PRS-test effect sizes estimated
-      in: UKB European ancestry samples v All Of Us European ancestry
-      samples for 24 overlapping traits passing PRS-test QC in both
-      cohorts. Triangles shaded relative to the All of Us sample size
-      for the trait.}  } \label{fig:rep} \end{figure} \FloatBarrier
-
-
-
-
-
-
-
-
-
-
-
-
-
-\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/fig6.pdf} \end{maybe} 
-  \caption{\footnotesize{{\bf Analysis of POPout Impact on PRS 
-        Prediction} Repeated for Three Traits.  
-        \textbf{(a)} POPout Figure - Phenotype on PRS. 
-        \textbf{(b)} PRS on Phenotype Figure. 
-        \textbf{(c)} Cumulative POPout Distributions show non-informative tails. 
-        \textbf{(d)} Pseudo Case/Control Analysis: Denoting the upper/lower tail 
-        (10\%, 5\%, 1\%, 0.5\%) as case status, log-odds relative to the middle 
-        PRS-quantile is calculated for each of twenty PRS quantiles. 
-        }  } \label{fig:pred} \end{figure} \FloatBarrier
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig4.pdf} \end{maybe} 
+\caption{\footnotesize{{\bf Rare Variant and Selection Analsis}}} 
+\textbf{(a)} Trumpet plots (minor allele frequency v effect size) of genome-wide significant variants for traits shown in (a). 
+\textbf{(b)} POP-out effect sizes plotted against the number of genome-wide significant
+variants with MAF<1\% for 58 traits with overlapping exome sequence results. 
+For upper tails positive variant effects are counted and for lower tails negative variant effects are counted. 
+Correlation and significance calculated using pearson correlation.
+\textbf{(c)} Age at Menopause: PRS quantile vs. trait mean and trumpet plot.  
+\textbf{(d)} Residualised trait value plotted against relative lifetime reproductive success for 16 example traits.
+Best model fit to the data, selected by BIC considering all models with and without linear and quadratic terms, 
+are shown by dashed lines. Model selected by BIC used to classify selective pressure acting on the traits. 
+\textbf{(e)} $POPout$ effect size shown by model selection category, with PRS-test effect size meta-analysis for each category. 
+\textbf{(f)} Spearman rank correlation between four proxy measures of fitness and PRS-test effect size. For each 
+fitness measure correlation was calculated between the mean of the fitness measure in individuals in the upper and lower 1\% tails
+and PRS-test effect size for the corresponding tail across 74 traits in UKB passing QC.
+\label{fig:evo} \end{figure} \FloatBarrier
+
+
+\subsection*{The Impact of Selection} ~\\
+Using adjusted lifetime reproductive success \citep{v_select, v_select2} as a proxy for selection 
+we classified the selective pressure acting on each trait (see \textit{Methods} - LRS) by fitting it an 
+optimal two parameter model ($Y_{LRS} = x_o+ \beta x + \gamma X^2$) as determined by BIC.  Shown 
+in \fref{fig:evo}{a}, most traits (65 of 74\%) have some relationship (ie. $\beta \neq 0$ or $\gamma \neq 0$) 
+between between adjusted lifetime success and trait quantile and the majority of them (43 of 65) 
+two thirds of traits (43 of 65) were classified as being under some form of stabilising ($\gamma < 0$) selection, which is 
+characterized by lower fecundity in the both tails of the trait distribution.  
+This may be the result of general fitness  favoring the trait mean or the result of sex specific selection 
+that averages to produce this relationship \citep{v_select}.  Only two traits were classified as under disruptive 
+selection ($\gamma > 0$) which is characterised by greater fecundity in both trait tails. 
+
+Irrespective of their gamma parameter, 57 trait models included a nonzero directional beta parameter.  
+In \fref{fig:evo}{b} we see that traits under positive selection have significantly more POPout regression 
+in the lower tail and that traits under negative selection have signficicantly more POPout regression 
+in the positive tail - which is in line with theoretical and simulated predictions that suggest that 
+negative selection drives an enrichment of rare variants in the tail which reducing polygenicity and 
+driveout POPout regression.  In \fref{fig:evo}{d-g} the results from our simulation are shown; stabilising 
+selection reduces the effect size of common variants (\fref{fig:evo}{d,e}) and enriches the tails 
+for rare variatns (\fref{fig:evo}{f}) leading to POPout regression in PRS models that omit rare variants (\fref{fig:evo}{g}). 
+
+\subsubsection*{Tail Fitness} ~\\ 
+
+In addition to model selection on adjusted lifetime reproductive sucess we analysed the 
+relationship between five ranked fitness related measures associated with \emph{de novo} etiology 
+and ranked POPout regression across all 148 tails analysed.  Shown in \fref{fig:evo}{c}, we find that 
+while POPout regression is associated with less less offspring in both sexes, that this effect may 
+be stronger in males.  Additionally we find that while neither the number of illnesses or miscarriages and 
+stillbirths are significantly associated with POPout regression that paternal age \cite{pat} 
+further suggesting that private variants may be driving some of the POPout signal. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END RESULTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
 %
 %
 %
@@ -677,30 +612,19 @@ progression.
 \vspace*{-0.5cm} 
 \subsubsection*{UK Biobank Genetic Data} ~\\
 
-\pcomment{
-\begin{itemize} 
-\item  More specifics on the numbers. 
-\item  Explain ancestry clustering more specifically (which ancestries?
-\item  What PC values chosen?). Nobody could repeat this accurately as written. 
-\item  Some loose language in places. Several places where citations needed e.g. “recommended by the UK Biobank team.” i
-\item  Need some better context - e.g. In the primary analyses in unrelated individuals (Figures 2, 3, 5)...
-\item  In the analyses performed on siblings (Figure 4)... 
-\item  Not sure if Mixed ancestry results needed anymore?
-\end{itemize}
-}
-
 The UK Biobank (UKB) is a prospective cohort study of approximately
-500,000 participants, involving baseline and follow-up surveys and
-assaying of biological measures across thousands of phenotypes, as
-well as linkage to health and disease record data, recruited across
-the United Kingdom from 2006 to 2010 \citep{ukb}. The genetic dataset
-consists of 488,377 samples genotyped at 805,426 SNPs. To determine
-population ancestries, 4-means clustering analysis was conducted on
-the first two Principal Components (PCs) of the genotype
-data. Samples were then projected onto 1000
-Genomes PCs to determine ancestry, resulting
-in 461,931 EUR, 11,074 SAS, 7,935 AFR, 2,585 WAS, 2,550 EAS, 1,619
-admixed, 543 Others.
+500,000 participants recruited across the United Kingdom from 2006 to
+2010 \citep{ukb}. Phenotype data of anthropometric, biological and
+lifestyle measures was collected at baseline and follow-up surveys, with
+further linkage to health and disease record data. The genetic dataset
+consists of 488,377 samples genotyped at 805,426 SNPs.
+
+To determine population ancestries, 4-means clustering analysis was
+conducted on the first two Principal Components (PCs) of the genotype
+data. Samples were then projected onto 1000 Genomes PCs to determine
+ancestry, resulting in 461,931 European, 11,074 South Asian, 7,935
+African, 2,585 West Asian, 2,550 East Asian, 1,619 and admixed
+samples.
 
 Subsequent to clustering, standard quality control (QC) procedures
 were applied independently to each ancestry cluster. SNPs with a minor
@@ -710,171 +634,164 @@ excluded. Samples exhibiting high levels of missingness or
 heterozygosity, inconsistencies in genetic-inferred and self-reported
 sex, or displaying aneuploidy of the sex chromosomes were removed in
 accordance with recommendations from the UKB data processing team
-\citep{ukb_qc}.  For the analyses on the general population, a greedy 
-algorithm was employed to remove related individuals that maximises 
-sample retention while removing all
-third-degree relatives (kinship coefficient > 0.044) \citep{erase}.
-After this QC 411,949 unrelated individuals remained.
-%It has been shown that both the mean and variance of PRS varies
-%across ancestry groups \citep{global}.
-Primary analyses were performed on the over 387,235
-unrelated European samples that comprised the largest ancestry
-cluster. Replication analyses were performed on the remaining
-24,476 samples that comprised multiple non-European
-ancestries.
+\citep{ukb_qc}.  For the analyses on the general population, a greedy
+algorithm was employed to remove related individuals that maximises
+sample retention while removing all third-degree relatives (kinship
+coefficient > 0.044) \citep{erase}.  After this QC 411,949 unrelated
+individuals remained.  Primary analyses were performed on the over
+387,235 unrelated European samples that comprised the largest ancestry
+cluster. Replication analyses were performed on the remaining 24,476
+samples that comprised multiple non-European ancestries.
 
-For the sibling analyses, sibling pairs were selected by first identifying first-degree relatives, defined as those with kinship coefficient within the range 0.177 and 0.354 (expected value for siblings is 0.25) to account for the expected variation in within-pair similarity \citep{sib1}. Only individuals of European ancestry were included in the sibling analyses because there are too few siblings of non-European ancestry for sufficient power for meaningful interpretation of results and we consider it important to perform 
-ancestry-stratified analyses until the generalisability of such analyses 
-are better understood. The proportion of SNPs with zero identity-by-state (IBS0) was used to distinguish sibling pairs from parent-offspring pairs, since parent–offspring pairs have IBS0$\approx$0 across the autosomes. It has been shown in the UKB that there is good separation between pairs of first degree relatives at IBS0=0.00112 \citep{sib1} and, thus, sibling pairs were selected as those exceeding this threshold, giving a total of 17,289 sibling pairs of European ancestry in total. 
+For the sibling analyses, sibling pairs were selected by first
+identifying first-degree relatives, defined as those with kinship
+coefficient within the range 0.177 and 0.354 (expected value for
+siblings is 0.25) to account for the expected variation in within-pair
+similarity \citep{sib1}. Only individuals of European ancestry were
+included in the sibling analyses. The proportion of SNPs with zero
+identity-by-state (IBS0) was used to distinguish sibling pairs from
+parent-offspring pairs, since parent–offspring pairs have
+IBS0$\approx$0 across the autosomes. It has been shown in the UKB that
+there is good separation between pairs of first degree relatives at
+IBS0=0.00112 \citep{sib1} so sibling pairs were selected as
+those exceeding this threshold, giving a total of 17,289 sibling pairs
+of European ancestry for analysis.
 
 
 \subsubsection*{Quantitative Trait QC} ~\\
 
-\pcomment{
-\begin{enumerate} 
-\item Seems a bit unusual to describe the QC, then the
-  residualisation/normalisation, and then some further QC steps on the
-  untransformed data. Is this the best order?
-\item I think the reduction from 151 to 92 traits due to rg<0.99
-  cut-off is likely to raise alarm bells - how many more would’ve been
-  lost if you’d used 0.98, 0.95, 0.9 instead?
-\item There are a lot of P-values reported in the paper dependent on a
-  test of many traits.. but if those are highly correlated then the
-  overall P-value reported will be inflated. We’ve talked about this
-  before I know but isn’t this still a problem!?
-\end{enumerate} 
-}
+\paragraph*{Trait Selection} ~\\ 
+After genetic QC, we initially selected all quantitve traits from the categories \textit{Biomarkers}, \textit{Physical Measures}, 
+the \textit{Touchscreen Questionnaire} and \textit{Cognitive Tests} to provide a broad group of traits 
+likely to have polygenic etiology.  We then removed 34,698 cancer cases, 1311 individuals on insulin, and 109 
+pregnant women from all traits.  We also removed ~65k individuals on statins and other cholesterol lowering 
+drugs from the \textit{Blood count} and \textit{Blood Biochemistry} subcategories and removed ~30k individuals on heart 
+rate medication from the \textit{Arterial stiffness} and \textit{Blood pressure} subcategories.  Next, to ensure that 
+extreme outliers do not impact our results, we removed all samples from traits more than six standard deviations 
+from the mean.  After these sample removals, we defined quantitive traits as those which contained at least ten 
+distinct values and whose top two modal values comprised less than half the samples. All such traits with at least 
+$100,000$ total samples of european ancestry and at least $1000$ sibling pairs of european ancestry were then selected 
+for the following stage of analysis. 
 
-\tfix{
-\begin{enumerate} 
-\item I don't know.  But basically Clives PRM-QC finds non-linearities 
-    but we know our normalization can hide them, so it does make sense to
-    be conservative here. 
-\item Filtering on Clives QC first and doing genetically correlations 
-last (as we should), it hardly makes a difference, I changed it to 0.95 
-and gave some numbers that should calm alarm bells. 
-\item They are not highly correlated - but I think we have done 
-enough in the methods to make people calm.
-\item This does need to be talked about in the discussion - the 
-whole point of the paper is TAILS, and the tails are 
-nothing like the main part of the distribution, so highly 
-correlated body doesn't mean much about the tails. 
-\end{enumerate}
-}
-
-\subsubsection*{Individual level QC}
-After genetic QC, individuals on insulin and pregant women at baseline
-were removed from all trait analyses. For blood count and biochemisty
-traits, individuals on statins and other cholesterol lowering drugs
-were removed. \need{Cancer patients traits were removed from the
-  following traits analyses.... Individuals on beta-blockers were
-removed from from pulse rate traits.}
+\paragraph*{Trait Normalisation} ~\\
+To minimise the effect that environmental risk factors have on phenotype, trait values were then
+normalised within each ancestry group by applying a linear regression model to each trait, with 
+covariates for $age$, $age^2$, $age^3$, sex, menopause status, type-II diabetes status, coronary 
+artery disease status, alcohol use (categorial and continuous), smoking (categorical and continuous), batch, centre, 
+and the first 40 genetic principal components.  At this stage, traits whose residuals had absolute skew $>2$ in 
+the larger European ancestry group were removed to avoid measurement bias and remaining trait values were 
+standardized using a rank inverse normal transform on residuals to provide standard normal distributions 
+for all further analysis. 
 
 
-\subsubsection*{Class Selection} 
-
-I removed: 
-\begin{enumerate} 
-    \item \textit{Raw acceleromter statistics} 
-    \item \textit{Population Characteristics, Local Environment} (Air Pollution) 
-    \item \textit{MRI and NMR} 
-    \item \textit{Diet by 24-hour Recall} (unreliable)  
-    \item \textit{Derived OCT measures} 
-\end{enumerate} 
+\paragraph*{Initial Analysis and Further Trait QC} ~\\
+To carry out our initial trait analysis, European ancestry UKB samples were split 
+randomly into 50\% base and 50\% target data sets. Then, for each trait, GWAS was 
+carried out on the standaridised trait values in the base data using PLINK-1.9 \citep{plink, bt_10} 
+and estimated heritability and pairwise genetic correlation was estimated using LDscore \cite{ldsc}.  
+At this stage, to ensure that our PRS analyses are well powered and reflect additive polygenicity 
+we removed traits with heritability $h^2<5\%$ or for which a single SNP explained more than 
+2\% of trait variance.  This left 120 remaining quantitive traits from across all three categories. 
 
 
+\paragraph*{Trait De-Duplication} ~\\
+To ensure that the traits analysed were meaningly different from each other, we considered the 
+pairwise genetic correlations calculated above and observed that more than half (64 of the 120) 
+remaining traits had pairwise genetic correlation $r_g>95\%$ with at least one remaining trait. 
+Of these 64 traits, 22 had a single pairwise correlation above this threshold.  For these 11 pairs 
+of traits, the trait with higher heritability was selected.  The remaining % 42 
+geneticically non-unique traits came from two categories \textit{ Bone-densitometry of heel} %(18) 
+and \textit{ Body composition by impedance}. %(24). 
+Applying the same data maximisation algorithm used to select the maximum number of unrelated 
+individuals \citep{erase} we were able to select seven (two bone-densitometry related and 5 body composition related)  
+without any pairwise genetic duplication (eg $r_g>95\%$).  In total addition to the 56 traits without genetic 
+duplicates and the 11 traits selected from duplicated pairs, this resulted in the set of 74 total traits which 
+were used for all downstream analysis. 
 
-\subsubsection*{Trait selection}
-Quantitative traits were selected for analysis as those with at least
-10 distinct values and for which the top two modal trait values
-combined comprised less than 50\% of the trait distribution. To ensure
-that our analyses were well-powered, traits with heritability
-$h^2<5\%$ (estimated by LD score \citep{ldsc} applied to publicly
-available UKB GWAS summary statistics \citep{neale}) and $<$50,000
-unrelated samples with observed trait measures were removed.  Result is 175 traits. 
+
+\subsubsection*{Replication}
+
+\paragraph*{European Ancestry Repeated Measures} ~\\
+Approximately 20k European ancestry individuals in the UKB had measurements 
+repeated after a five-year followup period.  These individuals had trait values normalised as 
+above but were held out of the base dataset above.  Their residualised trait values from their 
+two visits were then averaged to provide a target subset of individuals for which 
+random measurement error is less likely to produce phenotype values in the tail.  
+Replication analysis was restricted to the 63 of the 74 traits where there were at 
+least 1000 repeated measures.
 
 
 
-
-\subsubsection*{Trait QC}
-Trait specific QC was then performed, first, to ensure extreme
-outliers did not impact results, trait values more than six
-standard deviations from the mean were removed. To minimise the effect
-of environmental risk factors on the results,, trait values were then
-standardised by applying a linear regression model to each trait, with
-covariates for age, sex, recruitment centre, genotyping batch, and the
-first 40 genetic principal components [WHAT ABOUT AGE2 ETC AND THE
-FULL REGRESSION THAT WAS PERFORMED??].
-
-\subsubsection*{Further trait selection}
+\paragraph*{Non-European Ancestry Individuals} ~\\
+Approximately 22k Non-European ancestry individuals were normalised along with the 
+European ancestry samples but also held out of the GWAS base dataset after trait normalisation.  
+They were used to replicate the POPout results on the 70 of 74 traits where there were at least 
+a thousand samples. 
 
 
+\paragraph*{Replication in All of Us Cohort} ~\\
+\textit{All of Us} is a multi-ancestry biobank from the United States 
+that make use of electronic health record (EHR) data from a much wider age range than the UKB ($\mu,\sigma$= 55.8,17.1 vs 56.5,8.1). 
+Traits matching those analysed in our primary UKB analysis 
+were identified through an initial database search and were then interrogated 
+manually to determine if trait descriptions were sufficiently similar.  
+All of Us provides ancestry categories, corresponding to definitions used within gnomAD, the Human
+Genome Diversity Project, and 1000 Genomes project.  133,581  European ancestry individuals were 
+extracted for analysis. %Too few individuals of non-European ancestry were avaialble for sufficient replication power.
+
+Trait QC in All Of Us was carried out to approximately match what was done 
+in the UKB wherever possible.  Like above, inidividuals on statins were removed 
+from the \textit{Blood count} and \textit{Blood Biochemistry} subcategories.  
+Then the median measurement value for every trait (EHR data includes multiple measures) and 
+the age corresponding to that measurement was extracted.  For each trait, outliers greater 
+than six standard deviations from the mean were removed and a linear regression model was 
+applied with covariates for $age$, $age^2$, $age^3$, sex, and the first 40 genetic principal components 
+and a rank inverse normal transform was applied to residuals to provide standardized phenotype distributions.  
+
+Genetic QC in All Of Us was carried out with standard quality control procedures.  SNPs with a minor
+allele frequency $<$ 0.01, genotype missingness > 0.02, or Hardy-Weinberg equilibrium test $P$-value $< 10^{-8}$ were
+excluded. Samples exhibiting high levels of missingness or heterozygosity, inconsistencies in genetic-inferred 
+and self-reported sex, or displaying aneuploidy of the sex chromosomes were removed and the same 
+greedy algorithm mentioned above was used to maximize sample retention while removing all third-degree relatives (kinship
+coefficient > 0.044) \citep{erase}.  Using the higher powered publicly available European ancestry GWAS summary stats 
+generated from the entire UKB \cite{neale}, PRS scores were calculated \cite{prsice} using the same p-value 
+threshold that was trained in the UKB European ancestry analysis described above. After removing traits 
+for which fewer than 1000 samples remained this left us witih 33 trait phenotype and PRS pairs for replication 
+in All Of Us. 
+
+
+
+\paragraph*{Bootstrap Analysis using European Ancestry Target Subsets} ~\\
+Our 74 QC-validated traits were required to have at least 100k total
+samples.  In the target sample (half the total), after outlier removal
+our QC-validated traits had between of 50,109 and 167,857 (average
+123k) in the target sample.  To explore whether our PRM-test results
+replicate with smaller sample sizes, we repeatedly sampled subsets of
+between 5k and 50k target samples and performed our PRM-test on these
+subsets.  For each value between 5k and 50k (counting by 5k) we
+performed 100 trials across each of the 150 trait tails and calculated
+the \textbf{(1)} relative accuracy (true and false positives and
+negatives) relative to our full dataset (FDR 5\%) and \textbf{(2)} the
+linear and the rank correlation of for the regression effect size
+across all the tails.
 
 
 
 
-%100026 Daily_dietary_data_not_credible Diet_by_24-hour_recall Diet_by_24-hour_recall MINIMAL NA
-
-
-Subsequently, traits with skewed ($>2$) or multimodal residuals were
-removed (dip-test \citep{dip} $P$-value for unimodality $>$
-0.05). Residualised trait values were then normalised by inverse
-normal transforming the rank of the residuals [MAYBE EXPLAIN WHY THIS
-WAS DONE].  Utilising these standardised trait values, further
-trait-based QC was then performed [IS THIS RIGHT TO SAY??]. To ensure
-that selected traits were polygenic, traits for which a single common
-variant explains more than an estimated 0.5\% of trait variance
-($r^2 > 0.5\%$) were removed.  To ensure that the traits analysed were
-meaningly different from each other, we calculated pairwise genetic
-correlations using LDscore\cite{ldsc}. THE REMAINING SENTENCES OF THIS
-PARAGRAPH ARE A MESS AND NEED FIXING. Sixty one traits did not have a
-pair with $r_g>98\%$ and were retained for analyses. Additionally, 10
-traits had a single almost identical match (eg: "Standing Height"
-(ID:50) and "Height Measured Prior to Imaging" (ID:12144)), and in
-these cases the trait with greater sample size was prioritised.  The
-other 52 traits were part of larger clusters of genetically similar
-traits, the largest of which related to measurements related to of
-body-mass (eg: body fat percentage, leg mass, arm mass, etc) and heel
-bone mineral density.  Using the same data maximisation algorithm used
-to select unrelated individuals \citep{erase}, 11 such traits were
-then selected, resulting in a set of 77 genetically different traits
-for analysis.
-
-\subsubsection*{Replication in Non-European Ancestry Individuals (UKB data)} ~\\
-\noindent Non-European ancestry samples in the UKB have between 3,150
-and 13,037 (mean ~10k \need{exact number}) total samples for our 75
-\need{exact number}. Trait values of all non-European ancestry samples
-were normalised jointly as above.
-
-\subsubsection*{Replication in All of Us Cohort} ~\\
-All of Us is a biobank of individuals of multiple ancestries from
-across the United States of America. Traits matching those analysed in
-the primary UKB analysis were identified through an initial database
-search and were then interrogated manually to determine if trait
-descriptions were sufficiently similar.  All of Us provide ancestry
-categories, corresponding to definitions used within gnomAD, the Human
-Genome Diversity Project, and 1000 Genome, European ancestry
-individuals were extracted for analysis. There were too few
-individuals of non-European ancestry for sufficient replication power.
-\need{Trait values were normalised by...}
-
-\subsection*{Genome-wide association analyses and PRS estimation in UKB}
-European UKB samples were split randomly into 50\% base and 50\%
-target data sets. GWASs were applied to the base data using PLINK-1.9
-\citep{bt_10} applying a linear additive model to the standardised
-trait values. PRScice-2(v2.3.4) \citep{bt_11} was applied to the GWAS
-summary statistics of each trait with fast-scoring to select the most
-predictive P-value threshold within the target data. Individual risk
-scores were calculated for UKB target samples.
-
-\subsection*{PRS estimation in All of US}
 
 %%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
 
+
+
 \subsection*{Data Analysis} ~\\
 \vspace*{-0.5cm} 
-\subsubsection*{The PRS-regression tail test}~\\
-The PRS-test first applies a regression of PRS on trait values where
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection*{The POPout Test}~\\
+The POPout test first applies a regression of PRS on trait values where
 both the PRS and trait are standardised to have standard deviation of
 1. For each trait, the residuals from the regression are split
 into quantiles according to the trait distribution and two-tailed
@@ -889,7 +806,7 @@ the mean in both the upper and lower tails as follows
 where $f(y)$ is the predicted PRS from the regression given trait
 value $y$ and $n$ is the number of observations.
 
-\subsubsection*{The PRS-regression test QC}~\\
+\subsubsection*{POPout regression test QC} ~\\
 An additional trait QC was applied to ensure the robustness of the
 PRS-test by testing the residuals of samples in the middle of the
 trait distribution for departure from the null of zero mean.
@@ -899,15 +816,14 @@ the trait distribution. Traits were deemed to fail QC if the smallest
 P-value was significant at a Bonferroni-corrected level of 0.05 (P
 $\le$ 0.05/80).
 
-\subsubsection*{Empirical PRS-regression test}~\\
-\need{is this still needed for the paper?}\\
-A robust empirical P-value for deviation in trait tails was calculated
-as follows: for each centile of trait one-sided t-tests for residuals
-less than and greater than zero were calculated.  The P-value for
-regression to the mean in the upper tail was calculated from the rank
-of the tests for residuals significantly less than zero and the lower
-tail empirical P-value from the greater than zero tests. The tests
-were performed on all 1,121 continuous traits in UKB.
+%\subsubsection*{Empirical PRS-regression test}~\\
+%A robust empirical P-value for deviation in trait tails was calculated
+%as follows: for each centile of trait one-sided t-tests for residuals
+%less than and greater than zero were calculated.  The P-value for
+%regression to the mean in the upper tail was calculated from the rank
+%of the tests for residuals significantly less than zero and the lower
+%tail empirical P-value from the greater than zero tests. The tests
+%were performed on all 1,121 continuous traits in UKB.
 
 \subsubsection*{Trumpet plots} ~\\
 Trumpet plots show the effect sizes and MAF of independent genome-wide
@@ -922,7 +838,159 @@ deleterious, missense or predicted loss of function variants in each gene
 significant burden associations are shown where no single variant
 within the gene is genome-wide significant.
 
-\subsubsection*{Sibling concordance tests}
+
+
+\subsubsection*{POPout Rare Variant Associations} ~\\
+Backman et al \cite{backman} provides exome sequencing analysis across 
+3994 UKB traits including 65 of the 74 traits analysed in our target set. 
+For each of these 65 traits, in each tail (positive and negative effect), 
+the number of genes with at least one significant (P$\le 2.18\times 10^{-11}$) 
+variant (deleterious, missense, predicted loss of function) or a genome-wide 
+significant burden association are counted.  Across the 130 trait tails, the 
+pearson correlation between the number of exome variants and the $POPout$ 
+effect size is then calculated. 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Selection Analyses}
+\subsubsection*{Relative Lifetime Reproductive Success} ~\\
+The number of offspring is recorded in the UKB for both females and
+males, fields \textit{2734} and \textit{2405} respectively.  Following
+the methodology of Beauchamp \citep{v_select2}, samples were split
+into four birth cohorts (1934-42, 1943-48, 1949-55,
+1956-65). Individual relative
+lifetime reproductive success, $Y_{rLRS}$, was then calculated by
+dividing the number of offspring of each individual by the cohort
+mean. Following Sanjak et al \citep{v_select}, the presence and
+direction of selective pressure acting on traits was determined by
+fitting the following regression model:
+\begin{equation}
+Y_{rLRS} = \beta_o + \beta z + \gamma z^2 \label{math:LRS}
+\end{equation}
+where $z$ denotes the residualised and normalised trait values and
+$\beta$ and $\gamma$ are linear and quadratic regression parameters.
+
+Bayesian information criteria (BIC) was used to select the best
+fitting model for each trait from which the selective pressure acting
+on trait was inferred. If the selected model did not include a linear
+or quadratic parameter, no selection was inferred, here rare variant
+enrichment is not expected in either tail. If the selected model
+included only the linear parameter $\beta$, negative selection was
+inferred if $\beta<0$ and rare variant enrichment is expected in the
+upper tail, while positive selection was inferred if $\beta>0$ and
+rare variant enrichment is expected in the lower tail. If the selected
+model included only the quadratic parameter $\gamma$, with $\gamma<0$,
+stabilising selection is inferred and the mean trait value in the
+population is at its optimum and rare variant enrichment is expected
+in the both tails. Disruptive selection is implied by $\gamma>0$, in
+this scenario rare variant enrichment is not expected in either
+tail. Where the selected model included both non-zero linear and quadratic
+parameters then the $\beta$ parameter is used to determine our expectation 
+where $\beta<0$ and $\beta>0$ suggests greater relative rare variant enrichment 
+in the upper and lower tails respectively. 
+
+\subsubsection*{Association between POPout Test and LRS Models} ~\\ 
+% NO THIS IS WRONG -- WILL FIX THIS TADE 
+
+Traits are separated into four classes. The first two of the four classes are 
+non-directional, \textbf{(1)} no selection ($\beta=0,\gamma>=0$) 
+where no rare variant enrichment is expected and \textbf{(2)} neutral 
+stabilising selection ($\beta=0,\gamma<0$) where an equal amount of rare 
+variant enrichment is expected each tail.  The third and fourth class 
+are directional, and include \textbf{(3)} positive selection ($\beta>0$) where more rare variant 
+enrichment is expected in the lower tail and \textbf{(4)} negative 
+selection ($\beta>0$) where more rare variant enrichment is expected 
+int he upper tail.  For each class the mean $POPout$ effect is calculated 
+in each tail and the mean values are compared using a T-Test. 
+
+
+
+
+%Concordance between inferred selection and the PRS test for traits
+%classified as exhibiting both stabilising and directional selection
+%was tested by a Fisher exact test, comparing binary categories
+%$\beta<0$ / $\beta>0$ with PRS-test effect size greater in upper /
+%lower tail.  For traits classified as no selection, directional
+%selection and stabilising selection, concordance with PRS-test used
+%the PRS-test classifications of no / lower / upper / dual tail
+%regression. Fisher exact tests were constructed separately for
+%negative, postive and stablising selection for enrichment in the
+%expected PRS-test classification, lower / upper / dual respectively,
+%by collapsing the other categories, traits classified as exhibiting
+%both stabilising and directional selection were excluded from these
+%tests.
+
+\subsubsection*{Association between POPout tests and proxy measures of fitness}~\\
+% NO THIS IS WRONG -- WILL FIX THIS TADE 
+Five proxy measures of fitness were considered, \textbf{(1)} Male and \textbf{(2)} female 
+fecundity (Trait-Ids: 2405 and 2734), \textbf{(3)} 
+self-reported non-cancer illnesses (Trait-Id: 2002), 
+\textbf{(4)} miscarriages and still-births (Trait-Ids: 39290 and 3839), 
+and \textbf{(5)} paternal age which is calculated as the difference 
+between fathers age (Trait-Id 2946) and participant age at recruitment (Trait-Id 21022).
+
+%determined
+%by the residuals of a regression with covariates for age, sex and
+%recruitment centre. (2) Number of miscarriages (trait field
+%38290). (3) Number of still-births (trait field 3839). (4) Paternal
+%age at birth.
+
+Association between these measures and $POPout$ effect was tested as
+follows.  The mean value of the five proxies of selection was
+calculated separately in the upper and lower 1\% of the trait
+distribution, association was then tested by Spearman's rank
+correlation across all trait tails of the mean tail values for each
+proxy and the $POPout$ effect size.
+
+
+\subsubsection*{Simulating Stabilizing Selection using SLiM} ~\\
+Using SLiM v4.0 (1), we simulated a quantitative polygenic trait under
+a standard Wright-Fisher (WF) model of stabilising selection. First a
+population of N=10,000 diploid individuals of 1Mb was simulated to
+equilibrium (10N generations) with a constant mutation of
+$2.36\times 10^{-8}$ per base pair (bp) and recombination rate of
+$10^{-8}$ per bp under neutrallity. Mutations were assigned effect
+sizes simulated from a gamma distribution with shape parameter 0.186
+and mean 0.01026 and subsequently multiplied by -1 with probability
+0.5 to give a symmetrical effect size distribution. This distribution
+has been used previously to simulate genetic effects in humans and
+reflects a prior belief in a small number of large effects and many
+small effects \cite{anil3}. Individual trait values were determined by
+the sum of all genetic effects.
+
+After neutral genetic diversity was achieved (10N generations),
+stabilising selection on the trait was introduced for 1N
+generations through a Gaussian fitness function
+\begin{equation} 
+  f_t(x) = 1 + \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(x-\mu)^2}{2\sigma^2}\right\}
+\end{equation}
+where $x$ is the phenotype of an individual at generation $t$, $\mu$
+and $\sigma$ are the trait mean and standard deviation at the start of
+selection (i.e., $t=10N$). Stabilizing selection was simulated for a
+further 1N generations after the 10N burn-in generations.
+
+Simulation data was collected by logging, at each generation, the
+phenotypic mean and standard deviation of the population, statistics
+of mutations present in the populations, including allele frequencies
+and effect sizes, and the mutational profile of each individual. To
+investigate the contributopn of low-frequency variants and mimic a PRS
+based on common variants, a second genetic value was calculate using
+only variants with $MAF > 1\%$.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection*{Sibling concordance tests}~\\
 The conditional distribution under polygenicity of an individual's
 trait value given their siblings trait value is predicted by theory
 \cite{t_sibs}
@@ -980,131 +1048,26 @@ a $\chi^2$ statistic with 4 degrees of freedom,
 \end{align*}
 
 
-%%%%%%%%%%%   LRS   %%%%%%%%%%%%
-\subsection*{Selection Analyses}
-\subsubsection*{Relative Lifetime Reproductive Success} ~\\
-The number of offspring is recorded in the UKB for both females and
-males, fields \textit{2734} and \textit{2405} respectively.  Following
-the methodology of Beauchamp \citep{v_select2}, samples were split
-into four birth cohorts (1934-42, 1943-48, 1949-55,
-1956-65). Individual relative
-lifetime reproductive success, $Y_{rLRS}$, was then calculated by
-dividing the number of offspring of each individual by the cohort
-mean. Following Sanjak et al \citep{v_select}, the presence and
-direction of selective pressure acting on traits was determined by
-fitting the following regression model:
-\begin{equation}
-Y_{rLRS} = \beta_o + \beta z + \gamma z^2 \label{math:LRS}
-\end{equation}
-where $z$ denotes the residualised and normalised trait values and
-$\beta$ and $\gamma$ are linear and quadratic regression parameters.
 
-The Bayesian information criteria (BIC) was used to select the best
-fitting model for each trait from which the selective pressure acting
-on trait was inferred. If the selected model did not include a linear
-or quadratic parameter, no selection was inferred, here rare variant
-enrichment is not expected in either tail. If the selected model
-included only the linear parameter $\beta$, negative selection was
-inferred if $\beta<0$ and rare variant enrichment is expected in the
-upper tail, while positive selection was inferred if $\beta>0$ and
-rare variant enrichment is expected in the lower tail. If the selected
-model included only the quadratic parameter $\gamma$, with $\gamma<0$,
-stabilising selection is inferred and the mean trait value in the
-population is at its optimum and rare variant enrichment is expected
-in the both tails. Divergent selection is implied by $\gamma>0$, in
-this scenario rare variant enrichment is not expected in either
-tail. If the selected model included both linear and quadratic
-parameters with $\gamma<0$ stabilising and directional selection was
-inferred, in which the optimal trait value is within the range of the
-population values but is not the population mean. With
-$\beta<0$ it is inferred that selection is causing the trait mean to
-decrease and greater rare variant enrichment is expected in the upper
-tail. Conversely, with $\beta>0$ it is inferred that selection is
-causing the trait mean to decrease and greater rare variant enrichment
-is expected in the lower tail.  If $\gamma>0$ then rare variant
-enrichment is not expected in either tail.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Concordance between inferred selection and the PRS test for traits
-classified as exhibiting both stabilising and directional selection
-was tested by a Fisher exact test, comparing binary categories
-$\beta<0$ / $\beta>0$ with PRS-test effect size greater in upper /
-lower tail.  For traits classified as no selection, directional
-selection and stabilising selection, concordance with PRS-test used
-the PRS-test classifications of no / lower / upper / dual tail
-regression. Fisher exact tests were constructed separately for
-negative, postive and stablising selection for enrichment in the
-expected PRS-test classification, lower / upper / dual respectively,
-by collapsing the other categories, traits classified as exhibiting
-both stabilising and directional selection were excluded from these
-tests.
 
-%%%%%%%%%%%   TAIL FITNESS   %%%%%%%%%%%%
-\subsubsection*{Association between PRS-test and proxy measures of fitness}
-Four proxy measures of fitness were considered. (1) Standardised
-self-reported non-cancer illnesses (UKB trait field 2002) determined
-by the residuals of a regression with covariates for age, sex and
-recruitment centre. (2) Number of miscarriages (trait field
-38290). (3) Number of still-births (trait field 3839). (4) Paternal
-age at birth.
 
-Association between these measures and the PRS-test was tested by
-calculating the mean value of the four proxies of selection separately
-in the upper and lower 1\% of the trait distribution. Association is
-then tested by Spearman's rank correlation test between the mean tail
-values for each proxy and the PRS-test effect size across all trait
-tails.
+\subsubsection*{Pseudo Case Control Analyses}~\\ 
 
-\subsubsection*{Simulating Stabilizing Selection using SLiM} ~\\
-Using SLiM v4.0 (1), we simulated a quantitative polygenic trait under
-a standard Wright-Fisher (WF) model of stabilising selection. First a
-population of N=10,000 diploid individuals of 1Mb was simulated to
-equilibrium (10N generations) with a constant mutation of
-$2.36\times 10^{-8}$ per base pair (bp) and recombination rate of
-$10^{-8}$ per bp under neutrallity. Mutations were assigned effect
-sizes simulated from a gamma distribution with shape parameter 0.186
-and mean 0.01026 and subsequently multiplied by -1 with probability
-0.5 to give a symmetrical effect size distribution. This distribution
-has been used previously to simulate genetic effects in humans
-\need{ref} and reflects a prior belief in a small number of large
-effects and many small effects \need{ref}. Individual trait values
-were determined by the sum of all genetic effects.
+The predictive value of PRS in the tails of the distribution 
+can be calculated by setting a tail threshold and calculating the 
+odds-ratio under a pseudo case-control analysis.  Here we separate 
+samples accoriding to PRS quantiles that include the lowest 5\%, between 
+5-15\%, 15-25\%, 25-35\%, 45-55\%,55-65\%, 65-75\%, 75-85\%, 85-95\% and 
+the top 95\%.  Then for each trait threshold k (where case status is 
+defined as being more extreme than k), the odds ratio and 95\% confidence 
+interval is calculated for each quantile by comparing it to the 45-55\% quantile. 
 
-After neutral genetic diversity was achieved (10N generations),
-stabilising selection on the trait was introduced for 1N
-generations through a Gaussian fitness function
-\begin{equation} 
-  f_t(x) = 1 + \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(x-\mu)^2}{2\sigma^2}\right\}
-\end{equation}
-where $x$ is the phenotype of an individual at generation $t$, $\mu$
-and $\sigma$ are the trait mean and standard deviation at the start of
-selection (i.e., $t=10N$). The number of offspring each individual
- \need{contributed to the next generation was...}
-Stabilizing selection was simulated for a further 1N generations
-after the 10N burn-in generations.
 
-Simulation data was collected by logging, at each generation, the
-phenotypic mean and standard deviation of the population, statistics
-of mutations present in the populations, including allele frequencies
-and effect sizes, and the mutational profile of each individual. To
-investigate the contributopn of low-frequency variants and mimic a PRS
-based on common variants, a second genetic value was calculate using
-only variants with $MAF > 1\%$.
 
-\subsection*{Replication}
-\need{check numbers!}
-\subsubsection*{Bootstrap Analysis using Target Subsets}
-Our 75 QC-validated traits were required to have at least 100k total
-samples.  In the target sample (half the total), after outlier removal
-our QC-validated traits had between of 50,085 and 185,362 (average
-142k) target samples.  To explore whether our PRM-test results
-replicate with smaller sample sizes, we repeatedly sampled subsets of
-between 5k and 50k target samples and performed our PRM-test on these
-subsets.  For each value between 5k and 50k (counting by 5k) we
-performed 100 trials across each of the 150 trait tails and calculated
-the \textbf{(1)} relative accuracy (true and false positives and
-negatives) relative to our full dataset (FDR 5\%) and \textbf{(2)} the
-linear and the rank correlation of for the regression effect size
-across all the tails.
 
 
 
@@ -1112,6 +1075,12 @@ across all the tails.
 \clearpage \newpage
 \bibliography{refs}
 \clearpage \newpage
+
+
+
+
+
+
 
 
 
@@ -1151,6 +1120,29 @@ To summarize, for this trait the predictive value of polygenic scores is:
 
 \noindent Consequently, if disease state occurs for the top 0.1\% of the trait distribution, PRS is not 
 predictive. 
+
+
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/fig5.pdf} \end{maybe} 
+\caption{\footnotesize{{\bf POPout test replication and validation results in UKB repeated measures, UKB non-European samples, All of Us
+European ancestry.} 
+\textbf{(a)} PRS quantile (in 1\%
+increments) plotted agaisnt mean trait value in quantile for
+four traits with different types of PRS tail regression for
+discovery and replication cohorts.  \textbf{(b)} PRS-test effect
+size in discovery and replication cohorts across 25 traits
+measured and passing PRS-test quality control in all cohorts.
+\textbf{(c-e)} PRS-test effect sizes estimated in UKB European
+ancestry discovery samples and replication cohort: \textbf{(c)}
+UKB European ancestry sample repeated measures, \textbf{(d)} UKB
+non-European ancestry samples and (e) AllofUs European
+ancestry. Triangles shaded relative to the replication sample
+size for the trait. Pearson correlation shown.
+samples. \textbf{(f)}....}  } \label{fig:sup0} \end{figure}
+\FloatBarrier
+
+
+
 
 
 
