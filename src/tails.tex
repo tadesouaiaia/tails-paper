@@ -372,6 +372,7 @@ different POP-out results (clockwise: No $POPout$ Effects, $POPout$ in Upper Tai
 
 
 
+% trained
 
 
 
@@ -655,7 +656,57 @@ measure such as age of onset, disease severity and rate of disease
 progression.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END DISCUSSION %%%%%%%
-
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   METHODS - START     %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -689,11 +740,12 @@ accordance with recommendations from the UKB data processing team
 \citep{ukb_qc}.  For the analyses on the general population, a greedy
 algorithm was employed to remove related individuals that maximises
 sample retention while removing all third-degree relatives (kinship
-coefficient > 0.044) \citep{erase}.  After this QC 411,949 unrelated
-individuals remained.  Primary analyses were performed on the over
-387,235 unrelated European samples that comprised the largest ancestry
-cluster. Replication analyses were performed on the remaining 24,476
-samples that comprised multiple non-European ancestries.
+coefficient > 0.044) \citep{erase}.  After this QC, 411,949 unrelated    % THESE NUMBERS DON'T ADD UP 
+individuals remained of which 387,235 were of European ancestry. Included 
+among the European ancestry cluster were 18,340 individuals which repeated 
+measures that were set aside along with the 24,476 non-European individuals 
+for replication analyses.  All told, this resulted in up to 369,133 unrelated 
+European ancestry individuals for primary analyses. 
 
 For sibling analyses, sibling pairs were selected by first
 identifying first-degree relatives, defined as those with kinship
@@ -713,70 +765,117 @@ of European ancestry for analysis.
 \subsubsection*{Quantitative Trait QC} ~\\
 \vspace*{-0.3cm} 
 \paragraph*{Trait Selection} ~\\ 
-After genetic QC, we initially selected all quantitve traits from 
-categories \textit{Biomarkers}, \textit{Physical Measures}, 
-the \textit{Touchscreen Questionnaire} and \textit{Cognitive Tests} 
+
+
+After genetic QC, we initially considered all traits from the 
+categories \textit{Biomarkers} (453 traits), \textit{Physical Measures} (271 traits), 
+the \textit{Touchscreen Questionnaire} (396 traits) and \textit{Cognitive Function} (134 traits) 
 to provide a broad group of traits likely to have polygenic etiology.  
 We then removed 34,698 cancer cases, 1311 individuals on insulin, and 109 pregnant 
-women from all traits.  We also removed ~65k individuals on statins and other cholesterol lowering drugs from 
-the \textit{Blood count} and \textit{Blood Biochemistry} subcategories and removed ~30k individuals on heart 
-rate medication from the \textit{Arterial stiffness} and \textit{Blood pressure} subcategories.  Next, to ensure that 
-extreme outliers do not impact our results, we removed all samples from traits more than six standard deviations 
-from the mean.  After these removals, we defined quantitive traits as those which contained at least ten 
-distinct values and whose top two modal values comprised less than half the samples. All such traits with at least 
-$100,000$ total samples of European ancestry and at least $1000$ sibling pairs of European ancestry were then 
-selected and normalised as described below.  
+women from all traits.  We also removed 64,043 individuals on statins and other cholesterol lowering drugs from
+the \textit{Blood count} and \textit{Blood Biochemistry} subcategories and removed 29,395 individuals
+on heart rate medication from the \textit{Arterial stiffness} and \textit{Blood pressure} subcategories.
+Next, to ensure that extreme outliers do not impact our results, we removed all samples from traits more 
+than six standard deviations from the mean.  After these removals, we defined quantitative traits as 
+those which contained at least ten distinct values and whose top two modal values comprised less than 
+half the samples. Finally, we removed all traits with fewer than $100,000$ samples remaining in our 
+primary dataset of unrelated individuals of European ancestry which result in a set of 180 traits 
+which were then further normalised as described below. 
+
+
 
 \paragraph*{Trait Normalisation} ~\\
 To minimise the effect that environmental risk factors have on phenotype, trait values were 
 normalised within each ancestry group (European and Non-European) by applying a linear regression 
-model to each trait, with covariates for $age$, $age^2$, $age^3$, sex, menopause status, 
-type-II diabetes status, coronary artery disease status, alcohol use (categorial and continuous), 
-smoking (categorical and continuous), batch, centre, and the first 40 genetic principal components.  
-At this stage, traits whose residuals had absolute skew $>2$ in the larger European ancestry group were 
-removed to avoid measurement bias and remaining trait values were standardized using a rank inverse 
+model to each trait, with covariates for $age$, $age^2$, $age^3$, sex, menopause status, %(Field ID: 2724), 
+type-II diabetes status, coronary artery disease status, 
+alcohol intake (Field ID: 1558), 
+smoking (categorical (Field ID: 20116) and continuous (Field ID: 1239), 
+batch, centre, and the first 40 genetic principal components.  
+At this stage, traits whose residuals had absolute skew $>2$ \cite{skew_book} 
+in the larger European ancestry group were removed to avoid measurement bias and 
+remaining trait values were standardized using a rank inverse 
 normal transform on residuals to provide standard normal distributions for all initial analyses. 
 
 \paragraph*{Further Trait QC} ~\\
 To carry out our initial trait analyses, European ancestry UKB samples were split 
 randomly into 50\% base and 50\% target data sets. Then, for each trait, GWAS was 
-carried out on the standaridised trait values in the base data using PLINK-1.9 \citep{plink, bt_10} 
+carried out on the standardised trait values in the base data using PLINK-1.9 \citep{plink, bt_10} 
 and heritability and pairwise genetic correlation were estimated using LDscore \cite{ldsc}.  
-At this stage, to ensure that our PRS analyses are well powered and reflect additive polygenicity 
-we removed traits with heritability $h^2<5\%$ or for which a single SNP explained more than 
-2\% of trait variance. This left 120 remaining quantitive traits from across all three categories. 
 
-To ensure that the traits were meaningly different from each other, we considered the 
+
+At this stage, to ensure that our PRS analyses are well powered and reflect additive polygenicity 
+we removed traits with heritability $h^2<5\%$ \cite{guide_paper} or for which oligogenicity 
+was suggested due to a single SNP explained more than 2\% of trait variance \cite{2prule}. 
+This left 120 remaining quantitative traits from across all four categories. 
+
+To ensure that the traits were meaningfully different from each other, we considered the 
 pairwise genetic correlations calculated above and observed that more than half (64 of the 120) 
 remaining traits had pairwise genetic correlation $r_g>95\%$ with at least one remaining trait. 
 Of these 64 traits, 22 had a single pairwise correlation above this threshold.  For these 11 pairs 
 of traits, the trait with higher heritability was selected.  The remaining % 42 
-geneticically non-unique traits came from two categories \textit{ Bone-densitometry of heel} %(18) 
+genetically non-unique traits came from two categories \textit{ Bone-densitometry of heel} %(18) 
 and \textit{ Body composition by impedance}. %(24). 
 Applying the same data maximisation algorithm used to select the maximum number of unrelated 
 individuals \citep{erase} we were able to select seven (two bone-densitometry related and 5 body composition related)  
 without any pairwise genetic duplication (eg $r_g>95\%$).  In total addition to the 56 traits without genetic 
 duplicates and the 11 traits selected from duplicated pairs, this resulted in the set of 74 traits which 
-were used for all downstream analyses. 
+were used for all downstream analyses. % GIVE SOME ON AVERAGE NUMBERS OR BELOW - primary european and non, etc.  
 
 
-\subsubsection*{Replication}
+\paragraph*{Initial PRS Analyses} ~\\
+
+
+The surviving 74 traits included 37 in the \textit{Biomarkers} category, 21 traits in \textit{Physical Measures} 
+category, and 16 that were in either the \textit{Touchscreen Questionnaire} or \textit{Cognitive Function} 
+category.  In the primary unrelated European dataset these traits had between of 50,109 and 167,857 
+(average 123,482) samples in the base and target datasets.  For each trait, PRSice \cite{prsice} was 
+used to train an optimal p-value threshold on the base data using the \textit{FastScore} option and then 
+applied to the target dataset to produce risk scores. 
+
+
+
+% ADD IN INFOR FOR PRSICE HERE - FASTSCORE, hi-res PRM 
+% ADD IN CORRELATION BETWEEN PAIRWISE CORRELATION AND STANDARDIZED DIFFERENCE OF POPOUT IN TAIL % 
+
+
+\subsubsection*{Replication Dataset QC}
 
 \paragraph*{European Ancestry Repeated Measures} ~\\
-Approximately 20k European ancestry individuals in the UKB had measurements 
-repeated after a five-year followup period.  These individuals had trait values normalised as 
-above but were held out of the base dataset above.  Their residualised trait values from their 
-two visits were then averaged to provide a target subset of individuals for which 
-random measurement error is less likely to produce phenotype values in the tail.  
-Replication analysis was restricted to the 63 of the 74 traits where there were at 
-least 1000 repeated measures.
 
+As discussed above, after initial filtering, there were 18,340 European 
+ancestry individuals with measurements repeated after a five year-followup period. 
+For these individuals, both measurements were normalised alongside 
+the other European ancestry UKB samples but held out of the base dataset. Then 
+the residualised trait values from their two visits were averaged to provide a 
+target subset of individuals for which random measurement error is less likely 
+to produce phenotype values in the tail.  Across the 74 traits there were between 
+2461 and 15475 (average: 10699.4) unrelated individuals for repeated measure replication. 
+PRSice was used to generate PRS scores using the threshold from the European dataset 
+described above. 
 
 \paragraph*{Non-European Ancestry Individuals} ~\\
-Approximately 22k Non-European ancestry individuals were normalised along with the 
-European ancestry samples but also held out of the GWAS base dataset after trait normalisation.  
-They were used to replicate the POPout results on the 70 of 74 traits where there were at least 
-a thousand samples. 
+The 24,476 Non-European ancestry individuals were filtered as above and normalised 
+is a separate run that included all ancestry samples.   Across the 74 traits there 
+were between 569 and 22513 (average: 14871.4) unrelated individuals for cross ancestry replication. 
+
+%They were used to replicate the POPout results on the 70 of 74 traits where there were at least 
+%a thousand samples.  
+%among the European ancestry cluster were 18,340 individuals which repeated 
+%measures that were set aside along with the 24,476 non-European individuals 
+%for replication analyses.  All told, this resulted in up to 369,133 unrelated 
+%European ancestry individuals for primary analyses. 
+%Approximately 20k European ancestry individuals in the UKB had measurements 
+%repeated after a five-year followup period.  
+%These individuals had trait values normalised as 
+%above but were held out of the base dataset above.  Their 
+%residualised trait values from their 
+%two visits were then averaged to provide a target subset of individuals for which 
+%random measurement error is less likely to produce phenotype values in the tail.  
+%Replication analysis was restricted to the 63 of the 74 traits where there were at 
+%least 1000 repeated measures.  % WHY A THOUSAND AND HOW DO WE KNOW ITS POWERFUL ENOUGH 
+
+
 
 
 \paragraph*{All of Us Cohort} ~\\
@@ -805,26 +904,14 @@ and self-reported sex, or displaying aneuploidy of the sex chromosomes were remo
 greedy algorithm mentioned above was used to maximize sample retention while removing all third-degree relatives (kinship
 coefficient > 0.044) \citep{erase}.  Using the higher powered publicly available European ancestry GWAS summary stats 
 generated from the entire UKB \cite{neale}, PRS scores were calculated \cite{prsice} using the same p-value 
-threshold that was trained in the UKB European ancestry analysis described above. After removing traits 
-for which fewer than 1000 samples remained this left us witih 33 trait phenotype and PRS pairs for replication 
-in All Of Us. 
+threshold that was trained in the UKB European ancestry analysis described above. 
 
-\paragraph*{Bootstrap Analysis using European Ancestry Target Subsets} ~\\
-Our 74 QC-validated traits were required to have at least 100k total
-samples.  In the target sample (half the total), after outlier removal
-our QC-validated traits had between of 50,109 and 167,857 (average
-123k) in the target sample.  To explore whether our PRM-test results
-replicate with smaller sample sizes, we repeatedly sampled subsets of
-between 5k and 50k target samples and performed our PRM-test on these
-subsets.  For each value between 5k and 50k (counting by 5k) we
-performed 100 trials across each of the 148 trait tails and calculated
-linear and the rank correlation of for the regression effect size
-across the tails.
+%After removing traits 
+%for which fewer than 1000 samples remained this left us witih 33 trait phenotype and PRS pairs for replication 
+%in All Of Us. 
 
-%the \textbf{(1)} relative accuracy (true and false positives and
-%negatives) relative to our full dataset (FDR 5\%) and \textbf{(2)} the
-%linear and the rank correlation of for the regression effect size
-%across all the tails.
+
+
 
 
 %%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
@@ -931,6 +1018,29 @@ in each quantile for comparison to our traits with differing levels of $POPout$ 
 
 
 \paragraph*{Replicating POPout Results}~\\ 
+
+\paragraph*{Bootstrap Analysis using European Ancestry Target Subsets} ~\\
+Our 74 QC-validated traits were required to have at least 100k total
+samples.  In the target sample (half the total), after outlier removal
+our QC-validated traits had between of 50,109 and 167,857 (average
+123k) in the target sample.  To explore whether our PRM-test results
+replicate with smaller sample sizes, we repeatedly sampled subsets of
+between 5k and 50k target samples and performed our PRM-test on these
+subsets.  For each value between 5k and 50k (counting by 5k) we
+performed 100 trials across each of the 148 trait tails and calculated
+linear and the rank correlation of for the regression effect size
+across the tails.
+
+%the \textbf{(1)} relative accuracy (true and false positives and
+%negatives) relative to our full dataset (FDR 5\%) and \textbf{(2)} the
+%linear and the rank correlation of for the regression effect size
+%across all the tails.
+
+
+\paragraph{Replication Across Datasets} 
+
+
+
 We replicated $POPout$ test results were replicated in three datasets, 
 \textbf{(1)} UKB European ancestry repeated measures, 
 \textbf{(2)} the UKB Non-European ancestry cohort, and 
