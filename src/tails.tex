@@ -46,7 +46,7 @@
 %\leadauthor{Souaiaia} 
 \leadauthor{Author} 
 \begin{document}
-\title{Tail Analysis Indicates Lost Seals} 
+\title{Striking Departure from Polygenic Architecture in the Tails of Complex Traits}
 \shorttitle{Tails}
 %\author[1,\Letter]{Tade Souaiaia}
 %\author[2]{Hei Man Wu} 
@@ -69,7 +69,81 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT  %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract} %\normalsize
-\noindent\cyansub{Abstract}$\,$ Complex polygenic traits are typically modeled as the additive sum of 
+\noindent\cyansub{Abstract}$\,$ 
+
+Understanding the genetic architecture of human traits is a key goal of biomedical research
+and precision medicine. However, little is known about how genetic architecture 
+varies across the trait continuum and, in particular, if it differs in the tails 
+of complex traits, where disease often occurs. Here we show, via simulation, 
+that trait tails are enriched for rare alleles of large effect under stabilising 
+selection, a key factor shaping genetic variation in humans. Thus, a substantial
+fraction of individuals may have extreme trait values due to only one or several 
+alleles of very large effect, rather than polygenic burden. To test this, we 
+introduce a method that utilizes polygenic risk scores (PRS) to detect departures 
+from polygenic architecture in trait tails from population data: the PRS-On-Phenotype 
+outlier (“POPout”) test. Applying POPout to UK Biobank (UKB) data, we observe 
+significant - often striking - evidence of departures in polygenic architecture 
+in 107 of 148 complex trait tails tested. These results replicate in non-European 
+UKB individuals (R=0.63; P=1x10-5), in the US-based All Of Us dataset (R=0.59; P=1x10-4), 
+in individuals with repeat measures (R=0.71; P=1x10-8), and using our sibling-based 
+test of tail architecture (R=0.81; P=1x10-9). We demonstrate that PRSs perform relatively 
+poorly in tails with reduced polygenic architecture and that those tails are associated 
+with enrichment of rare alleles (R=0.34; P=1x10-5) and advanced paternal age (P=0.004). 
+Finally, we find evidence of ongoing selection consistent with observed departures in 
+polygenicity. Overall, our findings suggest that selection drives rare, large-effect 
+alleles to the tails of complex traits, where, consequently, disease often manifests. 
+Our study has implications for the discovery of rare variants, for the utility of 
+polygenic scores and for the relative importance of common and rare variants to 
+human traits and disease.
+\end {abstract}
+\noindent\textcolor{sunyGray}{\rule{17.25cm}{1mm}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  END ABSTRACT  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRO  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introduction} 
+
+Complex polygenic traits are typically modeled as the additive sum of 
 many variants of limited effect alongside rare risk alleles of substantial penetrence. This distinction 
 likely reflects a balance between long-range selection pressure and the limited ability of trait-altering 
 mutant alleles to persist over multiple generations.  Identification of individuals with extreme trait values as  
@@ -102,43 +176,6 @@ consider the role of rare variants in the analysis of trait tails.  The PRS and 
 offer valuable tools for the targeted selection of traits and samples likely to harbor de novo or rare 
 deleterious alleles and represent an approach that has the potential to significantly enhance the 
 effectiveness and design of sequencing studies.
-\end {abstract}
-\noindent\textcolor{sunyGray}{\rule{17.25cm}{1mm}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END ABSTRACT  %%%%%%%%%%%%%%%%%%%
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRO  %%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Introduction} 
 Genome-wide association studies (GWAS) are instrumental in
 understanding the genetic architecture of complex traits.  These
 studies typically identify numerous common genetic variants, each of
@@ -765,13 +802,11 @@ of European ancestry for analysis.
 \subsubsection*{Quantitative Trait QC} ~\\
 \vspace*{-0.3cm} 
 \paragraph*{Trait Selection} ~\\ 
-
-
 After genetic QC, we initially considered all traits from the 
 categories \textit{Biomarkers} (453 traits), \textit{Physical Measures} (271 traits), 
 the \textit{Touchscreen Questionnaire} (396 traits) and \textit{Cognitive Function} (134 traits) 
 to provide a broad group of traits likely to have polygenic etiology.  
-We then removed 34,698 cancer cases, 1311 individuals on insulin, and 109 pregnant 
+We then removed 34,698 cancer cases, 1,311 individuals on insulin, and 109 pregnant 
 women from all traits.  We also removed 64,043 individuals on statins and other cholesterol lowering drugs from
 the \textit{Blood count} and \textit{Blood Biochemistry} subcategories and removed 29,395 individuals
 on heart rate medication from the \textit{Arterial stiffness} and \textit{Blood pressure} subcategories.
@@ -779,37 +814,33 @@ Next, to ensure that extreme outliers do not impact our results, we removed all 
 than six standard deviations from the mean.  After these removals, we defined quantitative traits as 
 those which contained at least ten distinct values and whose top two modal values comprised less than 
 half the samples. Finally, we removed all traits with fewer than $100,000$ samples remaining in our 
-primary dataset of unrelated individuals of European ancestry which result in a set of 180 traits 
-which were then further normalised as described below. 
-
-
+primary dataset of unrelated individuals of European ancestry, resulting in a set of 180 quantitive 
+traits which were then normalised as described below. 
 
 \paragraph*{Trait Normalisation} ~\\
 To minimise the effect that environmental risk factors have on phenotype, trait values were 
 normalised within each ancestry group (European and Non-European) by applying a linear regression 
 model to each trait, with covariates for $age$, $age^2$, $age^3$, sex, menopause status, %(Field ID: 2724), 
-type-II diabetes status, coronary artery disease status, 
-alcohol intake (Field ID: 1558), 
+type-II diabetes status, coronary artery disease status, alcohol intake, % (Field ID: 1558), 
 smoking (categorical (Field ID: 20116) and continuous (Field ID: 1239), 
 batch, centre, and the first 40 genetic principal components.  
 At this stage, traits whose residuals had absolute skew $>2$ \cite{skew_book} 
 in the larger European ancestry group were removed to avoid measurement bias and 
 remaining trait values were standardized using a rank inverse 
-normal transform on residuals to provide standard normal distributions for all initial analyses. 
+normal transform on the residuals to provide standard normal distributions for all 
+initial analyses. 
 
 \paragraph*{Further Trait QC} ~\\
 To carry out our initial trait analyses, European ancestry UKB samples were split 
 randomly into 50\% base and 50\% target data sets. Then, for each trait, GWAS was 
 carried out on the standardised trait values in the base data using PLINK-1.9 \citep{plink, bt_10} 
 and heritability and pairwise genetic correlation were estimated using LDscore \cite{ldsc}.  
-
-
 At this stage, to ensure that our PRS analyses are well powered and reflect additive polygenicity 
 we removed traits with heritability $h^2<5\%$ \cite{guide_paper} or for which oligogenicity 
-was suggested due to a single SNP explained more than 2\% of trait variance \cite{2prule}. 
+was suggested due to a single SNP explaining more than 2\% of trait variance \cite{2prule}. 
 This left 120 remaining quantitative traits from across all four categories. 
 
-To ensure that the traits were meaningfully different from each other, we considered the 
+To verify that the traits were meaningfully different from each other, we considered the 
 pairwise genetic correlations calculated above and observed that more than half (64 of the 120) 
 remaining traits had pairwise genetic correlation $r_g>95\%$ with at least one remaining trait. 
 Of these 64 traits, 22 had a single pairwise correlation above this threshold.  For these 11 pairs 
@@ -824,25 +855,21 @@ were used for all downstream analyses. % GIVE SOME ON AVERAGE NUMBERS OR BELOW -
 
 
 \paragraph*{Initial PRS Analyses} ~\\
-
-
 The surviving 74 traits included 37 in the \textit{Biomarkers} category, 21 traits in \textit{Physical Measures} 
 category, and 16 that were in either the \textit{Touchscreen Questionnaire} or \textit{Cognitive Function} 
 category.  In the primary unrelated European dataset these traits had between of 50,109 and 167,857 
 (average 123,482) samples in the base and target datasets.  For each trait, PRSice \cite{prsice} was 
 used to train an optimal p-value threshold on the base data using the \textit{FastScore} option and then 
-applied to the target dataset to produce risk scores. 
-
+applied to the target dataset to produce target risk scores that were combined with the normalised phenotype 
+values in the target to run the $POPout$ test described below. 
 
 
 % ADD IN INFOR FOR PRSICE HERE - FASTSCORE, hi-res PRM 
 % ADD IN CORRELATION BETWEEN PAIRWISE CORRELATION AND STANDARDIZED DIFFERENCE OF POPOUT IN TAIL % 
 
-
+\vspace*{1cm} 
 \subsubsection*{Replication Dataset QC}
-
 \paragraph*{European Ancestry Repeated Measures} ~\\
-
 As discussed above, after initial filtering, there were 18,340 European 
 ancestry individuals with measurements repeated after a five year-followup period. 
 For these individuals, both measurements were normalised alongside 
@@ -850,14 +877,18 @@ the other European ancestry UKB samples but held out of the base dataset. Then
 the residualised trait values from their two visits were averaged to provide a 
 target subset of individuals for which random measurement error is less likely 
 to produce phenotype values in the tail.  Across the 74 traits there were between 
-2461 and 15475 (average: 10699.4) unrelated individuals for repeated measure replication. 
-PRSice was used to generate PRS scores using the threshold from the European dataset 
-described above. 
+2461 and 15,475 (average: 10699.4) unrelated individuals for repeated measure replication. 
+PRSice \cite{prsice} was used to generate PRS scores using the threshold from the 
+unrelated European dataset described above. 
+
 
 \paragraph*{Non-European Ancestry Individuals} ~\\
 The 24,476 Non-European ancestry individuals were filtered as above and normalised 
-is a separate run that included all ancestry samples.   Across the 74 traits there 
-were between 569 and 22513 (average: 14871.4) unrelated individuals for cross ancestry replication. 
+is a separate run that included all ancestry samples and risk scores were again 
+generated using \cite{prsice} on the 74 primary traits that were analysed in our 
+primary dataset.  Across these traits there were  between 569 and 
+22,513 (average: 14,871.4) unrelated individuals for cross ancestry replication. 
+
 
 %They were used to replicate the POPout results on the 70 of 74 traits where there were at least 
 %a thousand samples.  
@@ -875,18 +906,19 @@ were between 569 and 22513 (average: 14871.4) unrelated individuals for cross an
 %Replication analysis was restricted to the 63 of the 74 traits where there were at 
 %least 1000 repeated measures.  % WHY A THOUSAND AND HOW DO WE KNOW ITS POWERFUL ENOUGH 
 
-
-
-
 \paragraph*{All of Us Cohort} ~\\
 \textit{All of Us} is a multi-ancestry biobank from the United States 
-that make use of electronic health record (EHR) data from a much wider age range than the UKB ($\mu,\sigma$= 55.8,17.1 vs 56.5,8.1). 
+that make use of electronic health record (EHR) data from a much wider age 
+range than the UKB ($\mu,\sigma$= 55.8,17.1 vs 56.5,8.1). 
 Traits matching those analysed in our primary UKB analysis 
-were identified through an initial database search and were then interrogated 
-manually to determine if trait descriptions were sufficiently similar.  
-All of Us provides ancestry categories, corresponding to definitions used within gnomAD, the Human
-Genome Diversity Project, and 1000 Genomes project.  133,581  European ancestry individuals were 
-extracted for analysis. %Too few individuals of non-European ancestry were avaialble for sufficient replication power.
+were identified through an initial database search and were 
+then interrogated manually to determine if trait descriptions 
+were sufficiently similar (see \textit{Supplemental Table}.  
+All of Us provides ancestry categories, corresponding to definitions 
+used within gnomAD \cite{gnomad}, 
+the Human Genome Diversity Project \cite{hgdp}, 
+and 1000 Genomes project \cite{tgp}.  
+133,581  European ancestry individuals were extracted for analysis. %Too few individuals of non-European ancestry were avaialble for sufficient replication power.
 
 Trait QC in All Of Us was carried out to approximately match what was done 
 in the UKB wherever possible.  Like above, inidividuals on statins were removed 
@@ -1017,35 +1049,28 @@ target samples this simulation allowed us to calculate the expected relative odd
 in each quantile for comparison to our traits with differing levels of $POPout$ effect.  
 
 
+\vspace{1cm} 
 \paragraph*{Replicating POPout Results}~\\ 
-
+\vspace{-0.5cm} 
 \paragraph*{Bootstrap Analysis using European Ancestry Target Subsets} ~\\
-Our 74 QC-validated traits were required to have at least 100k total
-samples.  In the target sample (half the total), after outlier removal
-our QC-validated traits had between of 50,109 and 167,857 (average
-123k) in the target sample.  To explore whether our PRM-test results
-replicate with smaller sample sizes, we repeatedly sampled subsets of
-between 5k and 50k target samples and performed our PRM-test on these
-subsets.  For each value between 5k and 50k (counting by 5k) we
-performed 100 trials across each of the 148 trait tails and calculated
-linear and the rank correlation of for the regression effect size
-across the tails.
-
-%the \textbf{(1)} relative accuracy (true and false positives and
-%negatives) relative to our full dataset (FDR 5\%) and \textbf{(2)} the
-%linear and the rank correlation of for the regression effect size
-%across all the tails.
+Our 74 QC-validated traits were required to have at least 100k total (50k target) 
+samples. To explore whether our $POPout$ results replicate with smaller sample sizes, 
+we repeatedly sampled subsets of between 1k and 50k target samples and performed our 
+$POPout$ test on these subsets.  For each value between 1k and 50k (counting by 5k) we
+performed 100 trials across each of the 148 trait tails and calculated the linear and 
+the rank correlation for $POPout$ effect size across the tails.  We also enumerated 
+the number of of $POPout$ effects that were within the larger dataset 95\% confidence interval, 
+and the number of traits for which the greater tail $POPOut$ effect matched the larger dataset. 
+(see \textit{Supplement}). 
 
 
 \paragraph{Replication Across Datasets} 
 
-
-
-We replicated $POPout$ test results were replicated in three datasets, 
+Motivated by the result above we replicated the $POPout$ effect in our three replication datasets: 
 \textbf{(1)} UKB European ancestry repeated measures, 
 \textbf{(2)} the UKB Non-European ancestry cohort, and 
-\textbf{(3)} the European ancestry samples in All Of Us.  In each dataset
-matching traits with at least five thousand samples that passed the 
+\textbf{(3)} the European ancestry samples in All Of Us.  
+In each dataset matching traits with at least five thousand samples that passed the 
 \textit{$POPout$ regression QC} mentioned above were included and the 
 Pearson correlation across the $POPout$ tail effect sizes was calculated 
 to quantify replication.  
@@ -1232,6 +1257,52 @@ proxy and the $POPout$ effect size.
 
 
 
+
+
+
+
+
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Sup1.pdf} \end{maybe}
+\caption{\footnotesize{\textbf{TraitTables}}} \label{fig:sup1} \end{figure} \FloatBarrier
+
+
+\clearpage \newpage
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Sup2.pdf} \end{maybe}
+\caption{\footnotesize{\textbf{BootStrap Analysis}}} \label{fig:sup2} \end{figure} \FloatBarrier
+
+\clearpage \newpage
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Sup3.pdf} \end{maybe}
+\caption{\footnotesize{\textbf{Extended Replication}}} \label{fig:sup3} \end{figure} \FloatBarrier
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section*{Addendum 1: PRS Prediction} \label{sec:supplement}
 
 In this manuscript we have focused on polygenic regression to the mean, which can be observed when plotting 
@@ -1290,26 +1361,26 @@ samples. \textbf{(f)}....}  } \label{fig:sup0} \end{figure}
 
 
 
-\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
-\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/checkplot_30070.pdf} \end{maybe}
-\caption{\footnotesize{\textbf{Sample and SNP Workflow}}} \label{fig:sup1} \end{figure} \FloatBarrier
+%\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+%\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/checkplot_30070.pdf} \end{maybe}
+%\caption{\footnotesize{\textbf{Sample and SNP Workflow}}} \label{fig:sup1} \end{figure} \FloatBarrier
 
 \clearpage \newpage
 
 \section*{Addendum 2: QC Figures} \label{sec:supplement}
 
-\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/methodFlow.pdf} \end{maybe}
-\caption{\footnotesize{\textbf{Sample and SNP Workflow}}} \label{fig:qcFlow} \end{figure} \FloatBarrier
+%\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/methodFlow.pdf} \end{maybe}
+%\caption{\footnotesize{\textbf{Sample and SNP Workflow}}} \label{fig:qcFlow} \end{figure} \FloatBarrier
 
 
 
-\begin{figure}[!ht] \centering \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=16.5cm]{Figures/qctable.pdf} \end{maybe} \label{fig:m2} \caption{\scriptsize Secondary QC} \end{figure} 
-\clearpage \newpage
+%\begin{figure}[!ht] \centering \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=16.5cm]{Figures/qctable.pdf} \end{maybe} \label{fig:m2} \caption{\scriptsize Secondary QC} \end{figure} 
+%\clearpage \newpage
 
 \section*{Addendum 3: Lifetime Reproductive Success} \label{sec:supplement}
 
-\FloatBarrier \begin{figure}[!h] \centering \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=16.5cm]{Figures/vishtable.pdf} \end{maybe} 
-\caption{\footnotesize{\textbf{Comparison of Selection Estimates}}} \label{fig:vishy} \end{figure} \FloatBarrier 
+%\FloatBarrier \begin{figure}[!h] \centering \begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=16.5cm]{Figures/vishtable.pdf} \end{maybe} 
+%\caption{\footnotesize{\textbf{Comparison of Selection Estimates}}} \label{fig:vishy} \end{figure} \FloatBarrier 
 
 \clearpage \newpage
 %
