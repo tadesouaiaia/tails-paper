@@ -878,8 +878,12 @@ the residualised trait values from their two visits were averaged to provide a
 target subset of individuals for which random measurement error is less likely 
 to produce phenotype values in the tail.  Across the 74 traits there were between 
 2461 and 15,475 (average: 10699.4) unrelated individuals for repeated measure replication. 
-PRSice \cite{prsice} was used to generate PRS scores using the threshold from the 
-unrelated European dataset described above. 
+Risk scores for this subset of data were calculated directly from the SNP weights 
+generated in the UKB base data above. 
+
+
+%PRSice \cite{prsice} was used to generate PRS scores using the threshold from the 
+%unrelated European dataset described above. 
 
 
 \paragraph*{Non-European Ancestry Individuals} ~\\
@@ -888,6 +892,8 @@ is a separate run that included all ancestry samples and risk scores were again
 generated using \cite{prsice} on the 74 primary traits that were analysed in our 
 primary dataset.  Across these traits there were  between 569 and 
 22,513 (average: 14,871.4) unrelated individuals for cross ancestry replication. 
+Again, risk scores for this subset of data were calculated directly from the 
+SNP weights generated above. 
 
 
 %They were used to replicate the POPout results on the 70 of 74 traits where there were at least 
@@ -930,13 +936,14 @@ applied with covariates for $age$, $age^2$, $age^3$, sex, and the first 40 genet
 and a rank inverse normal transform was applied to residuals to provide standardized phenotype distributions.  
 
 Genetic QC in All Of Us was carried out with standard quality control procedures.  SNPs with a minor
-allele frequency $<$ 0.01, genotype missingness > 0.02, or Hardy-Weinberg equilibrium test $P$-value $< 10^{-8}$ were
-excluded. Samples exhibiting high levels of missingness or heterozygosity, inconsistencies in genetic-inferred 
-and self-reported sex, or displaying aneuploidy of the sex chromosomes were removed and the same 
-greedy algorithm mentioned above was used to maximize sample retention while removing all third-degree relatives (kinship
-coefficient > 0.044) \citep{erase}.  Using the higher powered publicly available European ancestry GWAS summary stats 
-generated from the entire UKB \cite{neale}, PRS scores were calculated \cite{prsice} using the same p-value 
-threshold that was trained in the UKB European ancestry analysis described above. 
+allele frequency $<$ 0.01, genotype missingness > 0.02, or Hardy-Weinberg equilibrium test 
+$P$-value $< 10^{-8}$ were excluded. Samples exhibiting high levels of missingness or heterozygosity, 
+inconsistencies in genetic-inferred and self-reported sex, or displaying aneuploidy of the sex 
+chromosomes were removed and the same greedy algorithm mentioned above was used to maximize sample 
+retention while removing all third-degree relatives (kinship coefficient > 0.044) \citep{erase}.  
+Using the higher powered publicly available European ancestry GWAS summary stats generated 
+from the entire UKB \cite{neale}, SNP weights and PRS scores were calculated \cite{prsice} 
+using the same p-value threshold trained in the UKB European ancestry analysis described above. 
 
 %After removing traits 
 %for which fewer than 1000 samples remained this left us witih 33 trait phenotype and PRS pairs for replication 
