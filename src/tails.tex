@@ -409,7 +409,7 @@ different POP-out results (clockwise: No $POPout$ Effects, $POPout$ in Upper Tai
 
 
 
-% trained
+% trained comprised
 
 
 
@@ -512,6 +512,29 @@ pearson correlation.}}
 
 \subsection*{The Role of Rare Variants} ~\\
 
+\FloatBarrier \begin{figure}[!h] 
+\begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig4.pdf} \end{maybe} 
+\caption{\footnotesize{{\bf Rare Variant and Selection Analysis}} 
+\textbf{(a)} Trumpet plots (minor allele frequency v effect size) of genome-wide significant variants for traits shown in (a). 
+\textbf{(b)} POP-out effect sizes plotted against the number of genome-wide significant
+variants with MAF<1\% for 58 traits with overlapping exome sequence results. 
+For upper tails positive variant effects are counted and for lower tails negative variant effects are counted. 
+Correlation and significance calculated using pearson correlation.
+\textbf{(c)} Age at Menopause: PRS quantile vs. trait mean and trumpet plot.  
+\textbf{(d)} Residualised trait value plotted against relative lifetime reproductive success for 16 example traits.
+Best model fit to the data, selected by BIC considering all models with and without linear and quadratic terms, 
+are shown by dashed lines. Model selected by BIC used to classify selective pressure acting on the traits. 
+\textbf{(e)} $POPout$ effect size shown by model selection category, with PRS-test effect size meta-analysis for each category. 
+\textbf{(f)} Spearman rank correlation between four proxy measures of fitness and PRS-test effect size. For each 
+fitness measure correlation was calculated between the mean of the fitness measure in individuals in the upper and lower 1\% tails
+and PRS-test effect size for the corresponding tail across 74 traits in UKB passing QC.}
+\label{fig:evo} \end{figure} \FloatBarrier
+
+
+
+
+
+
 \noindent The genetic mechanism proposed to explain $POPout$ involves the confluence 
 of genetic selection away from one or both tails, an enrichment of rare variants in those tails, 
 and PRS methods that typically restrict to common variants (MAF $>1\%$) that suffers in such tails.  
@@ -542,23 +565,17 @@ have been identified (see \fref{fig:evo}{c}).  This suggests that strong selecti
 may result in private variants that cannot be identified using population based sequencing.
 
 
-\FloatBarrier \begin{figure}[!h] 
-\begin{maybe}{showFig} \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig4.pdf} \end{maybe} 
-\caption{\footnotesize{{\bf Rare Variant and Selection Analysis}} 
-\textbf{(a)} Trumpet plots (minor allele frequency v effect size) of genome-wide significant variants for traits shown in (a). 
-\textbf{(b)} POP-out effect sizes plotted against the number of genome-wide significant
-variants with MAF<1\% for 58 traits with overlapping exome sequence results. 
-For upper tails positive variant effects are counted and for lower tails negative variant effects are counted. 
-Correlation and significance calculated using pearson correlation.
-\textbf{(c)} Age at Menopause: PRS quantile vs. trait mean and trumpet plot.  
-\textbf{(d)} Residualised trait value plotted against relative lifetime reproductive success for 16 example traits.
-Best model fit to the data, selected by BIC considering all models with and without linear and quadratic terms, 
-are shown by dashed lines. Model selected by BIC used to classify selective pressure acting on the traits. 
-\textbf{(e)} $POPout$ effect size shown by model selection category, with PRS-test effect size meta-analysis for each category. 
-\textbf{(f)} Spearman rank correlation between four proxy measures of fitness and PRS-test effect size. For each 
-fitness measure correlation was calculated between the mean of the fitness measure in individuals in the upper and lower 1\% tails
-and PRS-test effect size for the corresponding tail across 74 traits in UKB passing QC.}
-\label{fig:evo} \end{figure} \FloatBarrier
+
+
+
+
+
+
+
+
+
+
+
 
 
 \subsection*{The Impact of Selection} ~\\
@@ -812,7 +829,7 @@ the \textit{Blood count} and \textit{Blood Biochemistry} subcategories and remov
 on heart rate medication from the \textit{Arterial stiffness} and \textit{Blood pressure} subcategories.
 Next, to ensure that extreme outliers do not impact our results, we removed all samples from traits more 
 than six standard deviations from the mean.  After these removals, we defined quantitative traits as 
-those which contained at least ten distinct values and whose top two modal values comprised less than 
+those which contained at least ten distinct values and whose top two modal values comprise less than 
 half the samples. Finally, we removed all traits with fewer than $100,000$ samples remaining in our 
 primary dataset of unrelated individuals of European ancestry, resulting in a set of 180 quantitive 
 traits which were then normalised as described below. 
@@ -822,7 +839,7 @@ To minimise the effect that environmental risk factors have on phenotype, trait 
 normalised within each ancestry group (European and Non-European) by applying a linear regression 
 model to each trait, with covariates for $age$, $age^2$, $age^3$, sex, menopause status, %(Field ID: 2724), 
 type-II diabetes status, coronary artery disease status, alcohol intake, % (Field ID: 1558), 
-smoking (categorical (Field ID: 20116) and continuous (Field ID: 1239), 
+smoking (categorical - Field ID: 20116 and continuous - Field ID: 1239), 
 batch, centre, and the first 40 genetic principal components.  
 At this stage, traits whose residuals had absolute skew $>2$ \cite{skew_book} 
 in the larger European ancestry group were removed to avoid measurement bias and 
@@ -863,10 +880,6 @@ used to train an optimal p-value threshold on the base data using the \textit{Fa
 applied to the target dataset to produce target risk scores that were combined with the normalised phenotype 
 values in the target to run the $POPout$ test described below. 
 
-
-% ADD IN INFOR FOR PRSICE HERE - FASTSCORE, hi-res PRM 
-% ADD IN CORRELATION BETWEEN PAIRWISE CORRELATION AND STANDARDIZED DIFFERENCE OF POPOUT IN TAIL % 
-
 \vspace*{1cm} 
 \subsubsection*{Replication Dataset QC}
 \paragraph*{European Ancestry Repeated Measures} ~\\
@@ -877,13 +890,9 @@ the other European ancestry UKB samples but held out of the base dataset. Then
 the residualised trait values from their two visits were averaged to provide a 
 target subset of individuals for which random measurement error is less likely 
 to produce phenotype values in the tail.  Across the 74 traits there were between 
-2461 and 15,475 (average: 10699.4) unrelated individuals for repeated measure replication. 
+2,461 and 15,475 (average: 10699.4) unrelated individuals for repeated measure replication. 
 Risk scores for this subset of data were calculated directly from the SNP weights 
 generated in the UKB base data above. 
-
-
-%PRSice \cite{prsice} was used to generate PRS scores using the threshold from the 
-%unrelated European dataset described above. 
 
 
 \paragraph*{Non-European Ancestry Individuals} ~\\
@@ -894,23 +903,6 @@ primary dataset.  Across these traits there were  between 569 and
 22,513 (average: 14,871.4) unrelated individuals for cross ancestry replication. 
 Again, risk scores for this subset of data were calculated directly from the 
 SNP weights generated above. 
-
-
-%They were used to replicate the POPout results on the 70 of 74 traits where there were at least 
-%a thousand samples.  
-%among the European ancestry cluster were 18,340 individuals which repeated 
-%measures that were set aside along with the 24,476 non-European individuals 
-%for replication analyses.  All told, this resulted in up to 369,133 unrelated 
-%European ancestry individuals for primary analyses. 
-%Approximately 20k European ancestry individuals in the UKB had measurements 
-%repeated after a five-year followup period.  
-%These individuals had trait values normalised as 
-%above but were held out of the base dataset above.  Their 
-%residualised trait values from their 
-%two visits were then averaged to provide a target subset of individuals for which 
-%random measurement error is less likely to produce phenotype values in the tail.  
-%Replication analysis was restricted to the 63 of the 74 traits where there were at 
-%least 1000 repeated measures.  % WHY A THOUSAND AND HOW DO WE KNOW ITS POWERFUL ENOUGH 
 
 \paragraph*{All of Us Cohort} ~\\
 \textit{All of Us} is a multi-ancestry biobank from the United States 
@@ -944,12 +936,6 @@ retention while removing all third-degree relatives (kinship coefficient > 0.044
 Using the higher powered publicly available European ancestry GWAS summary stats generated 
 from the entire UKB \cite{neale}, SNP weights and PRS scores were calculated \cite{prsice} 
 using the same p-value threshold trained in the UKB European ancestry analysis described above. 
-
-%After removing traits 
-%for which fewer than 1000 samples remained this left us witih 33 trait phenotype and PRS pairs for replication 
-%in All Of Us. 
-
-
 
 
 
@@ -1064,23 +1050,25 @@ Our 74 QC-validated traits were required to have at least 100k total (50k target
 samples. To explore whether our $POPout$ results replicate with smaller sample sizes, 
 we repeatedly sampled subsets of between 1k and 50k target samples and performed our 
 $POPout$ test on these subsets.  For each value between 1k and 50k (counting by 5k) we
-performed 100 trials across each of the 148 trait tails and calculated the linear and 
-the rank correlation for $POPout$ effect size across the tails.  We also enumerated 
-the number of of $POPout$ effects that were within the larger dataset 95\% confidence interval, 
-and the number of traits for which the greater tail $POPOut$ effect matched the larger dataset. 
-(see \textit{Supplement}). 
+performed 100 trials across each of the 148 trait tails.  Implicitly assuming that the 
+set of FDR 5\% significant trait tails in our main analyses are "true positives" we 
+calculated the empirical power for each subset size.  We also calculated the linear 
+correlation across $POPout$ effect sizes across the tails between each subset and 
+our full dataset. This result informed our decision to require replication only in 
+traits where at least 5,000 target samples are present - due to dramatically 
+reduced power below this level. 
+(see \textit{Supplement Figure 1}). 
 
 
 \paragraph{Replication Across Datasets} 
 
-Motivated by the result above we replicated the $POPout$ effect in our three replication datasets: 
+Motivated by the result above we replicated the $POPout$ effect in our three replication datasets, 
 \textbf{(1)} UKB European ancestry repeated measures, 
 \textbf{(2)} the UKB Non-European ancestry cohort, and 
 \textbf{(3)} the European ancestry samples in All Of Us.  
-In each dataset matching traits with at least five thousand samples that passed the 
-\textit{$POPout$ regression QC} mentioned above were included and the 
-Pearson correlation across the $POPout$ tail effect sizes was calculated 
-to quantify replication.  
+In each dataset traits with at least five thousand samples that passed the \textit{$POPout$ regression QC} mentioned above were 
+included and the Pearson correlation across the $POPout$ tail effect sizes was calculated to quantify replication.  Additionally, 
+we also calculated the power or discovery rate by assuming that every tail effect significant at FDR 5\% is a true positive. 
 
 
 
@@ -1237,16 +1225,14 @@ in each tail and the mean values are compared using a T-Test.
 Five proxy measures of fitness were considered, \textbf{(1)} Male and \textbf{(2)} female 
 fecundity (Trait-Ids: 2405 and 2734), \textbf{(3)} 
 self-reported non-cancer illnesses (Trait-Id: 2002), 
-\textbf{(4)} miscarriages and still-births (Trait-Ids: 39290 and 3839), 
-and \textbf{(5)} paternal age which is calculated as the difference 
-between fathers age (Trait-Id 2946) and participant age at recruitment (Trait-Id 21022).
+\textbf{(4)} sum of miscarriages and still-births (Trait-Ids: 39290 and 3839), 
+and \textbf{(5)} paternal age (calculated as the difference 
+between fathers age (Trait-Id 2946) and participant age (Trait-Id 21022).
 Association between these measures and $POPout$ effect was tested as
-follows.  The mean value of the five proxies of selection was
+follows.  First, the mean value of the five proxies of selection was
 calculated separately in the upper and lower 1\% of the trait
-distribution, association was then tested by Spearman's rank
-correlation across all trait tails of the mean tail values for each
-proxy and the $POPout$ effect size.
-
+distribution.  Then, using Spearman's rank correlation, the association between 
+mean tail values of each proxy and $POPout$ effect size across the tails was calculated. 
 
 \clearpage \newpage
 \bibliography{refs}
