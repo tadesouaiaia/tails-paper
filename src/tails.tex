@@ -71,30 +71,33 @@
 \begin{abstract} %\normalsize
 \noindent\cyansub{Abstract}$\,$ 
 
-Understanding the genetic architecture of human traits is a key goal of biomedical research
-and precision medicine. However, little is known about how genetic architecture 
-varies across the trait continuum and, in particular, if it differs in the tails 
-of complex traits, where disease often occurs. Here we show, via simulation, 
-that trait tails are enriched for rare alleles of large effect under stabilising 
-selection, a key factor shaping genetic variation in humans. Thus, a substantial
-fraction of individuals may have extreme trait values due to only one or several 
-alleles of very large effect, rather than polygenic burden. To test this, we 
-introduce a method that utilizes polygenic risk scores (PRS) to detect departures 
-from polygenic architecture in trait tails from population data: the PRS-On-Phenotype 
-outlier (“POPout”) test. Applying POPout to UK Biobank (UKB) data, we observe 
-significant - often striking - evidence of departures in polygenic architecture 
-in 107 of 148 complex trait tails tested. These results replicate in non-European 
-UKB individuals (R=0.63; P=1x10-5), in the US-based All Of Us dataset (R=0.59; P=1x10-4), 
-in individuals with repeat measures (R=0.71; P=1x10-8), and using our sibling-based 
-test of tail architecture (R=0.81; P=1x10-9). We demonstrate that PRSs perform relatively 
-poorly in tails with reduced polygenic architecture and that those tails are associated 
-with enrichment of rare alleles (R=0.34; P=1x10-5) and advanced paternal age (P=0.004). 
-Finally, we find evidence of ongoing selection consistent with observed departures in 
-polygenicity. Overall, our findings suggest that selection drives rare, large-effect 
-alleles to the tails of complex traits, where, consequently, disease often manifests. 
-Our study has implications for the discovery of rare variants, for the utility of 
-polygenic scores and for the relative importance of common and rare variants to 
-human traits and disease.
+
+
+
+
+
+
+Understanding the genetic architecture of human traits is a key goal
+of biomedical research and precision medicine.  However, little is known about
+how genetic architecture varies across the trait continuum and, in particular,
+if it differs in the tails of complex traits, where disease often occurs. Here, applying an approach that
+utilizes polygenic scores, we observe striking evidence of pervasive and substantial departures in polygenic
+architecture across 148 complex trait tails (e.g. bottom/top 1\% of LDL, BMI, glucose) tested in UK Biobank data.
+These results replicate in individuals with repeat measures, in non-European UKB individuals,
+in the US-based All Of Us dataset, and in our sibling-based test of tail architecture. We demonstrate that
+PRSs perform relatively poorly in tails with reduced polygenic architecture and that those tails are associated
+with enrichment of rare alleles and advanced paternal age. Finally, we find evidence of ongoing
+selection consistent with observed departures in polygenicity and demonstrate, via simulation,
+that trait tails under selective pressure are expected to be enriched for rare, large-effect alleles2.
+Therefore, a substantial fraction of individuals may have extreme trait values due to only one or
+several alleles of very large effect, rather than polygenic burden. Overall, our findings suggest that
+selection can drive distinct genetic architecture in the tails of complex traits. Our study has implications
+for the discovery of rare variants, for the utility of polygenic scores and for the relative importance
+of common and rare variants to human traits and disease.
+
+
+
+
 \end {abstract}
 \noindent\textcolor{sunyGray}{\rule{17.25cm}{1mm}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  END ABSTRACT  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -142,6 +145,76 @@ human traits and disease.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRO  %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Introduction} 
+
+
+
+Background to genetic architecture, detection of variants and theory/methods relating to polygenicity.
+Also something on selection shaping genetic variation / polygenicity etc. End on the gap, despite all this,
+it's unknown how GA varies across trait continuum
+(and the role that selection might play in that) / + as a result, we don't have a way of inferring
+whether an individual has a rare/common cause.
+
+
+We introduce a method that utilizes polygenic risk scores (PRS) to detect departures from polygenic
+architecture in trait tails from population data: the PRS-On-Phenotype outlier ("POPout") test.
+Explain how it works. Say that we apply this to UKB and All of US data. Also explain that we've
+already developed a sibling-based test to do this as well.
+
+
+Some flavour of the results. Also elaborate a bit on the selection work.. done to help explain the
+observations and to set them in the context of how pop gen processes produce the genetic variation
+and how it manifests (cite a lot of the selection work on this), or maybe this whole paragraph
+could focus on the involvement/explanation of selection here.
+
+
+Understanding the genetic architecture of human traits is a key goal of biomedical research
+and precision medicine. However, little is known about how genetic architecture 
+varies across the trait continuum and, in particular, if it differs in the tails 
+of complex traits, where disease often occurs. Here we show, via simulation, 
+that trait tails are enriched for rare alleles of large effect under stabilising 
+selection, a key factor shaping genetic variation in humans. Thus, a substantial
+fraction of individuals may have extreme trait values due to only one or several 
+alleles of very large effect, rather than polygenic burden. To test this, we 
+introduce a method that utilizes polygenic risk scores (PRS) to detect departures 
+from polygenic architecture in trait tails from population data: the PRS-On-Phenotype 
+outlier (“POPout”) test. Applying POPout to UK Biobank (UKB) data, we observe 
+significant - often striking - evidence of departures in polygenic architecture 
+in 107 of 148 complex trait tails tested. These results replicate in non-European 
+UKB individuals (R=0.63; P=1x10-5), in the US-based All Of Us dataset (R=0.59; P=1x10-4), 
+in individuals with repeat measures (R=0.71; P=1x10-8), and using our sibling-based 
+test of tail architecture (R=0.81; P=1x10-9). We demonstrate that PRSs perform relatively 
+poorly in tails with reduced polygenic architecture and that those tails are associated 
+with enrichment of rare alleles (R=0.34; P=1x10-5) and advanced paternal age (P=0.004). 
+Finally, we find evidence of ongoing selection consistent with observed departures in 
+polygenicity. Overall, our findings suggest that selection drives rare, large-effect 
+alleles to the tails of complex traits, where, consequently, disease often manifests. 
+Our study has implications for the discovery of rare variants, for the utility of 
+polygenic scores and for the relative importance of common and rare variants to 
+human traits and disease.
+
+
+
+Genetic architecture describes the number, effect sizes and allele frequencies 
+of genetic variants affecting a trait. While there have been intense efforts to 
+catalogue and infer the genetic architecture of human traits, little is known 
+about how genetic architecture varies across the trait continuum. Here we 
+reveal striking departures from expected polygenic signal in the distribution 
+tails of a range of complex, continuous traits (e.g. LDL, glucose, sitting height)
+and implicate stabilising selection – pervasive in humans1,2 – as a chief cause. 
+Under simulation, we have demonstrated that stabilising selection can enrich 
+trait tails with rare alleles of large effect3, and here we find evidence of ongoing
+selection in traits with polygenic departures as inferred by models of 
+reproductive success1. Applying statistical tests to infer trait tail architecture 
+from polygenic risk scores (PRSs) in population data and from sibling trait-
+similarity in family data4 , leveraging the large UK Biobank and All of US 
+datasets, we observe consistent patterns of reduced polygenicity in trait tails 
+between tests, cohorts, and ancestries. Our study provides novel insights into 
+how genetic architecture varies across the trait continuum, demonstrating a 
+pervasive pattern of reduced polygenicity in trait tails that limits PRS accuracy,
+and highlights the key role of rare variants, specifically within the trait tails, 
+where disease typically manifests
+
+
 
 Complex polygenic traits are typically modeled as the additive sum of 
 many variants of limited effect alongside rare risk alleles of substantial penetrence. This distinction 
@@ -245,6 +318,39 @@ Finally, we assess whether the predictions of a complex
 trait architecture derived from a conditional sibling model align with
 the observed diversity in the architecture of trait extremes inferred
 from population level analyses.
+
+
+
+Complex polygenic traits are typically modeled as the additive sum of many variants
+of limited effect alongside rare risk alleles of substantial penetrence. This distinction likely
+reflects a balance between long-range selection pressure and the limited ability of trait-altering
+mutant alleles to persist over multiple generations. Identification of individuals with extreme
+trait values as probable carriers of rare high-impact variants has led sequencing strategies to
+focus on individuals in the tails of the trait distribution. Tail trait values can also result from
+extreme polygenic burden created by recombination and reassortment. Therefore, to enhance
+the efficency of sequencing studies, it is imperative to be able to discriminate between these
+different etiologies.
+One indicatation that rare variants may play a significant role in the tails of the trait dis-
+tribution can be reflected in the reliability of polygenic risk scores (PRS) in the tails. If highly
+penetrant rare variants not included in GWAS determine the tails of the trait distribution such
+individuals will not be assigned appropriate risk scores. In this study, we develop a polygenic
+regression-to-mean (PRM) statistical test that compares the PRS in the tails of the trait distribu-
+tion to expectation PRS under a polygenic model. Applying this test to hundreds of traits in the
+UK Biobank reveals that the majority of quantitive traits exhibit significant PRM in one or both
+tails.
+Next we examine whether rare variants in exome studies are enriched in trait tails with signifi-
+cant tail regression and demonstrate that such tails are more likely to be under negative selection.
+Further examining these trait tails we find an association between PRM and other measures of
+fitness that may be influenced by rare variants including the lifetime number of illnesses and still
+births. We then compare these results to a simulation and find that they match.
+Finally, we assess whether the predictions of a complex trait architecture derived from a con-
+ditional sibling model align with the observed diversity in the architecture of trait extremes. The
+concordance between these measures underscores the need to consider the role of rare variants
+in the analysis of trait tails. The PRS and sibling analyses presented here offer valuable tools for
+the targeted selection of traits and samples likely to harbor de novo or rare deleterious alleles and
+represent an approach that has the potential to significantly enhance the effectiveness and design
+of sequencing studies.
+
 
 
 \FloatBarrier \begin{figure}[!h] \centering \begin{maybe}{showFig} 
@@ -1249,8 +1355,8 @@ mean tail values of each proxy and $POPout$ effect size across the tails was cal
 \section*{Supplement} \label{sec:supplement}
 
 
-
-
+\renewcommand{\figurename}{Supplementary Figure}
+\setcounter{figure}{0}   
 
 
 
