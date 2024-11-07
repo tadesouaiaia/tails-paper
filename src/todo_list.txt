@@ -1,6 +1,12 @@
-
-
-
 1) Fix whitespace - in methods for sibtest 
 
 2) Fix bibliography duplicates 
+
+3) Fig 1 caption -- add "examples shown represent the same trait
+before and after strong stablising selection, stablising selection
+reduces trait variance
+
+4) Reduce thickness of x-axis line to reveal tails of the distribution
+
+5) Remove rare and ultra rare from legend, replace with maf threshold
+and reduce caption
