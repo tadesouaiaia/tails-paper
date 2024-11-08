@@ -10,8 +10,8 @@
   [2018/04/18 revision by RH]
 
 % subsection  hyperref  dBioRXiv
-%% Load base class subsection
-\LoadClass[a4paper]{article}
+%% Load base class subsection  caption 
+\LoadClass[a4paper,12pt]{article}
 
 %% define new needed boolean variables
 \newif\if@tmptwocolumn  \@tmptwocolumnfalse
@@ -31,6 +31,7 @@
 \DeclareOption{twocolumn}{\@tmptwocolumntrue}
 \DeclareOption{onecolumn}{\@tmptwocolumnfalse}
 %\DeclareOption{watermark}{\@displaywatermark}
+% section
 
 \ExecuteOptions{times,twoside,twocolumn}
 \ProcessOptions
@@ -65,7 +66,9 @@
 \RequirePackage{bbding} % For the \Envelope symbol
 
 
-\RequirePackage[labelfont={bf,sf},labelsep=colon,font=footnotesize,size=footnotesize,figurename=Fig.]{caption}
+%\RequirePackage[labelfont={bf,sf},labelsep=colon,font=footnotesize,size=footnotesize,figurename=Fig.]{caption}
+\RequirePackage[labelfont={bf,sf},labelsep=colon,size=scriptsize,figurename=Fig.]{caption}
+%\RequirePackage[font={Large}]{caption}
 
 
 \DeclareUnicodeCharacter{00B0}{\degree}
@@ -91,8 +94,6 @@
 
 %\crefname{sfigure}{SFig.}{sfigures}
 
-
-
 %\floatsep — distance between two floats;
 
 % \crefname{chapter}{Chapter}{Chapters}
@@ -112,17 +113,17 @@
 				layoutsize={8.125in,10.875in},%
                 layouthoffset=0.1875in,%
                 layoutvoffset=0.0625in,%
-                %left=38.5pt,%
-                %right=43pt,%
+                left=38.5pt,%
+                right=43pt,%
                 %top=43pt,% 10pt provided by headsep
                 %bottom=32pt,% 
-		left=45pt,%
-                right=50pt,%
+		        %left=45pt,%
+                %right=50pt,%
                 top=43pt,% 10pt provided by headsep
                 bottom=32pt,%
                 headheight=0pt,% No Header
                 headsep=10pt,%
-		% marginparwidth=3cm,%
+		        % marginparwidth=3cm,%
                 footskip=25pt]{geometry}
 
 
@@ -134,13 +135,14 @@
 %% Fonts
 \if@times\RequirePackage{times}\fi
 
-% geometry 
+% caption 
 %% sizes and margins
 \topmargin      -16.0mm
 %\oddsidemargin  -11.0mm
 %\evensidemargin -11.0mm
 %\textwidth        175mm
 \textheight       243mm
+%\textheight       243mm
 \columnsep          7mm
 \headsep          6.3mm
 \headheight        12pt
@@ -170,6 +172,10 @@
 \arrayrulewidth .4pt
 \doublerulesep   2pt
 \tabbingsep\labelsep
+
+% parskip
+
+
 
 %% footnotes  maketitle 
 \skip\footins 10pt plus 4pt minus 2pt
@@ -291,20 +297,15 @@
 \titlespacing*{\paragraph}{0pc}{1.5ex \@plus2pt \@minus1pt}{12pt}
 
 %% Figure caption style
-%\DeclareCaptionFormat{smallformat}{\normalfont\sffamily\fontsize{7}{9}\selectfont#1#2#3}
+\DeclareCaptionFormat{smallformat}{\normalfont\sffamily\fontsize{7}{9}\selectfont#1#2#3}
 %\DeclareCaptionFormat{largeformat}{\normalfont\sffamily\fontsize{9}{12}\selectfont#1#2#3}
 \DeclareCaptionFormat{largeformat}{\normalfont\sffamily\fontsize{12}{16}\selectfont#1#2#3}
+\DeclareCaptionFormat{medformat}{\normalfont\sffamily\fontsize{8}{9}\selectfont#1#2#3}
+\captionsetup*{format=medformat,skip=3pt}
 %\captionsetup*{format=smallformat,skip=3pt}
-\captionsetup*{format=largeformat,skip=3pt}
+%\captionsetup*{format=largeformat,skip=3pt}
 
-
-
-
-
-
-
-
-% %% Watermark 
+% %% Watermark parindent  
 \usepackage[printwatermark]{xwatermark}
 \AtBeginDocument{%
   \ifwatermark%
@@ -355,22 +356,6 @@
 \Button{GoForward}
 \end{center}%
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -476,7 +461,7 @@
 \DeclareSIUnit\Molar{\textsc{m}}
 
 
-%% Allows to enter BIOGRAPHY leaving place for picture
+%% Allows to enter BIOGRAPHY leaving place for picture  med
 %%
 \newenvironment{biography}[1]{%
 \footnotesize\unitlength 1mm\bigskip\bigskip\bigskip\parskip=0pt\par%
@@ -533,6 +518,7 @@
 
 \def\sectionmark#1{\relax}
 
-\parindent=5pt
+%\parindent=5pt
+\parindent=0pt
 \endinput
 
