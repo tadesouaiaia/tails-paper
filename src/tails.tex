@@ -1,5 +1,6 @@
 \RequirePackage[2020-02-02]{latexrelease}  
-\documentclass[times]{zHenriquesLab-StyleBioRxiv}
+%\documentclass[times]{zHenriquesLab-StyleBioRxiv}
+\documentclass[12pt]{zHenriquesLab-StyleBioRxiv}
 \usepackage{relsize, multirow, xcolor,xargs, placeins}
 \usepackage{amsfonts, amsmath, amsthm, amssymb, siunitx} % For math fonts, symbols and environments
 \usepackage[normalem]{ulem}
@@ -9,7 +10,7 @@
 \definecolor{sunyGray}{RGB}{131,134,135} \definecolor{sunyBlue}{RGB}{0,76,147}     
 \definecolor{sunyCyan}{RGB}{0,148,254}                                                            
 \newcommandx{\cyansub}[1]{\large\textcolor{sunyCyan} \noindent \textcolor{sunyBlue} {\noindent\textbf{#1}}}                             
-% The toggles are initially false  Fig. 
+% The toggles are initially false  Fig. caption  
 \newtoggle{showFig}
 \togglefalse{showFig} \toggletrue{showFig}
 \NewEnviron{maybe}[1]{\iftoggle{#1}{\BODY}{}}
@@ -44,6 +45,9 @@
 \newcommand\tfix[1]{\textcolor{purple}{\textbf{Solutions:} \footnotesize{#1}}}                                                                                                           
 
 \setlength\parindent{0.50cm}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.5\baselineskip} 
+
 \leadauthor{Souaiaia} 
 \begin{document}
 \title{Striking Departures from Polygenic Architecture in the Tails of Complex Traits}
@@ -72,7 +76,7 @@
 
 
 
-
+% shape
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END PREAMBLE  %%%%%%%%%%%%%%%%%%%%%
@@ -86,26 +90,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract} %\normalsize
 \noindent\cyansub{Abstract}$\,$ 
-Understanding the genetic architecture of human traits is a key goal of
-biomedical research and precision medicine \cite{Timpson2018}. However, little
-is known about how genetic architecture varies across the trait continuum and, in particular,
-if it differs in the tails of complex traits, where disease often occurs.
-Here, applying a novel approach based on polygenic scores, we reveal striking departures
-from polygenic architecture across 148 quantitative trait tails consistent with distinct
-concentrations of high-impact rare alleles in one or both tails of most complex traits.
-These results replicate across ancestries, cohorts, repeat measures, and using an
-orthogonal family-based approach \cite{Souaiaia2024}. Furthermore, we observe associations
-between inferred tail architecture and the number of rare exome-based hits, paternal age, fecundity,
-and polygenic score predictive performance. Finally, we find evidence of ongoing selection consistent
-with observed departures in polygenicity and demonstrate, via simulation, that traits under
-stabilising selection are expected to have tails enriched for rare, large-effect alleles.
-This means that many individuals may have extreme trait values due to only one or several
-alleles of very large effect, contrary to the popular infinitesimal model of quantitative traits,
-which assumes that the genetic contribution to trait values is due only to the total burden of
-many weak effects \cite{Barton2017}. Overall, our findings suggest that selection drives distinct
-genetic architecture in the tails of complex traits. Our study has implications for the discovery
-of rare variants, for the utility of polygenic scores, and for the relative importance of
-common and rare variants to human traits and disease.
+Understanding the genetic architecture of human traits is a key goal of 
+biomedical research and precision medicine \cite{Timpson2018}. However, little 
+is known about how genetic architecture varies across the trait continuum and, in particular, 
+if it differs in the tails of complex traits, where disease often occurs. 
+Here, applying a novel approach based on polygenic scores, we reveal striking departures 
+from polygenic architecture across 148 quantitative trait tails consistent with distinct 
+concentrations of high-impact rare alleles in one or both tails of most complex traits. 
+We demonstrate replication of these results across ancestries, cohorts, repeat measures, and using an 
+orthogonal family-based approach \cite{Souaiaia2024}. Furthermore, trait tails with inferred 
+enrichment of rare alleles are associated with more rare exome-based hits, advanced paternal 
+age, reduced fecundity, and poor predictive performance of polygenic scores. 
+Finally, we find evidence of ongoing selection consistent with observed
+departures in polygenicity and demonstrate, via simulation, that traits under 
+stabilising selection are expected to have tails enriched for rare alleles of large effect. 
+This means that many individuals may have extreme trait values due to only one or several alleles 
+of very large effect, contrary to the popular infinitesimal model \cite{Barton2017} of quantitative traits, 
+which assumes that the genetic contribution to trait values is due only to total burden of many weak effects. 
+Overall, our findings suggest that selection drives distinct genetic architecture in the tails of complex traits. 
+Our study has implications for the discovery of rare variants, the utility of polygenic scores, 
+the study of selection, and for the relative importance of common and rare variants to human traits and disease.
+
+
+
+
+
+
+
 \end {abstract}
 \vspace*{-5mm}
 \noindent\textcolor{sunyGray}{\rule{17.25cm}{1mm}}
@@ -144,16 +155,16 @@ common and rare variants to human traits and disease.
 Genetic architecture describes the number, effect sizes and allele frequencies of genetic 
 variants affecting a complex trait \cite{Timpson2018}. Extensive efforts have been made 
 to elucidate the genetic architecture of human traits over many decades and across multiple fields, 
-including population genetics \cite{Barton2017}, quantitative genetics \cite{Polderman2015} 
+including population genetics \cite{Oconnor2019}, quantitative genetics \cite{Polderman2015} 
 and genetic epidemiology \cite{Abdellaoui2023}. Recent genome-wide association and sequencing 
 studies have identified many thousands of common and rare variants associated with a 
-plethora of complex traits \cite{Wainschtein2022, Flannick2019}. The number of variants 
+plethora of complex traits \cite{Flannick2019, Singh2022}. The number of variants 
 identified is now so large that a complete picture of the genetic architecture of 
 many complex traits is starting to emerge. Recent publications illustrate all known 
 variants for a trait on a spectrum of allele frequency vs effect size, producing a 
-characteristic "trumpet" shape \cite{Corte2023, Koch2024} that reflects the action of natural selection
+characteristic "trumpet" shape \cite{Yengo2022, Corte2023} that reflects the action of natural selection
 shaping the genetic architecture of human traits \cite{Ori2024, Koch2024}. 
-Stabilising selection, a key driver of genetic variation \cite{Barton2017, Ori2024}, 
+Stabilising selection, a key driver of genetic variation \cite{Oconnor2019, Ori2024}, 
 reduces fitness in individuals with extreme phenotype values, preventing alleles of 
 very large effect from becoming common. Despite this, most statistical genetics methods 
 suggest that common variants of weak effect jointly explain most of 
@@ -189,6 +200,19 @@ traits is already known in isolated cases. For example, mutations in ACAN
 result in short stature \cite{vanDerSteen2017}, mutations in LEP cause leptin 
 deficiency and severe early onset obesity \cite{Saeed2015}, while those in HNF1A 
 produce large deviations in glucose homeostasis and early-onset diabetes \cite{Miyachi2022}. 
+Therefore, it is already known that there are single alleles of sufficient effect size 
+to generate extreme trait values in individuals. Moreover, Fiziev et al. \cite{Fiziev2023} 
+demonstrated that rare polygenic risk scores, calculated based on their PrimateAI algorithm, 
+were more pply multiple approaches to interrogate how genetic architecture 
+varies across the trait continuum. However, so far there has been no systematic investigation 
+into how genetic architecture 
+varies across complex trait distributions and whether, in particular, the tails of 
+quantitative traits have distinct genetic architecture.
+
+
+
+
+
 
 
 
@@ -196,11 +220,12 @@ produce large deviations in glucose homeostasis and early-onset diabetes \cite{M
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace*{-2mm} 
-\FloatBarrier \begin{figure}[!h] \centering \begin{maybe}{showFig} 
+%\vspace*{-2mm} 
+%\FloatBarrier 
+\begin{figure}[!h] \centering \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=0.98\linewidth]{Figures/Fig1.pdf} \end{maybe} 
-\vspace*{-1mm} 
-\caption{\footnotesize{\textbf{Schematic of trait characteristics
+%\vspace*{-1mm} 
+\caption{{\textbf{Schematic of trait characteristics
       before and after strong stabilising selection.  Panels (a-d),
       before stablising selection the standard ploygenic model is
       observed.} \textbf{(a)} Trumpet plots illustrate the
@@ -219,22 +244,8 @@ produce large deviations in glucose homeostasis and early-onset diabetes \cite{M
     associated with extreme phenotype.  \textbf{(h)} Siblings of
     individuals harbouring large effect de novo variants resemble the
     background population.}}
-\label{fig1} \end{figure} \FloatBarrier 
-
-
-\noindent
-Therefore, it is already known that there are single alleles of sufficient effect size 
-to generate extreme trait values in individuals. Moreover, Fiziev et al. \cite{Fiziev2023} 
-demonstrated that rare polygenic risk scores, calculated based on their PrimateAI algorithm, 
-were more pply multiple approaches to interrogate how genetic architecture 
-varies across the trait continuum. First, we develop a method that utilizes polygenic 
-risk scores \cite{Choi2020} (PRS) to detect departures from polygenic architecture in trait 
-tails from population data: the PRS-On-Phenotype outlier (“POPout”) test.
-predictive for individuals with extreme, rather than average, trait values. 
-However, so far there has been no systematic investigation into how genetic architecture 
-varies across complex trait distributions and whether, in particular, the tails of 
-quantitative traits have distinct genetic architecture.
-
+\label{fig1} \end{figure} 
+%\FloatBarrier 
 
 
 Here we apply multiple approaches to interrogate how genetic 
@@ -256,7 +267,7 @@ orthogonal evidence of tail architecture to that of the POPout test since it lev
 Overall, we observe widespread and marked departures from polygenic expectations in trait tails 
 across these approaches and cohorts (\fref{fig2}, \fref{fig3}). In order to gain insight into the causes of these observations, 
 we investigate the evidence that selection underpins these findings (\fref{fig4}). Extending a 
-method \cite{Ference2018} that uses lifetime reproductive success to infer ongoing positive, 
+method \cite{Sanjak2018} that uses lifetime reproductive success to infer ongoing positive, 
 negative, and stabilising selection, we find consistency between the type of selection inferred 
 and the tail(s) of a trait that appear to be selected against according to our POPout results.
 This is supported by simulations that we perform using the forward-in-time 
@@ -311,7 +322,8 @@ inferring the markedly different causes of extreme trait values in different ind
 \section*{Results} \label{sec:results} 
 
 \subsection*{Tail architecture inferred by PRS} ~\\
-\noindent Here we first investigate how genetic architecture 
+%\noindent 
+Here we first investigate how genetic architecture 
 varies across the trait continuum in a range of 
 quantitative traits using UK Biobank (UKB) 
 genotype-phenotype data \cite{Bycroft2018}. We consider traits 
@@ -377,10 +389,11 @@ complex disease, yet broad enough for sufficient sample size.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\FloatBarrier \begin{figure}[!h] \centering \begin{maybe}{showFig} 
+%\FloatBarrier 
+\begin{figure}[!h] \centering \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig2.pdf} 
 \end{maybe} 
-\caption{\footnotesize{{\bf Population based POPout results.}
+\caption{{{\bf Population based POPout results.}
 \textbf{(a)} PRS quantile (in 1\% increments) plotted against mean
 trait value in quantile for four traits with different POPout
 characteristics.  
@@ -395,10 +408,11 @@ UKB-EUR POPout effect sizes plotted against replication POPout
 effect sizes for upper and and lower tails of all traits available. 
 Correlation between UKB-EUR and replication effect sizes calculated using Pearson.}
 }\label{fig2} \end{figure}
-\FloatBarrier
+%\FloatBarrier
 
 
-\noindent We applied the POPout test to the 74 traits in the UK Biobank, 
+%\noindent
+We applied the POPout test to the 74 traits in the UK Biobank, 
 splitting the sample of 389,462 individuals into two halves, 
 in which a GWAS is performed in the first half and used to derive 
 PRS in the second half for the analysis. 
@@ -459,7 +473,8 @@ wite top 5\% PRS values is 1.8 instead of an expected 4.1.
 
 \subsection*{Replicating \textit{POPout} Effects} \label{sec:res1} ~\\
 
-\noindent Here we perform three different forms of replication to test the 
+%\noindent 
+Here we perform three different forms of replication to test the 
 generalizability of our primary findings that used UKB European 
 ancestry data. In each replication dataset, we only include traits that pass 
 our POPout QC (see \hyperref[sec:methods:qc]{Methods: POPout QC}) 
@@ -498,7 +513,8 @@ replication analyses.
 
 \subsection*{Tail architecture inferred from siblings} ~\\
 
-\noindent Next, we seek to validate our findings further using family data. 
+%\noindent 
+Next, we seek to validate our findings further using family data. 
 We have developed a method \cite{Souaiaia2024} that evaluates trait 
 data in large samples of siblings to infer genetic architecture 
 in the tails of quantitative traits. This provides an 
@@ -526,9 +542,10 @@ tail architecture enriched for large-effect, rare alleles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+%\FloatBarrier
+\begin{figure}[!h] \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig3.pdf} \end{maybe} 
-\caption{\footnotesize{{\bf Tail architecture inferred from siblings.}
+\caption{{{\bf Tail architecture inferred from siblings.}
     \textbf{(a)} Schematic of relationships between sibling trait
     values under polygenicity, de novo variants of large effect in one
     sibling and rare variants of large effect within families --
@@ -542,13 +559,15 @@ tail architecture enriched for large-effect, rare alleles
     Pearson correlation.  \textbf{(d)} LDscore regression SNP
     heritability plotted against heritability estimated from sibling
     pair trait similarity using European UKB samples.}}
-\label{fig3} \end{figure} \FloatBarrier
+\label{fig3} \end{figure} 
+%\FloatBarrier
 
 
 
 
 %The UK Biobank (UKB) includes over 17,289 sibling pairs of European 
-\noindent The UK Biobank (UKB) includes over 17k sibling pairs of European 
+%\noindent 
+The UK Biobank (UKB) includes over 17k sibling pairs of European 
 ancestry available for our STANDout analyses, none of which 
 were included in our population-based analyses. There were too 
 few sibling pairs of non-European ancestry for a sufficiently 
@@ -576,62 +595,18 @@ the STANDout approach (\dref{fig3}{d}).
 
 \subsection*{Selection shapes tail architecture} ~\\
 
-\noindent In previous sections, we demonstrated that there are
-pervasive departures from our null model, which assumes polygenic
-architecture and jointly Gaussian environmental factors, in the tails
-of complex traits. However, these may still be due to unaccounted for
-non-Gaussian environmental risk factors. Here, we investigate evidence
-for our hypothesized cause of these tail departures from expectations;
-namely, that they are caused by the enrichment of rare, large-effect
-alleles in the tails due to selection on the trait constraining
-large-effect alleles to low frequency (\fref{fig1}).
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\FloatBarrier \begin{figure}[!h] 
-\begin{maybe}{showFig} 
-\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig4.pdf} 
-\end{maybe} 
-\caption{\footnotesize{{\bf Concordance between POPout effect size and
-      rare variants of large effect and selective pressure.}}
-  \textbf{(a)} Trumpet plots (minor allele frequency v effect size) of
-  genome-wide significant variants for the four traits selected for
-  their different POPout characteristics (see Fig 2a).  \textbf{(b)}
-  POPout effect size plotted against the number of genome-wide
-  significant variants with MAF<1\% for 58 traits with overlapping
-  exome sequence results.  For upper tails positive variant effects
-  are counted and for lower tails negative variant effects are
-  counted.  Correlation and significance calculated using Pearson
-  correlation.  \textbf{(c)} Age of menopause: PRS quantile vs. trait
-  mean and trumpet plot.  \textbf{(d)} Enrichment of variant-type by
-  trait quantile relative to central quantile under simulated strong
-  and weak selection. Rare and ultra rare variants correspond to
-  MAF<1\% and MAF<0.05\%, respectively.  Large effect variants defined
-  as those with effect sizes $>$ 2 standard deviations of the trait.
-  \textbf{(e)} $\Delta$PRS, the mean absolute difference between the
-  common variant PRS (MAF>1\%) and the trait value, plotted against
-  trait quantile across 100 simulated replicates for each of strong
-  selection and no selection.  \textbf{(f)} Residualised trait value
-  plotted against relative lifetime reproductive success for 16
-  example traits.  Best model fit to the data, selected by BIC
-  considering all models with and without linear and quadratic terms,
-  are shown by dashed lines. Model selected by BIC used to classify
-  selective pressure acting on the traits.  \textbf{(g)} POPout effect
-  size grouped by model selection category for 10 traits under no
-  selection, 8 traits under non-direction stabilising selection, 29
-  traits under positive selection, and 27 traits under negative
-  selection.  Significant difference between upper and lower tail mean
-  effect sizes calculated using a two-sample t-test.  \textbf{(h)}
-  Spearman rank correlation between four proxy measures of fitness and
-  POPout effect size. For each fitness measure, correlation was
-  calculated between the mean of the fitness measure in individuals in
-  the upper and lower 1\% trait tails and POPout effect size for the
-  corresponding tail across 74 trait tails.}
-\label{fig4} \end{figure} \FloatBarrier
-
-
+%\noindent 
+In previous sections, we demonstrated that there are 
+pervasive departures from our null model, which assumes 
+polygenic architecture and jointly Gaussian environmental 
+factors, in the tails of complex traits. However, these 
+may still be due to unaccounted for non-Gaussian environmental 
+risk factors. Here, we investigate evidence for our 
+hypothesized cause of these tail departures from expectations; 
+namely, that they are caused by the enrichment of rare, 
+large-effect alleles in the tails due to selection on the 
+trait constraining large-effect alleles to low frequency 
+(\fref{fig1}). 
 Backman et al. \cite{Backman2021} conducted 
 the most comprehensive trait-wide analysis of UK Biobank 
 exome sequence data to date, and here we utilize their 
@@ -675,6 +650,52 @@ in the tail but little signal in exome data.
 
 
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\FloatBarrier 
+\begin{figure}[!h] 
+\begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig4.pdf} 
+\end{maybe} 
+\caption{{\bf Concordance between POPout effect size and
+rare variants of large effect and selective pressure.}
+\textbf{(a)} Trumpet plots (minor allele frequency v effect size) of
+genome-wide significant variants for the four traits selected for their 
+different POPout characteristics (see Fig 2a).  
+\textbf{(b)} POPout effect size plotted against the number of 
+genome-wide significant variants with MAF<1\% for 58 traits with overlapping exome sequence
+results.  For upper tails positive variant effects are counted and
+for lower tails negative variant effects are counted.  Correlation
+and significance calculated using Pearson correlation. 
+\textbf{(c)} Age of menopause: PRS quantile vs. trait mean and trumpet plot.
+\textbf{(d)} Simulation: Enrichment of variant-type by trait quantile under different environments. 
+Rare and Ultra Rare correspond to MAF<1\% and MAF<0.05\%, respectively.  Large denotes variants in the top 
+10\% of absolute effect. For more information on the variant distribution 
+and the how weak and strong selection is simulation see the \myemph{Methods: Simulation}. 
+\textbf{(e)} Simulation: $\Delta$ PRS refers to gain between traditional common variant PRS (MAF>1\%) and 
+a theoretical PRS where all variants are known and used. 
+\textbf{(f)} Residualised trait value plotted against relative
+lifetime reproductive success for 16 example traits.  Best model fit
+to the data, selected by BIC considering all models with and without
+linear and quadratic terms, are shown by dashed lines. Model
+selected by BIC used to classify selective pressure acting on the
+traits. 
+\textbf{(g)} POPout effect size grouped by model selection
+category for 10 traits under no selection, 8 traits under non-direction 
+stabilising selection, 29 traits under positive selection, and 27 traits under negative selection. 
+Significant difference between upper and lower tail mean effect sizes calculated using a two-sample t-test. 
+\textbf{(h)} Spearman rank correlation between four proxy measures of fitness and
+POPout effect size. For each fitness measure, correlation was
+calculated between the mean of the fitness measure in individuals in
+the upper and lower 1\% trait tails and POPout effect size for the
+corresponding tail across 74 trait tails.}
+\label{fig4} \end{figure} 
+%\FloatBarrier
+% \clearpage
 
 
 To gain greater insight into how selection may impact variation 
@@ -732,25 +753,66 @@ increase in de novo mutation rate with advanced paternal age\cite{Kong2012} is c
 traits being subject to ongoing selection, and may contribute directly to the observed enrichment of rare 
 variants associated with those traits.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END RESULTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+%  PREV: RESULTS, NEXT: DISCUSSION
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+%  PREV: RESULTS, NEXT: DISCUSSION
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+%  PREV: RESULTS, NEXT: DISCUSSION
+% 
+% 
+% 
+% 
+% 
+% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   DISCUSSION - START  %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\FloatBarrier
 \section*{Discussion} \label{sec:discussion} 
 
 Our study is the first dedicated investigation into how genetic architecture 
@@ -808,7 +870,7 @@ in focus from selective pressures acting at the
 variant or locus level \cite{Sabeti2002,Paul2008}, 
 to polygenic adaptation acting on the trait \cite{Pritchard2010, Hollinger2019}. 
 This has led to important advances in our understanding 
-of how selection may have generated \cite{OConnor2019}, 
+of how selection may have generated \cite{Oconnor2019}, 
 and can be inferred from \cite{Barghi2020}, 
 widespread polygenicity. However, until now there has been 
 no consideration of how different selective pressures on a trait 
@@ -926,7 +988,7 @@ causes of extreme trait values and disease in individuals.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage \newpage 
 \section*{Methods} \label{sec:methods} 
-\vspace*{0.2cm} 
+%\vspace*{0.2cm} 
 %%%%%%%%%%%%%%   METHODS 1- DATA PROCESSING %%%%%%%%%%%%
 \subsection*{Data Processing} \label{sec:methods:dataProcessing} ~\\
 \vspace*{-0.5cm} 
@@ -1168,7 +1230,8 @@ were included and tested for matched discovery of POPout effects and correlation
 
 
 \paragraph*{Sibling-based Investigation of Departures from Polygenic Architecture} ~\\ 
-\noindent We have already developed sibling-based tests of departures from polygenic expectations in trait tails caused by \emph{de novo} high-impact alleles or caused by rare alleles of large effect segregating in families ("Mendelian" effects) \cite{t_sibs}. Here we summarise the theoretical framework underlying those tests, and then describe the novel test used here that combines the two tests into a single omnibus test to identify general departures from population expectations due to either cause. \\
+%\noindent 
+We have already developed sibling-based tests of departures from polygenic expectations in trait tails caused by \emph{de novo} high-impact alleles or caused by rare alleles of large effect segregating in families ("Mendelian" effects) \cite{t_sibs}. Here we summarise the theoretical framework underlying those tests, and then describe the novel test used here that combines the two tests into a single omnibus test to identify general departures from population expectations due to either cause. \\
 The conditional distribution of an individual's trait value given their sibling's trait value, assuming the infinitesimal model for genetic effects ("polygenicity") and normally distributed environmental factors, can be derived analytically \cite{t_sibs} as:
 
 \begin{equation} p(s_2 \mid s_1 ) \sim \N\left(\frac{1}{2}s_1h^2,
@@ -1218,7 +1281,8 @@ under the null hypothesis of the infinitesimal model (see above):
 
 \paragraph*{The Sibling \textit{STANDout}  Test}~\\ 
 
-\noindent In order to test for general departures from polygenic architecture in the tails of 
+\noindent 
+In order to test for general departures from polygenic architecture in the tails of 
 quantitative traits, caused either by high-impact alleles that are either \emph{de novo} or 
 that are segregating in families (i.e. rare alleles), we combine the results of the two tests 
 using Fisher's method to give a $\chi^2$ statistic with 4 degrees of freedom: 
@@ -1341,7 +1405,7 @@ only variants with \emph{MAF} $> 1\%$.
 \clearpage \newpage
 
 
-\section*{Supplement} \label{sec:supplement}
+\section*{Supplemental Figures} \label{sec:supplement}
 
 
 \renewcommand{\figurename}{Supplementary Figure}
