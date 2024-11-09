@@ -13,7 +13,7 @@
 %% Load base class subsection  caption 
 \LoadClass[a4paper,12pt]{article}
 
-%% define new needed boolean variables
+%% define new needed boolean variables subsection 
 \newif\if@tmptwocolumn  \@tmptwocolumnfalse
 \newif\if@times         \@timesfalse
 
@@ -274,27 +274,27 @@
   {0em}
   {#1}
   []  
-\titleformat{\subsection}[runin]
+\titleformat{\subsection}
   {\sffamily\bfseries}
   {\thesubsection.}
   {0.5em}
   {#1 }
   []
-\titleformat{\subsubsection}[runin]
+\titleformat{\subsubsection}
   {\sffamily\small\bfseries\itshape}
   {\thesubsubsection.}
   {0.5em}
   {#1 }
   []    
-\titleformat{\paragraph}[runin]
+\titleformat{\paragraph}
   {\sffamily\small\bfseries}
   {}
   {0em}
   {#1} 
-\titlespacing*{\section}{0pc}{3ex \@plus4pt \@minus3pt}{5pt}
-\titlespacing*{\subsection}{0pc}{2.5ex \@plus3pt \@minus2pt}{2pt}
-\titlespacing*{\subsubsection}{0pc}{2ex \@plus2.5pt \@minus1.5pt}{2pt}
-\titlespacing*{\paragraph}{0pc}{1.5ex \@plus2pt \@minus1pt}{12pt}
+\titlespacing*{\section}{0pc}{2.0ex \@plus4pt \@minus3pt}{5pt}
+\titlespacing*{\subsection}{0pc}{1.0ex \@plus3pt \@minus2pt}{3pt}
+\titlespacing*{\subsubsection}{0pc}{0.75ex \@plus2.5pt \@minus1.5pt}{2pt}
+\titlespacing*{\paragraph}{0pc}{1ex \@plus1pt \@minus1pt}{0.5pt}
 
 %% Figure caption style
 \DeclareCaptionFormat{smallformat}{\normalfont\sffamily\fontsize{7}{9}\selectfont#1#2#3}
