@@ -1156,6 +1156,39 @@ estimate the expected predictive performance of the PRS based on the
 corresponding $r^2$ and assuming uniform polygenicity throughout the 
 trait distribution. 
 
+
+\subsubsection*{Estimating Rare Variant Fraction from POPout Effect} 
+To estimate the proportion of trait variance described by unaccounted for 
+rare variants we make a number of assumptions.  First we assume that rare 
+variants are "monogenic like" meaning that the expected common variant 
+genotype (polygenic risk) of extreme individuals with rare variants is equal 
+to the population mean ($\mu_R$).  Then for every percentile in the lower and upper 5\% of 
+the distribution where POPout is present we estimate the fraction of individuals 
+who came from this distribution: 
+
+\begin{align*}
+    PRS_{obs} = \frac{k}{n} \mu_R    + \frac{n-k}{n} PRS_{expected} 
+\end{align*}
+
+Next, we simulate a trait whose values are given by $T=rG + E$ where G represents total genetic risk 
+(standaridised to mean 0 and variance 1) and the environmental effect E is drawn from a 
+normal distribution with mean 0 and variance (1-$r^2$), ensuring a standard normal trait distribution. 
+For any trait, we can assign an initial $r^2$ value that representing variance explained by total 
+genetic risk and simulate the corresponding genotype and phenotype for 500,000 individuals. Then in each 
+tail percentile, we can randomly select $\frac{k}{n}$ individuals, assign them a gentic contribution drawn 
+from a standard normal, and recalculate the association between the remaining common genetic risks and the 
+phenotypes ($r^2_{common}$) and the fraction explained by rare variants alone ($r^2 - r^2_{common}$).  
+ 
+Iteratively increasing $r^2$ until $r^2_{common}$ is equal to the value for $r^2$ that we calculated 
+using LD score regression \cite{ldsc} allows us to estimate what the total trait variance explained would 
+have been had POPout not been present and estimate the fraction of variance explained by known (common) and 
+rare variants. 
+
+
+
+
+
+
 \subsubsection*{Replication of POPout Results}
 \paragraph{Bootstrap Study To Establish Power of Replication Analyses} ~\\
 In our primary analysis QC, we set a minimum sample size threshold of 100k in total 
