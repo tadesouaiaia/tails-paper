@@ -998,7 +998,7 @@ identifying first-degree relatives, defined as those with kinship
 coefficient within the range 0.177 and 0.354 (expected value for
 siblings is 0.25) to account for the expected variation among siblings \citep{sib1}. 
 Only individuals of European ancestry were included in the sibling analyses due to 
-insufficient statistical power of the non-European ancestry samples \citep{t_sibs}. 
+insufficient statistical power of the non-European ancestry samples \citep{Souaiaia2024}. 
 The proportion of SNPs with zero identity-by-state (IBS0) was used to distinguish 
 sibling pairs from parent-offspring pairs, since parent–offspring pairs have
 IBS0$\approx$0 across the autosomes. It has been shown in the UKB that
@@ -1156,8 +1156,9 @@ estimate the expected predictive performance of the PRS based on the
 corresponding $r^2$ and assuming uniform polygenicity throughout the 
 trait distribution. 
 
-
-\subsubsection*{Estimating Rare Variant Fraction from POPout Effect} 
+\clearpage \newpage
+\note{NEW SECTION:} 
+\subsubsection*{Estimating Variance Explained by Rare Variants from POPout Effect} 
 To estimate the proportion of trait variance described by unaccounted for 
 rare variants we make a number of assumptions.  First we assume that rare 
 variants are "monogenic like" meaning that the expected common variant 
@@ -1218,8 +1219,8 @@ were included and tested for matched discovery of POPout effects and correlation
 \subsection*{Sibling-based Analyses} \label{sec:methods:sibs}  
 %
 \subsubsection*{Sibling-based Investigation of Departures from Polygenic Architecture}
-We have already developed sibling-based tests of departures from polygenic expectations in trait tails caused by \emph{de novo} high-impact alleles or caused by rare alleles of large effect segregating in families ("Mendelian" effects) \cite{t_sibs}. Here we summarise the theoretical framework underlying those tests, and then describe the novel test used here that combines the two tests into a single omnibus test to identify general departures from population expectations due to either cause. \\
-The conditional distribution of an individual's trait value given their sibling's trait value, assuming the infinitesimal model for genetic effects ("polygenicity") and normally distributed environmental factors, can be derived analytically \cite{t_sibs} as:
+We have already developed sibling-based tests of departures from polygenic expectations in trait tails caused by \emph{de novo} high-impact alleles or caused by rare alleles of large effect segregating in families ("Mendelian" effects) \cite{Souaiaia2024}. Here we summarise the theoretical framework underlying those tests, and then describe the novel test used here that combines the two tests into a single omnibus test to identify general departures from population expectations due to either cause. \\
+The conditional distribution of an individual's trait value given their sibling's trait value, assuming the infinitesimal model for genetic effects ("polygenicity") and normally distributed environmental factors, can be derived analytically \cite{Souaiaia2024} as:
 %
 \begin{equation} p(s_2 \mid s_1 ) \sim \N\left(\frac{1}{2}s_1h^2,
 1-\frac{h^4}{4}\right) \label{math:S2givenS1}
@@ -1235,7 +1236,7 @@ similarity (or concordance) between siblings on average compared
 to polygenicity. Conversely, a high-impact {\em de novo} mutation in one
 sibling will result in excess dissimilarity (discordance) between siblings.
 
-Our sibling-based test for enrichment of {\em Mendelian} effects \cite{t_sibs} evaluates 
+Our sibling-based test for enrichment of {\em Mendelian} effects \cite{Souaiaia2024} evaluates 
 the proportion of sibling pairs in which both siblings reside in a defined quantile of the trait distribution, which can be formulated as a score test with the following z-statistic:
 \begin{align*}
 z&=\frac{r-n\pi_0}{\sqrt{n\pi_0(1-\pi_0)}}
@@ -1256,7 +1257,7 @@ distribution and their conditional siblings, as follows:
   z&=\frac{\sum_{i\in A_q}s_2^{(i)}-\frac{1}{2}s_1^{(i)}h^2} {\sqrt{n(1-\frac{h^4}{4})}}
 \end{align*}
 For index siblings in the lower and upper tails, the alternative
-hypotheses of $H_1: z>0$ and $H_1: z<0$ are tested as one-tailed t-tests, respectively. For further details, see Souaiaia et al \citep{t_sibs}.
+hypotheses of $H_1: z>0$ and $H_1: z<0$ are tested as one-tailed t-tests, respectively. For further details, see Souaiaia et al \citep{Souaiaia2024}.
 
 The trait heritability, $h^2$, a required parameter in the {\em Mendelian} and {\em de novo} tests, is estimated from the sibling pairs by calculating the maximum likelihood of $h^2$ 
 under the null hypothesis of the infinitesimal model (see above): 
@@ -1277,6 +1278,36 @@ using Fisher's method to give a $\chi^2$ statistic with 4 degrees of freedom:
     \chi^2_4 = -2(\log(p_{Mendelian}) + \log(p_{de novo}))
 \end{align*}
 
+
+\note{NEW SECTION:} 
+\subsubsection*{Inferring Detailed Tail Architecture from Sibling Data} 
+
+The \textit{SibArc} software package \cite{Souaiaia2024} includes algorithmic routine to 
+estimate the fraction of tail architecture attributed to polygenic, \textit{De Novo}, 
+or Mendelian Architecture.  This routine assumes that for standardised complex trait, the 
+under polygenic and \textit{De Novo} architecture that the conditional sibling distribution 
+given one sibling ($2_1$) in the tail of the distribution is $\N(0,1)$ and 
+$\N(\frac{1}{2}s_1 h^2,1 - \frac{h^4}{4})$, respectively.  Under pure Mendelian architecture,  
+the conditional distribution giving a sibling in the top 1\% of the distribution depends on 
+whether the siblings share a familial variant and is either standard normal or truncated normal: %we assume happens with equal probability: 
+
+\begin{align*}
+P(s_2 | s_1, \text{Mendelian Arch}) = 
+\begin{cases}
+    Z & \text{if unshared} \\
+    \frac{\varphi(2.326)}{Z} & \text{if shared}
+\end{cases} 
+\end{align*}
+
+Assuming that both cases occur with equal probability the conditional sibling 
+probability distribution function given tail Mendelian and $De Novo$ fractions of $a$ and $b$, is: 
+
+\begin{align*}
+    a\frac{1}{2}\left(p(s_2 | S_2 = Z)  + p(s_2 |  S_2 \frac{\varphi(2.326)}{Z} \right) + b(s_2| S_2 = Z) + (1-(a+b))(s_2 | S_2 \sim \N(\frac{1}{2}s_1 h^2,1 - \frac{h^4}{4}))
+\end{align*}
+
+This routine iteratively identifies the $a$ and $b$ that maximize this likelihood across all siblings, subject to $a+b<=1$.  
+Then, $a,b,c$ represent the most likely fraction of Mendelian, $De Novo$, and polygenic architecture given a set of conditional siblings. 
 
 
 
@@ -1399,6 +1430,7 @@ only variants with \emph{MAF} $> 1\%$.
 
 
 
+
 \FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Sup1.pdf} \end{maybe} 
 \caption{{{\bf Extended Replication}
@@ -1415,6 +1447,43 @@ replication is defined by the Pearson across effect sizes in our bootstrapped su
 (\textbf{(e)}) and in the replication datasets (\textbf{(f)}).
 }} \label{sup1} \end{figure}
 \FloatBarrier
+
+
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Sup2.pdf} \end{maybe} 
+\caption{{{\bf Variance Explained by Rare Variants}
+Rare Variant $R^2$ Plotted Alongside Variance Explained by Common Variants 
+}} \label{sup2} \end{figure}
+\FloatBarrier
+
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Sup2b.pdf} \end{maybe} 
+\caption{{{\bf Rare Variant Heritability}
+Rare Variant Heritability Plotted Alongside Common Variant Heritability 
+}} \label{sup2b} \end{figure}
+\FloatBarrier
+
+\FloatBarrier \begin{figure}[!h] \begin{maybe}{showFig} 
+\includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Sup3.pdf} \end{maybe} 
+\caption{{{\bf Detail Tail Architecture Inferred from Sibling Data}
+For all traits with at least one nominally significant \textit{STANDout} tail test, the estimated 
+fraction of polygenic, $De Novo$, and Mendelian Architecture is shown in gray, red, and purple.  
+}} \label{sup3} \end{figure}
+\FloatBarrier
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
