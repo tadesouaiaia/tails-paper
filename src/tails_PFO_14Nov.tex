@@ -24,7 +24,7 @@
 %\newcommand{\V}{\mbox{V}}  \newcommand{\Wi}{\mbox{Wi}}                                                                                                                                                         
 \newcommand\eref[1]{{\textbf{\textit{Equation \ref{#1}}}}{}}                                                                                                                        
 \newcommand\erefs[2]{\textbf{\textit{Equations \ref{#1} \& \ref{#2}}}}                                                                                                              
-\newcommand\fref[1]{\normalsize{\textbf{\textit{Fig. \ref{#1}}}}\normalsize{}}                                                                                                    
+\newcommand\fref[1]{\normalsize{\textbf{\textit{Fig.\,\ref{#1}}}}\normalsize{}}                                                                                                    
 \newcommand\dref[2]{\normalsize{\textbf{\textit{Fig.\,\ref{#1}#2}}}\normalsize{}}                                                                                                  
 \newcommand\sref[1]{\normalsize{\textbf{\textit{Supplemental Fig.\,\ref{#1}}}}\normalsize{}}                                                                                       
 \newcommand\tref[1]{\normalsize{\textbf{\textit{Table \ref{#1}}}}\normalsize{}}                                                                                                     
@@ -68,22 +68,11 @@
 \begin{corrauthor} \texttt{\small tade.souaiaia\at downstate.edu, paul.oreilly\at mssm.edu} \end{corrauthor}
 \vspace*{-2mm}
 \noindent\textcolor{sunyGray}{\rule{17.25cm}{1mm}}
-
-
-
-
-
-
-
-
-% shape
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   END PREAMBLE  %%%%%%%%%%%%%%%%%%%%%
 % 
 %  PREV: PREAMBLE, NEXT: ABSTRACT
 %  PREV: PREAMBLE, NEXT: ABSTRACT
-% 
+%  
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT  %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -91,8 +80,25 @@
 \begin{abstract} %\normalsize
 \noindent\cyansub{Abstract}$\,$ 
 Understanding the genetic architecture of human traits is critical for advancing 
-biomedical research and precision medicine \cite{Timpson2018}. Despite much progress, little is known about how genetic architecture varies across the full trait spectrum and, in particular, if it differs in the tails of complex traits, where disease often occurs. Here, applying a novel approach based polygenic scores, we reveal striking departures from polygenic architecture across 148 quantitative trait tails. This pattern is consistently observed across diverse ancestries, independent cohorts, repeat measurements, and is further validated using an orthogonal family-based approach \cite{Souaiaia2024}. Our findings suggest that there are distinct concentrations of high-impact rare alleles in one or both tails of most complex traits. Furthermore, trait tails with inferred enrichment of rare alleles are associated with more exome study hits, reduced fecundity, advanced paternal age, and diminished predictive accuracy of polygenic scores. Finally, we find evidence of ongoing selection consistent with the observed departures in polygenicity and demonstrate, via simulation, that traits under stabilising selection are expected to have tails enriched for rare, large-effect alleles. Overall, our results suggest that while polygenic burden from numerous small-effect variants  \cite{Barton2017} predominates overall trait variance, a substantial fraction of individuals in the trait tails may have a far simpler, monogenic or oligogenic architecture. Our study has significant implications for rare variant discovery, the utility of polygenic scores, the study of selection in humans, and for the relative importance of common and rare variants to complex traits and diseases.
-
+biomedical research and precision medicine \cite{Timpson2018}. Despite much progress, 
+little is known about how genetic architecture varies across the full trait spectrum and, 
+in particular, if it differs in the tails of complex traits, where disease often occurs. 
+Here, applying a novel approach based polygenic scores, we reveal striking departures 
+from polygenic architecture across 148 quantitative trait tails. This pattern is consistently 
+observed across diverse ancestries, independent cohorts, repeat measurements, and is further 
+validated using an orthogonal family-based approach \cite{Souaiaia2024}. Our findings 
+suggest that there are distinct concentrations of high-impact rare alleles in one or 
+both tails of most complex traits. Furthermore, trait tails with inferred enrichment 
+of rare alleles are associated with more exome study hits, reduced fecundity, advanced 
+paternal age, and diminished predictive accuracy of polygenic scores. Finally, we find 
+evidence of ongoing selection consistent with the observed departures in polygenicity and 
+demonstrate, via simulation, that traits under stabilising selection are expected to 
+have tails enriched for rare, large-effect alleles. Overall, our results suggest that 
+while polygenic burden from numerous small-effect variants  \cite{Barton2017} predominates 
+overall trait variance, a substantial fraction of individuals in the trait tails may have a far simpler, 
+monogenic or oligogenic architecture. Our study has significant implications for rare variant 
+discovery, the utility of polygenic scores, the study of selection in humans, and for the 
+relative importance of common and rare variants to complex traits and diseases.
 
 
 
@@ -145,7 +151,8 @@ variants for a trait on a spectrum of allele frequency versus effect size, produ
 characteristic "trumpet" shape \cite{Yengo2022, Corte2023} that reflects the influence of natural selection
 in shaping the genetic architecture of human traits \cite{Ori2024, Koch2024}. 
 Stabilising selection, a key driver of genetic variation \cite{Oconnor2019, Ori2024}, 
-reduces fitness in individuals whose trait values deviate from an optimal mean, which consequently limits the frequency of large-effect alleles. Despite this, most statistical genetics methods 
+reduces fitness in individuals whose trait values deviate from an optimal mean, which consequently limits 
+the frequency of large-effect alleles. Despite this, most statistical genetics methods 
 suggest that common, small-effect variants jointly account for the majority of 
 trait heritability \cite{Golan2014, Wainschtein2022,Pathan2024}. However, little is 
 known about how genetic architecture varies across the trait continuum. 
@@ -153,7 +160,26 @@ For example, it is unknown whether common and rare alleles are evenly spread thr
 quantitative trait distributions, or if individuals in the trait 
 tails (e.g. the lowest and highest 1\% of LDL, BMI, glucose) are more likely to harbour high-impact, rare alleles.
 
-We hypothesise that the strength and type of selection acting on complex trait influences the distribution of common and rare alleles along the trait continuum. Specifically, we propose that many complex traits have experienced sufficiently strong selection to generate marked enrichments of large-effect, rare alleles in the trait tails (Fig.1). This concept contrasts with the classical infinitesimal model, initially proposed \cite{Fisher1919} by R.A. Fisher in 1918, which posits that quantitative traits result from the cumulative effects of numerous alleles, each one of tiny effect. This “polygenic” model has since been extended to explain genetic liability of complex diseases and has proven incredibly effective in describing the genetic architecture of complex traits \cite{Barton2017}. Indeed, many widely used statistical genetic methods rely on its assumptions \cite{Yang2011, BulikSullivan2015, Choi2020}. Our hypothesis diverges from the infinitesimal model to the extent that selection constrains large-effect alleles to remain at low frequencies, effectively concentrating rare alleles in the tails of complex traits (Fig.1). Thus, while the infinitesimal model accurately reflects the genetic architecture for the majority of the population, where polygenic burden predominates, it may be a poor approximation in trait tails under negative selection, where genetic architecture is more heterogeneous. This would be a key caveat to the infinitesimal model because in this case rare variants may make a modest contribution to overall trait variance \cite{Pathan2024}, but a substantial contribution in trait tails, which are of critical evolutionary and clinical significance  \cite{Kingsolver2007, Ference2018, Kyrou2000}. 
+We hypothesise that the strength and type of selection acting on complex trait influences 
+the distribution of common and rare alleles along the trait continuum. Specifically, we 
+propose that many complex traits have experienced sufficiently strong selection to generate 
+marked enrichments of large-effect, rare alleles in the trait tails (\fref{fig1}). 
+This concept contrasts with the classical infinitesimal model, initially 
+proposed \cite{Fisher1919} by R.A. Fisher in 1918, which posits that quantitative traits result 
+from the cumulative effects of numerous alleles, each one of tiny effect. This “polygenic” model has 
+since been extended to explain genetic liability of complex diseases and has proven incredibly 
+effective in describing the genetic architecture of complex traits \cite{Barton2017}. 
+Indeed, many widely used statistical genetic methods rely on its 
+assumptions \cite{Yang2011, BulikSullivan2015, Choi2020}. Our hypothesis diverges 
+from the infinitesimal model to the extent that selection constrains large-effect alleles 
+to remain at low frequencies, effectively concentrating rare alleles in the tails of complex traits (\fref{fig1}). 
+Thus, while the infinitesimal model accurately reflects the genetic architecture for the 
+majority of the population, where polygenic burden predominates, it may be a poor approximation 
+in trait tails under negative selection, where genetic architecture is more heterogeneous. 
+This would be a key caveat to the infinitesimal model because in this case rare variants may 
+make a modest contribution to overall trait variance \cite{Pathan2024}, but a substantial 
+contribution in trait tails, which are of critical evolutionary and clinical 
+significance \cite{Kingsolver2007, Ference2018, Kyrou2000}. 
 
 
 
@@ -165,7 +191,9 @@ produce large deviations in glucose homeostasis and early-onset diabetes \cite{M
 Therefore, it is already known that there are single alleles of sufficient effect size 
 to generate extreme trait values in individuals. Moreover, Fiziev et al. \cite{Fiziev2023} 
 demonstrated that rare polygenic risk scores, calculated based on their PrimateAI algorithm, 
-were more predictive for individuals with extreme, rather than average, trait values. However, so far there has been no systematic investigation into how genetic architecture varies across complex trait distributions and whether, in particular, the tails of quantitative traits have distinct genetic architecture. 
+were more predictive for individuals with extreme, rather than average, trait values. 
+However, so far there has been no systematic investigation into how genetic architecture varies 
+across complex trait distributions and whether, in particular, the tails of quantitative traits have distinct genetic architecture. 
 
 
 
@@ -206,8 +234,33 @@ were more predictive for individuals with extreme, rather than average, trait va
 %\FloatBarrier 
 
 
-In this study, we apply multiple approaches to interrogate how genetic architecture varies across the trait continuum. First, we introduce the PRS-On-Phenotype outlier (“POPout”) test, a novel method that uses polygenic risk scores \cite{Choi2020} (PRS) to detect deviations in polygenic expectations in the tails of trait distributions. The premise of the POPout test is that a PRS derived from common variants should exhibit a positive, linear correlation with its corresponding trait. However, if rare alleles are concentrated in the trait tails, then the PRS is expected to regress towards the mean in these extremes (Fig1c). We first apply POPout to 74 quality-controlled quantitative traits in individuals of European ancestry from the UK Biobank \cite{Bycroft2018}, followed by replication in individuals of multiple ancestries from the UK Biobank and in the US-based All of Us cohort \cite{Bick2024}. Next, we employ an independent method \cite{Souaiaia2024} 
-that uses sibling trait variability to infer the genetic architecture of trait tails (Fig.1d) in over 17k sibling pairs from the UK Biobank. This sibling-based approach provides complementary evidence to POPout, since it leverages non-genetic family data to infer tail architecture. Across these approaches and cohorts, we observe widespread and substantial departures from polygenic expectations in trait tails (Fig.2, Fig.3). To gain insight into the causes of these observations, we investigate whether natural selection may drive these findings  (Fig.4). Extending a method \cite{Sanjak2018} that uses lifetime reproductive success to infer ongoing positive, negative, and stabilising selection, we find consistency between the type of selection inferred and the tail(s) of a trait that appear to be selected against according to our POPout results. Supporting this, simulations using the forward-in-time simulator SLiM \cite{BC_2019}, show that stabilising selection results in POPout effects in both tails, whereas traits simulated under neutrality display no such effects. Finally, we observe that trait tails with POPout effects are associated with a higher frequency of significant exome-based rare variants, reduced fecundity in both males and females, and advanced paternal age. Our findings reveal the distinct nature of genetic architecture in the tails of complex traits, highlighting the importance of distinguishing between the diverse genetic profiles that can lead to extreme trait values in different individuals and in different traits.
+In this study, we apply multiple approaches to interrogate how genetic architecture varies 
+across the trait continuum. First, we introduce the PRS-On-Phenotype outlier (“POPout”) test, 
+a novel method that uses polygenic risk scores \cite{Choi2020} (PRS) to detect deviations 
+in polygenic expectations in the tails of trait distributions. The premise of the POPout test 
+is that a PRS derived from common variants should exhibit a positive, linear correlation with 
+its corresponding trait. However, if rare alleles are concentrated in the trait tails, then the 
+PRS is expected to regress towards the mean in these extremes (\dref{fig1}{c}). We first 
+apply POPout to 74 quality-controlled quantitative traits in individuals of European ancestry 
+from the UK Biobank \cite{Bycroft2018}, followed by replication in individuals of multiple ancestries 
+from the UK Biobank and in the US-based All of Us cohort \cite{Bick2024}. Next, we employ an 
+independent method \cite{Souaiaia2024} that uses sibling trait variability to infer the 
+genetic architecture of trait tails (\dref{fig1}{d}) in over 17k sibling pairs from the UK Biobank. 
+This sibling-based approach provides complementary evidence to POPout, since it leverages 
+non-genetic family data to infer tail architecture. Across these approaches and cohorts, 
+we observe widespread and substantial departures from polygenic expectations in trait tails (\fref{fig2}, \fref{fig3}). 
+To gain insight into the causes of these observations, we investigate whether natural 
+selection may drive these findings  (\fref{fig4}). Extending a method \cite{Sanjak2018} that 
+uses lifetime reproductive success to infer ongoing positive, negative, and stabilising selection, 
+we find consistency between the type of selection inferred and the tail(s) of a trait that 
+appear to be selected against according to our POPout results. Supporting this, simulations using 
+the forward-in-time simulator SLiM \cite{BC_2019}, show that stabilising selection results in POPout 
+effects in both tails, whereas traits simulated under neutrality display no such effects. 
+Finally, we observe that trait tails with POPout effects are associated with a higher frequency of 
+significant exome-based rare variants, reduced fecundity in both males and females, and advanced 
+paternal age. Our findings reveal the distinct nature of genetic architecture in the tails of 
+complex traits, highlighting the importance of distinguishing between the diverse genetic profiles 
+that can lead to extreme trait values in different individuals and in different traits.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -260,7 +313,10 @@ quantitative traits using UK Biobank (UKB)
 genotype-phenotype data \cite{Bycroft2018}. We consider traits 
 from the broad UKB trait categories of \emph{Biomarkers}, 
 \emph{Physical Measures}, \emph{Touchscreen Questionnaire}, and \emph{Cognitive Function}. 
-After quality control (QC) steps (see Methods), to ensure, for example, that the traits selected for analysis are heritable, approximately normally distributed, are heritable and sufficiently independent, 74 traits remain for analysis. To limit the contribution of environmental factors, we 
+After quality control (QC) steps (see Methods), to ensure, for example, 
+that the traits selected for analysis are heritable, approximately normally distributed, 
+are heritable and sufficiently independent, 74 traits remain for analysis. 
+To limit the contribution of environmental factors, we 
 residualise the traits with a range of covariates, including 
 age, sex, smoking, alcohol intake, menopause status; 
 we also remove individuals with cancer diagnoses or who 
@@ -283,11 +339,11 @@ results as trait quantiles on the X-axis and PRS on the Y-axis.
 This simple reversal of the usual relationship enables us to 
 investigate how the PRS varies along the trait continuum. 
 Under the infinitesimal model, or “polygenicity” for brevity, 
-we expect a linear relationship between the trait and PRS (Fig.1c). 
+we expect a linear relationship between the trait and PRS (\dref{fig1}{c}). 
 In contrast, if the tails are enriched for rare alleles of large 
 effect, not included in the PRS that is derived from GWAS on 
 common variants, then the average PRS in the lower and upper 
-quantiles will regress to the population mean PRS (Fig.1g). 
+quantiles will regress to the population mean PRS (\dref{fig1}{g}). 
 We formally test for deviations from polygenic expectations 
 by performing t-tests on the residuals of a regression of 
 PRS on trait. Each of the middle 80 trait centiles are tested 
@@ -351,7 +407,7 @@ the general results. In the full POPout analysis of 74 traits,
 68 traits had significant (FDR$<5\%$) POPout effects in one or both 
 tails, suggesting pervasive departures from polygenic 
 architecture in the tails of complex traits in 
-general (Fig.2b, Supplemental Figures). Of the 107 tails with significant 
+general (\dref{fig2}{b}, Supplemental Figures). Of the 107 tails with significant 
 POPout overall, 97 showed POPout effects in the 
 direction expected according to rare allele enrichment 
 in the tails, offering support to our hypothesis, and 
@@ -370,7 +426,7 @@ To exemplify the impact of these observed deviations from
 polygenic expectations, we emulated PRS prediction of 
 case/control status for diseases hypothetically diagnosed 
 in individuals with low haemoglobin and high red blood cell 
-distribution width, with prevalences of 1\% and 25\% (Fig.2c). 
+distribution width, with prevalences of 1\% and 25\% (\dref{fig2}{c}). 
 While prediction of case/control status using the trait PRS 
 is as expected (orange dashed line) for a disease prevalence 
 of 25\%, the PRSs underperform substantially for both 
@@ -378,15 +434,50 @@ traits for disease prevalence 1\%. For haemoglobin, the mean
 odds ratio (OR) for individuals in the bottom 5\% of PRS is 
 expected to be 3.7 but is in fact 1.8, while, for red blood 
 cell distribution width, the mean OR for individuals 
-wite top 5\% PRS values is 1.8 instead of an expected 4.1.
+with top 5\% PRS values is 1.8 instead of an expected 4.1.
 %
 \subsection*{Replicating POPout Effects} \label{sec:res1}
-Here we perform three different forms of replication to test the generalizability of our primary findings that used UKB European ancestry data. In each replication dataset, we only include traits that pass our POPout QC (see Methods) and have sample size over 5k individuals based on inferred power (see Supplemental Fig.1). First, to investigate if POPout effects of the primary analysis are due to residual non-genetic factors not captured by our QC or covariate adjustments, we repeated the analysis in a held-out sample of individuals that had traits measured at baseline and at approximately 5-year follow-up. By taking mean values of the two repeat measures, the impact of transient, environmentally influenced factors, such as infections, short-term medication use, or diet, should be minimized. This ‘UKB Repeated’ analysis, performed on up to $\sim$15k individuals across the 50 overlapping traits that passed QC, showed a strong and significant ($R=0.71$, $P=2.3 \times 10^{-16}$) correlation with the results of the primary analysis (Fig.2d), suggesting genetic contribution to the observed POPout effects of the primary analysis. Next, we investigated the generalizability of our findings to a held-out sample of UKB multi-ancestry ancestry individuals (see Methods). This ‘UKB Multi-Ancestry’ analysis, performed on up to $\sim$22k individuals across the overlapping 54 traits that passed QC, produced highly correlated and significant replication ($R=0.63$, $P=3.7 \times 10^{-13}$) of the primary results (Fig.1d). Finally, we apply the same approach to European ancestry individuals from the US-based All of Us data \cite{Bick2024} to evaluate the generalizability to matched-ancestry sample but from a clinical-based cohort from a different continent, with different collection and assaying procedures, and a different healthcare system and set of environment factors. This ‘All of Us’ analysis, performed on up to $\sim$127k individuals across 28 traits, also showed strong replication (Fig.1d) of the primary analysis results ($R=0.59$, $P=1.6 \times 10^{-6}$). See Supplementary Material (Supplemental Fig.1) for a full breakdown of all replication analyses. 
-
+Here we perform three different forms of replication to test the generalizability of our primary 
+findings that used UKB European ancestry data. In each replication dataset, 
+we only include traits that pass our POPout QC (see Methods) and have sample size 
+over 5k individuals based on inferred power (see \sref{sup1}). First, 
+to investigate if POPout effects of the primary analysis are due to residual 
+non-genetic factors not captured by our QC or covariate adjustments, we repeated 
+the analysis in a held-out sample of individuals that had traits measured at 
+baseline and at approximately 5-year follow-up. By taking mean values of the 
+two repeat measures, the impact of transient, environmentally influenced factors, 
+such as infections, short-term medication use, or diet, should be minimized. 
+This ‘UKB Repeated’ analysis, performed on up to $\sim$15k individuals across the 
+50 overlapping traits that passed QC, showed a strong and 
+significant ($R=0.71$, $P=2.3 \times 10^{-16}$) correlation with the results 
+of the primary analysis (\dref{fig2}{d}), suggesting genetic contribution to the 
+observed POPout effects of the primary analysis. Next, we investigated the generalizability 
+of our findings to a held-out sample of UKB multi-ancestry ancestry individuals (see Methods). 
+This ‘UKB Multi-Ancestry’ analysis, performed on up to $\sim$22k individuals across the 
+overlapping 54 traits that passed QC, produced highly correlated and significant 
+replication ($R=0.63$, $P=3.7 \times 10^{-13}$) of the primary results (\dref{fig1}{d}). 
+Finally, we apply the same approach to European ancestry individuals from the 
+US-based All of Us data \cite{Bick2024} to evaluate the generalizability to matched-ancestry 
+sample but from a clinical-based cohort from a different continent, with different 
+collection and assaying procedures, and a different healthcare system and set of 
+environment factors. This ‘All of Us’ analysis, performed on up to $\sim$127k individuals 
+across 28 traits, also showed strong replication (\dref{fig1}{d}) of the primary 
+analysis results ($R=0.59$, $P=1.6 \times 10^{-6}$). 
+See Supplementary Material (\sref{sup1}) for a full breakdown of all replication analyses. 
 %
 %
 \subsection*{Tail architecture inferred from siblings} 
-Next, we seek to validate our findings further using family data. We have developed a method \cite{Souaiaia2024} that evaluates trait data in large samples of siblings to infer genetic architecture in the tails of quantitative traits. This provides an alternative, complementary approach to infer tail architecture from independent, family-based, non-genetic data. The intuition of the approach (Fig.3a) is that individuals with extreme trait values have siblings whose trait values reflect the architecture in the tails, such that under: (1) polygenic architecture: siblings have high but less extreme trait values, (2) de novo architecture: siblings have trait values reflective of the general population, (3) Mendelian architecture (i.e. due to rare, high-impact alleles that segregate in families): siblings either have similarly extreme trait values or have trait values that reflect the general population.
+Next, we seek to validate our findings further using family data. We have 
+developed a method \cite{Souaiaia2024} that evaluates trait data in large 
+samples of siblings to infer genetic architecture in the tails of quantitative traits. 
+This provides an alternative, complementary approach to infer tail architecture 
+from independent, family-based, non-genetic data. 
+The intuition of the approach (\dref{fig3}{a}) is that individuals with extreme 
+trait values have siblings whose trait values reflect the architecture in the tails, 
+such that under: (1) polygenic architecture: siblings have high but less extreme trait 
+values, (2) de novo architecture: siblings have trait values reflective of the general 
+population, (3) Mendelian architecture (i.e. due to rare, high-impact alleles that segregate 
+in families): siblings either have similarly extreme trait values or have trait values that reflect the general population.
 
 Having established theoretical expectations of sibling 
 similarity according to genetic architecture, we developed 
@@ -423,8 +514,21 @@ tail architecture enriched for large-effect, rare alleles
 %
 %
 
-The UK Biobank (UKB) includes over 17k sibling pairs of European ancestry available for our STANDout analyses, none of which were included in our population-based analyses. There were too few sibling pairs from the multi-ancestry sample for a sufficiently powered multi-ancestry sibling analysis. Data across all 74 traits were available for analysis. Replicating our POPout analysis, our STANDout analysis showed no departure from polygenic expectations for phosphate, showed a significant lower tail STANDout effect for haemoglobin concentration ($P_{lower}=2 \times 10^{-5}$), a significant upper tail STANDout effect for red blood cell distribution width ($P_{upper}=4 \times 10^{-4}$), and significant effects in both tails for sitting height ($P_{lower}=7 \times 10^{-4}$, $P_{upper}=3 \times 10^{-8}$; see Fig.3b and Fig.2a for comparison). More broadly, our sibling-based STANDout analyses replicated our population-based POPout analyses across the 74 traits extremely well (Fig.3c; $R = 0.66$, $P = 3 \times 10^{-20}$). This is reassuring given that the two methods use such orthogonal approaches and types of data. Further reassurance of the validity of our sibling-based method is provided by the strong correlation ($R = 0.81$, $P = 2 \times 10^{-9}$) between SNP-based heritability ($h^2$), estimated by the popular LD score regression approach~\cite{BulikSullivan2015}, and the sibling-based $h^2$ estimated as a key parameter in the STANDout approach (Fig.3d).
-
+The UK Biobank (UKB) includes over 17k sibling pairs of European ancestry available for our STANDout analyses, 
+none of which were included in our population-based analyses. There were too few sibling pairs from the 
+multi-ancestry sample for a sufficiently powered multi-ancestry sibling analysis. 
+Data across all 74 traits were available for analysis. Replicating our POPout analysis, 
+our STANDout analysis showed no departure from polygenic expectations for phosphate, showed 
+a significant lower tail STANDout effect for haemoglobin concentration ($P_{lower}=2 \times 10^{-5}$), a 
+significant upper tail STANDout effect for red blood cell distribution width ($P_{upper}=4 \times 10^{-4}$), 
+and significant effects in both tails for sitting height 
+($P_{lower}=7 \times 10^{-4}$, $P_{upper}=3 \times 10^{-8}$; see \dref{fig3}{b} and \dref{fig2}{a} for comparison). 
+More broadly, our sibling-based STANDout analyses replicated our population-based POPout analyses across 
+the 74 traits extremely well (\dref{fig3}{c}; $R = 0.66$, $P = 3 \times 10^{-20}$). This is reassuring given that the 
+two methods use such orthogonal approaches and types of data. Further reassurance of the validity of our 
+sibling-based method is provided by the strong correlation ($R = 0.81$, $P = 2 \times 10^{-9}$) between 
+SNP-based heritability ($h^2$), estimated by the popular LD score regression approach~\cite{BulikSullivan2015}, 
+and the sibling-based $h^2$ estimated as a key parameter in the STANDout approach (\dref{fig3}{d}).
 
 %
 \subsection*{Selection shapes tail architecture}
@@ -438,7 +542,7 @@ hypothesized cause of these tail departures from expectations;
 namely, that they are caused by the enrichment of rare, 
 large-effect alleles in the tails due to selection on the 
 trait constraining large-effect alleles to low frequency 
-(Fig.1). Backman et al. \cite{Backman2021} conducted 
+(\fref{fig1}). Backman et al. \cite{Backman2021} conducted 
 the most comprehensive trait-wide analysis of UK Biobank 
 exome sequence data to date, and here we utilize their 
 results to investigate whether traits with significant tail 
@@ -450,13 +554,13 @@ effect sizes, haemoglobin concentration has eight with
 positive and twelve with negative effect sizes, red blood 
 cell distribution width has twenty-eight with positive and 
 five with negative effects, and sitting height has ten with 
-positive and twenty with negative effects (Fig.4a). 
+positive and twenty with negative effects (\dref{fig4}{a}). 
 Across the 74 traits, we find that $POPout$ effect sizes from 
 our primary analysis are significantly positively 
 correlated ($R=0.35$, $P=2\times10^{-5}$) with the 
 number of exome hits with effects in the direction 
 relating to the tail of the POPout 
-effect (Fig.4b). This provides direct 
+effect (\dref{fig4}{b}). This provides direct 
 support for the observed complex tail architecture 
 being underlain by rare alleles. Findings by Fiziev and 
 colleagues \cite{Fiziev2023} offer further support. 
@@ -468,10 +572,10 @@ However, we highlight one result that suggests that rare
 PRS may perform poorly for traits under extremely strong 
 selection. The trait with the most significant $POPout$ 
 effect in the questionnaire/cognitive category 
-(Fig.2b) was \textit{Age at Menopause}, 
+(\dref{fig2}{b}) was \textit{Age at Menopause}, 
 which had an effect consistent with rare allele 
 enrichment in the lower tail; yet the exome data showed 
-no hits of negative effect (Fig.4c). However, 
+no hits of negative effect (\dref{fig4}{c}). However, 
 given the rationale for early age of menopause being 
 under particularly strong negative selection, it may 
 be that only ultra-rare alleles of large effect 
@@ -534,14 +638,14 @@ the trait was subject to stabilizing selection or strong
 stabilizing selection. After stabilizing selection, rare alleles 
 were enriched in the trait tails compared to under neutrality, 
 and this effect was more pronounced for ultra-rare alleles and 
-after strong stabilizing selection (Fig.4d). Under 
+after strong stabilizing selection (\dref{fig4}{d}). Under 
 neutrality, approximately 1\% of simulated individuals in the 
 top trait centiles harbored rare alleles of sufficiently large 
 effect to cause their extreme trait value, whereas under strong
 stabilizing selection, about 28\% of individuals in the tails 
 carried such alleles. As a result, the trait tails showed a marked 
 difference between trait value and PRS calculated from common alleles 
-only across replicated (Fig.4e). These simulations 
+only across replicated (\dref{fig4}{e}). These simulations 
 suggest that selection can have a critical impact on how genetic 
 architecture varies across the trait continuum and could, thus, 
 have played an important role in the observed departures from 
@@ -553,10 +657,10 @@ method \cite{Sanjak2018} for inferring ongoing selection from
 "lifetime reproductive success" to our 74 traits in the UKB 
 data (see Methods). We use Bayesian Information Criteria (BIC) 
 to distinguish "no selection", "positive", "negative", and 
-"stabilising" selection in the fitted models (Fig.4f). 
+"stabilising" selection in the fitted models (\dref{fig4}{f}). 
 Next, we stratify the POPout results of the primary analysis into 
 groups of traits according to the categories of inferred selection and test if 
-the POPout effects reflect the inferred selection (Fig.4g). 
+the POPout effects reflect the inferred selection (\dref{fig4}{g}). 
 Despite the snapshot into historical selection provided by 
 contemporary reproductive success, POPout effects were reflective 
 of inferred selection. There were no significant differences in 
@@ -567,8 +671,12 @@ As expected there were significantly larger POPout effects in the lower tail
 for traits with inferred positive selection (lower mean=0.2, upper mean=0.04, $P=7 \times 10^{-7}$) 
 and significantly larger POPout effects in the upper 
 tail for traits under inferred negative selection (lower mean=0.08, upper mean = 0.17, $P=0.02$), 
-Finally, we tested for associations between POPout effects and proxy measures of fitness (Fig.4h), finding that POPout effects are significantly negatively correlated with number of offspring (paternal: $P=0.0001$; maternal: $P=0.0233$), 
-significantly positively correlated with paternal age ($P=0.0096$) and not significantly associated with self-identified illnesses or number of miscarriages and still births. Notably, the well-established increase in \emph{de novo} mutation rate with advanced paternal age\cite{Kong2012} is consistent with the corresponding 
+Finally, we tested for associations between POPout effects and proxy measures of fitness (\dref{fig4}{h}), 
+finding that POPout effects are significantly negatively correlated with number of 
+offspring (paternal: $P=0.0001$; maternal: $P=0.0233$), significantly positively correlated 
+with paternal age ($P=0.0096$) and not significantly associated with self-identified illnesses 
+or number of miscarriages and still births. Notably, the well-established increase 
+in \emph{de novo} mutation rate with advanced paternal age\cite{Kong2012} is consistent with the corresponding 
 traits being subject to ongoing selection, and may contribute directly to the observed enrichment of rare 
 variants associated with those traits.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -665,7 +773,7 @@ architecture varies across the trait distribution.
 Sequencing individuals with average PRS in the lower tail of 
 haemoglobin concentration, for instance, is likely to yield greater 
 discovery of rare variants than a design blind to POPout 
-effects (Fig.2a). Likewise, a priori evidence of enrichment of de 
+effects (\fref{fig2}{a}). Likewise, a priori evidence of enrichment of de 
 novo mutations derived from our sibling approach \cite{Souaiaia2024} 
 would motivate trio sequence studies, rather than population 
 sequence or genotype studies. Moreover, our results could be 
@@ -707,7 +815,8 @@ to more accurate PRS, which makes the POPout approach more powerful for
 identifying residual unidentified rare variants, creating an iterative 
 process that builds increasingly accurate and comprehensive PRS over time.
 
-Our study had a number of limitations and areas for future follow-up. Firstly, and most important, we cannot rule out the contribution of 
+Our study had a number of limitations and areas for future follow-up. 
+Firstly, and most important, we cannot rule out the contribution of 
 environmental factors in generating the observations in relation to 
 complex tail architecture. In fact, despite our focus on genetics 
 here, we expect the environment to have made significant contributions 
@@ -715,10 +824,18 @@ to the observed departures from our null expectations. However,
 given control of major environmental risk factors, replication across 
 multiple measures and cohorts, association with reported exome variants, 
 and evidence for selection generating such signals from real and simulated data, 
-we believe that enrichment of high-impact rare alleles is a major cause of our findings. Future work should interrogate potential genetic and environmental causes of extreme trait values at the individual level, with greater trait-specific attention than possible from our trait-wide analyses. Secondly, in our multi-ancestry replication analysis we combined individuals of many diverse ancestries into a single group, which poorly reflects global diversity and prevents evaluation of potential heterogeneity across populations. However, relatively large sample sizes are required to study tails of trait distributions in this 
+we believe that enrichment of high-impact rare alleles is a major cause of our findings. 
+Future work should interrogate potential genetic and environmental causes of extreme 
+trait values at the individual level, with greater trait-specific attention than possible 
+from our trait-wide analyses. Secondly, in our multi-ancestry replication analysis we 
+combined individuals of many diverse ancestries into a single group, which poorly 
+reflects global diversity and prevents evaluation of potential heterogeneity across 
+populations. However, relatively large sample sizes are required to study tails of trait distributions in this 
 way and so we chose to perform this grouping to establish whether our 
 findings were valid across ancestries. Future studies should expand to large, 
-global samples. Thirdly, we did not explicitly integrate rare PRS to recover observed reductions in absolute PRS in the tails. This was due to the recent publication of a highly comprehensive study that performs a similar analysis and provides direct support for our findings \cite{Fiziev2023}, 
+global samples. Thirdly, we did not explicitly integrate rare PRS to recover observed reductions 
+in absolute PRS in the tails. This was due to the recent publication of a highly comprehensive 
+study that performs a similar analysis and provides direct support for our findings \cite{Fiziev2023}, 
 as well as the challenge in verifying observed effects that are due to 
 presently unidentified ultra-rare and  de novo effect alleles. 
 Fourthly, we only utilized siblings given data availability, but our
@@ -851,10 +968,16 @@ for analysis.
 
 \subsubsection*{Quantitative Trait QC} \label{sec:methods:traitQC} 
 \paragraph*{Trait Selection} 
-We considered all traits from the categories \textit{Biomarkers} (453 traits), \textit{Physical Measures} (271 traits), the \textit{Touchscreen Questionnaire} (396 traits) and \textit{Cognitive Function} (134 traits) 
-to provide a broad group of well-studied, heritable traits. To minimise non-genetic causes of trait values, we then removed all individuals with a cancer diagnosis (34,698), on insulin treatment (1,311) or who were pregnant at baseline (109). We also removed 64,043 individuals on statins and other cholesterol-lowering drugs from the \textit{Blood count} and \textit{Blood Biochemistry} subcategories and 29,395 individuals
+We considered all traits from the categories \textit{Biomarkers} (453 traits), 
+\textit{Physical Measures} (271 traits), the \textit{Touchscreen Questionnaire} (396 traits) 
+and \textit{Cognitive Function} (134 traits) to provide a broad group of well-studied, heritable traits. 
+To minimise non-genetic causes of trait values, we then removed all individuals with a cancer diagnosis (34,698), 
+on insulin treatment (1,311) or who were pregnant at baseline (109). We also removed 64,043 individuals 
+on statins and other cholesterol-lowering drugs from the \textit{Blood count} 
+and \textit{Blood Biochemistry} subcategories and 29,395 individuals
 on heart rate medication from the \textit{Arterial stiffness} and \textit{Blood pressure} subcategories.
-Next, to ensure that extreme outliers do not impact results, we removed all samples that had trait values six standard deviations or more from the mean. After these removals, we defined quantitative traits as 
+Next, to ensure that extreme outliers do not impact results, we removed all samples that had 
+trait values six standard deviations or more from the mean. After these removals, we defined quantitative traits as 
 those containing at least 10 distinct values and whose top two modal values comprise less than 
 half the samples. Finally, we removed all traits with < $100,000$ samples remaining in our 
 primary dataset of unrelated European ancestry individuals, resulting in a set of 180 quantitative 
@@ -875,13 +998,27 @@ PCs, and with relatively low skew, transformed to have standard normal distribut
 %
 \paragraph*{Further Trait QC}
 To conduct our initial primary analyses, European ancestry UKB samples were split 
-randomly into 50\% base and 50\% target data sets, for computing GWAS results and PRS (or "polygenic scores"), respectively. Then, for each trait, a GWAS was performed using the standardised trait values in the base data, applying PLINK-1.9 \citep{plink, bt_10}, while heritability and pairwise genetic correlations were estimated using LD score regression \cite{ldsc}.  To ensure that our PRS analyses are well-powered, we removed traits with heritability $h^2<5\%$ \cite{guide_paper}, while to ensure that the traits were essentially polygenic, rather than oligogenic, traits were removed for which a single SNP (MAF > 1\%) explained more than 2\% of trait variance \cite{2prule}. After these QC steps, 120 quantitative traits remained across all four categories. 
+randomly into 50\% base and 50\% target data sets, for computing GWAS results and 
+PRS (or "polygenic scores"), respectively. Then, for each trait, a GWAS was performed 
+using the standardised trait values in the base data, applying PLINK-1.9 \citep{plink, bt_10}, 
+while heritability and pairwise genetic correlations were estimated using LD score regression \cite{ldsc}.  
+To ensure that our PRS analyses are well-powered, we removed traits 
+with heritability $h^2<5\%$ \cite{guide_paper}, while to ensure that the traits were 
+essentially polygenic, rather than oligogenic, traits were removed for which a single SNP (MAF > 1\%) 
+explained more than 2\% of trait variance \cite{2prule}. 
+After these QC steps, 120 quantitative traits remained across all four categories. 
 
 To verify that the traits were meaningfully different from each other, we considered their  
 pairwise genetic correlations. More than half (64 of the 120) of the traits had pairwise genetic 
 correlation $r_g>95\%$ with at least one other trait. Of these 64 traits, 22 had a single pairwise 
-correlation above this threshold. For these 11 pairs of traits, the trait with higher heritability was selected for analysis.  The remaining 42 genetically non-unique traits came from two categories: \textit{ Bone-densitometry of heel}  and \textit{ Body composition by impedance}. Applying the same data maximisation algorithm used to select the maximum number of unrelated individuals \citep{erase}, we selected a further 7 traits (two bone-densitometry related and five body composition related) with pairwise $r_g<95\%$.  In addition to the 56 traits without high genetic pairwise correlations, and the 11 traits selected from correlated pairs, this resulted in a set of 74 traits for use in the primary analyses. % GIVE SOME ON AVERAGE NUMBERS OR BELOW - primary european and non, etc.  
-
+correlation above this threshold. For these 11 pairs of traits, the trait with higher heritability 
+was selected for analysis.  The remaining 42 genetically non-unique traits came from two 
+categories: \textit{ Bone-densitometry of heel}  and \textit{ Body composition by impedance}. Applying the 
+same data maximisation algorithm used to select the maximum number of unrelated 
+individuals \citep{erase}, we selected a further 7 traits (two bone-densitometry related and five body 
+composition related) with pairwise $r_g<95\%$.  In addition to 
+the 56 traits without high genetic pairwise correlations, and the 11 traits 
+selected from correlated pairs, this resulted in a set of 74 traits for use in the primary analyses. 
 
 \paragraph*{Initial PRS Analyses}
 The 74 traits remaining after QC included 37 in the \textit{Biomarkers} category, 
@@ -911,6 +1048,8 @@ Across the 74 traits, there were between 2,461 and 15,475 (mean: 10,699) unrelat
 individuals with repeated measure replication.  PRS were calculated in this sample 
 using the $P$-value threshold (and, thus, same SNPs) optimised for the relevant 
 trait in the primary analyses, as well as the (same) effect size weights of the base GWAS. 
+
+
 %
 \paragraph*{Non-European Multi-Ancestry Individuals}
 After initial QC (above), there were 24,476 non-European ancestry individuals. The trait values of 
@@ -1051,7 +1190,7 @@ provide sufficient power for replication (see \sref{sup1}).
 \paragraph{Replication Across Datasets} 
 We replicated our primary $POPout$ analyses in three different independent cohorts:  
 \textbf{(1)} UKB European ancestry individuals with repeat measures (baseline and follow-up at $\sim$5 years), 
-\textbf{(2)} Non-European UKB individuals, \textbf{(3)} the European ancestry samples in the 
+\textbf{(2)} Non-European Multi-Ancestry UKB individuals, \textbf{(3)} the European ancestry samples in the 
 US-based All of Us biobank. For each cohort, traits with at least 5000 samples, passing our POPout QC, 
 were included and tested for matched discovery of POPout effects and correlation as described above. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
