@@ -2,7 +2,7 @@
 %% This is file `zHenriquesLab-StyleBioRxiv.cls',
 %%
 %% Class files for pre-print servers such as BioRXiv
-%%
+%% chapterbib
 %% Copyright (C) Ricardo Henriques <r.henriques@ucl.ac.uk>
 \typeout{Document Class `HenriquesLab' <18-April-2018>.}
 \NeedsTeXFormat{LaTeX2e}
@@ -369,12 +369,13 @@
 
 % %% bibliography
 \RequirePackage{chapterbib}
-\RequirePackage[sectionbib,numbers,sort&compress,merge,round]{natbib}
+%\RequirePackage[super,sectionbib,numbers,sort&compress,merge,round]{natbib}
+\RequirePackage[super,sectionbib,numbers,sort&compress,merge]{natbib}
+%\usepackage[backend=biber, style=nature]{biblatex}   
 \setlength{\bibsep}{0.0pt}
 \bibliographystyle{zHenriquesLab-StyleBib}
 \renewcommand{\bibsection}{} % Remove header
 \renewcommand\bibfont{\normalfont\sffamily\fontsize{6}{8}\selectfont} % set font to be sans serif
-
 \makeatletter 
 \renewcommand\@biblabel[1]{ #1.} % Remove brackets from label
 \def\tagform@#1{\maketag@@@{\bfseries(\ignorespaces#1\unskip\@@italiccorr)}}

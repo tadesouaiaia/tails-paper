@@ -6,6 +6,7 @@
 \usepackage[normalem]{ulem}
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 \usepackage{environ, etoolbox}
+%\usepackage[backend=biber, style=nature]{biblatex}
 %\usepackage{hyperref} 
 \definecolor{sunyGray}{RGB}{131,134,135} \definecolor{sunyBlue}{RGB}{0,76,147}     
 \definecolor{sunyCyan}{RGB}{0,148,254}                                                            
@@ -39,10 +40,12 @@
 \newcommand\question[1]{\textbf{\textcolor{red}{QUESTION: #1}}}                                                                                                                     
 \newcommand\minipoint[1]{\smaller{\textbf{\textcolor{purple}{MINIPOINT: #1}}}\normalsize{}}                                                                                         
 \newcommand\note[1]{\textbf{\textcolor{red}{\scriptsize{NOTE: #1}}}}                                                                                                                
-\newcommand\btext[1]{\textcolor{purple}{Beatrice Draft: \scriptsize{#1}}}                                                                                                           
-\newcommand\bmore[1]{\textcolor{purple}{\scriptsize{#1}}}         
-\newcommand\pcomment[1]{\textcolor{blue}{\textbf{Issues:} \footnotesize{#1}}}                                                                                                           
-\newcommand\tfix[1]{\textcolor{purple}{\textbf{Solutions:} \footnotesize{#1}}}                                                                                                           
+%\newcommand\btext[1]{\textcolor{purple}{Beatrice Draft: \scriptsize{#1}}}                                                                                                           
+%\newcommand\bmore[1]{\textcolor{purple}{\scriptsize{#1}}}         
+%\newcommand\pcomment[1]{\textcolor{blue}{\textbf{Issues:} \footnotesize{#1}}}                                                                                                           
+%\newcommand\tfix[1]{\textcolor{purple}{\textbf{Solutions:} \footnotesize{#1}}}                                                                                                           
+
+
 
 \setlength\parindent{0.50cm}
 \setlength{\parindent}{0cm}
@@ -73,14 +76,14 @@
 %  PREV: PREAMBLE, NEXT: ABSTRACT
 %  PREV: PREAMBLE, NEXT: ABSTRACT
 %  
-% 
+% Sanjak 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT  %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract} %\normalsize
 \noindent\cyansub{Abstract}$\,$ 
 Understanding the genetic architecture of human traits is critical for advancing 
-biomedical research and precision medicine \cite{Timpson2018}. Despite much progress, 
+biomedical research and precision medicine \citep{Timpson2018}. Despite much progress, 
 little is known about how genetic architecture varies across the full trait spectrum and, 
 in particular, if it differs in the tails of complex traits, where disease often occurs. 
 Here, applying a novel approach based polygenic scores, we reveal striking departures 
@@ -608,42 +611,63 @@ in the tail but little signal in exome data.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\FloatBarrier 
 \begin{figure}[!h] 
-\begin{maybe}{showFig} 
+%\begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig4.pdf} 
-\end{maybe} 
-\caption{{\bf Concordance between POPout effect size and
-rare variants of large effect and selective pressure.}
-\textbf{(a)} Trumpet plots (minor allele frequency v effect size) of
-genome-wide significant variants for the four traits selected for their 
-different POPout characteristics (see Fig 2a).  
-\textbf{(b)} POPout effect size plotted against the number of 
-genome-wide significant variants with MAF<1\% for 58 traits with overlapping exome sequence
-results.  For upper tails positive variant effects are counted and
-for lower tails negative variant effects are counted.  Correlation
-and significance calculated using Pearson correlation. 
-\textbf{(c)} Age of menopause: PRS quantile vs. trait mean and trumpet plot.
-\textbf{(d)} Simulation: Enrichment of variant-type by trait quantile under different environments. 
-Rare and Ultra Rare correspond to MAF<1\% and MAF<0.05\%, respectively.  Large denotes variants in the top 
-10\% of absolute effect. For more information on the variant distribution 
-and the how weak and strong selection is simulation see the \myemph{Methods: Simulation}. 
-\textbf{(e)} Simulation: $\Delta$ PRS refers to gain between traditional common variant PRS (MAF>1\%) and 
-a theoretical PRS where all variants are known and used. 
-\textbf{(f)} Residualised trait value plotted against relative
-lifetime reproductive success for 16 example traits.  Best model fit
-to the data, selected by BIC considering all models with and without
-linear and quadratic terms, are shown by dashed lines. Model
-selected by BIC used to classify selective pressure acting on the
-traits. 
-\textbf{(g)} POPout effect size grouped by model selection
-category for 10 traits under no selection, 8 traits under non-direction 
-stabilising selection, 29 traits under positive selection, and 27 traits under negative selection. 
-Significant difference between upper and lower tail mean effect sizes calculated using a two-sample t-test. 
-\textbf{(h)} Spearman rank correlation between four proxy measures of fitness and
-POPout effect size. For each fitness measure, correlation was
-calculated between the mean of the fitness measure in individuals in
-the upper and lower 1\% trait tails and POPout effect size for the
-corresponding tail across 74 trait tails.}
+%\end{maybe} 
+\caption{{{\bf Rare variants and natural selection as putative causal mechanisms of observed POPout effects.} 
+\textbf{(a)} Trumpet plots \cite{Corte2023} (minor allele frequency vs effect size) of significant variants reported 
+in major exome \cite{Backman2021} and GWAS \cite{neale} studies for the four traits selected for their different POPout effects (see Fig.2a). 
+\textbf{(b)} POPout effect size vs number of significant exome variants \cite{Backman2021}. 
+For upper tail POPout effects, the number of trait-increasing rare alleles are counted, 
+while for the lower tail the number of trait-reducing rare alleles are counted. 
+Correlation and significance calculated using Pearson correlation. 
+\textbf{(c)} PRS-on-trait quantile plot (left) and trumpet plot (right) for self-reported age of menopause in UKB. 
+\textbf{(d)} Enrichment of rare vs common alleles in simulations under weak and strong selection scenarios, 
+stratified by rare variant classification and effect size (see Methods). 
+\textbf{(e)} POPout effects across trait quantiles averaged over 100 simulations (mean and CIs shown) under
+neutrality and selection. 
+\textbf{(f)} Trait value vs relative lifetime reproductive success for 16 example traits. 
+Best fitting model (dashed line) determined by BIC ($\beta$ = linear, $\gamma$ = quadratic, regression parameters) 
+used to classify selective pressure acting on trait. 
+\textbf{(g)} POPout effect sizes for traits are grouped by selection category inferred by BIC model (panel \textbf{f}, models with linear and quadratic terms are categorised by direction of linear term). Differences between lower and
+upper tail effects tested by two-sample t-test in each of the four categories).  
+\textbf{(h)} Association between POPout effect size and five traits relating to fitness. 
+For each proxy fitness trait, Spearman rank correlation was calculated between the mean
+of the trait in individuals in the upper and lower 1\% trait tails and POPout effect size 
+for the corresponding tail across the 74 traits.}}
 \label{fig4} \end{figure} 
+
+%\textbf{(a)} Trumpet plots (minor allele frequency v effect size) of
+%genome-wide significant variants for the four traits selected for their 
+%different POPout characteristics (see Fig 2a).  
+%\textbf{(b)} POPout effect size plotted against the number of 
+%genome-wide significant variants with MAF<1\% for 58 traits with overlapping exome sequence
+%results.  For upper tails positive variant effects are counted and
+%for lower tails negative variant effects are counted.  Correlation
+%and significance calculated using Pearson correlation. 
+%\textbf{(c)} Age of menopause: PRS quantile vs. trait mean and trumpet plot.
+%\textbf{(d)} Simulation: Enrichment of variant-type by trait quantile under different environments. 
+%Rare and Ultra Rare correspond to MAF<1\% and MAF<0.05\%, respectively.  Large denotes variants in the top 
+%10\% of absolute effect. For more information on the variant distribution 
+%and how weak and strong selection are simulated see the \myemph{Methods: Simulation}. 
+%\textbf{(e)} Simulation: $\Delta$ PRS refers to gain between traditional common variant PRS (MAF>1\%) and 
+%a theoretical PRS where all variants are known and used. 
+%\textbf{(f)} Residualised trait value plotted against relative
+%lifetime reproductive success for 16 example traits.  Best model fit
+%to the data, selected by BIC considering all models with and without
+%linear and quadratic terms, are shown by dashed lines. Model
+%selected by BIC used to classify selective pressure acting on the
+%traits. 
+%\textbf{(g)} POPout effect size grouped by model selection
+%category for 10 traits under no selection, 8 traits under non-direction 
+%stabilising selection, 29 traits under positive selection, and 27 traits under negative selection. 
+%Significant difference between upper and lower tail mean effect sizes calculated using a two-sample t-test. 
+%\textbf{(h)} Spearman rank correlation between four proxy measures of fitness and
+%POPout effect size. For each fitness measure, correlation was
+%calculated between the mean of the fitness measure in individuals in
+%the upper and lower 1\% trait tails and POPout effect size for the
+%corresponding tail across 74 trait tails.}
+%\label{fig4} \end{figure} 
 %\FloatBarrier
 % \clearpage
 
@@ -652,8 +676,10 @@ To gain greater insight into how selection may impact variation
 in genetic architecture across the trait continuum, we 
 performed simulations using the forward-in-time population 
 genetic simulator SLiM \cite{BC_2019}. Using standard population 
-genetic parameter settings (Methods), we simulated genetic variation data and a ‘trait’ calculated as the sum of genome-wide alleles, with effect sizes drawn from a Gamma distribution. After an initial burn-in period under neutrality, 
-the trait was subject to stabilizing selection or strong 
+genetic parameter settings (Methods), we simulated genetic variation 
+data and a polygenic quantitive ‘trait’ calculated as the sum of genome-wide alleles, 
+with effect sizes drawn from a Gamma distribution. After an initial 
+burn-in period under neutrality, the trait was subject to stabilizing selection or strong 
 stabilizing selection. After stabilizing selection, rare alleles 
 were enriched in the trait tails compared to under neutrality, 
 and this effect was more pronounced for ultra-rare alleles and 
@@ -942,7 +968,7 @@ causes of extreme trait values and disease in individuals.
 \subsubsection*{UK Biobank Genetic Data} 
 The UK Biobank (UKB) is a prospective cohort study of approximately
 500,000 participants recruited across the United Kingdom from 2006 to
-2010 \citep{ukb}. Phenotype data of anthropometric, biological and
+2010 \cite{ukb}. Phenotype data of anthropometric, biological and
 lifestyle measures were collected at baseline and in follow-up surveys, with
 further linkage to health and disease record data. The genetic dataset
 consists of 488,377 samples genotyped at 805,426 SNPs.
@@ -961,10 +987,10 @@ excluded. Samples exhibiting high levels of missingness or
 heterozygosity, inconsistencies in genetic-inferred and self-reported
 sex, or displaying aneuploidy of the sex chromosomes, were removed in
 accordance with recommendations from the UKB data processing team
-\citep{ukb_qc}.  For the analyses in the general population, a greedy
+\cite{ukb_qc}.  For the analyses in the general population, a greedy
 algorithm was employed to remove related individuals that maximises
 sample retention while removing all third-degree relatives (kinship
-coefficient > 0.044) \citep{erase}.  After these QC steps, 411,949 unrelated    % THESE NUMBERS DON'T ADD UP 
+coefficient > 0.044) \cite{erase}.  After these QC steps, 411,949 unrelated    % THESE NUMBERS DON'T ADD UP 
 individuals remained, of which 387,235 were of European ancestry. Included 
 among the European ancestry cluster were 18,340 individuals with repeated 
 measures that were set aside, along with the 24,476 non-European individuals, 
@@ -974,14 +1000,14 @@ European ancestry individuals for the primary $POPout$ analyses (see below).
 For the sibling analyses (see below), sibling pairs were selected by first
 identifying first-degree relatives, defined as those with kinship
 coefficient within the range 0.177 and 0.354 (expected value for
-siblings is 0.25) to account for the expected variation among siblings \citep{sib1}. 
+siblings is 0.25) to account for the expected variation among siblings \cite{sib1}. 
 Only individuals of European ancestry were included in the sibling analyses due to 
-insufficient statistical power of the non-European ancestry samples \citep{Souaiaia2024}. 
+insufficient statistical power of the non-European ancestry samples \cite{Souaiaia2024}. 
 The proportion of SNPs with zero identity-by-state (IBS0) was used to distinguish 
 sibling pairs from parent-offspring pairs, since parent–offspring pairs have
 IBS0$\approx$0 across the autosomes. It has been shown in the UKB that
 there is good separation between pairs of first degree relatives at
-IBS0=0.00112 \citep{sib1} and, thus, sibling pairs were selected as
+IBS0=0.00112 \cite{sib1} and, thus, sibling pairs were selected as
 those exceeding this threshold. This provided a total of 17,289 sibling pairs 
 for analysis.
 
@@ -1019,7 +1045,7 @@ PCs, and with relatively low skew, transformed to have standard normal distribut
 To conduct our initial primary analyses, European ancestry UKB samples were split 
 randomly into 50\% base and 50\% target data sets, for computing GWAS results and 
 PRS (or "polygenic scores"), respectively. Then, for each trait, a GWAS was performed 
-using the standardised trait values in the base data, applying PLINK-1.9 \citep{plink, bt_10}, 
+using the standardised trait values in the base data, applying PLINK-1.9 \cite{plink, bt_10}, 
 while heritability and pairwise genetic correlations were estimated using LD score regression \cite{ldsc}.  
 To ensure that our PRS analyses are well-powered, we removed traits 
 with heritability $h^2<5\%$ \cite{Choi2020}, while to ensure that the traits were 
@@ -1034,7 +1060,7 @@ correlation above this threshold. For these 11 pairs of traits, the trait with h
 was selected for analysis.  The remaining 42 genetically non-unique traits came from two 
 categories: \textit{ Bone-densitometry of heel}  and \textit{ Body composition by impedance}. Applying the 
 same data maximisation algorithm used to select the maximum number of unrelated 
-individuals \citep{erase}, we selected a further 7 traits (two bone-densitometry related and five body 
+individuals \cite{erase}, we selected a further 7 traits (two bone-densitometry related and five body 
 composition related) with pairwise $r_g<95\%$.  In addition to 
 the 56 traits without high genetic pairwise correlations, and the 11 traits 
 selected from correlated pairs, this resulted in a set of 74 traits for use in the primary analyses. 
@@ -1257,7 +1283,8 @@ distribution and their conditional siblings, as follows:
   z&=\frac{\sum_{i\in A_q}s_2^{(i)}-\frac{1}{2}s_1^{(i)}h^2} {\sqrt{n(1-\frac{h^4}{4})}}
 \end{align*}
 For index siblings in the lower and upper tails, the alternative
-hypotheses of $H_1: z>0$ and $H_1: z<0$ are tested as one-tailed t-tests, respectively. For further details, see Souaiaia et al \citep{Souaiaia2024}.
+hypotheses of $H_1: z>0$ and $H_1: z<0$ are tested as one-tailed t-tests, respectively. For further details, 
+see Souaiaia et al \cite{Souaiaia2024}.
 
 The trait heritability, $h^2$, a required parameter in the {\em Mendelian} and {\em de novo} tests, is estimated from the sibling pairs by calculating the maximum likelihood of $h^2$ 
 under the null hypothesis of the infinitesimal model (see above): 
@@ -1325,11 +1352,11 @@ effect size (\dref{fig4}{b}).
 %
 \subsubsection*{Relative Lifetime Reproductive Success}
 The number of offspring is recorded in the UKB for both females and
-males. Following the approach of Beauchamp \citep{v_select2}, samples were 
+males. Following the approach of Beauchamp \cite{v_select2}, samples were 
 stratified into four birth cohorts (1934-42, 1943-48, 1949-55, 1956-65). Individual relative
 lifetime reproductive success, $Y_{rLRS}$, was then calculated by
 dividing the number of offspring of each individual by the cohort
-mean. Following Sanjak et al \citep{v_select}, the presence and
+mean. Following Sanjak et al \cite{Sanjack2018}, the presence and
 direction of selective pressure acting on traits was inferred by
 fitting the following regression model:
 \begin{equation}
@@ -1380,10 +1407,13 @@ separately in the upper and lower (1\%) tail for every trait. Then, the associat
 between these tail measure means and corresponding $POPout$ effect sizes was 
 calculated as a Spearman's rank correlation across the traits.
 
+
+
 \subsubsection*{Population genetic forward-in-time simulation study} \label{sec:methods:sims} 
+
 Using SLiM v4.0 (1), we simulated a quantitative polygenic trait under
 a standard Wright-Fisher (WF) model of stabilising selection. First a
-population of N=10,000 diploid individuals of 1Mb was simulated to
+population of N=10,000 diploid individuals of 100kb was simulated to
 equilibrium (10N generations) with a constant mutation of
 $2.36\times 10^{-8}$ per base pair (bp) and recombination rate of
 $10^{-8}$ per bp under neutrality. Mutations were assigned effect
@@ -1393,33 +1423,43 @@ and mean 0.01026 and subsequently multiplied by -1 with probability
 has been used previously to simulate genetic effects in humans and
 reflects a prior belief in a small number of large effects and many
 small effects \cite{anil3}. Individual trait values were determined by
-the sum of all genetic effects.
+the sum of all genetic effects, which full heritability ($h^2 =1$).
 
 After neutral genetic diversity was achieved (10N generations),
 stabilising selection on the trait was introduced for 1N
 generations through a Gaussian fitness function
 \begin{equation} 
-  f_t(x) = 1 + \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(x-\mu)^2}{2\sigma^2}\right\}
+  f_t(x) = 1 + \frac{k}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(x-\mu)^2}{2\sigma^2}\right\}
 \end{equation}
-where $x$ is the phenotype of an individual at generation $t$, $\mu$
+where $k$ is a multiplier for strength of selection (eg. weak selection ($k=1$) or 
+strong selection ($k=100$)),
+$x$ is the phenotype of an individual at generation $t$, $\mu$
 and $\sigma$ are the trait mean and standard deviation at the start of
 selection (i.e., $t=10N$). Stabilizing selection was simulated for a
 further 1N generations after the 10N burn-in generations.
 
-Simulation data was collected by logging, at each generation, the
-phenotypic mean and standard deviation of the population, statistics
-of mutations present in the populations, including allele frequencies
-and effect sizes, and the mutational profile of each individual. To
-investigate the contributopn of low-frequency variants and mimic a PRS
-based on common variants, a second genetic value was calculate using
-only variants with \emph{MAF} $> 1\%$.
+We ran this simulation for 100 independent runs and colleted data in 
+each simulation by logging, at each generation, the phenotypic mean and standard 
+deviation of the population, statistics regarding the mutations present in the 
+populations, including allele frequencies and effect sizes, and the mutational profile of each individual. 
+To analse the enrichment of rare variant architecture at different quantiles, the population 
+was split across 100 centiles (each including 100 individuals) and the number of rare and common 
+mutations carried by individuals in each centile was calculated under neutrality vs under selection.  
+The mean of the log-transformed odds ratio across all 100 independent simulations was used as a measure 
+of enrichment and to test for significant differences from zero (using a t-test, see \dref{fig4}{d}).  
+To analyse how the impact that low-frequency variants have on prediction and mimic common 
+variant PRS, a second genetic value was calculated using only variants with \emph{MAF} $>1\%$ 
+and compared to the true value across the individuals in each centile.  The mean difference (POPout) 
+and 95\% confidence intervals in each centile were calculated across the 100 independent simulations (\dref{fig4}{e}) 
+
+
 
 
 \clearpage \newpage
 \bibliography{refs}
 \clearpage \newpage
 
-
+a
 \section*{Supplemental Figures} \label{sec:supplement}
 
 
@@ -1512,6 +1552,16 @@ fraction of polygenic, $De Novo$, and Mendelian Architecture is shown in gray, r
 %
 \clearpage \newpage
 \end{document}
+
+
+
+
+
+-terminology on page 8: negative versus positive selection reads confusing here because it is usually used in the 
+context of selection on genetic variants. You could say “negative directional selection” and 
+“positive directional selection” to emphasize that we are talking about selection on the phenotype and not on the variant.
+
+
 
 
 % ensure
