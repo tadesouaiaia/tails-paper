@@ -211,25 +211,44 @@ across complex trait distributions and whether, in particular, the tails of quan
 \begin{figure}[!h] \centering \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=0.98\linewidth]{Figures/Fig1.pdf} \end{maybe} 
 %\vspace*{-1mm} 
-\caption{{\textbf{Schematic of trait characteristics
-      before and after strong stabilising selection.  Panels (a-d),
-      before stablising selection the standard ploygenic model is
-      observed.} \textbf{(a)} Trumpet plots illustrate the
-    relationship between allele frequency and effect size.
-    \textbf{(b)} Common alleles contribute to a greater proportion of
-    heritability across the trait continuum.  \textbf{(c)}
-    PRS-On-Phenotype plots demonstrate a monotonic relationship
-    between trait quantile and genetic risk.  \textbf{(d)} Siblings of
-    individuals in the trait tails moderately regress to the mean.
-    \textbf{Panels (e-h), after strong stabilising selection.}
-    \textbf{(e)} Trumpet plot shows that common variants of large
-    effect are selected out.  \textbf{(f)} Common alleles contribute
-    to a greater proportion of heritability in the trait body, rare
-    alleles predominate in the tails and the trait variance decreases.
-    \textbf{(g)} PRS-On-Phenotype plots show tail trait quantiles not
-    associated with extreme phenotype.  \textbf{(h)} Siblings of
-    individuals harbouring large effect de novo variants resemble the
-    background population.}}
+\caption{{\textbf{Two polygenic models of genetic architecture} 
+In the polygenic model with no selection: \textbf{a}, the allele frequency (AF) and effect size of 
+variants affecting the trait are uncorrelated, \textbf{b}, 
+common and rare variants are uniformly distributed across the trait continuum and common variants explain more heritability, 
+\textbf{c}, the trait and polygenic score have a linear, monotonic relationship, and 
+\textbf{d}, siblings of individuals in the tails of the trait distribution also show low/high trait values, 
+with regression-to-the-mean dependent on trait heritability \cite{Souaiaia2024}. 
+The hallmark of this model is that polygenic architecture predominates the entire trait distribution. 
+In the “polygenic model” with strong selection: 
+\textbf{e}, there is a strong relationship between AF and effect size, whereby only rare alleles have large effect, 
+\textbf{f}, common variants explain more heritability overall, but rare variants contribute more in the tails, 
+\textbf{g}, the polygenic score (derived from common variants) regresses to the mean in the trait tails due to 
+enrichment of high-impact rare alleles not included in the polygenic score, \textbf{h}, assuming selection is so 
+strong to produce tails characterised by de novo architecture, then siblings of individuals in the trait tails 
+have trait values drawn from the background distribution. The hallmark of this model is that polygenic architecture 
+prevails across most of the trait distribution, except for the tails where rare-variant architecture predominates. 
+These models illustrate two extremes of selection, neither expected to reflect most traits (indeed recent work 
+suggests polygenicity may be caused by selection \cite{Oconnor2019}; however, most complex traits should lie somewhere 
+between these two extremes.}}
+
+
+
+ %     \textbf{(a)} Trumpet plots illustrate the
+ %   relationship between allele frequency and effect size.
+ %   \textbf{(b)} Common alleles contribute to a greater proportion of
+ %   heritability across the trait continuum.  \textbf{(c)}
+ %   PRS-On-Phenotype plots demonstrate a monotonic relationship
+ %   between trait quantile and genetic risk.  \textbf{(d)} Siblings of
+ %   individuals in the trait tails moderately regress to the mean.
+ %   \textbf{Panels (e-h), after strong stabilising selection.}
+ %   \textbf{(e)} Trumpet plot shows that common variants of large
+ %   effect are selected out.  \textbf{(f)} Common alleles contribute
+ %   to a greater proportion of heritability in the trait body, rare
+ %   alleles predominate in the tails and the trait variance decreases.
+ %   \textbf{(g)} PRS-On-Phenotype plots show tail trait quantiles not
+ %   associated with extreme phenotype.  \textbf{(h)} Siblings of
+ %   individuals harbouring large effect de novo variants resemble the
+ %   background population.}}
 \label{fig1} \end{figure} 
 %\FloatBarrier 
 
@@ -361,21 +380,22 @@ complex disease, yet broad enough for sufficient sample size.
 \begin{figure}[!h] \centering \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig2.pdf} 
 \end{maybe} 
-\caption{{{\bf Population based POPout results.}
-\textbf{(a)} PRS quantile (in 1\% increments) plotted against mean
-trait value in quantile for four traits with different POPout
-characteristics.  
-\textbf{(b)} UKB-EUR POPout effect sizes with
-95\% confidence intervals for all 74 traits separated by
-category. 
-\textbf{(c)} Odds ratio for being in the in the
-bottom/top 1\%/25\% of the phenotype distribution for the index
-PRS quantile compared to the central PRS quantile. 
+\caption{{{\bf Population-based POPout analyses.}
+\textbf{(a)} Trait quantiles (1\% increments) plotted against mean
+PRS value for four traits with different POPout
+characteristics.  Expected PRS (orange) calculated from regression of PRS on trait. 
+\textbf{(b)} 
+POPout results across 74 QC’ed traits in UKB EUR data. 
+Effects with 95\% confidence intervals shown. 
+\textbf{(c)} 
+Odds ratio corresponding to the lowest/highest 1\%/25\% of the trait as index PRS 
+quantile versus the central PRS quantile. Orange dashed line is expected performance 
+assuming infinitesimal model (shaded area highlights the difference with observed). 
 \textbf{(d)}
-UKB-EUR POPout effect sizes plotted against replication POPout
-effect sizes for upper and and lower tails of all traits available. 
-Correlation between UKB-EUR and replication effect sizes calculated using Pearson.}
-}\label{fig2} 
+POPout effect sizes from UKB EUR analysis (of b) plotted against replication POPout 
+effect sizes for upper and lower tails of all overlapping traits. 
+Correlation between UKB EUR and replication effect sizes calculated using Pearson.
+}}\label{fig2} 
 \vspace*{-5mm} 
 \end{figure}
 %\FloatBarrier
@@ -487,7 +507,7 @@ STANDout (Methods). STANDout infers general departures from polygenic expectatio
 in trait tails from trait-only data and is powered to identify 
 tail architecture enriched for large-effect, rare alleles 
 (that can cause individuals to ‘stand out’ from their siblings for given traits).
-%
+% backman 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  FIGURE 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -495,20 +515,19 @@ tail architecture enriched for large-effect, rare alleles
 \begin{figure}[!h] \begin{maybe}{showFig} 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Fig3.pdf} \end{maybe} 
 \caption{{{\bf Tail architecture inferred from siblings.}
-    \textbf{(a)} Schematic of relationships between sibling trait
-    values under polygenicity, de novo variants of large effect in one
-    sibling and rare variants of large effect within families --
-    Mendelian variants.  \textbf{(b)} Index sibling trait quantile (in
-    1\% increments) plotted against mean trait value of conditional
-    sibling in quantile for the four traits selected with different
-    POPout characteristics. (Fig 2a).  \textbf{(c)} POPout P-values
-    plotted against meta analysis P-values of sibling de novo and
-    Mendelian tests on $-\log_{10}$ scale for upper and lower tails of
-    all 74 traits. Correlation and significance calculated using
-    Pearson correlation.  \textbf{(d)} LDscore regression SNP
-    heritability plotted against heritability estimated from sibling
-    pair trait similarity using European UKB samples.}}
-\label{fig3} \end{figure} 
+\textbf{(a)} 
+Schematic of relationships between sibling trait values under tails governed by polygenic (grey), 
+de novo (red) and Mendelian (purple) architecture, where Mendelian here refers to rare (but not de novo) 
+high-impact alleles segregating in families. 
+\textbf{(b)} 
+Index sibling trait quantile (1\% increments) plotted against mean trait 
+value of other (conditional) sibling for the four traits selected with 
+different POPout characteristics (see Fig 2a). 
+\textbf{(c)} POPout P-values plotted against STANDout P­-values for the 74 traits. Correlation and significance 
+calculated using Pearson. 
+\textbf{(d)} LD score regression \cite{ldsc} SNP-estimated heritability plotted against heritability estimated 
+from sibling pair trait similarity \cite{Souaiaia2024}.
+}} \label{fig3} \end{figure} 
 %\FloatBarrier
 %
 %
@@ -1295,11 +1314,11 @@ Then, $a,b,c$ represent the most likely fraction of Mendelian, $De Novo$, and po
 \subsection*{Rare Variant and Selection Analyses} \label{sec:methods:rvs} 
 
 \subsubsection*{Associations between POPout effects and Rare Variants}
-Backman et al \cite{backman} provides results from exome sequencing analysis 
+Backman et al \cite{Backman2021} provides results from exome sequencing analysis 
 performed in the UK Biobank full exome data across 3994 traits, including 65 of 
 the 74 traits analysed in our target set. For each of these 65 traits, in each tail, 
 the number of genes with at least one significant (P$\le 2.18\times 10^{-11}$; significance 
-threshold used in \cite{backman}) variant (deleterious, missense, predicted loss of function) or a 
+threshold used in \cite{Backman2021}) variant (deleterious, missense, predicted loss of function) or a 
 genome-wide significant burden association is counted. Across the 130 trait tails, we 
 calculate the Pearson correlation between the number of exome variants and the $POPout$ 
 effect size (\dref{fig4}{b}). 
