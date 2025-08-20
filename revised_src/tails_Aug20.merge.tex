@@ -860,8 +860,8 @@ the UK Biobank Resource under application 18177 (P.F.O’Reilly). All participan
 
 \clearpage \newpage 
 \section*{Methods} \label{sec:methods} 
-\subsection*{Data Processing} \label{sec:methods:dataProcessing}
-\subsubsection*{UK Biobank Genetic Data} 
+\subsection*{Data processing} \label{sec:methods:dataProcessing}
+\subsubsection*{UK Biobank genotye data} 
 The UK Biobank (UKB) is a prospective cohort study of approximately
 500,000 participants recruited across the United Kingdom from 2006 to
 2010 \cite{ukb}. Phenotype data of anthropometric, biological and
@@ -908,8 +908,8 @@ IBS0=0.00112 \cite{sib1} and, thus, sibling pairs were selected as
 those exceeding this threshold. This provided a total of 17,289 sibling pairs 
 for analysis.
 
-\subsubsection*{Quantitative Trait QC} \label{sec:methods:traitQC} 
-\paragraph*{Trait Selection} 
+\subsubsection*{Quantitative trait QC} \label{sec:methods:traitQC} 
+\paragraph*{Trait selection} 
 We considered all traits from the categories \textit{Biomarkers} (453 traits), 
 \textit{Physical Measures} (271 traits), the \textit{Touchscreen Questionnaire} (396 traits) 
 and \textit{Cognitive Function} (134 traits) to provide a broad group of well-studied, heritable traits. 
@@ -925,7 +925,7 @@ half the samples. Finally, we removed all traits with < $100,000$ samples remain
 primary dataset of unrelated European ancestry individuals, resulting in a set of 180 quantitative 
 traits. These traits were then residualised and subject to further QC as described below. 
 %
-\paragraph*{Trait Residualisation}
+\paragraph*{Trait residualisation}
 To minimise the impact of environmental risk factors, trait values were 
 residualised within each ancestry group (European and Multi-Ancestry) by applying a linear regression 
 model to each trait, with covariates for $age$, $age^2$, $age^3$, sex (as reported by the NHS at birth, unless 
@@ -939,7 +939,7 @@ the remaining trait values were standardised using a rank inverse
 normal transform on the residuals. This provided traits adjusted by key environmental factors, genetic 
 PCs, and with relatively low skew, transformed to have standard normal distributions for all analyses. 
 %
-\paragraph*{Further Trait QC}
+\paragraph*{Further trait QC}
 To conduct our initial primary analyses, European ancestry UKB samples were split 
 randomly into 50\% base and 50\% target data sets, for computing GWAS results and 
 PRS (or "polygenic scores"), respectively. Then, for each trait, a GWAS was performed 
@@ -963,7 +963,7 @@ composition related) with pairwise $r_g<0.95$.  In addition to
 the 56 traits without high genetic pairwise correlations, and the 11 traits 
 selected from correlated pairs, this resulted in a set of 74 traits for use in the primary analyses. 
 
-\paragraph*{Initial PRS Analyses}
+\paragraph*{Initial PRS analyses}
 The 74 traits remaining after QC included 37 in the \textit{Biomarkers} category, 
 21 traits in \textit{Physical Measures} category, and 16 that were in either 
 the \textit{Touchscreen Questionnaire} or \textit{Cognitive Function} categories.  
@@ -980,8 +980,8 @@ the POPout analyses. This procedure optimised the sample size of the test data. 
 analyses (below) were subject to any overfitting since they all corresponded to out-of-sample data. 
 %
 
-\subsubsection*{Replication Dataset QC} \label{sec:methods:rqc} 
-\paragraph*{European Ancestry Repeated Measures}
+\subsubsection*{Replication dataset QC} \label{sec:methods:rqc} 
+\paragraph*{European ancestry repeated measures}
 After initial QC (above), there were 18,340 European ancestry individuals 
 with measurements repeated at a follow-up data collection approximately an average
 of five years after baseline (timing differed for different individuals). For these individuals, both measurements were normalised alongside 
@@ -994,7 +994,7 @@ individuals with repeated measures available for replication.  PRS were calculat
 using the $P$-value threshold (and, thus, same SNPs) optimised for the relevant 
 trait in the primary analyses, as well as the (same) effect size weights of the base GWAS. 
 
-\paragraph*{Multi-Ancestry Sample}
+\paragraph*{Multi-ancestry sample}
 After initial QC (above), there were 24,476 individuals of multiple ancestries (in order of sample size: South Asian, African, West Asian, East Asian and other smaller sized ancestries; see "UK Biobank Data" section above for classification of ancestries) 
 available for replication, which we refer to as the "Multi-Ancestry" replication sample. The trait values of 
 these individuals were normalised alongside the European UKB individuals, as above, and PRS 
@@ -1004,7 +1004,7 @@ optimised for the relevant trait in the primary analyses, as well as the (same) 
 size weights of the base GWAS. There were between 569 and 22,513 (mean: 14,871) unrelated 
 individuals for this multi-ancestry replication. 
 
-\paragraph*{All of Us Cohort}
+\paragraph*{All of Us cohort}
 The All of Us Research Program (All of Us) is a diverse ancestry biobank from the United States, utilising 
 electronic health record (EHR) data in a cohort of individuals with a wider age 
 range than the UKB ($\mu,\sigma$= 55.8,17.1 vs 56.5,8.1). 
@@ -1039,34 +1039,14 @@ European ancestry analysis (see above).
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 %%%%%%%%%%%%%%   METHODS 2- DATA ANALYSIS %%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%   POPOUT TEST %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \vspace*{0.3cm} 
-\subsection*{Data Analysis: POPout Analyses} \label{sec:methods:popout} 
-\paragraph*{The POPout Test}
+\subsection*{Data analysis: POPout analyses} \label{sec:methods:popout} 
+\paragraph*{The POPout test}
 Here we describe the PRS-On-Phenotype outlier test, or "POPout" test, which is 
 designed to identify departures from polygenic expectations in the tails of 
 quantitative traits from population genotype data. In our application, we seek to identify 
@@ -1104,7 +1084,7 @@ the trait distribution. Traits were deemed to fail QC if the smallest
 $P$-value was significant at a Bonferroni-corrected level of 0.05 ($P$
 $\le$ 0.05/80). Such traits were removed from our analysis.
 
-\paragraph*{Evaluating Impact of POPout Effects on PRS Prediction} 
+\paragraph*{Evaluating impact of POPout effects on PRS prediction} 
 To evaluate how observed POPout effects impact on the performance of 
 polygenic score, or PRS, prediction, we emulate a scenario in which the 
 quantitative trait underlies a binary outcome (e.g. as is the case for BMI 
@@ -1130,8 +1110,7 @@ are shown in \sref{sup_pred}.
 {\color{blue}
 
 \subsubsection*{Power of POPout replication analyses}
-\paragraph{Bootstrap Study To Establish Power of Replication Analyses}
-
+\paragraph{Power of replication analyses}
 In our primary analysis, we set a minimum total sample size threshold
 of 100k (i.e. at least 50k target samples). To explore the power of
 POPout at different sample sizes, we applied POPout to subsets ranging
@@ -1141,12 +1120,12 @@ compared with POPout results from the primary analysis that were
 significant at FDR 5\%; replication power was defined as the
 proportion of sampled subsets with P $<0.05$ for these associations.
 \sref{sup_rep} shows that, for a sample size of 5,000, we achieved x\%
-power to replicate the "gold standard" associations with an error rate
-of y. This threshold was therefore used in the replication analyses.
+power to replicate associations with an error rate of y. This
+threshold was therefore used in the replication analyses.
 
 }
 
-\paragraph{Replication Across Datasets} 
+\paragraph{Replication across datasets} 
 We replicated our primary POPout analyses in three different independent cohorts:  
 \textbf{(1)} UKB European ancestry individuals with repeat measures (baseline and follow-up at $\sim$5 years), 
 \textbf{(2)} Non-European Multi-Ancestry UKB individuals, \textbf{(3)} the European ancestry samples in the 
@@ -1158,9 +1137,9 @@ were included and tested for matched discovery of POPout effects and correlation
 %%%%%%%%%%%%%%%%%%%%%%%%%   SIBLING METHODS  %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\subsection*{Sibling-based Analyses} \label{sec:methods:sibs}  
+\subsection*{Sibling-based analyses} \label{sec:methods:sibs}  
 %
-\subsubsection*{Sibling-based Investigation of Departures from Polygenic Architecture}
+\subsubsection*{Sibling-based investigation of departures from polygenic architecture}
 We have already developed sibling-based tests of departures from polygenic expectations 
 in trait tails caused by \emph{de novo} high-impact alleles or caused by rare alleles of 
 large effect segregating in families ("Mendelian" effects) \cite{Souaiaia2024}. Here we 
@@ -1221,7 +1200,7 @@ under the null hypothesis of the infinitesimal model (see above):
   \right)^2
 \end{equation*}
 
-\subsubsection*{The Sibling \textit{STANDout}  Test} 
+\subsubsection*{The sibling \textit{STANDout}  test} 
 
 In order to test for general departures from polygenic architecture in the tails of 
 quantitative traits, caused either by high-impact alleles that are either \emph{de novo} or 
@@ -1233,18 +1212,6 @@ using Fisher's method to give a $\chi^2$ statistic with 4 degrees of freedom:
 \end{align*}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%   RARE VARIANTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1252,11 +1219,9 @@ using Fisher's method to give a $\chi^2$ statistic with 4 degrees of freedom:
 
 \clearpage \newpage
 
-{\color{blue} 
-\subsection*{Analysis of Rare Variants} \label{sec:methods:rvs} 
+\subsection*{Analysis of rare variants} \label{sec:methods:rvs} 
 
-\subsubsection*{Associations between POPout effects and Rare Exome Hits}
-
+\subsubsection*{Calculating association between POPout effects and rare exome hits}
 Backman et al.\cite{Backman2021} provide association results from the
 UK Biobank exome sequencing study across 3,994 traits. These results
 include 65 of the 74 traits analysed in our target set.  For each of
@@ -1267,7 +1232,7 @@ single-variant deleterious, missense, or predicted loss-of-function
 association, or a gene-burden association, at P
 $\le 2.18\times 10^{-11}$. Across the 130 trait tails, we calculated
 the Pearson correlation between the number of genes with significant
-exome associations and the POPout effect size (\dref{fig4}{b}).
+exome associations and the POPout effect size.
 
 
 \subsubsection*{Incorporating WGS data to identify significant rare variants}
@@ -1292,81 +1257,6 @@ common-variant PRS). PRS recovery was then calcaulated as
 \[
   \mbox{POPout rare variant recovery}=\frac{{POPout}_{common}-POPout_{combined}}{POPout_{common}}
 \]
-
-
-
-
-
-
-
-
-
-\subsubsection*{Incorporating WGS data to identify significant rare variants: GWAS and PRS}
-
-The UK Biobank has recently made whole genome sequencing (WGS) data available for the
-approximately 500,000 participants dataset used throughout the manuscript \cite{ukb, ukb3}.  This
-comprehensive dataset achieved an average coverage depth of at least 23.5x, which ensures
-the detection of a wide spectrum of rare genetic variants that are not usually included in
-PRS analyses \cite{ukb2}.  Using our previously QCed European ancestry samples and the
-same set of of base samples and standardized phenotypes for our 74 traits, we split the
-dataset into two sets of rare variants:
-
-\begin{itemize}
-    \item[\textbf{A:}] $0.001 <= MAF < 0.01$
-    \item[\textbf{B:}] $0.0001 <= MAF < 0.001$
-\end{itemize}
-
-to ensure that we would be sufficiently powered to identify rare variants across
-all analysed traits.  Then, after applying standard QC filters (sample and trait missingness $<0.02$, 
-PLINK-1.9 \cite{plink, bt_10} was applied to the base dataset
-to to identify genome-wide assocations, after which clumping was performed with 
-standard parameters ($R^2=0,1$, window$=250kb$) \cite{Choi2020} across the combined 
-set of variants. Under the same strict threshold for genome wide significance introduced
-by Backman et al \cite{Backman2021}, $P<2.18 \times 10^{-11}$, PRS scores
-were calculated using the previously standardized target phenotypes for
-the "A" and "B" snps whenever at least one SNP was available.  40 rare variant PCs
-were included as a covariates, but it should be noted that they explained very
-little additional trait variance (0.1\% to 0.01\%), suggesting our previously
-standardized continuous traits remain robust to population stratification
-at the levels of minor allele frequency used.
-
-\subsubsection*{Impact on POPout and Prediction}
-
-To compare the effect that the inclusion of rare variants has on POPout, the rare variant PRS results,
-"A" and "B" (when available) were added to the common-variant PRS summed results added to produce a 
-combined rare+common PRS result.  Then for each result we calculated the $POPout$ 
-in each tail, the overall variance explained ($R^2$), and the odds ratio for predicting "disease" (defined 
-as the top and bottom 1\% of the trait distribution, given a PRS score in the top or bottom 1\% of the 
-distribtion.  Repeating this for rare+common PRS result whenever significant $POPout$ was present 
-in one or both of the tails of the common-variant PRS and one or more significant rare variants 
-were present allowed us to measure POPout recovery ($\frac{{POPout}_{common}-POPout_{combined}}{POPout_{common}}$), to 
-describe the improvement in the tail produced by the inclusion of rare variants (\stref{sup_rareTable}). 
-ADD THE DETAILED SUPPLEMENT STUFF 
-
-
-\subsubsection*{Rare Variant Annotation}
-
-Out of a total of 610 rare variants identified above, 143 were shared across multiple traits and 67 were previously 
-idenfied and had an annotation in the CLINVAR database.  These SNPs and the phenotypes they have been previously 
-associated with are listed in (\stref{sup_clinVar1}). 
-
-%For a small subset of sample traits (two index traits and two well recovered traits in the lower and upper tail)
-%with sufficiently large target sample size we performed further analysis of the smaller subsets of the
-%tail.  Here we analysed either the lower (1\%, 0.5\%, 0.1\%, 0.025\%, and 0.01\%) or the upper
-%(99\%, 99.5\%, 99.95\%, 99.975\%, and 99.9\%) of the distribution with respect to common PRS,
-%rare-variant PRS and comined variant PRS.  In each instance we calculated the rank of the average
-%PRS score in each bin and the percentage of each bin whose PRS score was in the lower or upper 1\% of
-%PRS scores.
-
-\subsection*{Alternative POPout tail quantiles} 
-While we focus on POPout on the upper and lower 1\% of the trait
-distribution, this value is arbitary and can be specified by the user
-in our POPout software ({\tt PRStools.org}). \sref{sup_t1} shows
-POPout results for tail quantiles of 0.1\%, 0.5\%, 5\%,
-and 10\%. \sref{sup_t2} compares POPout rare+common variant recovery results
-in the 1\% and 0.1\% tails.
-}
-
 
 \subsubsection*{Heritability attributable to genetic effects not included in
   the PRS}
@@ -1460,19 +1350,13 @@ deviation derived from their POPout test and averaging the calculated
 $h^2$ across each sampled POPout effect.
 
 
-
 \clearpage \newpage
-
-
-
-
 
 
 %%%% METHODS %%%%%%%%%%%%%%%%%%
 %%%% ANIL SIMULATION STUFF %%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection*{Population Genetics Forward-in-Time Simulation Study} \label{sec:methods:sims} 
-
+\subsubsection*{Forward-in-time simulation} \label{sec:methods:sims} 
 Using SLiM v4.0 (1), we simulated a quantitative polygenic trait under
 a standard Wright-Fisher (WF) model of stabilising selection. First a
 population of N=10,000 diploid individuals of genome size 100kb was simulated to
@@ -1518,36 +1402,12 @@ replicates (\dref{fig4}{e}). These simulations reflect a subset of those perform
 that we conducted \cite{Ori2024}.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% METHODS %%%%%%%%%%%%%%%%%%
 %%%% LRS AND SELECTION     %%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection*{Inferring Selection using Relative Lifetime Reproductive Success}
-
+\subsection*{Inferring selection using relative lifetime reproductive success}
 The number of offspring is recorded in the UKB for both females and
 males. Following the approach of Beauchamp \cite{v_select2}, samples were 
 stratified into four birth cohorts (1934-42, 1943-48, 1949-55, 1956-65). Individual relative
@@ -1577,160 +1437,46 @@ model includes both linear and quadratic terms, then the $\beta$ parameter indic
 the general direction of selection as positive or negative, while presence of the quadratic 
 term suggesting that an optimal mean is being reached.
 
-{\color{blue}
-\subsubsection*{Comparison to Sanjak et al.} 
-
-\sref{sup_vish} compares results of our analyses of the lifetime
-reproductive success data with those of Sanjak et
-al. \cite{Sanjak2018}. Results are shown for Sanjak et al. sex
-stratified results and our pooled results. Our analyses also differed
-from Sanjak et al. by model selection criteria, we selected the best
-fitting model by BIC whereas Sanjak et al. used P-values.  }
-
-
-%
-\subsubsection*{Associations between POPout Effects and LRS-inferred Selection}
-To test the association between POPout effects and the selection acting on 
-corresponding traits as inferred by the rLRS model described above, we stratified 
-traits into four categories of selection. The first two of the four categories reflect non-directional 
-selection: \textbf{(1)} no selection ($\beta=0,\gamma=0$), in which POPout 
-effects are not expected in either tail, \textbf{(2)} Non-directional stabilising 
-selection ($\beta=0,\gamma<0$), in which we hypothesise POPout effects 
-in both tails of equal magnitude. The third and fourth categories reflect directional selection: 
-\textbf{(3)} positive selection ($\beta>0$), which can be linear ($\gamma=0$), disruptive 
-(($\gamma>0$) or stabilising ($\gamma<0$), in which we hypothesise greater 
-POPout effects in the lower tail vs the upper tail, \textbf{(4)} negative 
-selection ($\beta>0$; linear, disruptive or stabilising as for positive), in which we 
-hypothesise greater POPout effects in the upper tail vs the lower tail. For each category, 
-a t-test is applied to test for the difference in mean POPout effects (excluding non-significant 
+\subsubsection*{Calculating association between POPout effects and lifetime
+  reproductive success inferred selection}
+To test the association between POPout effects and the selection
+acting on corresponding traits as inferred by the lifetime
+reproductive success model, we stratified traits into four categories
+of selection. The first two of the four categories reflect
+non-directional selection: \textbf{(1)} no selection
+($\beta=0,\gamma=0$), in which POPout effects are not expected in
+either tail, \textbf{(2)} Non-directional stabilising selection
+($\beta=0,\gamma<0$), in which we hypothesise POPout effects in both
+tails of equal magnitude. The third and fourth categories reflect
+directional selection: \textbf{(3)} positive selection ($\beta>0$),
+which can be linear ($\gamma=0$), disruptive (($\gamma>0$) or
+stabilising ($\gamma<0$), in which we hypothesise greater POPout
+effects in the lower tail vs the upper tail, \textbf{(4)} negative
+selection ($\beta>0$; linear, disruptive or stabilising as for
+positive), in which we hypothesise greater POPout effects in the upper
+tail vs the lower tail. For each category, a t-test is applied to test
+for the difference in mean POPout effects (excluding non-significant
 POPout effects) between the lower and upper tails across the traits.
 
-
-{\color{blue}
-
-\subsection*{Sensitivity of Lifetime Reproductive SUccess analyses to BIC Model choice}
-
-As described above, using BIC to select models may correspond to two scenarios, \textbf{1:} the 
-selected model is far superior to others or \textbf{2:} the selected model performs very similar to 
-another model but is chosen because of a negligible difference in BIC.  Thus, for each pair of best 
-and next best models we performed the following comparison.  When the next best model was a nested 
-subset of the best model (e.g. missing a parameter) we calculated the likelihood ratio 
-for the top two models and compared it the critical values from a $\chi^2$ chi-squared distribution 
-whose degrees of freedom are equal to the difference in parameters for the two models to determine 
-if it was significantly better ($alpha=0.05$).  When the next best 
-model had more parameters we instead relied on the work of Kass and Rafferty \cite{bayesguys}, who 
-determiend that a difference in BIC of less than 2 was weak evidence of model superiority. Using these 
-two criteria we found 10 and 7 traits, respectively, for which there was justification to use the 
-alternate model.  This traits are shown in \stref{sup_bic} where we additionally (\stref{sup_bic}{c} 
-replace the top model with the alternate model for these 17 traits and reestimate the relationship 
-between LRS and POPout effect observed in \fref{fig5}{d} - we observe that the expected relatipnship persists.   
-
-
-
-
-\subsubsection*{Association between POPout Effects and Broad Measures of Fitness}
-Five broad measures of fitness were considered: \textbf{(1)} Male and \textbf{(2)} female 
-fecundity (Field IDs: 2405 and 2734), \textbf{(3)} self-reported, non-cancer illnesses 
-(Field ID: 2002), \textbf{(4)} total miscarriages and still births (Field IDs: 39290 and 3839), 
-\textbf{(5)} paternal age (calculated as the difference between father's age (Field ID: 2946) 
-and participant age (Field ID: 21022). Associations between POPout effects and these 
-measures were tested as follows. For each measure, the mean value was calculated 
-separately in the upper and lower (1\%) tail for every trait. Then, the association between 
-between these tail measure means and corresponding POPout effect sizes was 
-calculated as a Spearman's rank correlation across the traits.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\subsubsection*{Calculating association between POPout effects and broad measures of fitness}
+Five broad measures of fitness were considered: \textbf{(1)} Male and
+\textbf{(2)} female fecundity (Field IDs: 2405 and 2734), \textbf{(3)}
+self-reported, non-cancer illnesses (Field ID: 2002), \textbf{(4)}
+total miscarriages and still births (Field IDs: 39290 and 3839),
+\textbf{(5)} paternal age (calculated as the difference between
+father's age (Field ID: 2946) and participant age (Field ID:
+21022). Associations between POPout effects and these measures were
+tested as follows. For each measure, the mean value was calculated
+separately in the upper and lower (1\%) tail for every trait. Then,
+the association between between these tail measure means and
+corresponding POPout effect sizes was calculated as a Spearman's rank
+correlation across the traits.
 
 
 \clearpage \newpage 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \clearpage \newpage
-
 
 \section*{Data availability} {
 UK Biobank genotype and phenotype data were obtained from the UK
@@ -1745,9 +1491,6 @@ All of Us data available through application to the All of Us Research Program w
 UK Biobank exome sequencing study data and results available from: www.app.genebass.org/
 
 GWAS summary statistics available from: www.nealelab.is/uk-biobank
-
-
-   }
 
 \section*{Software availability}
 A nextflow pipeline to run all analyses, with R code to run the POPout test (on phenotype and PRS data) and
@@ -1770,33 +1513,6 @@ Other code used in this study is available from the following websites:
 \clearpage \newpage
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   SUPPLEMENTARY MATERIALS %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1806,18 +1522,47 @@ Other code used in this study is available from the following websites:
 \renewcommand{\figurename}{Supplementary Figure}
 \setcounter{figure}{0}   
 
+\section*{Supplementary Material} \label{sec:supplement}
 
+\section*{Rare variant annotation}
+Out of a total of 610 rare variants identified above, 143 were shared
+across multiple traits and 67 were previously idenfied and had an
+annotation in the CLINVAR database.  These SNPs and the phenotypes
+they have been previously associated with are listed in
+(\stref{sup_clinVar1}).
 
+\section*{Alternative POPout tail quantiles} 
+While we focus on POPout on the upper and lower 1\% of the trait
+distribution, this value is arbitary and can be specified by the user
+in our POPout software ({\tt PRStools.org}). \sref{sup_t1} shows
+POPout results for tail quantiles of 0.1\%, 0.5\%, 5\%,
+and 10\%. \sref{sup_t2} compares POPout rare+common variant recovery results
+in the 1\% and 0.1\% tails.
 
-\section*{Supplementary Materials} \label{sec:supplement}
+\section*{Comparison of lifetime reproductive success results to Sanjak et al.}
+\sref{sup_vish} compares results of our analyses of the lifetime
+reproductive success data with those of Sanjak et
+al. \cite{Sanjak2018}. Results are shown for Sanjak et al. sex
+stratified results and our pooled results. Our analyses also differed
+from Sanjak et al. by model selection criteria, we selected the best
+fitting model by BIC whereas Sanjak et al. used P-values.  }
 
-
-
-
+\section*{Sensitivity of lifetime reproductive success analyses to BIC Model choice}
+For each pair of best and second best models as ranked by BIC we
+performed the following comparison.  When the second best model was a
+nested subset of the best model we calculated the likelihood ratio
+test to determine if it was significantly better (P $<0.05$).  When
+the second best model had more parameters we determiend that a
+difference in BIC$<2$ was weak evidence of model
+superiority \cite{bayesguys}. These two criteria identified 10 and 7
+traits, respectively, for which there was justification to use the
+alternate model.  This traits are shown in \stref{sup_bic} where we
+additionally (\stref{sup_bic}{c} replace the top model with the
+alternate model for these 17 traits and reestimate the relationship
+between LRS and POPout effect observed in \fref{fig5}{d} - we observe
+that the expected relatipnship persists.
 
 \section*{Supplementary Figures} \label{sec:supplement}
-
-
 
 \FloatBarrier \begin{figure}[!h] 
 \includegraphics[trim=0cm 0cm 0cm 0cm, clip, width=\linewidth]{Figures/Sup1.pdf} 
@@ -1878,56 +1623,6 @@ correcting PRS values for a large number the most extreme individuals (bottom 0.
 }} \label{sup_t2} \end{figure}
 \FloatBarrier
 \clearpage \newpage 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 \FloatBarrier \begin{figure}[!h] 
