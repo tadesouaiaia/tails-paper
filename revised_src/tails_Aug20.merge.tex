@@ -321,6 +321,7 @@ odds ratio (OR) for individuals in the bottom 5\% of PRS is
 expected to be 3.7 but is in fact 1.8, while, for red blood 
 cell distribution width, the mean OR for individuals 
 with top 5\% PRS values is 1.8 instead of an expected 4.1.
+
 %
 \subsection*{Replication of POPout effects} \label{sec:res1}
 Here we performed three different forms of replication to test the generalizability of our primary 
@@ -1097,16 +1098,27 @@ and correlation as described above.
 \subsubsection*{Estimating power of POPout on replication analyses}
 In our primary analysis, we set a minimum total sample size threshold
 of 100k (i.e. at least 50k target samples). To explore the power of
+{\color{green}
 POPout at different sample sizes, we applied POPout to subsets ranging
 from 1k to 50k target samples, with subset sizes incremented by 5k.
 Analyses were repeated 100 times for each sample size. Results were
-compared with POPout results from the primary analysis that were
-significant at FDR 5\%; replication power was defined as the
-proportion of sampled subsets with P $<0.05$ for these associations.
-\sref{sup_rep} shows that, for a sample size of 5,000, we achieved x\%
-power to replicate associations with an error rate of y. This
-threshold was therefore used in the replication analyses.
+compared with the primary analysis with respect to \textbf{(1)}
+the number of FDR 5\% significant tails replicated at $P<0.05$ and 
+\textbf{(2)} the average correlation (Pearson) across POPout effects 
+between the primary and subset analysis. As shown in \sref{sup_rep}, 
+at subset sizes of 5,000 the average correlation is 0.715 
+(all 100 repetitons are statistically significant $P<0.05$).  This 
+threshold was therefore used as a minimum in the replication analyses. 
+}
+}
 
+
+%significant at FDR 5\%; replication power was defined as the
+%proportion of sampled subsets with P $<0.05$ for these associations.
+%\sref{sup_rep} shows that, for a sample size of 5,000, we achieved x\%
+%power to replicate associations with an error rate of y. This
+%threshold was therefore used in the replication analyses.
+%}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%   SIBLING METHODS  %%%%%%%%%%%%%%%%%%%%%%%%%%%
