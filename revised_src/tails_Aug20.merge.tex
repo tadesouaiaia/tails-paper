@@ -1045,8 +1045,7 @@ European ancestry analysis (see above).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \vspace*{0.3cm} 
-\subsection*{Data analysis: POPout analyses} \label{sec:methods:popout} 
-\paragraph*{The POPout test}
+\subsection*{The POPout test}} \label{sec:methods:popout} 
 Here we describe the PRS-On-Phenotype outlier test, or "POPout" test, which is 
 designed to identify departures from polygenic expectations in the tails of 
 quantitative traits from population genotype data. In our application, we seek to identify 
@@ -1074,7 +1073,8 @@ where $K=\Phi^{-1}(0.99)$ (testing the top 1\% tail), $\Phi^{-1}$ is
 the inverse-normal cumulative density function, $f(y)$ is the
 predicted PRS from the regression given trait value $y$ and $n$ is the
 number of observations in the quantile.
-\paragraph*{POPout regression QC}
+
+\subsubsection*{POPout test QC}
 An additional trait QC was applied to ensure the robustness of the
 POPout to its assumptions by ensuring that the POPout test 
 did not produce significant results in the middle of the trait distribution. 
@@ -1084,33 +1084,17 @@ the trait distribution. Traits were deemed to fail QC if the smallest
 $P$-value was significant at a Bonferroni-corrected level of 0.05 ($P$
 $\le$ 0.05/80). Such traits were removed from our analysis.
 
-\paragraph*{Evaluating impact of POPout effects on PRS prediction} 
-To evaluate how observed POPout effects impact on the performance of 
-polygenic score, or PRS, prediction, we emulate a scenario in which the 
-quantitative trait underlies a binary outcome (e.g. as is the case for BMI 
-underlying clinical obesity). We consider individuals above a specified 
-trait threshold value to be cases and individuals below the threshold to 
-be controls. We investigate thresholds at the 75\% and the 99\% points of 
-the trait distribution. For each, we use the PRS to predict case/control 
-status, and then generate a quantile plot, in which the odds ratio of the 
-given quantile is estimated in relation to the central quantile via logistic 
-regression (\dref{fig2}{c}). Additionally, for each trait with $PRS$ $r^2$, we simulated 
-a quantitative phenotype with trait values given by $T=r{PRS}+E$, where 
-$PRS$ has a standard normal distribution and $E$ represents all other contributions 
-to trait variance and is drawn from a normal distribution with mean 0 and 
-variance $(1-r^2)$. This produces a simulated trait with a $\mathcal{N}(0,1)$ 
-distribution and $PRS$ $r^2$. Using the same number of target samples 
-used in the real data analysis for each trait, this simulation allows us to 
-estimate the expected predictive performance of the PRS based on the 
-corresponding $r^2$ and assuming uniform polygenicity throughout the 
-trait distribution.  The results of this analysis for all our index traits 
-are shown in \sref{sup_pred}. 
+\subsubsection*{Replication of POPout associations} 
+We replicated our primary POPout analyses in three different
+independent cohorts: \textbf{(1)} UKB European ancestry individuals
+with repeat measures (baseline and follow-up at $\sim$5 years),
+\textbf{(2)} Non-European Multi-Ancestry UKB individuals, \textbf{(3)}
+the European ancestry samples in the US-based All of Us biobank. For
+each cohort, traits with at least 5000 samples that passed our POPout
+QC, were included and tested for matched discovery of POPout effects
+and correlation as described above.
 
-
-{\color{blue}
-
-\subsubsection*{Power of POPout replication analyses}
-\paragraph{Power of replication analyses}
+\subsubsection*{Estimating power of POPout on replication analyses}
 In our primary analysis, we set a minimum total sample size threshold
 of 100k (i.e. at least 50k target samples). To explore the power of
 POPout at different sample sizes, we applied POPout to subsets ranging
@@ -1122,15 +1106,6 @@ proportion of sampled subsets with P $<0.05$ for these associations.
 \sref{sup_rep} shows that, for a sample size of 5,000, we achieved x\%
 power to replicate associations with an error rate of y. This
 threshold was therefore used in the replication analyses.
-
-}
-
-\paragraph{Replication across datasets} 
-We replicated our primary POPout analyses in three different independent cohorts:  
-\textbf{(1)} UKB European ancestry individuals with repeat measures (baseline and follow-up at $\sim$5 years), 
-\textbf{(2)} Non-European Multi-Ancestry UKB individuals, \textbf{(3)} the European ancestry samples in the 
-US-based All of Us biobank. For each cohort, traits with at least 5000 samples that passed our POPout QC, 
-were included and tested for matched discovery of POPout effects and correlation as described above. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1234,7 +1209,6 @@ $\le 2.18\times 10^{-11}$. Across the 130 trait tails, we calculated
 the Pearson correlation between the number of genes with significant
 exome associations and the POPout effect size.
 
-
 \subsubsection*{Incorporating WGS data to identify significant rare variants}
 The UK Biobank recently released whole-genome sequencing (WGS) data
 for approximately 500,000 participants \cite{ukb, ukb3}. This dataset
@@ -1250,7 +1224,7 @@ components were included as covariates in the GWASs.
 
 For each trait two rare variant PRS were constructed using clumped
 variants with P $\le 2.18\times 10^{-11}$ \cite{Backman2021}; one using variants with
-0.001 $le$ MAF $<$ 0.01 and the other with variants with 0.0001 $le$
+0.001 $\le$ MAF $<$ 0.01 and the other with variants with 0.0001 $le$
 MAF $<$ 0.001. To assess the effect of rare variants on POPout, POPout was
 recalculated using the combined-variant PRS (the rare variant PRS plus the
 common-variant PRS). PRS recovery was then calcaulated as
@@ -1258,7 +1232,7 @@ common-variant PRS). PRS recovery was then calcaulated as
   \mbox{POPout rare variant recovery}=\frac{{POPout}_{common}-POPout_{combined}}{POPout_{common}}
 \]
 
-\subsubsection*{Heritability attributable to genetic effects not included in
+\subsection*{Heritability attributable to genetic effects not included in
   the PRS}
 The observed POPout effect can be approximated by the expected minus
 the observed PRS for individuals in the top (or bottom) 1\% of the
@@ -1356,7 +1330,7 @@ $h^2$ across each sampled POPout effect.
 %%%% METHODS %%%%%%%%%%%%%%%%%%
 %%%% ANIL SIMULATION STUFF %%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection*{Forward-in-time simulation} \label{sec:methods:sims} 
+\subsection*{Forward-in-time simulation} \label{sec:methods:sims} 
 Using SLiM v4.0 (1), we simulated a quantitative polygenic trait under
 a standard Wright-Fisher (WF) model of stabilising selection. First a
 population of N=10,000 diploid individuals of genome size 100kb was simulated to
@@ -1382,24 +1356,31 @@ $x$ is the phenotype of an individual at generation $t$, $\mu$
 and $\sigma$ are the trait mean and standard deviation at the start of
 selection (i.e., $t=10N$).
 
-We ran this simulation for 100 independent replicates and reported data in 
-each simulation by logging, at each generation, the phenotypic mean and standard 
-deviation of the population, as well as statistics regarding the mutations present in the 
-populations, including allele frequencies and effect sizes, and the mutational profile of each individual. 
-To analyse the enrichment of rare variant architecture at different quantiles, the population 
-was stratified across 100 centiles (each including 100 individuals) and the number of rare and common 
-alleles carried by individuals in each centile was calculated under neutrality vs under selection.  For comparison 
-purposes, "weak selection" corresponded to simulations performed using a multiplier of $k=1$ in equation 3, 
-while "strong selection" corresponded to simulations with $k=100$. "Large effects" were considered 
-those in the top 10\% of effect sizes genome-wide.   The mean of the log-transformed odds ratio across 
-all 100 independent simulation replicates was used as a measure of enrichment and a $t$-test was 
-performed to test for significant differences from zero (see \dref{fig4}{d}).  To analyse the impact 
-that low-frequency variants have on prediction and to mimic the calculation of common 
-variant PRS in real data, a PRS was calculated using only variants with \emph{MAF} $>1\%$ 
-and compared to the true trait value across the individuals in each centile.  The mean difference (POPout effect) 
-and 95\% confidence intervals in each centile were calculated across the 100 independent simulation 
-replicates (\dref{fig4}{e}). These simulations reflect a subset of those performed in a recent simulation study 
-that we conducted \cite{Ori2024}.
+We ran this simulation for 100 independent replicates and reported
+data in each simulation by logging, at each generation, the phenotypic
+mean and standard deviation of the population, as well as statistics
+regarding the mutations present in the populations, including allele
+frequencies and effect sizes, and the mutational profile of each
+individual.  To analyse the enrichment of rare variant architecture at
+different quantiles, the population was stratified across 100 centiles
+(each including 100 individuals) and the number of rare and common
+alleles carried by individuals in each centile was calculated under
+neutrality vs under selection.  For comparison purposes, "weak
+selection" corresponded to simulations performed using a multiplier of
+$k=1$ in equation 3, while "strong selection" corresponded to
+simulations with $k=100$. "Large effects" were considered those in the
+top 10\% of effect sizes genome-wide.  The mean of the log-transformed
+odds ratio across all 100 independent simulation replicates was used
+as a measure of enrichment and a $t$-test was performed to test for
+significant differences from zero.  To analyse the impact that
+low-frequency variants have on prediction and to mimic the calculation
+of common variant PRS in real data, a PRS was calculated using only
+variants with \emph{MAF} $>1\%$ and compared to the true trait value
+across the individuals in each centile.  The mean difference (POPout
+effect) and 95\% confidence intervals in each centile were calculated
+across the 100 independent simulation replicates. These simulations
+reflect a subset of those performed in a recent simulation study that
+we conducted \cite{Ori2024}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1524,14 +1505,38 @@ Other code used in this study is available from the following websites:
 
 \section*{Supplementary Material} \label{sec:supplement}
 
-\section*{Rare variant annotation}
+\subsection*{Evaluating impact of POPout effects on PRS prediction} 
+To evaluate how observed POPout effects impact on the performance of
+PRS, prediction, we emulate a scenario in which the quantitative trait
+underlies a binary outcome (e.g. as is the case for BMI underlying
+clinical obesity). We consider individuals above a specified trait
+threshold value to be cases and individuals below the threshold to be
+controls. We investigate thresholds at the 75\% and the 99\% points of
+the trait distribution. For each, we use the PRS to predict
+case/control status, and then generate a quantile plot, in which the
+odds ratio of the given quantile is estimated in relation to the
+central quantile via logistic regression
+(\dref{fig2}{c}). Additionally, for each trait with $PRS$ $r^2$, we
+simulated a quantitative phenotype with trait values given by
+$T=r{PRS}+E$, where $PRS$ has a standard normal distribution and $E$
+represents all other contributions to trait variance and is drawn from
+a normal distribution with mean 0 and variance $(1-r^2)$. This
+produces a simulated trait with a $\mathcal{N}(0,1)$ distribution and
+$PRS$ $r^2$. Using the same number of target samples used in the real
+data analysis for each trait, this simulation allows us to estimate
+the expected predictive performance of the PRS based on the
+corresponding $r^2$ and assuming uniform polygenicity throughout the
+trait distribution.  The results of this analysis for all our index
+traits are shown in \sref{sup_pred}.
+
+\subsection*{Rare variant annotation}
 Out of a total of 610 rare variants identified above, 143 were shared
 across multiple traits and 67 were previously idenfied and had an
 annotation in the CLINVAR database.  These SNPs and the phenotypes
 they have been previously associated with are listed in
 (\stref{sup_clinVar1}).
 
-\section*{Alternative POPout tail quantiles} 
+\subsection*{Alternative POPout tail quantiles} 
 While we focus on POPout on the upper and lower 1\% of the trait
 distribution, this value is arbitary and can be specified by the user
 in our POPout software ({\tt PRStools.org}). \sref{sup_t1} shows
@@ -1539,7 +1544,7 @@ POPout results for tail quantiles of 0.1\%, 0.5\%, 5\%,
 and 10\%. \sref{sup_t2} compares POPout rare+common variant recovery results
 in the 1\% and 0.1\% tails.
 
-\section*{Comparison of lifetime reproductive success results to Sanjak et al.}
+\subsection*{Comparison of lifetime reproductive success results to Sanjak et al.}
 \sref{sup_vish} compares results of our analyses of the lifetime
 reproductive success data with those of Sanjak et
 al. \cite{Sanjak2018}. Results are shown for Sanjak et al. sex
@@ -1547,7 +1552,7 @@ stratified results and our pooled results. Our analyses also differed
 from Sanjak et al. by model selection criteria, we selected the best
 fitting model by BIC whereas Sanjak et al. used P-values.  }
 
-\section*{Sensitivity of lifetime reproductive success analyses to BIC Model choice}
+\subsection*{Sensitivity of lifetime reproductive success analyses to BIC Model choice}
 For each pair of best and second best models as ranked by BIC we
 performed the following comparison.  When the second best model was a
 nested subset of the best model we calculated the likelihood ratio
