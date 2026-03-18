@@ -113,6 +113,7 @@ class MyFigure:
 
     def collect_reps(self, MIN_REPS=20): 
         PD, rep_removes = dd(lambda: dd(list)), dd(lambda: dd(int))  
+        AS = dd(list) 
         for k in self.rep_color_key.keys(): 
             RK = dd(list) 
             for ti,T in self.traits.items(): 
@@ -120,10 +121,9 @@ class MyFigure:
                 try: 
                     R = T.vals['pop'][k] 
                     r1, r2, name, size, QC= R.e1, R.e2, R.name, R.size, (R.QC == 'PASS') 
-
-
+                    AS[k].append(size) 
                     if QC and size > 5000: 
-                        for n,data in [['X',[e1,e2]],['Y',[r1,r2]],['xL',[e1]],['xH',[e2]],['yL',[r1]],['yH',[r2]]]: RK[n].extend(data)
+                        for n,data in [['X',[e1,e2]],['Y',[r1,r2]],['xL',[e1]],['xH',[e2]],['yL',[r1]],['yH',[r2]], ['S',[size]]]: RK[n].extend(data)
                     else: 
                         if not QC: rep_removes[k]['QC'] += 1 
                         if size <= 5000: rep_removes[k]['5k'] += 1 
@@ -152,8 +152,8 @@ class MyFigure:
             ax.scatter(PD[k]['xH'], PD[k]['yH'], marker='^', color = clr, s= 12, ec='k',lw=0.1, zorder=10) 
             #X,Y = PD[k]['X'], PD[k]['Y'] 
             R,Rpv = DV.add_scatter_corr(ax, PD[k]['X'], PD[k]['Y'], clr=clr, fs=fs+1, lw=1.5, EXTEND=xe, REP=k) 
-            self.progress.report_result('Replication on '+k+' '+str(len(PD[k]['xL']))+' Traits, R='+str(round(R,3))+', p='+str(Rpv))  
-            
+            ss_str = ' (Avg SampleSize: '+str(round(np.mean(PD[k]['S']),1))+') '
+            self.progress.report_result('Replication on '+k+' '+str(len(PD[k]['xL']))+' Traits, R='+str(round(R,3))+', p='+str(Rpv)+ss_str) 
         x1,x2 = -0.26, 0.76
         x1,x2 = -0.26, 0.78
         y1,y2 = -0.4, 0.64

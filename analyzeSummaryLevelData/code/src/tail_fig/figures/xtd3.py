@@ -186,6 +186,7 @@ class MyFigure:
     def draw_reps(self, ax1, ax2, fs = 8, fs2=7): 
         for i,(k,c) in enumerate(zip(['rep','poc','aou'],self.my_colors)): 
             yF, yT, yS = self.discovery_key[k] 
+            
             yp, mSize = yF/yT, 'n~'+str(int(np.mean(yS) / 1000.0))+'k' 
             ax1.bar(i,yp, color=c,width=0.7) 
             ax1.text(i, yp, mSize, ha='center', va='bottom',fontsize=fs2, fontweight='bold') 

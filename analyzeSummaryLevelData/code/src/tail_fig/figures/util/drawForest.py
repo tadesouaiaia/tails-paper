@@ -229,6 +229,7 @@ class ForestReps:
         compList = [] 
         self.comp_key = {}  
         self.discovery_key = dd(lambda: [0,0,[]]) 
+        self.all_size_key = dd(list) 
         self.corr_key = dd(lambda: [[],[]]) 
         for ti,T in self.traits.items(): 
             P, pd = T.vals['pop'], T.vals['pop']['common-snp'] 
@@ -240,14 +241,13 @@ class ForestReps:
             if pd.e2 > 0 and pd.f2: finds[0] = True  
             rep_data = [] 
             for k in ['rep','poc','aou']: 
-                if k in P and (k != 'aou' or P[k].name != 'NA'): 
+                if k in P: 
                     e1 = [P[k].e1, P[k].e1 - P[k].j1, P[k].e1 + P[k].j1] 
                     e2 = [P[k].e2, P[k].e2 - P[k].j2, P[k].e2 + P[k].j2]
                     
                     e1, e2 = [round(e,3) for e in e1], [round(e,3) for e in e2] 
-
-
-
+                    size = P[k].size 
+                    self.all_size_key[k].append(size) 
                     rep_data.append([e1,e2,k, (P[k].QC=='PASS'), P[k].size]) 
                     QC = (P[k].QC == 'PASS')
                     tests = [[P[k].p1, P[k].e1, pd.e1],[P[k].p2, P[k].e2, pd.e2]]
@@ -256,7 +256,7 @@ class ForestReps:
                             self.discovery_key[k][1] += 1 
                             self.discovery_key[k][2].append(P[k].size) 
                             if (pv < 0.05 and eV > 0): self.discovery_key[k][0] += 1 
-                        if QC: 
+                        if QC and size > 5000:  
                             self.corr_key[k][0].append(eV) 
                             self.corr_key[k][1].append(uV) 
             if len(rep_data) == 3:

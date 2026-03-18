@@ -6,14 +6,7 @@ from util.Util   import *
 from util import drawScatter as DS
 from util import drawVarious as DV
 from util import drawLabels  as DL
-np.random.seed(43)  
-
-# Common
-# Quantiles
-# Trait
-# Sibling
-# Tail
-# Cause
+np.random.seed(45)  
 
 
 
@@ -92,7 +85,7 @@ class FigLib:
         # Add the arrow to the plot
         ax.add_patch(arrow)
         if txt != 'NA': 
-            if SHIFT: ax.text(a[0]+2,a[1]+1,txt,ha='center',va='bottom',fontsize=self.fs4-1, fontweight='bold',zorder=999) 
+            if SHIFT: ax.text(a[0]+2,a[1]+1,txt,ha='center',va='bottom',fontsize=self.fs4-1, zorder=999) 
             else: ax.text(a[0],a[1]+1,txt,ha='center',va='bottom',fontsize=self.fs4, zorder=999) 
 
 
@@ -305,7 +298,7 @@ class MyFigure:
         ax.set_yticks([-4,-2,0,2,4]) 
         ax.set_ylim(-5,5)  
         ax.set_xlim(-3.11,2.5) 
-        ax.set_xlabel('Allele Frequency',fontsize=self.fs3,labelpad=0) 
+        ax.set_xlabel('Allele Frequency',fontsize=self.fs3,labelpad=2) 
         ax.set_ylabel('Effect Size',fontsize=self.fs3-0.5, labelpad=-2.75) 
 
         ax.plot([-3.1,-3.1],[-5,5], color='k',lw=self.lw2, clip_on=False)  
@@ -314,7 +307,7 @@ class MyFigure:
         x1,x2, y1, y2 = -2.4, -0.2, -4.6, 1.7
         for i,(x,c,txt) in enumerate(zip([x1,x2],['red','grey'],['Rare Alleles','Common Alleles'])): 
             ax.scatter(x,y1, marker='o',ec='k',color=c,clip_on=False,s=self.sz2)
-            ax.text(x+0.13,y1-0.1, txt, va='center',ha='left',fontsize=self.fs6,clip_on=False)
+            ax.text(x+0.15,y1-0.1, txt, va='center',ha='left',fontsize=self.fs6,clip_on=False)
         return
 
 
@@ -409,8 +402,7 @@ class MyFigure:
             
             #self.lib.make_arrow(ax, a = (99,-0.1), b = (103,0.8),FLIP=True, STYLE='PEND') 
             self.lib.make_arrow(ax, a = (90,-0.4), b = (100,0.75),FLIP=True, STYLE='PEND') 
-            #ax.text(91,-0.7,'Rare Alleles in Tail\nReduce Common\nPolygenic Signal', fontsize=self.fs5,ha='center',va='center')  
-            ax.text(77,-1.2,'Rare Alleles in Tail\nReduce Common\nPolygenic Signal', fontsize=self.fs5,ha='center',va='center',fontweight='bold')  
+            ax.text(77,-1.2,'Rare Alleles in Tail\nReduce Common\nPolygenic Signal', fontsize=self.fs5,ha='center',va='center')  
 
         ax.scatter(X, Xobs, color='blue', s = self.sz2, ec='k', alpha=0.9, lw=0.1) 
         ax.spines[['top','right']].set_visible(False) 
@@ -423,9 +415,9 @@ class MyFigure:
 
         x1,x2, y1, y2 = -2, 90, 2.5, 2
         for i,(y,c,txt) in enumerate(zip([y1,y2],['darkorange','blue'],['Expected','Observed'])): 
-            if i == 0: ax.plot([x1-2.5,x1+1.5],[y,y], color=c,clip_on=False,lw=self.lw2)
+            if i == 0: ax.plot([x1-2.5,x1+1.9],[y,y], color=c,clip_on=False,lw=self.lw2)
             else:      ax.scatter(x1,y+0.02, color=c, s = self.sz1) 
-            ax.text(x1+3,y, txt, va='center',ha='left',fontsize=self.fs4,clip_on=False)
+            ax.text(x1+4,y, txt, va='center',ha='left',fontsize=self.fs4,clip_on=False)
         return
 
 
@@ -499,11 +491,10 @@ class MyFigure:
 
         # Expected
         if NULL: 
-            txt1 = 'Common-Variant\nTail\nArchitecture\nCauses\nRegression\nto Mean' 
+            txt1 = 'Common-Variant\nTail Architecture\nCauses\nRegression\nto Mean' 
             self.lib.make_arrow(ax, a = (9,10), b = (13,6), txt = txt1,FLIP=True, SHIFT=True) 
         else: 
             txt1 = '$De\,\,Novo$\nTail Architecture\nCauses Sibling\nDiscordance'
-            txt1 = 'De Novo\nTail Architecture\nCauses Sibling\nDiscordance'
             self.lib.make_arrow(ax, a = (19,11), b = (23,6.5), txt = txt1,FLIP=True, SHIFT=True) 
         return
 

@@ -213,7 +213,7 @@ class MyFigure:
 
     
     def draw(self): 
-        names = ['table-glossary.csv', 'table-traitSummaries.csv','table-commonTails.csv', 'table-rareTails.csv', 'table-rareSnps.csv'] 
+        names = ['table-glossary.csv', 'table-traitSummaries.csv','table-commonTails.csv', 'table-rareTails.csv', 'table-rareSNPs.csv'] 
         paths = [self.options.out + n for n in names] 
         csv_key      = CsvOut(self.traits, paths[0]).write_full_glossary() 
         summaries      = CsvOut(self.traits, paths[1]).write_summaries() 
