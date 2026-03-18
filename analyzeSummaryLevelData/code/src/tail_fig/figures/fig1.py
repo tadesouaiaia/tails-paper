@@ -8,6 +8,7 @@ from util import drawVarious as DV
 from util import drawLabels  as DL
 np.random.seed(45)  
 
+# Rare
 
 
 class FigLib: 
@@ -306,7 +307,7 @@ class MyFigure:
         # Heritability 
         x1,x2, y1, y2 = -2.4, -0.2, -4.6, 1.7
         for i,(x,c,txt) in enumerate(zip([x1,x2],['red','grey'],['Rare Alleles','Common Alleles'])): 
-            ax.scatter(x,y1, marker='o',ec='k',color=c,clip_on=False,s=self.sz2)
+            ax.scatter(x,y1, marker='o',ec='k',color=c,clip_on=False,s=self.sz2, lw=0.5)
             ax.text(x+0.15,y1-0.1, txt, va='center',ha='left',fontsize=self.fs6,clip_on=False)
         return
 

@@ -30,7 +30,7 @@ class MyFigure:
 
     def setup(self):
         self.fig, self.axes = matplotlib.pyplot.gcf(), [] 
-        self.rows, self.cols, self.WD, self.HT = 16, 2, 7.1,9
+        self.rows, self.cols, self.WD, self.HT = 17, 2, 7.1,9
         for i in [0,4,9,13]: 
             for j in range(self.cols): 
                 self.axes.append(plt.subplot2grid((self.rows,self.cols), (i,j), rowspan =4, colspan =1))                                                             
@@ -40,7 +40,7 @@ class MyFigure:
     def finish(self,fs=22):
         lms = DV.AxLims(self.axes[0]) 
         for i,x in enumerate(['a','b','c','d','e','f','g','h']): self.axes[i].set_title('$'+x+'$', x= -0.07, y=0.935, fontsize=13) 
-        plt.subplots_adjust(left=0.06, bottom=0.07, right=0.96, top=0.97,wspace=0.3, hspace=1) 
+        plt.subplots_adjust(left=0.06, bottom=0.09, right=0.96, top=0.97,wspace=0.3, hspace=1) 
         if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
         else:                        figPath = self.options.out+'Xtd9.pdf' 
         plt.savefig(figPath, dpi=self.options.dpi) 

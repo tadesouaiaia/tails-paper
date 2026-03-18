@@ -170,7 +170,7 @@ class SlimLib:
     def plot_dists(self, axes, c1 = 'red',c2='grey', sz=100): 
         self.colors = [['#1b9e77','#d95f02','#7570b3'],['#1b9e77','#d95f02','#7570b3','#e7298a']]
         
-        self.colors = [['springgreen','xkcd:pumpkin orange','xkcd:tea'],['#1b9e77','gold','#7570b3','#e7298a']]
+        self.colors = [['blue','xkcd:pumpkin orange','xkcd:tea'],['#1b9e77','gold','#7570b3','#e7298a']]
         
 
         #self.colors = ['dimgrey','xkcd:tea','cornflowerblue','xkcd:pumpkin orange','springgreen','magenta','deeppink','pink','orange','gold','yellow']
