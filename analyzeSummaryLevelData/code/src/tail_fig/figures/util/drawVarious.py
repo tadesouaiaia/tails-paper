@@ -3,9 +3,6 @@ from Util import *
 
 
 
-
-
-
 def draw_square(ax,x1,x2,y1,y2,clr='k',lw=0.4): 
     ax.plot([x1,x2],[y1,y1],clip_on=False,color=clr,lw=lw) 
     ax.plot([x1,x2],[y2,y2],clip_on=False,color=clr,lw=lw)
