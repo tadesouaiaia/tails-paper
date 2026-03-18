@@ -1,15 +1,8 @@
 import sys, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
-from collections import defaultdict as dd
-from statsmodels.stats.multitest import multipletests
-from math import log
-from scipy import stats 
+from figures.util.Util import *
 import figNames as TN 
-
-
-
-
 
 
 
@@ -265,7 +258,7 @@ class Traits:
         eps = 1e-300
         p_mend = max(min(p_mend, 1.0), eps)
         p_denovo = max(min(p_denovo, 1.0), eps)
-        stat = -2.0 * (log(p_mend) + log(p_denovo))  # ~ chi2(df=4) under null
+        stat = -2.0 * (math.log(p_mend) + math.log(p_denovo))  # ~ chi2(df=4) under null
         meta_p = stats.chi2.sf(stat, df=4)  # survival function = 1 - CDF, numerically stable
         return meta_p
 
@@ -300,7 +293,9 @@ class Traits:
                     FDR.extend([[p1,1,ti],[p2,2,ti]]) 
             
             pvals, locs, tis = [v[0] for v in FDR], [v[1] for v in FDR], [v[2] for v in FDR]  
-            reject, p_adj, _, _ = multipletests(pvals, method="fdr_bh")
+            reject, p_adj, _, _ = statsmodels.stats.multitest.multipletests(pvals, method='fdr_bh') 
+
+            #multipletests(pvals, method="fdr_bh")
             for rB,pA,loc,ti in zip(reject, p_adj, locs, tis): 
                 
                 if loc == 1: 

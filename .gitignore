@@ -1,0 +1,9 @@
+/analyzeSummaryLevelData/output_figs/ 
+/analyzeSummaryLevelData/output_qc/
+/analyzeSummaryLevelData/run_all_w_latex.sh
+/analyzeSummaryLevelData/xtended_latex_src/ 
+*.pyc 
+*.swp 
+*.swo
+__pycache__/
+

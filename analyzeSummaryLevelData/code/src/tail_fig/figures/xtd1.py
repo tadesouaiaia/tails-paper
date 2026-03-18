@@ -1,27 +1,13 @@
-#!/usr/bin/python3
-
-import sys, os                                                                                                                                                                                                                           
-from pathlib import Path
+import sys,os 
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
-
-
 from util.Util import * 
 from util import drawScatter as SP
 from util import drawVarious as DV
 
-
-
-
-
-
-
-
-
 class SumStats:
     def __init__(self, betas, pvs): 
         self.betas, self.pvs = betas, pvs 
-
         self.binnedB = self.get_binned_betas() 
         self.binnedP   = self.get_binned_pvs() 
         
@@ -39,7 +25,6 @@ class SumStats:
             Y.append(C[c]) 
         return X,Y 
 
-
     def get_binned_pvs(self): 
         self.sig = len([p for p in self.pvs if p < 0.05]) 
         C = dd(int)         
@@ -49,17 +34,12 @@ class SumStats:
         for pv,p in zip(pvs,log_p): 
             if p > cutoffs[c]: c+= 1 
             C[cutoffs[c]] += 1 
-        
         X,Y = [], [] 
         for c in cutoffs: 
             if c < 999:  X.append(c) 
             else:        X.append(32.3) 
             Y.append(C[c]) 
         return X,Y 
-
-
-
-
 
     def get_bin_data(self, X, loc, dt = 'pvs'): 
         SIG, C = 0, dd(int)  
@@ -81,22 +61,12 @@ class SumStats:
                 C[xx] += 1 
             return SIG, C 
 
-
-
-
-
-
-
-
-
-
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None):
         self.options, self.data, self.traits, self.progress = options, traits, traits.members, progress
         self.figName = figName
         self.exampleTraits = self.get_valid_examples()
         self.fs1, self.fs2, self.fs3, self.fs4 = 10, 8, 7 , 5
-
 
     def get_valid_examples(self):
         X, cands = [], []
@@ -110,15 +80,12 @@ class MyFigure:
                 else:             X.append(ti)
         return X
 
-
     def draw(self): 
         self.setup() 
         self.create() 
         self.finish() 
 
-    
     def setup(self):
-        #self.K = K 
         self.rows, self.cols = 13, 25
         self.WD, self.HT = 50, 25
         self.WD, self.HT = 7.2, 3.6
@@ -135,46 +102,32 @@ class MyFigure:
         return         
 
    
-
-
-
-    
     def create(self, fs=33): 
-        
         self.c1, self.c1e, self.c2, self.c2e = 'blue', 'cyan', 'xkcd:shamrock green', 'lime' 
         self.rc, self.rce = 'gold', 'xkcd:bright yellow' 
-
-        
         xLabs, yLabs = [None,None,'Trait Centile','Trait Centile'],['PRS',None,'PRS',None]
         self.locs = [0.1, 0.5, 1, 5, 10] 
         self.names = ['0.1%','0.5%', '1%', '5%', '10%'] 
         self.lookups = ['common@0.1','common@0.5','common-snp','common@5','common@10'] 
-
         self.locs = [10, 5, 1, 0.5, 0.1] 
         self.names = ['10%','5%','1%','0.5%','0.1%'] 
         self.lookups = ['common@10','common@5','common-snp','common@0.5','common@0.1'] 
-
-
-
         for i,k in enumerate([0.1,0.5,1,5,10]):
             axes = self.axes[i*4:4+i*4] 
             for j,ti in enumerate(self.exampleTraits): 
                 sp = SP.POPplot(axes[j], self.traits, ti,xLab=xLabs[j], yLab=yLabs[j], sz1=9,sz2=8,sz3=6)
                 if k == 1: 
                     sp.draw_body('common', ALLOW_MISSING=False)
-                    
                     if sp.VALID: 
                         sp.draw_tail()
                         sp.mark_significance()
                 else:
                     sp.draw_alt(self.lookups[i],ALLOW_MISSING=False)
-                
                 x1,y1,xs,ys = sp.lms.xMin, sp.lms.yMax, sp.lms.xHop, sp.lms.yHop
                 if j == 0: sp.ax.text(x1+xs*50,y1+ys,self.names[i], ha='center',va='bottom',fontsize=self.fs3, zorder=10) 
                 try: 
                     fn = self.traits[ti].name.mini 
                     if len(fn.split()) > 1: fn = " ".join(fn.split()[0:-1])+'\n'+fn.split()[-1] 
-
                     sp.ax.text(x1+xs,y1-ys,fn, ha='left',va='top',fontsize=self.fs4) 
                 except: pass 
         SK = dd(list) 
@@ -212,13 +165,8 @@ class MyFigure:
                     else:        ax2.bar(x-2,y,width=2,align='edge',color='green',ec='darkgreen') 
             sB.append(str(SS.beta_avg)) 
             sP.append(str(SS.sig)) 
-            
-
-
             lms1 = DV.AxLims(ax1,xlab = 'POPout Effect Size', ylab = 'Count', ystretch=0, xstretch=0,fs = 6, COMMANDS=['noSpines'], CORNERS=[['topRight',pt+'\nAvg='+SS.beta_avg,5]]) 
             lms2 = DV.AxLims(ax2,xlab = '$-log_{10}(P{-}Value)$', ylab = 'Count', ystretch=0, xstretch=0,fs = 6, COMMANDS=['noSpines'], CORNERS=[['topRight',pt+'#nom. sig='+str(SS.sig),5]]) 
-        
-        
         self.progress.report_result('Avg Effect Size Across Alt Bins (10%,5%,1%,0.5%,0.1%): '+str(",".join(sB)))
         self.progress.report_result('Number Nom-Sig Across Alt Bins (10%,5%,1%,0.5%,0.1%): '+str(",".join(sP)))
 
@@ -230,17 +178,11 @@ class MyFigure:
 
     def finish(self, fs =13):
         letters = ['$a$','$b$','$c$','$d$','$e$','$f$'] 
-        #for i,ax in enumerate([self.axes[0], self.axes[4], self.axes[12], self.axes[14]]): #self.axes[10], self.axes[11]]): # self.axes[12],self.axes[13]]): 
         for i,x in zip([0,20,25],['$a$','$b$','$c$']): 
             if i == 0:   self.axes[i].set_title(x, x= -0.17, y = 0.98, fontsize=fs) 
             elif i == 20:   self.axes[i].set_title(x, x= -0.11, y = 0.97, fontsize=fs) 
             elif i == 25:   self.axes[i].set_title(x, x= -0.11, y = 0.97, fontsize=fs) 
-            #elif i == 17:   self.axes[i].set_title(x, x= -0.09, y = 1.10, fontsize=fs) 
         plt.subplots_adjust(left=0.04, bottom=0.001, right=1.03, top=0.95,wspace=0.05, hspace=0.05) 
-     
-
-
-
         if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
         else:                        figPath = self.options.out+'Sup4.pdf' 
         plt.savefig(figPath, dpi=self.options.dpi) 

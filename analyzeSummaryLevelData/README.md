@@ -25,10 +25,9 @@ For full documentation please see `tailsManual.pdf` in the docs directory.
 
 ### System requirements
 
-- Linux or macOS shell environment
-- Python 3.10+ recommended
-- `bash`
-- `pdflatex` if you want to compile the extended-data PDF in `xtended_latex_src/`
+- Linux or macOS shell environment 
+- Python 3.10+ recommended [See Packages Below] 
+- `bash` (if you want to use the runall.sh single command script) 
 
 ### Python packages
 
@@ -37,18 +36,15 @@ The figure-generation code checks for the following Python modules:
 - `matplotlib`
 - `numpy`
 - `scipy`
-- `pandas`
 - `statsmodels`
-- `pyreadr`
 
 Notes:
-- `pyreadr` is only needed for the simulation-figure portion of `tails gen all`.
 - The QC stage is lighter, but in practice it is simplest to install the same environment for both stages.
 
 A minimal install is typically:
 
 ```bash
-python3 -m pip install matplotlib numpy scipy pandas statsmodels pyreadr
+python3 -m pip install matplotlib numpy scipy statsmodels 
 ```
 
 ## Quick start
@@ -82,14 +78,6 @@ python3 code/tails.py gen all \
   --simPath data/trait_sims/ \
   --out output_figs/
 ```
-
-#### 3. Compile the extended-data PDF
-
-#```bash
-#cd xtended_latex_src
-#./compileExtendedDocument.sh ../output_figs/
-#cd ..
-#```
 
 ## Documentation
 

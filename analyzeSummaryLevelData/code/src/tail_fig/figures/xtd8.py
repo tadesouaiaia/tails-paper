@@ -1,15 +1,13 @@
 import sys, os
 HERE = os.path.dirname(os.path.abspath(__file__))                                                                                                                                                                                                                                            
 if HERE not in sys.path: sys.path.insert(0, HERE)                                                                                                                                                                                                                                            
-
 from util.Util   import *
 from util import drawScatter as SP
 from util import drawVarious as DV
 from util import drawLabels  as DL
 from matplotlib.colors import to_rgb, ListedColormap
 
-
-# Sample 
+# Extended Data Figure: Analysis of the Tail and Extreme Tail 0.1% # 
 
 class PlotLabels:
     def __init__(self, options): #trait_key, DRAW=True): 
@@ -30,9 +28,6 @@ class PlotLabels:
         yjj = 21.5
         if RULE == 'LOWER': ax.text(x1+xs*29, y2-ys*1.5, 'Lower Tail Bins',ha='center',va='top',fontsize=fs2) 
         else:               ax.text(x1+xs*29, y2-ys*1.5, 'Upper Tail Bins',ha='center',va='top',fontsize=fs2) 
-        #ax.plot([x1+xs*18,x1+xs*40],[y2-ys*9,y2-ys*9], color='k', clip_on=False, lw=3)  
-
-
         for i,xj in enumerate([1, 25, 47,67]): 
             x = x1+xs*xj
             if i < 3: 
@@ -47,12 +42,6 @@ class PlotLabels:
                 ax.scatter(x,y2-ys*17, marker='*', color='k', ec= 'k', s=sz, zorder=5, clip_on=False) 
                 ax.text(x+xs*2.1, y2-ys*8.5, 'Sig. Dif (P$<$0.05)\nRelative to Common',ha='left',va='top',fontsize=fs3) 
         return
-
-
-
-
-
-
 
 
     def make_index_key(self, pp, ck, fs = 6): 
@@ -79,6 +68,20 @@ class PlotLabels:
             else: ax.text(x+0.9*xs,yl,'Rare${+}$Common Tails (0.1%)',va='center',ha='left',fontsize=fs)
         DV.draw_square(ax, x1-5, x2+5, y1-ys*0.3, y2+ys*0.2) 
         return  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

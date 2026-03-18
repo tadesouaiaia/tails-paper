@@ -1,23 +1,13 @@
 import sys, os
 HERE = os.path.dirname(os.path.abspath(__file__))                                                                                                                                                                                                                                            
 if HERE not in sys.path: sys.path.insert(0, HERE)                                                                                                                                                                                                                                            
-
 from util.Util   import *
 from util import drawScatter as SP
 from util import drawVarious as DV
-from util import drawLabels  as DL
+#from util import drawLabels  as DL
 from util import drawForest  as DF
 
-
-
-
-
-
-
-
-
-
-
+# Extended Data Figure: Detailed Replication # 
 
 
 class MyFigure:
@@ -27,8 +17,6 @@ class MyFigure:
         self.fs0, self.fs1, self.fs2, self.fs3, self.fs4, self.fs5 = 20, 15, 10, 7, 6, 5
         self.sz1, self.sz2, self.sz3 = 15,10,8
         self.lw1, self.lw2, self.lw3 = 1, 0.7, 0.5
-
-
 
     def get_valid_examples(self): 
         X, cands = [], [] 
@@ -59,8 +47,6 @@ class MyFigure:
 
     def setup(self): 
         self.POP_SIM=False
-
-
         if 'popout_sim.txt' in os.listdir(self.options.simPath):
             with open(self.options.simPath+'/popout_sim.txt') as f: X = [line.split() for line in f.readlines()] 
             self.sim_key = {X[0][j]: [float(x[j]) for x in X[1::]] for j in range(0,len(X[0]))} 
@@ -175,14 +161,6 @@ class MyFigure:
 
 
 
-
-
-
-
-
-
-
-
     def draw_sims(self, ax1, ax2, fs = 7): 
         X, Cy, Ce, Ry, Re  = [self.sim_key[k] for k in ['---', 'repRate', 'repErr', 'pearsonR', 'pearsonErr']]
         for j,(ax,Y,E) in enumerate(zip([ax1,ax2],[Cy,Ry],[Ce,Re])):  
@@ -232,37 +210,5 @@ class MyFigure:
             ax.set_xticklabels(['Repeated','Multi\nAncestry','All Of\nUs'],fontsize=fs) 
             ax.set_yticks([0,0.2,0.4,0.6,0.8,1]) 
             ax.set_yticklabels(['0',0.2,0.4,0.6,0.8,'']) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

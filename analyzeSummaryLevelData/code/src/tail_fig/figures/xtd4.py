@@ -1,16 +1,12 @@
-#!/usr/bin/python3
-
 import sys, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
-
 from util.Util   import * 
 from util import drawScatter as SP 
 from util import drawTables as DT
 from util import drawVarious as DV 
 
-# print
-
+# Extended Data Figure: All Tail Plots # 
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None): 
@@ -52,14 +48,9 @@ class MyFigure:
         cs1 = 30
         t_rows  = math.ceil(self.my_len/3.0) 
         self.rows, self.cols = (2*t_rows) + 3 , 2+(cs1 + self.subplots)*3
-        self.WD, self.HT = 51, 6 + (t_rows*2.4) 
-        #self.WD, self.HT = 51, 6 + (t_rows*2.4) 
-        
         self.WD = 7.2 
         if self.my_len >= 70: self.HT = 9.7 
         else:                 self.HT = (self.my_len / 8.0) + 1  
-
-
         self.rows = (2*math.ceil(self.my_len/3.0)) + 3   
         self.axes.append(plt.subplot2grid((self.rows,self.cols),(0,0), rowspan = 3, colspan =cs1))                                                                           
         self.axes.append(plt.subplot2grid((self.rows,self.cols),(0,cs1), rowspan = 3, colspan =self.subplots))                                                               
@@ -108,74 +99,10 @@ class MyFigure:
                 if self.clr == self.C1: self.clr = self.C2 
                 else:                   self.clr = self.C1 
         
-        #for ax in self.axes: ax.axis('off') 
-        for ax in self.axes[self.ax_index::]: 
-            ax.axis('off') 
+        for ax in self.axes[self.ax_index::]: ax.axis('off') 
 
-        #self.update_borders() 
         return self
 
-
-
-
-    def borderize(self, ax, loc, lw =1, lw2 = 1, lw3=1, MIN=False, INTERNAL=False):  
-        v = DV.AxLims(ax)
-        xs, ys = v.xHop, v.yHop 
-        if loc == 'top_left': 
-            ax.plot([v.xMin, v.xMax], [v.yMax+v.yHop, v.yMax+v.yHop], lw = lw, color = self.E1, zorder=-1, clip_on=False) 
-            ax.plot([v.xMax, v.xMax], [v.yMax+ys, v.yMin+ys], lw = lw3, color = self.E2, zorder=-1, clip_on=False) 
-            ax.plot([v.xMin-xs/5, v.xMin-xs/5], [v.yMax+ys, v.yMin-v.yRange*0.67], lw = lw, color = self.E1, zorder=9, clip_on=False) 
-            if INTERNAL: ax.plot([v.xMin - v.xRange, v.xMax], [v.yMax+1.1*ys, v.yMax+1.1*ys], color = 'k', lw=lw3, zorder=99, clip_on=False) 
-        elif loc == 'top_right':  
-            ax.plot([v.xMin, v.xMax], [v.yMax+v.yHop, v.yMax+v.yHop], lw = lw, color = self.E1, zorder=-1, clip_on=False) 
-            ax.plot([v.xMin, v.xMin], [v.yMax+ys, v.yMin+ys], lw = lw3, color = self.E2, zorder=-1, clip_on=False) 
-            ax.plot([v.xMax+xs/4, v.xMax+xs/4], [v.yMax+ys, v.yMin-v.yRange*0.67], lw = lw, color = self.E1, zorder=9, clip_on=False) 
-            if INTERNAL: ax.plot([v.xMin, v.xMax + v.xRange], [v.yMax+1.1*ys, v.yMax+1.1*ys], color = 'k', lw=lw3, zorder=99, clip_on=False) 
-
-        elif loc == 'bottom_left': 
-            ax.plot([v.xMin, v.xMax + v.xRange*0.7], [v.yMin-v.yHop, v.yMin-v.yHop], lw = lw, color = self.E1, zorder=9, clip_on=False) 
-            ax.plot([v.xMin-xs/5, v.xMin - xs/5], [v.yMin-ys, v.yMax + (v.yRange*1.01)*self.vM], lw = lw2, color = self.E1, zorder=9, clip_on=False) 
-            if MIN:  ax.plot([v.xMin, v.xMax + v.xRange*4.25], [v.yMin-ys*1.2, v.yMin-ys*1.2], color = 'k', lw=lw3, zorder=9, clip_on=False) 
-
-
-
-        elif loc == 'bottom_right': 
-            ax.plot([v.xMin-v.xRange, v.xMax + xs/4], [v.yMin-v.yHop, v.yMin-v.yHop], lw = lw, color = self.E1, zorder=9, clip_on=False) 
-            ax.plot([v.xMax+xs/4, v.xMax + xs/4], [v.yMin-ys, v.yMax + (v.yRange*1.01)*self.vM], lw = lw2, color = self.E1, zorder=9, clip_on=False) 
-            
-        elif loc == 'last_one': 
-                ax.plot([v.xMin, v.xMax], [v.yMin-ys*1.2, v.yMin-ys*1.2], color = 'k', lw=lw3, zorder=9, clip_on=False) 
-                ax.plot([v.xMax+xs/5, v.xMax+xs/5], [v.yMin-ys*2, v.yMax+ys], color = 'k', lw=lw3, zorder=9, clip_on=False) 
-
-
-
-    def update_borders(self): 
-        for j in [0,2,4]: self.borderize(self.axes[j], 'top_left',INTERNAL=(j!=0)) 
-        for j in [1,3,5]: self.borderize(self.axes[j], 'top_right',INTERNAL=(j!=5)) 
-        while self.ax_index < len(self.axes): 
-            ax = self.axes[self.ax_index] 
-            self.axes[self.ax_index].axis('off') 
-            self.ax_index +=1 
-       
-
-
-        vM = (self.ax_index-6)/12.0 
-        bottom_pairs = [[12,9,vM]] 
-        self.bType = self.my_len % 3 
-
-
-
-        if self.bType == 1: bottom_pairs.append([20,17,vM-1]) 
-        else:               bottom_pairs.append([8,5,vM]) 
-        if self.bType == 0: bottom_pairs.append([4,1,vM]) 
-        else:               bottom_pairs.append([16,13,vM-1]) 
-
-        for j,(bL,bR,vR) in enumerate(bottom_pairs): 
-            self.vM = vR     
-            self.borderize(self.axes[self.ax_index-bL], 'bottom_left', MIN=(j==0)) 
-            self.borderize(self.axes[self.ax_index-bR], 'bottom_right') 
-        if self.bType != 0: self.borderize(self.axes[self.ax_index-1], 'last_one') 
-        return 
 
 
 

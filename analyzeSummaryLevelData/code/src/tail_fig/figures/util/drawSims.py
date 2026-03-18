@@ -4,68 +4,6 @@ if HERE not in sys.path: sys.path.insert(0, HERE)
 from Util import *
 import drawVarious as DV
 import drawLabels as DL 
-try: import pyreadr 
-except: pass 
-try: import pandas as pd  
-except: pass 
-
-class SlimFig:
-    def __init__(self, fig):
-        self.fig = fig 
-        self.fs0, self.fs1, self.fs2, self.fs3, self.fs4 = 18, 14, 12, 10, 8
-        self.lw1, self.lw2, self.lw3 = 1.8, 1.0, 0.6
-        self.rds = self.find_rds() 
-
-    def load_single(self, kind='rares'): 
-        return self.normalize_cycle_strings('gamma',kind)
-
-    def load_double(self, kind='rares'): 
-        gamma = self.normalize_cycle_strings('gamma',kind)
-        gaussian = self.normalize_cycle_strings('gaussian',kind)
-        gaussian = gaussian.copy()
-        gaussian['dist'] = 'gaussian'
-        return pd.concat([gamma, gaussian], ignore_index=True)
-
-    def find_rds(self): 
-        K = dd(lambda: {})  
-        for f in os.listdir(self.fig.options.simPath): 
-            if f.split('.')[-1] == 'rds': 
-                K[f.split('_')[1]][f.split('_')[2].split('.')[0]] = pyreadr.read_r(self.fig.options.simPath+'/'+f)[None].copy() 
-        return K 
-
-    def ensure_dir(self, path):
-        os.makedirs(path, exist_ok=True)
-
-    def normalize_cycle_strings(self, a,b):
-        df = self.rds[a][b] 
-        df = df.copy()
-        if 'cycle' in df.columns:
-            cyc = pd.to_numeric(df['cycle'], errors='coerce')
-            df['cycle'] = cyc.astype('Int64').astype(str)
-        if 'prs_bin2' in df.columns:
-            prs = pd.to_numeric(df['prs_bin2'], errors='coerce')
-            df['prs_bin2'] = prs.astype('Int64').astype(str)
-        return df
-
-    def add_panel_label(self, ax, label, x=-0.16, y=1.02, size=None):
-        ax.set_title('$'+label+'$', x=x, y=y, fontsize=self.fs0 if size is None else size, fontweight='bold')
-
-
-
-    def clean_axis(self, ax):
-        ax.spines['top'].set_visible(False)
-        ax.spines['right'].set_visible(False)
-        ax.tick_params(axis='x', length=0, labelsize=self.fs4)
-        ax.tick_params(axis='y', length=0, labelsize=self.fs4)
-        #for tick in ax.get_xticklabels() + ax.get_yticklabels():
-        #    tick.set_fontweight('bold')
-
-    def finish_save(self, fig, options, figName, default_name):
-        self.ensure_dir(options.out)
-        figPath = os.path.join(options.out, (figName if figName is not None else default_name) + '.pdf')
-        plt.savefig(figPath, dpi=options.dpi)
-        plt.clf()
-        return figPath
 
 
 class SlimLib: 

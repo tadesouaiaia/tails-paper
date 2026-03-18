@@ -7,11 +7,11 @@ def qc_run(args, command_line):
     if out_dir: os.makedirs(out_dir, exist_ok=True) 
     qcRun(args, command_line).go() 
 
-def fig_gen(args, command_line):  
+def fig_gen(args, fig_goals, command_line):  
     from src.tail_fig.figGen import figGen
     out_dir = os.path.dirname(args.out) 
     if out_dir: os.makedirs(out_dir, exist_ok=True) 
-    figGen(args, command_line).go() 
+    figGen(args, fig_goals, command_line).go() 
 
 
 def build_parser():
@@ -107,6 +107,30 @@ def parse_figs_args(argv):
     return p.parse_args(argv)
 
 
+
+def parse_fig_goals(which: str): 
+    X = which.upper() 
+    rangeKey = {'main': 5, 'xtd': 10, 'sup': 2} 
+    main_out, xtd_out, sup_out, tab_out = ['main'+str(i) for i in [1,2,3,4,5]],['xtd'+str(i+1) for i in range(10)], ['sup1','sup2'], ['csv']
+    main_in, sup_in= ['MAIN-FIGURES','MAIN-FIGS','MAIN','MAINS','FIGS','FIG'],['SUP','SUPS']
+    xtd_in, tab_in = ['EXTENDED-DATA','XTDS','EXTS','XTD','EXT'], ['TABLES','EXCEL','TABS','CSV']
+    if X == 'ALL': return main_out + xtd_out + sup_out + tab_out
+    if X.lower() in main_out+xtd_out+sup_out: return [X.lower()]
+    for a,b in [[main_in,main_out],[xtd_in,xtd_out],[tab_in, tab_out],[sup_in,sup_out]]:
+        if X in a: return b
+    try: 
+        for in_list,prefix in [[main_in, 'main'],[xtd_in, 'xtd'],[sup_in,'sup']]: 
+            for m in in_list: 
+                if X[0:len(m)] == m: a,b = prefix, X[len(m)::] 
+        b1, b2 = int(b.split('-')[0]), int(b.split('-')[-1])
+        vals = [i for i in range(11) if i >= b1 and i <= b2]
+        if len(vals) > 0 and max(vals) <= rangeKey[a]: return [a+str(v) for v in sorted(vals)] 
+    except: pass 
+    return [] 
+
+
+
+
 def validate_figs_what(which: str) -> bool:
     wx = which.upper() 
     if wx in {"ALL",'MAIN','MAINS','MAIN-FIGS','MAIN-FIGURES','FIGS','EXCEL','CSV','CSVS','XTD','XTDS','EXT','EXTS','EXTENDED-DATA'}: return True
@@ -127,11 +151,9 @@ def main(argv=None):
 
     # First pass: only parse top-level command (and qc subcommands normally)
     args, rest = parser.parse_known_args(argv)
-    if args.cmd is None:
+    if args.cmd not in ["qc","gen"]: 
         parser.print_help()
         return 0
-    
-
     if args.cmd == "qc":
         # Let normal argparse handle qc fully (and show qc help if missing subcmd)
         args = parser.parse_args(argv)
@@ -140,23 +162,23 @@ def main(argv=None):
             return 0
         args.func(args, command_line)
         return 0
-
     if args.cmd == "gen":
         # If user typed just `tails figs` or `tails figs help`, show menu.
         if len(rest) == 0 or (len(rest) == 1 and rest[0] in {"help", "-h", "--help"}):
             figs_menu(figs_parser)
             return 0
         # Otherwise parse figs properly (requires vals/pts)
-        figs_args = parse_figs_args(rest)
-        if os.path.isdir(figs_args.out) and not figs_args.out.endswith(os.sep):  figs_args.out += os.sep  
-        if not validate_figs_what(figs_args.which):
+        fig_args = parse_figs_args(rest)
+        if os.path.isdir(fig_args.out) and not fig_args.out.endswith(os.sep):  fig_args.out += os.sep  
+        
+        fig_goals = parse_fig_goals(fig_args.which)  
+        if len(fig_goals) == 0: 
+            sys.stderr.flush()
+            sys.stdout.write('Invalid Figure: Try: ./tails gen all or tails gen main2\n') 
             figs_menu(figs_parser)
             return 2
-        fig_gen(figs_args, command_line)
+        fig_gen(fig_args, fig_goals, command_line)
         return 0
-
-    parser.print_help()
-    return 0
 
 
 if __name__ == "__main__":

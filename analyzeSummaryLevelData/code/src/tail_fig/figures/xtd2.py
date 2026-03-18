@@ -1,10 +1,16 @@
 import sys, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
-
 from util.Util   import * 
 from util import drawPreds as DP 
 from util import drawVarious as DV 
+
+
+
+# Extended Data Figure: Odds Ratios For Pseudo 1% Prevalent Tail Traits #  
+
+
+
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None): 
@@ -40,10 +46,6 @@ class MyFigure:
         for T,axes in pred_pairs:
             dp = DP.PredPlot(self.options) 
             dp.draw_odds(T, axes, QT=True) 
-        
-
-
-
         try: 
             ax = self.axes[len(self.axes)-5] 
             axl = DV.AxLims(ax) 
@@ -67,9 +69,3 @@ class MyFigure:
         plt.clf() 
         self.progress.save('(Figure Saved: '+figPath+')')
         return
-
-
-
-
-
-
