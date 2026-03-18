@@ -178,7 +178,7 @@ class BoxKeys:
         clrs = [c1,c2] 
         for i in range(2): 
             yp = y2 - yh*1.5 - 0.7*ys*i  
-            self.ax.scatter(x,yp,color=clrs[i], ec ='k', s=self.sz2, lw=self.lw2, zorder=10) 
+            self.ax.scatter(x,yp,color=clrs[i], ec ='k', s=self.sz2, lw=self.lw3, zorder=10) 
             self.ax.plot([x-xh,x+xh],[yp,yp],color=clrs[i], lw=self.lw2, zorder=10) 
             if i == 0: self.ax.text(x+xh*5,yp,'Common PRS',zorder=20, ha='center', va='center',clip_on=False,fontsize=self.fs3) 
             else:      self.ax.text(x+xh*5.2,yp,'Common+Rare\nPRS',zorder=20, ha='center', va='center',clip_on=False,fontsize=self.fs3) 

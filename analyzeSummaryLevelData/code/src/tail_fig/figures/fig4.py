@@ -153,16 +153,10 @@ class MyFigure:
 
             p = T.vals['pop']['common-snp'] 
             r = T.vals['recovery']['combo']   
-            
-            
-
             if p.e1 > 0 and p.f1 and r.total1 != 'NA': TR['Lower'].append([r.total1, T]) 
             if p.e2 > 0 and p.f2 and r.total2 != 'NA': TR['Upper'].append([r.total2, T]) 
         self.progress.report_result('Total of '+str(found+negs+nots)+' Trait Tails, '+str(nots)+' (no FDR-SIG POPout), '+str(negs)+' (Neg POPout), '+str(found)+' (Pos POPout)')  
         self.progress.report_result('In '+str(yessnps)+' of '+str(found)+' Tails w/Sig +POPout, (>0.01%) GWAS-SIG snps located and tested for reduction (via common+rare PRS)') 
-        #self.progress.report_result('There are '+str(found)+' Trait Tails w/FDR Sig +POPout, ') 
-        #self.progress.report_result('But '+str(nosnps)+' Correspond to Traits with no Rares') 
-        #sys.exit() 
         return TR 
 
     def validate_fractions(self, rTot, T, i): 
@@ -260,8 +254,8 @@ class MyFigure:
                     sig_odds.append(rel_change) 
 
                 for pt,ci,clr in zip(pts, cis, [self.c1, self.c2]): 
-                    ax.scatter(pt+MID2, yl, color=clr,ec='k',s=self.sz2,lw=self.lw3,zorder=10) 
-                    ax.plot([pt+MID2-ci[0],pt+MID2+ci[1]],[yl,yl], color=clr,lw=self.lw2, alpha=0.5) 
+                    ax.scatter(pt+MID2, yl, color=clr,ec='k',s=self.sz2,lw=self.lw3/2.0,alpha=0.8,zorder=10) 
+                    ax.plot([pt+MID2-ci[0],pt+MID2+ci[1]],[yl,yl], color=clr,lw=self.lw2, alpha=0.6) 
             yp += 5 
             ax.set_xlim(leftEnd,rightEnd) 
             self.ax.set_yticks([]) 

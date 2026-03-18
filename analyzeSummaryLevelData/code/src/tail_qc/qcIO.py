@@ -18,9 +18,8 @@ class qcIO:
         self.qc_names = [] 
 
     def get_uniq_filenames(self): 
-        
-        if self.args.qc_cmd == 'filter': failFile, passFile = self.args.out+'.fail.txt', self.args.out+'.pass.txt'
-        else:                            failFile, passFile = self.args.out+'.missing.txt', self.args.out+'.merged.txt'
+        if self.args.qc_cmd == 'load':   failFile, passFile = self.args.out+'.missing.txt', self.args.out+'.merged.txt'
+        else:                            failFile, passFile = self.args.out+'.fail.txt', self.args.out+'.pass.txt'
         #if self.args.infile.name in [failFile, passFile]: self.progress.error('Input/Output names must be unique')  
         return passFile, failFile 
 

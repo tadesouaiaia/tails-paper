@@ -38,10 +38,10 @@ class MyFigure:
         self.finish() 
 
     def add_square(self,x,y, s=10): 
-        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x,y), rowspan = s, colspan =s)) 
-        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x,y+s), rowspan = s, colspan =s)) 
-        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x+s,y), rowspan = s, colspan =s)) 
-        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x+s,y+s), rowspan = s, colspan =s)) 
+        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x,y), rowspan = s-1, colspan =s)) 
+        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x,y+s), rowspan = s-1, colspan =s)) 
+        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x+s-1,y), rowspan = s-1, colspan =s)) 
+        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x+s-1,y+s), rowspan = s-1, colspan =s)) 
         return 
 
 
@@ -60,14 +60,14 @@ class MyFigure:
         s = 10
         self.add_square(0,0,s) 
         self.add_square(0,2*s+1,s) 
-        self.add_square(2*s+1,0,s) 
-        self.add_square(2*s+1,2*s+1,s)
+        self.add_square(2*s,0,s) 
+        self.add_square(2*s,2*s+1,s)
         self.axes.append(plt.subplot2grid((self.rows,self.cols), (0,4*s+8), rowspan = 80, colspan =s*3))  
         ci=1
         r1, rs = s*4+8 , 14 
         if self.POP_SIM: 
-            self.axes.append(plt.subplot2grid((self.rows,self.cols), (r1+3,ci), rowspan = rs, colspan =s+9)) 
-            self.axes.append(plt.subplot2grid((self.rows,self.cols), (r1+3,2+s+12), rowspan = rs, colspan =s+8)) 
+            self.axes.append(plt.subplot2grid((self.rows,self.cols), (r1+2,ci), rowspan = rs, colspan =s+9)) 
+            self.axes.append(plt.subplot2grid((self.rows,self.cols), (r1+2,2+s+12), rowspan = rs, colspan =s+8)) 
             self.axes.append(plt.subplot2grid((self.rows,self.cols), (r1+rs+8,ci), rowspan = rs, colspan =s+9)) 
             self.axes.append(plt.subplot2grid((self.rows,self.cols), (r1+rs+8,2+s+12), rowspan = rs, colspan =s+8)) 
         else: 
@@ -139,7 +139,7 @@ class MyFigure:
         lms = DV.AxLims(ax) 
 
 
-        y1, y2, ys, xs = lms.yMax + 4*lms.yStep, lms.yMax + 5*lms.yStep, lms.yStep, lms.xStep 
+        y1, y2, ys, xs = lms.yMax + 5*lms.yStep, lms.yMax + 6*lms.yStep, lms.yStep, lms.xStep 
         x1,x2,x3,x4 = [lms.xMin + lms.xStep * i for i in [-0.05,5.65,12.25,17.8]]
         DV.draw_square(ax,x1-xs*0.5,x4+xs*3.3,y1-ys*1.2,y2+ys*0.7)
         c1,c2,c3,c4 = 'blue', self.rep_color, self.poc_color, self.aou_color
