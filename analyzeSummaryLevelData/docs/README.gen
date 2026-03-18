@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Quick figure-generation example for the packaged inputs.
+# Assumes the QC stage has already produced output_qc/qc.pass.txt.
+
+python3 code/tails.py gen all \
+  --in output_qc/qc.pass.txt \
+  --vals data/trait_data/vals/*.vals \
+  --pts data/trait_data/pts/*.pts \
+  --simPath data/trait_sims/ \
+  --out output_figs/
