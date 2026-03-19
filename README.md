@@ -1,4 +1,4 @@
-# TAILS: Code and Resources for “Polygenic traits have oligogenic tails under selection”
+# TAILS: Code and Resources for “Striking departures from common-variant architecture in complex trait tails”
 
 This repository contains all code and resources required to reproduce the analyses and figures presented in the TAILS manuscript.
 
