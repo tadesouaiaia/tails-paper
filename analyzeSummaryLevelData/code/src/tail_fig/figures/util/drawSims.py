@@ -173,9 +173,6 @@ class SlimLib:
         self.colors = [['blue','xkcd:pumpkin orange','xkcd:tea'],['#1b9e77','gold','#7570b3','#e7298a']]
         
 
-        #self.colors = ['dimgrey','xkcd:tea','cornflowerblue','xkcd:pumpkin orange','springgreen','magenta','deeppink','pink','orange','gold','yellow']
-
-
 
         self.styles = ['-','--',':','-'] 
         opts = [['10k', '50k', '100k'],['gamma(u=0.05)', 'gamma(u=0.1)', 'gamma(u=0.2)', 'gaussian']]
@@ -195,11 +192,13 @@ class SlimLib:
         for i,ax in enumerate([axes[2], axes[6]]): 
             lms = DV.AxLims(ax) 
             xs, ys, xh, yh, yp = lms.xStep, lms.yStep, lms.xHop, lms.yHop, lms.yMin - 4*lms.yStep
-
-            if i == 0: X, yp = [lms.xMid + xs*v for v in [2.5,3,5.5,8,10.5]], lms.yMin - 3*ys
-            else:      X, yp = [lms.xMid + xs*v for v in [0.5,1,4,7,10,12.5]], lms.yMin - 4*ys
-            yl = yp + yh*3 
-            DV.draw_square(ax, X[0], X[-1], yp, yp + 1.5*ys, lw=0.3) 
+            if i == 0: X, yp = [lms.xMid + xs*v for v in [2.5,3,5.5,8,10.4]], lms.yMin - 3*ys
+            else:      X, yp = [lms.xMid + xs*v for v in [0.6,1,4,7,9.8,12.3]], lms.yMin - 3.8*ys
+            DV.draw_square(ax, X[0], X[-1], yp, yp + 1.9*ys, lw=0.3) 
+            
+            if i == 0: ax.text(X[0] + xs*3.95, yp + 1.8*ys, 'Generations of Selection', ha='center', va='top', fontsize=self.fs2) 
+            else:      ax.text(X[0] + xs*5.75, yp + 1.8*ys, 'Mutation Distribution', ha='center', va='top', fontsize=self.fs2) 
+            yl = yp + yh*2
             for j,(k,c) in enumerate(zip(opts[i],self.colors[i])): 
                 ax.plot([X[j+1],X[j+1]+xs], [yl,yl], color=c, linestyle=self.styles[j],clip_on=False) 
                 if i == 0: ax.text(X[j+1]+5.35*xh, yl, k, fontsize=self.fs2, va='center') 

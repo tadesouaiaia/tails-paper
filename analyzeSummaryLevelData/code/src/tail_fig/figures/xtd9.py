@@ -40,7 +40,7 @@ class MyFigure:
     def finish(self,fs=22):
         lms = DV.AxLims(self.axes[0]) 
         for i,x in enumerate(['a','b','c','d','e','f','g','h']): self.axes[i].set_title('$'+x+'$', x= -0.07, y=0.935, fontsize=13) 
-        plt.subplots_adjust(left=0.06, bottom=0.09, right=0.96, top=0.97,wspace=0.3, hspace=1) 
+        plt.subplots_adjust(left=0.05, bottom=0.08, right=0.99, top=0.97,wspace=0.3, hspace=2) 
         if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
         else:                        figPath = self.options.out+'Xtd9.pdf' 
         plt.savefig(figPath, dpi=self.options.dpi) 
