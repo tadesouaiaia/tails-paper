@@ -1,7 +1,7 @@
-/analyzeSummaryLevelData/output_figs/ 
-/analyzeSummaryLevelData/output_qc/
-/analyzeSummaryLevelData/run_all_w_latex.sh
-/analyzeSummaryLevelData/xtended_latex_src/ 
+/SummaryLevel/output_figs/ 
+/SummaryLevel/output_qc/
+/SummaryLevel/run_all_w_latex.sh
+/SummaryLevel/xtended_latex_src/ 
 *.pyc 
 *.swp 
 *.swo
