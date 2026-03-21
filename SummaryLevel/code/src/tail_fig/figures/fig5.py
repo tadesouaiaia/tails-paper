@@ -1,28 +1,20 @@
-#!/usr/bin/python3
-
 import sys, os                                                                                                                                                                                                                                                                               
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
-
 from util.Util   import *
-from util import drawScatter as DS
+#from util import drawScatter as DS
 from util import drawVarious as DV
 from util import drawLabels  as DL
-from util import drawTables  as DT
+#from util import drawTables  as DT
 from util import drawSims    as DI 
 from util import drawEvo     as DE 
-
-
-
-
 
 
 class MyFigure:
     def __init__(self, options, traitData, progress, figName=None):
         self.options, self.data, self.traits, self.progress, self.figName = options, traitData, traitData.members, progress, figName
-        self.fs0, self.fs1, self.fs2, self.fs3, self.fs4, self.fs5 = 12,10, 9,7.5,6, 5       
-        self.lw1,self.lw2,self.lw3 = 1, 0.7,0.5
-        self.sz1,self.sz2,self.sz3 = 20,15,10
+        self.fs0,self.fs1,self.fs2,self.fs3,self.fs4,self.fs5,self.sz1,self.lw1,self.lw2,self.lw3 = 12,10,9,7.5,6,5,20,1,0.7,0.5    
+
 
     def draw(self): 
         self.read_slim_data() 
@@ -39,9 +31,6 @@ class MyFigure:
         self.SIM  =  self.lib.SLIM 
         if not self.SIM: self.progress.warn('Invalid Slim Results (--simPath requires valid enrich/delta.csvs)\n                 Figure Will Omit Slim Simulation Panels')  
         return         
-
-
-
 
     def setup(self):
         self.fig, self.axes = matplotlib.pyplot.gcf(), [] 
@@ -80,15 +69,6 @@ class MyFigure:
         self.evo.plot_health_tails(self.axes[-1]) 
         return 
 
-
-   
-
-
-
-
-
-
-
     def finish(self,fs=22):
         lms = DV.AxLims(self.axes[2]) 
         if self.SIM: idx, labs = [2, 0, 1, 18, 21], ['c','a','b','d','e'] 
@@ -101,7 +81,6 @@ class MyFigure:
             elif i == 1:   ax.set_title('$'+x+'$', x= -0.16, y = 0.86, fontsize=fs) 
             elif i in [16,18]:   ax.set_title('$'+x+'$', x= 0.1, y = 1.05, fontsize=fs) 
             elif i in [19,21]:   ax.set_title('$'+x+'$', x= -0.33, y = 0.95, fontsize=fs) 
-
         if self.SIM: plt.subplots_adjust(left=0.04, bottom=-0.04, right=1.01, top=0.97,wspace=0.05, hspace=0.07) 
         else:        plt.subplots_adjust(left=0.05, bottom=-0.15, right=0.99, top=0.90,wspace=0.05, hspace=0.07) 
         if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
@@ -110,5 +89,3 @@ class MyFigure:
         plt.clf() 
         self.progress.save('(Figure Saved: '+figPath+')')
         return            
-
-

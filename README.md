@@ -1,4 +1,4 @@
-# TAILS: Code and Resources for “Striking departures from common-variant architecture in complex trait tails”
+# TAILS: Code and Resources for Tails Paper 
 
 This repository contains all code and resources required to reproduce the analyses and figures presented in the TAILS manuscript.
 
@@ -11,12 +11,12 @@ The repository is divided into two main components:
 
 ## Repository Structure
 
-analyzeSummaryLevelData/
-processIndivLevelData/
+SummaryLevel/
+IndividualLevel/
 
 ---
 
-## 1. analyzeSummaryLevelData/ (Primary user-facing component)
+## 1. SummaryLevel/ (Primary user-facing component)
 
 This directory contains all code required to:
 
@@ -33,7 +33,7 @@ Key components:
 - docs/ — documentation and manual
 
 Manual:
-analyzeSummaryLevelData/docs/manual/tailsManual.pdf
+SummaryLevel/docs/manual/tailsManual.pdf
 
 ---
 
@@ -50,7 +50,7 @@ analyzeSummaryLevelData/docs/manual/tailsManual.pdf
 
 ## Basic Usage
 
-cd analyzeSummaryLevelData
+cd SummaryLevel
 ../code/tails qc > traitset.out
 
 cd make_figs
@@ -58,7 +58,7 @@ cd make_figs
 
 ---
 
-## 2. processIndivLevelData/ (Reproducibility pipelines)
+## 2. IndividualLevel/ (Reproducibility pipelines)
 
 Contains pipelines for:
 - GWAS
@@ -93,4 +93,4 @@ Some figure inputs are derived from external sources such as:
 ## Support
 
 See manual:
-analyzeSummaryLevelData/docs/manual/tailsManual.pdf
+SummaryLevel/docs/manual/tailsManual.pdf

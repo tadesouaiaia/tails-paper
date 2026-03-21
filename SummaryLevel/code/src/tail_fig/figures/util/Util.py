@@ -64,5 +64,20 @@ def spearman_ci(x, y, n_boot=1000, alpha=0.05):
     
     lo = np.percentile(boots, 100 * alpha/2)
     hi = np.percentile(boots, 100 * (1 - alpha/2))
-    
     return r, pv, lo, hi
+
+
+def mean_ci(x, alpha=0.05):
+    x = np.asarray(x, dtype=float)
+    x = x[np.isfinite(x)]
+    
+    n = len(x)
+    mean = np.mean(x)
+    se = stats.sem(x)  # = std / sqrt(n)
+    
+    t_crit = stats.t.ppf(1 - alpha/2, df=n-1)
+    
+    lo = mean - t_crit * se
+    hi = mean + t_crit * se
+    
+    return mean, lo, hi
