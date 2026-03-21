@@ -179,21 +179,43 @@ class EvoPlot:
 
 
 
-    def quick_add(self, ax, yp, T, RULE=4, STEP=-1, ht=0.25, LR=0.015): 
+    def quick_add(self, ax, yp, T, RULE=4, STEP=-1, ht=0.23, LR=0.015, CI=True): 
         clr = T.group_color 
         pop = T.vals['pop']['common-snp'] 
         pLo, pHi, eLo, eHi = pop.p1, pop.p2, pop.e1, pop.e2 
         self.scorekeep['lo'].append(eLo) 
         self.scorekeep['hi'].append(eHi) 
         if RULE == 2 and eLo > 0.2: eLo *= 0.95 
-        if eLo < 0: ax.barh(yp,-0.01,left=-1*LR,height=ht,color=clr,clip_on=False,alpha=0.99) 
+
+
+    
+
+
+        if eLo < 0:              ax.barh(yp,-0.01,left=-1*LR,height=ht,color=clr,clip_on=False,alpha=0.6) 
         else: 
-            if pop.f1:           ax.barh(yp,-1*eLo,left=-1*LR,height=ht,color=clr,clip_on=False,alpha=0.99) 
-            else:                ax.barh(yp,-1*eLo,left=-1*LR,height=ht,color='white', ec=clr, lw=0.5, clip_on=False,alpha=0.99) 
-        if eHi < 0: ax.barh(yp,0.01,left=LR,height=ht,color=clr,clip_on=False,alpha=0.9) 
+            
+            if pop.f1:  cx, ex = clr, 'k'
+            else:       cx, ex = 'white', clr
+            
+            ax.barh(yp,-1*eLo,left=-1*LR,height=ht,color=cx, ec=ex,clip_on=False,lw=0.33,alpha=0.6) 
+            if CI: 
+                ax.plot([-1*eLo-pop.j1,-1*eLo+pop.j1],[yp,yp],color='k',lw=0.7,clip_on=False) 
+                ax.plot([-1*eLo-pop.j1,-1*eLo+pop.j1],[yp,yp],color=clr,lw=0.5,clip_on=False) 
+
+        if eHi < 0: ax.barh(yp,0.01,left=LR,height=ht,color=clr,clip_on=False,alpha=0.6) 
         else: 
-            if pop.f2:         ax.barh(yp,eHi,left=LR,height=ht,color=clr,clip_on=False,alpha=0.99) 
-            else:              ax.barh(yp,eHi,left=LR,height=ht,color='white',ec=clr,lw=0.5,clip_on=False,alpha=0.99) 
+            
+            
+            if pop.f1:  cx, ex = clr, 'k'
+            else:       cx, ex = 'white', clr
+
+            ax.barh(yp,eHi,left=LR,height=ht,color=cx,ec=ex,lw=0.33,clip_on=False,alpha=0.6) 
+            if CI: 
+                ax.plot([eHi-pop.j1,eHi+pop.j1],[yp,yp],color='k',lw=0.7,clip_on=False) 
+                ax.plot([eHi-pop.j1,eHi+pop.j1],[yp,yp],color=clr,lw=0.5,clip_on=False) 
+
+            #if pop.f2:         ax.barh(yp,eHi,left=LR,height=ht,color=clr,clip_on=False,alpha=0.99) 
+            #else:              ax.barh(yp,eHi,left=LR,height=ht,color='white',ec=clr,lw=0.5,clip_on=False,alpha=0.99) 
         return yp - 0.3
 
 
@@ -371,7 +393,7 @@ class EvoPlot:
 
 
 
-    def plot_health_tails(self, ax, clr = 'xkcd:dusty green'): 
+    def plot_health_tails(self, ax, clr = 'xkcd:dusty green',CI=True): 
         TR, names  = [], ['Children\nFathered', 'Livebirths\n(Maternal)', 'Number of\nIllnesses', 'Miscarriages &\nStill Births', 'Paternal\nAge']
         for k in ['pkid','mkid','ill','msb','page']: 
             X, Y, Z = [], [], [] 
@@ -384,26 +406,37 @@ class EvoPlot:
                     Z.append([e1,x1,ti]) 
                     Z.append([e2,x2,ti]) 
                 except KeyError: continue 
-            S,p = stats.spearmanr(X,Y) 
-            TR.append([S,p]) 
+            #S,p = stats.spearmanr(X,Y) 
+            
+            #S,p,sL,sH = spearman_ci(X,Y)) 
+
+            TR.append(spearman_ci(X,Y))
+                    #TR.append([S,p]) 
 
 
         TK = dd(lambda: dd(list)) 
         xOffset, yOffset = 0, 0.1 
-        for i,(S,pv) in enumerate(TR): 
+        for i,(S,pv,sL,sH) in enumerate(TR): 
             n = names[i] 
             xp = i + 0.5 + i * 0.25 
             if S > 0: yp = yOffset 
             else:     yp = -yOffset 
             ax.text(xp, 0, names[i], fontsize=self.fs4, ha='center',va='center')  
-            ax.bar(xp, S, bottom=yp, width=0.5, edgecolor='k', color=clr, clip_on=False)  
             
+            if not CI: 
+                ax.bar(xp, S, bottom=yp, width=0.5, edgecolor='k', color=clr, clip_on=False)  
+            else: 
+                ax.bar(xp, S, bottom=yp, width=0.5, edgecolor='k', color=clr, alpha=0.7,clip_on=False)  
+                if S > 0: ax.plot([xp,xp],[max(yOffset,sL+yOffset), yOffset+sH], lw=0.6,zorder=3,color='green',clip_on=False) 
+                else:     ax.plot([xp,xp],[min(-yOffset,-yOffset+sH),-yOffset+sL], lw=0.6,zorder=3,color='green',clip_on=False) 
+                
+
             if pv < 0.05: 
                 st = '*' 
                 if pv < 0.01: st+='*' 
                 if pv < 0.001: st+='*' 
-                if S > 0: ax.text(xp,yp+S+0.08, st,ha='center',va='top',fontweight='bold',fontsize=self.fs1) 
-                else:     ax.text(xp,yp+S-0.03, st,ha='center',va='top',fontweight='bold',fontsize=self.fs1) 
+                if S > 0: ax.text(xp,yp+S+0.1, st,ha='center',va='top',fontweight='bold',zorder=111,fontsize=self.fs1) 
+                else:     ax.text(xp,yp+S-0.03, st,ha='center',va='top',fontweight='bold',zorder=111,fontsize=self.fs1) 
             
             gzz = str(round(S,3))+','+str(round(pv,5)) 
             self.progress.report_result('Health-Measure/POPout Rank Correlation: ' +"_".join(names[i].split('\n'))+' S,p='+gzz) 

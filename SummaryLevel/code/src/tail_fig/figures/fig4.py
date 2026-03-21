@@ -160,6 +160,9 @@ class MyFigure:
         return TR 
 
     def validate_fractions(self, rTot, T, i): 
+        
+
+
         if i == 0: rf,rS = [float(y) for y in T.vals['recovery']['combo'].frac1.split(',')], T.vals['recovery']['combo'].sig1
         else:      rf,rS = [float(y) for y in T.vals['recovery']['combo'].frac2.split(',')], T.vals['recovery']['combo'].sig2
         if rTot > 0 and all([r>=0 for r in rf]): return rf, rS 
