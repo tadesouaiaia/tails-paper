@@ -195,16 +195,15 @@ class MyFigure:
             #R, pv = stats.pearsonr(X,Y)  
             R,pv,rL,rH = pearson_ci(X,Y) 
             ax2.bar(i,R, color=c, ec='k',lw=0.5,alpha=0.8,width=0.7) 
-            
+            CI = True 
             if CI: ax2.plot([i,i],[rL,rH], color=c, zorder=99) 
-
-            try: 
-                p_start = str(int(str(pv).split('.')[0]))
-                p_end = str(int(str(pv).split('e-')[-1]))
-                rpv = 'P=\n'+'$'+p_start+'$\n$'+'{\\times}$'+'\n'+'$10^{-'+p_end+'}$'
-            except ValueError: rpv = 'P=\n'+'$'+str(round(pv,5))+'$' 
-            #ax2.text(i+0.06, R*1.1, rpv, ha='center', va='bottom',fontsize=fs2) 
-            ax2.text(i+0.02, 0.01, rpv, ha='center', va='bottom',fontsize=fs2) 
+            else: 
+                try: 
+                    p_start = str(int(str(pv).split('.')[0]))
+                    p_end = str(int(str(pv).split('e-')[-1]))
+                    rpv = 'P=\n'+'$'+p_start+'{\\times}$'+'$10^{-'+p_end+'}$'
+                except ValueError: rpv = 'P=\n'+'$'+str(round(pv,5))+'$' 
+                ax2.text(i+0.06, R*1.01, rpv, ha='center', va='bottom',fontsize=fs2) 
 
         for i,ax in enumerate([ax1, ax2]): 
             if i == 0: 
