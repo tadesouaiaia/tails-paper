@@ -123,17 +123,21 @@ class EvoPlot:
             if pop.f1:  cx, ex = clr, 'k'
             else:       cx, ex = 'white', clr
             ax.barh(yp,-1*eLo,left=-1*LR,height=ht,color=cx, ec=ex,clip_on=False,lw=0.33,alpha=0.6) 
-            if self.CI: 
-                ax.plot([-1*eLo-pop.j1,-1*eLo+pop.j1],[yp,yp],color='k',lw=0.7,clip_on=False) 
-                ax.plot([-1*eLo-pop.j1,-1*eLo+pop.j1],[yp,yp],color=clr,lw=0.5,clip_on=False) 
-        if eHi < 0: ax.barh(yp,0.01,left=LR,height=ht,color=clr,clip_on=False,alpha=0.6) 
+            if self.CI:
+                z1,z2=eLo-pop.j1, eLo+pop.j1 
+                ax.plot([min(-LR,-1*LR-z1),-1*LR-z2],[yp,yp],color='k',lw=0.7,clip_on=False) 
+                ax.plot([min(-LR,-1*LR-z1),-1*LR-z2],[yp,yp],color=clr,lw=0.5,clip_on=False) 
+        if eHi < 0: 
+            ax.barh(yp,0.01,left=LR,height=ht,color=clr,clip_on=False,alpha=0.6) 
         else: 
             if pop.f2:  cx, ex = clr, 'k'
             else:       cx, ex = 'white', clr
             ax.barh(yp,eHi,left=LR,height=ht,color=cx,ec=ex,lw=0.33,clip_on=False,alpha=0.6) 
+            
             if self.CI: 
-                ax.plot([eHi-pop.j1,eHi+pop.j1],[yp,yp],color='k',lw=0.7,clip_on=False) 
-                ax.plot([eHi-pop.j1,eHi+pop.j1],[yp,yp],color=clr,lw=0.5,clip_on=False) 
+                z1,z2=eHi-pop.j1, eHi+pop.j1 
+                ax.plot([max(LR,LR+z1),LR+z2],[yp,yp],color='k',lw=0.7,clip_on=False) 
+                ax.plot([max(LR,LR+z1),LR+z2],[yp,yp],color=clr,lw=0.5,clip_on=False) 
         return yp - 0.3
 
 
