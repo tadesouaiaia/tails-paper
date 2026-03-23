@@ -112,7 +112,7 @@ class MyFigure:
         
 
     def collect_reps(self, MIN_REPS=20): 
-        PD, rep_removes = dd(lambda: dd(list)), dd(lambda: dd(int))  
+        PD, rep_removes, named_removals = dd(lambda: dd(list)), dd(lambda: dd(int)), dd(lambda: dd(list)) 
         AS = dd(list) 
         for k in self.rep_color_key.keys(): 
             RK = dd(list) 
@@ -125,12 +125,16 @@ class MyFigure:
                     if QC and size > 5000: 
                         for n,data in [['X',[e1,e2]],['Y',[r1,r2]],['xL',[e1]],['xH',[e2]],['yL',[r1]],['yH',[r2]], ['S',[size]]]: RK[n].extend(data)
                     else: 
-                        if not QC: rep_removes[k]['QC'] += 1 
-                        if size <= 5000: rep_removes[k]['5k'] += 1 
+                        if not QC: 
+                            rep_removes[k]['QC'] += 1 
+                            named_removals[k]['QC'].append(T.name.mini) 
+                        if size <= 5000: 
+                            rep_removes[k]['5k'] += 1 
+                            named_removals[k]['5k'].append(T.name.mini) 
+
                         rep_removes[k]['TOTAL'] += 1 
                 except KeyError: continue 
             if len(RK['X']) > MIN_REPS: PD[k] = RK  
-        
         rems = sorted([k+'(Total/QC/5k): '+str(V['TOTAL'])+','+str(V['QC'])+','+str(V['5k']) for k,V in rep_removes.items()]) 
         kept = ",".join([str(len(PD[k]['xL'])) for k in ['aou','poc','rep']]) 
         self.progress.report_result('Replication Removals: '+', '.join(rems)) 

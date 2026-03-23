@@ -8,7 +8,6 @@ import drawVarious as DV
 
 
 
-
 def draw_evo(ax, T, NOTES=[1,1], fs = 40, sz=130, lw=0.3):
     Y = T.pts['lrs'].Y
     X = [stats.norm.ppf((xl+0.5)/100.0) for xl in range(len(Y))]
@@ -219,12 +218,6 @@ class POPplot:
   
     
 
-
-
-
-
-
-
     def draw_body(self,p_type,yc1='blue',yc2='blue',ec1='orange',ec2='darkorange',rc1='xkcd:shamrock green',rc2='lime',tailType='STANDARD', ALLOW_MISSING=True):  
         self.type, self.tailType, self.yc1, self.yc2, self.ec1, self.ec2, self.rc1, self.rc2 = p_type, tailType, yc1, yc2, ec1, ec2, rc1, rc2 
         try: 
@@ -238,13 +231,11 @@ class POPplot:
                 self.ax.plot(self.X[1:99], [ye-(se*5.5) for ye,se in zip(self.Ye[1:99],self.Se[1:99])], color=ec1,zorder=1,linestyle='--',lw=self.lw/2.0) 
             except AttributeError: pass 
             self.ax.scatter(self.X[1:99], self.Y[1:99],color=yc1,edgecolor=yc1,  alpha=self.alp,  zorder=1, lw=0.1, s = self.sz3) 
-            #self.ax.scatter(self.X[1:99], self.Y[1:99],color=yc1,edgecolor=yc1,  alpha=self.alp,  zorder=1, s = self.sz1) 
         except: 
             if ALLOW_MISSING:
                 self.Y, self.Ye = [0 for x in self.X], [0 for x in self.X] 
                 xp = [x for x in self.X if x in [0,2,4,95,97,99] or x % 4 == 0] 
                 self.ax.scatter(xp, [0 for x in xp],color=yc1,edgecolor=yc1,alpha=0.5,zorder=1, s = self.sz3-1, lw=0.3) 
-                #self.ax.scatter(self.X, [0 for x in self.X],color=yc1,edgecolor=yc1,alpha=0.2,zorder=1, s = 5) 
             else:
                 self.lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = self.xLab, ylab = self.yLab, ystretch=0.5, xstretch=0.75,fs = 45 ) 
                 self.NULL, self.VALID = True, False 
@@ -253,7 +244,6 @@ class POPplot:
 
 
     def draw_alt(self,p_type,yc1='blue',yc2='blue',ec1='orange',ec2='darkorange',rc1='xkcd:shamrock green',rc2='lime',alp=1,tailType='STANDARD', ALLOW_MISSING=False):  
-        
         self.type, self.tailType, self.yc1, self.yc2, self.ec1, self.ec2, self.rc1, self.rc2 = p_type, tailType, yc1, yc2, ec1, ec2, rc1, rc2 
         try: 
             P = self.T.pts['apop'][p_type] 
@@ -381,9 +371,7 @@ class POPplot:
         elif self.type == 'rareB': self.ax.text(self.lms.xMin+self.lms.xHop, self.lms.yMax - self.lms.yHop, 'Rare PRS:\n0.1%>MAF>0.01%', va='top', fontsize = self.fs3)  
         elif self.type == 'burden': self.ax.text(self.lms.xMin+self.lms.xHop, self.lms.yMax - self.lms.yHop, 'Burden PRS', va='top', fontsize = self.fs3)  
         elif self.type in ['A+B+burden']:  self.ax.text(self.lms.xMin+self.lms.xHop, self.lms.yMax - self.lms.yHop, 'Rare PRS', va='top', fontsize = self.fs3)  
-        else: 
-            print(self.type, 'wtf') 
-            sys.exit() 
+        else: return self  
         return self 
    
 
@@ -510,8 +498,6 @@ class POPplot:
         try:    f1, f2 = self.T.vals['pop']['common-snp'].f1, self.T.vals['pop']['common-snp'].f2  
         except: return 
         if not f1 and not f2: return
-
-
         x1, x2 = self.X[0] - self.lms.xStep/2, self.X[-1] + self.lms.xStep/2
         x1a, x1b, x2a, x2b = x1 - self.lms.xHop, x1 + self.lms.xHop, x2 - self.lms.xHop, x2 + self.lms.xHop 
         yLo, yHi = self.lms.yMin + self.lms.yStep, self.lms.yMax - self.lms.yStep*5
@@ -519,7 +505,6 @@ class POPplot:
         cs1 = "arc3,rad=-0.02"
         cs2 = "arc3,rad=0.02"
         el = matplotlib.patches.Ellipse((50, yLo), 0, 0, angle=0, alpha=0.0,fc=None,ec='black',zorder=0,linewidth=1,fill=False)
-        
         if MINI: 
             astr = "fancy,head_width=2,head_length=1"
             if f1 or f2: 
@@ -531,12 +516,6 @@ class POPplot:
                 AP=dict(arrowstyle=astr,linewidth=0.3,mutation_scale=0.5,color='k',patchB=el,shrinkB=0,connectionstyle=cs2)
                 self.ax.annotate("",xy=(xHi+self.lms.xStep*0.9, yHi+self.lms.yHop*3.3), xycoords='data',xytext=(xHi+self.lms.xStep*0.50,yHi-2.6*self.lms.yStep),textcoords='data',arrowprops=AP)
             return self 
-        
-
-
-
-
-
         astr = "fancy,head_width=9.75,head_length=10"
         if f1:  
             self.ax.plot([x1, x1], [self.Ye[0], self.Y[0]], lw =  lw, linestyle='--', color='gray') 
@@ -550,7 +529,6 @@ class POPplot:
             self.ax.plot([x2a, x2b], [self.Y[-1], self.Y[-1]], lw =  lw, linestyle='--', color='gray') 
             AP=dict(arrowstyle=astr,linewidth=lw,mutation_scale=0.5,color='k',patchB=el,shrinkB=0,connectionstyle=cs2)
             self.ax.annotate("",xy=(xHi+self.lms.xStep*1.2, yHi+self.lms.yHop*3), xycoords='data',xytext=(xHi+self.lms.xStep*0.8,yHi-1.5*self.lms.yStep),textcoords='data',arrowprops=AP)
-
         if f1 and f2:    self.ax.text(xLo+self.lms.xStep*1.5,yLo+self.lms.yStep*0.5,'Dual Tail\n$POPout$',fontsize=fs+3,ha='center',va='center')
         elif f1: self.ax.text(xLo+self.lms.xStep*1.5,yLo+self.lms.yStep*0.5,'Lower Tail\n$POPout$',fontsize=fs+3,ha='center',va='center')
         elif f2: self.ax.text(xLo+self.lms.xStep*1.5,yLo+self.lms.yStep*0.5,'Upper Tail\n$POPout$',fontsize=fs+3,ha='center',va='center')
@@ -647,21 +625,6 @@ class SibPlot:
             else:                                             self.NULL = True 
         else:            
             self.VALID, self.NULL, self.T =  False, True, 'NA' 
-
-
-
-
-    #def draw_sib_pair(self,idx=9, clr1 = 'dodgerblue', clr2='darkorange', clr3='dodgerblue',LABEL=False, MINI=False): 
-    
-    #def draw_mini_sib_pair(self,idx=9, clr1 = 'mediumblue', clr2='darkorange', clr3='mediumblue',LABEL=False, MINI=False): 
-
-
-
-
-
-
-
-
 
 
     def draw_sib_pair(self,idx=9, clr1 = 'mediumblue', clr2='darkorange', clr3='mediumblue',LABEL=False, MINI=False): 

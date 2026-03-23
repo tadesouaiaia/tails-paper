@@ -33,7 +33,7 @@ LK["DRAGEN-ID"]= "DRAGEN-SNP-Identifier"
 LK["gene"]= "Gene Annotation (When Available)"
 LK["lower-0.1%-pop-effect"]= "Lower Tail (0.1%) Common Variant PRS POPout effect size"
 LK["lower-0.1%-pop-fdr"]= "Lower Tail (0.1%) Common Variant PRS POPout pvalue 5%-FDR Test"
-LK["lower-0.1%-recSig"]= "Lower Tail (0.1%) Common+Rare Variant PRS POPout % reduction pvalue (>0)"
+LK["lower-0.1%-recP"]= "Lower Tail (0.1%) Common+Rare Variant PRS POPout % reduction pvalue (>0)"
 LK["lower-0.1%-reduction"]= "Lower Tail (0.1%) Common+Rare Variant PRS POPout % reduction to POPOut effect"
 LK["lower-1%-pop-effect"]= "Lower Tail (1%) Common Variant PRS POPout effect size"
 LK["lower-1%-pop-fdr"]= "Lower Tail (1%) Common Variant PRS POPout pvalue 5%-FDR Test"
@@ -49,7 +49,7 @@ LK["lower-pop-effect"]= "Lower Tail (1%) Common Variant PRS POPout effect size"
 LK["lower-pop-fdr"]= "Lower Tail (1%) Common Variant PRS POPout pvalue 5%-FDR Test"
 LK["lower-pop-pv"]= "Lower Tail (1%) Common Variant PRS POPout pvalue"
 LK["lower-pop-QC"]= "Lower Tail (1%) Common Variant PRS POPout QC"
-LK["lower-recSig"]= "Lower Tail (1%) Common+Rare Variant PRS POPout % reduction pvalue (>0)"
+LK["lower-recP"]= "Lower Tail (1%) Common+Rare Variant PRS POPout % reduction pvalue (>0)"
 LK["lower-standout-pv"]= "Lower Tail (1%) Sibling Standout Pvalue"
 LK["maf"]= "Minor Allele Fraction Bin"
 LK["pv"]= "SNP-pvalue (from gwas on normalized trait)"
@@ -57,7 +57,7 @@ LK["RS-ID"]= "RS-Identifier (When Available)"
 LK["type"]= "Functional SNP Description (When Availble)"
 LK["upper-0.1%-pop-effect"]= "Upper Tail (0.1%) Common Variant PRS POPout effect size"
 LK["upper-0.1%-pop-fdr"]= "Upper Tail (0.1%) Common Variant PRS POPout pvalue 5%-FDR Test"
-LK["upper-0.1%-recSig"]= "Upper Tail (0.1%) Common+Rare Variant PRS POPout % reduction pvalue (>0)"
+LK["upper-0.1%-recP"]= "Upper Tail (0.1%) Common+Rare Variant PRS POPout % reduction pvalue (>0)"
 LK["upper-0.1%-reduction"]= "Upper Tail (0.1%) Common+Rare Variant PRS POPout % reduction to POPOut effect"
 LK["upper-1%-pop-effect"]= "Upper Tail (1%) Common Variant PRS POPout effect size"
 LK["upper-1%-pop-fdr"]= "Upper Tail (1%) Common Variant PRS POPout pvalue 5%-FDR Test"
@@ -73,7 +73,7 @@ LK["upper-pop-effect"]= "Upper Tail (1%) Common Variant PRS POPout effect size"
 LK["upper-pop-fdr"]= "Upper Tail (1%) Common Variant PRS POPout pvalue 5%-FDR Test"
 LK["upper-pop-pv"]= "Upper Tail (1%) Common Variant PRS POPout pvalue"
 LK["upper-pop-QC"]= "Upper Tail (1%) Common Variant PRS POPout QC"
-LK["upper-recSig"]= "Upper Tail (1%) Common+Rare Variant PRS POPout % reduction pvalue (>0)"
+LK["upper-recP"]= "Upper Tail (1%) Common+Rare Variant PRS POPout % reduction pvalue (>0)"
 LK["upper-standout-pv"]= "Upper Tail (1%) Sibling Standout Pvalue"
 
 
@@ -158,19 +158,22 @@ class CsvOut:
 
     def write_rare_tails(self): 
         pop_names = ['1%-pop-effect','1%-pop-fdr'] 
-        rec_names = ['1%-reduction','recSig'] 
+        rec_names = ['1%-reduction','recP'] 
         odd_names = ['OR-commonPRS','OR-CI-commonPRS'] 
-        odd_names2 = ['OR-combinedPRS','OR-CI-combinedPRS'] 
+        odd_names2 = ['OR-combinedPRS','OR-CI-combinedPRS','OR-Diff-P'] 
         pop_names2 = ['0.1%-pop-effect','0.1%-pop-fdr'] 
-        rec_names2 = ['0.1%-reduction','0.1%-recSig'] 
+        rec_names2 = ['0.1%-reduction','0.1%-recP'] 
         pop_keys = [['e1','f1'],['e2','f2']]
-        rec_keys = [['total1','sig1'],['total2','sig2']]
+        rec_keys = [['total1','pv1'],['total2','pv2']]
         odd_keys = [['odds-1','ci-1'],['odds-99','ci-99']]
+        
+        odd_rec = [['rp1'],['rp99']]
         all_names = pop_names + rec_names + odd_names + odd_names2 + pop_names2 + rec_names2 
         header = ['trait'] + ['lower-'+n for n in all_names]+['upper-'+n for n in all_names] 
         self.w.write(','.join(header)+'\n') 
         for ti, T in self.traits.items(): 
             if 'recovery' not in T.vals: continue  
+            if T.vals['recovery']['combo'].total1 == 'NA' and T.vals['recovery']['combo'].total2 == 'NA': continue 
             td = [str(ti)] 
             for i in range(2): 
                 xp= [str(T.vals['pop']['common-snp'].key[k]) for k in pop_keys[i]] 
@@ -178,12 +181,15 @@ class CsvOut:
                 xo = [T.vals['odds']['common'].key[k] for k in odd_keys[i]] 
                 xo[1] = str(round(xo[0]-xo[1],3))+';'+str(round(xo[0]+xo[1],3))
                 xo = [str(x) for x in xo] 
+
                 ro = [T.vals['odds']['combo'].key[k] for k in odd_keys[i]] 
                 ro[1] = str(round(ro[0]-ro[1],3))+';'+str(round(ro[0]+ro[1],3))
-                ro = [str(x) for x in xo] 
+                ro = [str(x) for x in ro] 
+                po = [str(T.vals['odds']['combo'].key[k]) for k in odd_rec[i]] 
+                
                 XP = [str(T.vals['pop']['common@0.1'].key[k]) for k in pop_keys[i]]  
                 RP = [str(T.vals['recovery']['combo@0.1'].key[k]) for k in rec_keys[i]] 
-                td.extend(xp+rp+xo+ro+XP+RP) 
+                td.extend(xp+rp+xo+ro+po+XP+RP) 
             self.w.write(','.join(td)+'\n')  
 
 

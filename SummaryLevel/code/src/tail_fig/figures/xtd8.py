@@ -294,7 +294,7 @@ class MyFigure:
                 ax.set_yticks([-0.2,0,0.25,0.5,0.75,1,1.25]) 
                 ax.text(xMax,yMin,zS[0], ha='right',va='bottom',fontsize=self.fs3) 
             else:      
-                yMin, yMax, my_colors = -0.13, 1.1, ['xkcd:shamrock green','lime'] 
+                yMin, yMax, my_colors = -0.13, 1.15, ['xkcd:shamrock green','lime'] 
                 ax.set_yticks([0,0.25,0.5,0.75,1],[0,'25%','50%','75%','100%']) 
                 ax.set_ylabel('POPout Reduction', fontsize=self.fs4) 
                 ax.text(xMax,yMin,zS[1], ha='right',va='bottom',fontsize=self.fs4)        

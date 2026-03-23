@@ -5,7 +5,6 @@ from figures.util.Util import *
 import figNames as TN 
 
 
-
 class Trait:
     def __init__(self, ti, tData):
         self.id, self.ti = ti, ti 
@@ -15,12 +14,10 @@ class Trait:
             self.name = TN.TailName(ti, tData[0], tData[1]) 
             self.find_group(tData[1]) 
         
-
     def find_group(self, group): 
         self.group = group 
         if self.group == 'Questionnaire/Cognitive': self.group_color = 'xkcd:olive yellow' 
         elif self.group == 'Biomarkers':            self.group_color =  'xkcd:rose red'
-        #elif self.group == 'Biomarkers':            self.group_color =  'xkcd:indian red'
         elif self.group == 'Physical_Measures':     self.group, self.group_color = 'Physical Measures', 'xkcd:sea blue'
         else:                                       self.group, self.group_color = 'Unknown', 'magenta'  
 
@@ -94,7 +91,6 @@ class TraitVals:
 
     def __repr__(self):
         return str(len(self.key))+" keys: "+','.join([x for x in self.key.keys()])
-    #return str(len(self.key))+" keys" 
 
 
 
@@ -122,7 +118,6 @@ class Traits:
                 if tx not in m.qc: m.qc[tx] = TraitVals(tx) 
                 m.qc[tx].add_val_dict(K) 
         
-        #self.members[0] = Trait(0, []) 
     
     def load(self, value_files, pt_files): 
         self.add_values(value_files) 
@@ -228,11 +223,9 @@ class Traits:
     def summarize(self): 
         self.process_fdrs()
         self.process_sibs()
-        
         valid_traits = [T for T in self.members.values() if T.ti != 0] 
         K = sorted({T.group: T.group_color for T in valid_traits}.items()) 
         self.group_names, self.group_colors = [k[0] for k in K], [k[1] for k in K] 
-        #for ti,T in self.members.items(): 
         for T in valid_traits: 
             model, beta0, beta1, beta2 = T.vals['lrs'].model, T.vals['lrs'].beta0, T.vals['lrs'].beta1, T.vals['lrs'].beta2 
             if T.vals['lrs'].model == 'Y~yInt': 
@@ -282,22 +275,18 @@ class Traits:
 
     def process_fdrs(self): 
         FDR = dd(list) 
-        for k in ['common-snp','common-gwas','common@0.1','combo','combo@0.1','rare','poc','rep','aou']: 
-            
+        for k in ['common-snp','common@0.1','combo','combo@0.1','rare','poc','rep','aou']: 
             FDR = [] 
             for ti,T in self.members.items(): 
-                
                 if 'pop' in T.vals and k in T.vals['pop'] and T.vals['pop'][k].QC != 'FAIL': 
+                    
                     pop = T.vals['pop'][k]
                     p1, p2 = pop.key['p1'], pop.key['p2'] 
-                    FDR.extend([[p1,1,ti],[p2,2,ti]]) 
-            
+                    if type(p1) == float and type(p2) == float: 
+                        FDR.extend([[p1,1,ti],[p2,2,ti]]) 
             pvals, locs, tis = [v[0] for v in FDR], [v[1] for v in FDR], [v[2] for v in FDR]  
             reject, p_adj, _, _ = statsmodels.stats.multitest.multipletests(pvals, method='fdr_bh') 
-
-            #multipletests(pvals, method="fdr_bh")
             for rB,pA,loc,ti in zip(reject, p_adj, locs, tis): 
-                
                 if loc == 1: 
                     self.members[ti].vals['pop'][k].f1 = rB  
                     self.members[ti].vals['pop'][k].key['f1'] = rB

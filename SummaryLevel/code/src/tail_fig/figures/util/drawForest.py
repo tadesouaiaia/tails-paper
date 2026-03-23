@@ -151,39 +151,6 @@ class ForestReps:
         
                 
 
-    def add_square(self,x,y, s=10): 
-        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x,y), rowspan = s, colspan =s)) 
-        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x,y+s), rowspan = s, colspan =s)) 
-        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x+s,y), rowspan = s, colspan =s)) 
-        self.axes.append(plt.subplot2grid((self.rows,self.cols), (x+s,y+s), rowspan = s, colspan =s)) 
-        return 
-
-
-
-
-    def draw_key(self, ax, sz=210, fs=14.5): 
-        yMin, yMax = ax.get_ylim() 
-        xMin, xMax = ax.get_xlim() 
-        xs, ys = (xMax - xMin)/10.0, (yMax- yMin)/10.0
-        y1, y2 = yMax + ys*3.9 , yMax + ys*4.90
-        x1  = xMin + xs*0.11 
-        x2, x3, x4 = x1 + xs*5.5, x1+xs*12.1, x1+xs*17.7
-        DV.draw_square(ax,x1-xs*0.5,x4+xs*3.5,y1-ys*1.2,y2+ys*0.7)
-        c1,c2,c3,c4 = 'blue', self.rep_color, self.poc_color, self.aou_color
-        ax.scatter(x1,y1,marker='o', color=c1,ec = 'k',s=sz,clip_on=False,zorder=10,lw=2,alpha=0.7)
-        ax.text(x1+2000,y1,'UKB-European',fontsize=fs+20,va='center',ha='left')
-        ax.scatter(x2,y1,marker='o', color=c2,ec = 'k',s=sz,clip_on=False,zorder=10,lw=2,alpha=0.7)
-        ax.text(x2+2000,y1,'Repeated Measures\n(UKB-EUR)',fontsize=fs+15,va='center',ha='left')
-
-        ax.scatter(x3,y1,marker='o', color=c3,ec = 'k',s=sz,clip_on=False,zorder=10,lw=2,alpha=0.7)
-        ax.text(x3+2000,y1,'Multi-Ancestry\n(UKB)',fontsize=fs+20,va='center',ha='left')
-
-        ax.scatter(x4,y1,marker='o', color=c4,ec = 'k',s=sz,clip_on=False,zorder=10,lw=2,alpha=0.7)
-        ax.text(x4+2000,y1,'All Of Us',fontsize=fs+20,va='center',ha='left')
-        
-        ax.set_xlim(xMin, xMax) 
-        ax.set_ylim(yMin, yMax) 
-        return
 
 
 
@@ -191,18 +158,14 @@ class ForestReps:
 
 
 
-
-
-
-
-
-    def rep_whisky(self, pts, T, mp, marker = 'o', color='k', TYPE='UKB', QC=True, MIN = -0.24, MAX=0.59): 
+    def rep_whisky(self, pts, T, mp, marker = 'o', color='k', TYPE='UKB', QC=True, MIN = -0.24, MAX=0.58): 
         if TYPE == 'UKB': 
             pts = [-0.15 if p < -0.15 else p for p in pts]                                                                                                                                                                      
             locs = [(self.pad + p)*mp for p in pts]                                                                                                                                                                             
             self.ax.plot([locs[1],locs[2]],[self.yp,self.yp], color = color, clip_on=False, zorder=5, lw = 1)                                                                                                           
-            self.ax.scatter(locs[0], self.yp, color = color, clip_on=False, zorder=6, s=12) 
+            self.ax.scatter(locs[0], self.yp, color = color, ec = color, lw=0.7, clip_on=False, zorder=6, s=10) 
         else:
+            MIN = -0.23 
             M1, M2, locs = False, False, [] 
             for p in pts: 
                 if p >= MIN and p <= MAX: locs.append((self.pad+p)*mp) 
@@ -212,15 +175,20 @@ class ForestReps:
                 else: 
                     M2 = True 
                     locs.append((self.pad+MAX)*mp) 
+            CLASH = False
+            if locs[0] == locs[1]: CLASH=True 
             self.ax.plot([locs[1],locs[2]],[self.yp,self.yp], color = color, clip_on=False, zorder=2, lw = 1)                                                                                                           
-            if QC: self.ax.scatter(locs[0], self.yp, color = color, clip_on=False, zorder=3, s=12) 
-            else:  self.ax.scatter(locs[0], self.yp, marker='s', color = 'white', ec = color, lw=1,clip_on=False, zorder=3, s=12) 
+            if QC:  mark, c1, c2, c3 = 'o', color, color, color
+            else:   mark, c1, c2, c3 = 's', 'white', color, color
+            if not CLASH: self.ax.scatter(locs[0], self.yp, marker = mark, color = c1, ec = c2, lw =0.7, clip_on=False, zorder=3, s=10) 
+            else:         c3 = 'white' 
             if mp == 1: 
-                if M1: self.ax.scatter(locs[1], self.yp, marker= '<', color=color, zorder=4, s = 12, clip_on=False) 
-                if M2: self.ax.scatter(locs[2], self.yp, marker= '>', color=color, zorder=4, s = 12, clip_on=False) 
+                if M1: self.ax.scatter(locs[1], self.yp, marker= '<', color=c3, ec=color, zorder=4, lw=0.7, s = 10, clip_on=False) 
+                if M2: self.ax.scatter(locs[2], self.yp, marker= '>', color=color, ec = color, zorder=4, lw=0.7,s = 10, clip_on=False) 
             else: 
-                if M1: self.ax.scatter(locs[1], self.yp, marker= '>', color=color, zorder=4, s = 12, clip_on=False) 
-                if M2: self.ax.scatter(locs[2], self.yp, marker= '<', color=color, zorder=4, s = 12, clip_on=False) 
+                if M1: self.ax.scatter(locs[1], self.yp, marker= '>', color=c3, ec=color, zorder=4, lw=0.7, s = 10, clip_on=False) 
+                if M2: self.ax.scatter(locs[2], self.yp, marker= '<', color=color, ec = color, zorder=4, lw=0.7, s = 10, clip_on=False) 
+                
             return
 
 
@@ -271,9 +239,11 @@ class ForestReps:
         lc1 = 'whitesmoke' 
         self.yp, yTop = 0.25, 1  
         mList = sorted(self.prepare_forest()) 
-
         for tname,T,comps in mList: 
-            if len(tname.split()) == 1: self.ax.text(0,self.yp, tname,ha='center',va='center',fontweight='bold',fontsize=fs4)                                                                                                                     
+            if len(tname.split()) == 1: 
+                if len(tname) > 10:   self.ax.text(0,self.yp, tname,ha='center',va='center',fontweight='bold',fontsize=fs4-0.25) 
+                elif len(tname) > 8: self.ax.text(0,self.yp, tname,ha='center',va='center',fontweight='bold',fontsize=fs4+0.25)                                                                                                                     
+                else:                  self.ax.text(0,self.yp, tname,ha='center',va='center',fontweight='bold',fontsize=fs4+0.75)                                                                                                                     
             else: 
                 tsp = tname.split() 
                 zname = " ".join(tsp[0:-1])+'\n'+tsp[-1]  
@@ -287,9 +257,6 @@ class ForestReps:
                 self.rep_whisky(e2, T,  1, 'o', c, TYPE=k, QC=QC)  
                 self.yp -= 0.25 
             self.yp -= 0.9
-        
-        
-        
         self.yp += 1 * 0.79                                                                                                                                                                                           
         self.ax.plot([0-(self.pad+0.5),self.pad+0.5],[yTop, yTop], linestyle = '-', linewidth=1,color='k',clip_on=False)                                                                                                                  
         self.ax.arrow(0, self.yp,  -1*(self.mvals[-1]+self.pad + apad), 0, linewidth=1, head_width=0.5, head_length=0.05, fc='k', ec='k',clip_on=False,zorder=0)                                                             
@@ -302,14 +269,7 @@ class ForestReps:
                 elif a == 0: self.ax.plot([m*(self.pad+a),m*(self.pad+a)],[self.yp,yTop], linestyle = '--', color = 'k', zorder=0, linewidth=0.5, alpha=0.74, clip_on=False)                                                                        
                 else:        self.ax.plot([m*(self.pad+a),m*(self.pad+a)],[self.yp,yTop], linestyle = '-', color = 'gray', zorder=0, linewidth=0.01, alpha=0.1, clip_on=False)  
         
-
-
         self.ax.axis('off')
-        
-
-
-
-
         self.ax.set_xlim(-0.9,1.0) 
         x1, x2 = -0.5, 0.5 
         y1, y2, y3 = -48.5,-49.5, -51.75
@@ -319,9 +279,6 @@ class ForestReps:
         self.ax.text(x1+0.25,y1-1,'Lower Tail $POPout$',fontsize=fs2,va='center',ha='right')                                    
         self.ax.text(x2-0.25,y1-1,'Upper Tail $POPout$',fontsize=fs2,va='center',ha='left')                                    
         sz = 20 
-        
-
-
         x1,x2, x3 = -0.85, -0.2, 0.3
         self.ax.scatter(x1,y3,marker='o', color='k',ec = 'k',s=sz,clip_on=False,zorder=10,lw=1,alpha=1)    
         self.ax.text(x1+0.05,y3,'Effect Size',fontsize=fs3,va='center',ha='left')                                    
@@ -335,35 +292,6 @@ class ForestReps:
 
 
 
-    def draw_reps(self, ax1, ax2, fs = 40, fs2=25, fs3=45): 
-        for i,(k,c) in enumerate(zip(['rep','poc','aou'],self.my_colors)): 
-            yF, yT, yS = self.discovery_key[k] 
-            yp, mSize = yF/yT, 'n~'+str(int(np.mean(yS) / 1000.0))+'k' 
-            ax1.bar(i,yp, color=c,width=0.7) 
-            ax1.text(i, yp, mSize, ha='center', va='bottom',fontsize=fs2, fontweight='bold') 
-            X,Y = self.corr_key[k]
-            R, pv = stats.pearsonr(X,Y)  
-            ax2.bar(i,R, color=c, width=0.7) 
-            try: 
-                p_start = str(int(str(pv).split('.')[0]))
-                p_end = str(int(str(pv).split('e-')[-1]))
-                rpv = 'P=\n'+'$'+p_start+' \\times 10^{-'+p_end+'}$'
-            except ValueError: rpv = 'P=\n'+'$'+str(round(pv,5))+'$' 
-
-
-            ax2.text(i, R, rpv, ha='center', va='bottom',fontsize=fs2) 
-            
-        for i,ax in enumerate([ax1, ax2]): 
-            if i == 0: 
-                ax.set_title('$POPout$ Discovery',fontsize=fs) 
-                ax.set_ylabel('Percent Replicated', fontsize=fs) 
-            else:      
-                ax.set_title('$POPout$ Replication',fontsize=fs) 
-                ax.set_ylabel('Pearson Correlation', fontsize=fs) 
-            ax.set_xticks([0,1,2]) 
-            ax.set_xticklabels(['Repeated','Multi\nAncestry','All Of\nUs'],fontsize=43) 
-            ax.set_yticks([0,0.2,0.4,0.6,0.8,1]) 
-            ax.set_yticklabels(['0',0.2,0.4,0.6,0.8,'']) 
 
 
 

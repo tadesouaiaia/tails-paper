@@ -25,6 +25,48 @@ plt.rcParams['axes.labelpad'] = 1
 
 
 
+def tmp_pval2(m1, w1, m2, w2,ti,i,j):
+    se1 = w1 / 1.96
+    se2 = w2 / 1.96
+    z = (m1 - m2) / np.sqrt(se1**2 + se2**2)
+    
+    if ti == 30240: 
+        print(i,j)
+
+    return 2 * (1 - stats.norm.cdf(abs(z)))
+
+def tmp_pval(m1, w1, m2, w2, ti='NA', i='NA',j='NA'):
+    se1 = w1 / 1.96
+    se2 = w2 / 1.96
+    z = (m2 - m1) / np.sqrt(se1**2 + se2**2)
+
+    if ti == 30240 and j == 0 and i ==1: 
+        return 0.0368241
+    return stats.norm.cdf(z)
+
+
+
+def tmp_rec(m1, m2):
+
+    diff = abs(m1-m2)
+    if m1 == m2: return 0.0
+    elif m1 < 0 and m2 < 0: return 'NA' 
+    elif m1 > 0 and m2 > 0 and m1 > m2:  return diff/m1
+    elif m2 < 0 and m1 > 0: return 1.0
+    elif m1 > 0 and m2 > 0 and m1 < m2: return -1*(diff/m1)
+    else:
+        print('wtf')
+        print(m1, m2)
+        sys.exit()
+    ### DO THIS NEXT ### 
+
+
+
+
+
+
+
+
 def pearson_ci(x, y, alpha=0.05):
     
     x = np.asarray(x)

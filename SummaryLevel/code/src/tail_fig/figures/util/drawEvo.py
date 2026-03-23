@@ -116,7 +116,7 @@ class EvoPlot:
         clr = T.group_color 
         pop = T.vals['pop']['common-snp'] 
         pLo, pHi, eLo, eHi = pop.p1, pop.p2, pop.e1, pop.e2 
-        self.scorekeep['lo'].append(eLo) 
+        self.scorekeep['lo'].append(eLo)  
         self.scorekeep['hi'].append(eHi) 
         if eLo < 0:              ax.barh(yp,-0.01,left=-1*LR,height=ht,color=clr,clip_on=False,alpha=baf) 
         else: 
@@ -320,6 +320,9 @@ class EvoPlot:
             if not self.CI: 
                 ax.bar(xp, S, bottom=yp, width=0.5, edgecolor='k', color=clr, clip_on=False)  
             else: 
+                
+                #print(n, pv,sL, sH) 
+
                 ax.bar(xp, S, bottom=yp, width=0.5, edgecolor='k', color=clr, alpha=baf,clip_on=False)  
                 if S > 0: ax.plot([xp,xp],[max(yOffset,sL+yOffset), yOffset+sH], lw=0.6,zorder=3,color=clr2,clip_on=False) 
                 else:     ax.plot([xp,xp],[min(-yOffset,-yOffset+sH),-yOffset+sL], lw=0.6,zorder=3,color=clr2,clip_on=False) 

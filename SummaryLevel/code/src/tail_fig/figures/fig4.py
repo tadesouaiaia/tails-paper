@@ -232,15 +232,24 @@ class MyFigure:
         for ki,k in enumerate(['Lower','Upper']): 
             self.ax, ax, yp = axes[ki], axes[ki], 0 
             tail_data = sorted(TR[k], key = lambda X: X[0], reverse=True) 
+            
+            #for rTot,T in tail_data: 
+            #    print(T.ti, T.name.mini, k, rTot, 'HERE') 
+
+
+
+
             for rTot,T in tail_data: 
                 if T not in obs_traits: obs_traits.append(T) 
                 self.ax.text(-0.235,yp-2.5,T.name.mini[0:15],fontsize=self.fs4, ha='center',va='center') 
-                self.ax.add_patch(matplotlib.patches.Rectangle((leftEnd, yp-8),1.35+self.offset, 12, color=self.blockclr, ec = 'k', lw = 0, alpha=0.9, zorder=0,clip_on=False))
+                self.ax.add_patch(matplotlib.patches.Rectangle((leftEnd, yp-8),1.38+self.offset*2, 12, color=self.blockclr, ec = 'k', lw = 0, alpha=0.9, zorder=0,clip_on=False))
                 self.ax.add_patch(matplotlib.patches.Rectangle((self.offset+STEP2, yp-8),rightEnd - (STEP2 + self.offset), 12, color=self.blockclr, ec = 'k', lw = 0, alpha=0.9, zorder=0,clip_on=False))
                 yl, yp = yp - 2, yp - 14 
                 ax.barh(yl,rTot,left=0+self.offset,height=barHt,facecolor='white',clip_on=False,alpha=0.95,lw=self.lw3,ec='k')
                 my_offset, my_shrink = self.offset, 0 
                 r_vals, rSig = self.validate_fractions(rTot, T, ki) 
+                
+
                 rec_results[rSig].append(rTot) 
                 rec_results['ALL'].append(rTot) 
                 for i,(val,clr) in enumerate(zip(r_vals,[self.rc1,self.rc2,self.rc3])): 
