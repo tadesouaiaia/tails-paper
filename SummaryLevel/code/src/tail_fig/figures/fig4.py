@@ -37,8 +37,6 @@ class MyFigure:
     def setup(self, STYLE='HOR'): 
         self.ax_index, self.base = 0, 20   
         self.fig, self.axes = matplotlib.pyplot.gcf(), [] 
-        #self.rows, self.cols, self.WD, self.HT = 60, 41, 72, 70
-        #self.rows, self.cols, self.WD, self.HT = 47, 37, 72, 65
         self.rows, self.cols, self.WD, self.HT = 45, 75, 7.1, 6.6
         rs1, cs1 = 6, 14 
         for i in [0,rs1]: 
@@ -131,8 +129,6 @@ class MyFigure:
             
             f1, e1 = T.vals['pop']['common-snp'].f1, T.vals['pop']['common-snp'].e1
             f2, e2 = T.vals['pop']['common-snp'].f2, T.vals['pop']['common-snp'].e2
-            
-            
             n_found, z_found, t_found = 0,0,0
             if f1: 
                 if e1 > 0: t_found +=1 
@@ -159,10 +155,10 @@ class MyFigure:
         self.progress.report_result('In '+str(yessnps)+' of '+str(found)+' Tails w/Sig +POPout, (>0.01%) GWAS-SIG snps located and tested for reduction (via common+rare PRS)') 
         return TR 
 
+
+
+
     def validate_fractions(self, rTot, T, i): 
-        
-
-
         if i == 0: rf,rS = [float(y) for y in T.vals['recovery']['combo'].frac1.split(',')], T.vals['recovery']['combo'].sig1
         else:      rf,rS = [float(y) for y in T.vals['recovery']['combo'].frac2.split(',')], T.vals['recovery']['combo'].sig2
         if rTot > 0 and all([r>=0 for r in rf]): return rf, rS 
@@ -232,12 +228,6 @@ class MyFigure:
         for ki,k in enumerate(['Lower','Upper']): 
             self.ax, ax, yp = axes[ki], axes[ki], 0 
             tail_data = sorted(TR[k], key = lambda X: X[0], reverse=True) 
-            
-            #for rTot,T in tail_data: 
-            #    print(T.ti, T.name.mini, k, rTot, 'HERE') 
-
-
-
 
             for rTot,T in tail_data: 
                 if T not in obs_traits: obs_traits.append(T) 
@@ -249,6 +239,7 @@ class MyFigure:
                 my_offset, my_shrink = self.offset, 0 
                 r_vals, rSig = self.validate_fractions(rTot, T, ki) 
                 
+            
 
                 rec_results[rSig].append(rTot) 
                 rec_results['ALL'].append(rTot) 
@@ -258,7 +249,10 @@ class MyFigure:
                 if rSig == 'True': 
                     if my_offset < 1.1: ax.scatter(my_offset+0.017, yl+0.35, color = 'k', marker= '*', lw = 0.2, zorder=990, s=self.sz2) 
                     else:               ax.scatter(my_offset-0.03, yl+1, color ='k', marker='*', lw = 0.2,zorder=990, s = self.sz2,clip_on=False) 
-                    
+                    #print()  
+                    #print(T.ti, T.name, k, rTot) 
+
+
                 rel_change, pts, cis = self.validate_odds(T, T.vals['odds'], ki) 
                 obs_odds.append(rel_change) 
                 if rSig == 'True': 

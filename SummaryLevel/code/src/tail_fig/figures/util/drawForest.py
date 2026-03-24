@@ -153,12 +153,7 @@ class ForestReps:
 
 
 
-
-
-
-
-
-    def rep_whisky(self, pts, T, mp, marker = 'o', color='k', TYPE='UKB', QC=True, MIN = -0.24, MAX=0.58): 
+    def rep_whisky(self, pts, T, mp, marker = 'o', color='k', TYPE='UKB', QC=True, SIZE=9999, MIN = -0.24, MAX=0.58): 
         if TYPE == 'UKB': 
             pts = [-0.15 if p < -0.15 else p for p in pts]                                                                                                                                                                      
             locs = [(self.pad + p)*mp for p in pts]                                                                                                                                                                             
@@ -177,9 +172,12 @@ class ForestReps:
                     locs.append((self.pad+MAX)*mp) 
             CLASH = False
             if locs[0] == locs[1]: CLASH=True 
-            self.ax.plot([locs[1],locs[2]],[self.yp,self.yp], color = color, clip_on=False, zorder=2, lw = 1)                                                                                                           
-            if QC:  mark, c1, c2, c3 = 'o', color, color, color
+            self.ax.plot([locs[1],locs[2]],[self.yp,self.yp], color = color, clip_on=False, zorder=2, lw = 1)       
+            if QC and SIZE > 5000:  mark, c1, c2, c3 = 'o', color, color, color
             else:   mark, c1, c2, c3 = 's', 'white', color, color
+            
+
+
             if not CLASH: self.ax.scatter(locs[0], self.yp, marker = mark, color = c1, ec = c2, lw =0.7, clip_on=False, zorder=3, s=10) 
             else:         c3 = 'white' 
             if mp == 1: 
@@ -253,8 +251,8 @@ class ForestReps:
             self.yp += 0.35 
             for j,(pd,c) in enumerate(zip(comps,['blue']+self.fig.my_colors)): 
                 e1,e2,k,QC,size = pd 
-                self.rep_whisky(e1, T, -1, 'o', c, TYPE=k, QC=QC)
-                self.rep_whisky(e2, T,  1, 'o', c, TYPE=k, QC=QC)  
+                self.rep_whisky(e1, T, -1, 'o', c, TYPE=k, QC=QC, SIZE=size)
+                self.rep_whisky(e2, T,  1, 'o', c, TYPE=k, QC=QC, SIZE=size)  
                 self.yp -= 0.25 
             self.yp -= 0.9
         self.yp += 1 * 0.79                                                                                                                                                                                           
