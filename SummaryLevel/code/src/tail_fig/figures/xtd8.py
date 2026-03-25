@@ -274,7 +274,7 @@ class MyFigure:
         for z in [z1,z2]: 
             if z < 0.001: 
                 zA, zB = str(z)[0:3], str(z).split('e-')[-1] 
-                zS.append('$P{=}'+zA+' \\times 10^{'+zB+'}$') 
+                zS.append('$P{=}'+zA+' \\times 10^{-'+zB+'}$') 
             else: 
                 zS.append('$P{=}'+str(round(z,4))+'$') 
         self.progress.report_result('For '+L1+' FDR-Sig Positive POPout From 1% Tails, Avg Effect 1% vs 0.1%: '+m1+', '+m2+' (P='+str(z1)+')') 
