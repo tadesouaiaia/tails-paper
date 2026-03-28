@@ -2,19 +2,17 @@ import sys, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
 from util.Util   import *
-#from util import drawScatter as DS
 from util import drawVarious as DV
 from util import drawLabels  as DL
-#from util import drawTables  as DT
 from util import drawSims    as DI 
 from util import drawEvo     as DE 
 
 
 class MyFigure:
     def __init__(self, options, traitData, progress, figName=None):
-        self.options, self.data, self.traits, self.progress, self.figName = options, traitData, traitData.members, progress, figName
+        self.options, self.data, self.traits, self.figName = options, traitData, traitData.members, figName
+        self.progress = progress.update(self) 
         self.fs0,self.fs1,self.fs2,self.fs3,self.fs4,self.fs5,self.sz1,self.lw1,self.lw2,self.lw3 = 12,10,9,7.5,6,5,20,1,0.7,0.5    
-
 
     def draw(self): 
         self.read_slim_data() 
@@ -83,9 +81,5 @@ class MyFigure:
             elif i in [19,21]:   ax.set_title('$'+x+'$', x= -0.33, y = 0.95, fontsize=fs) 
         if self.SIM: plt.subplots_adjust(left=0.04, bottom=-0.04, right=1.01, top=0.97,wspace=0.05, hspace=0.07) 
         else:        plt.subplots_adjust(left=0.05, bottom=-0.15, right=0.99, top=0.90,wspace=0.05, hspace=0.07) 
-        if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
-        else:                        figPath = self.options.out+'Fig5.pdf' 
-        plt.savefig(figPath, dpi=self.options.dpi) 
-        plt.clf() 
-        self.progress.save('(Figure Saved: '+figPath+')')
-        return            
+        self.progress.save() 
+        return 

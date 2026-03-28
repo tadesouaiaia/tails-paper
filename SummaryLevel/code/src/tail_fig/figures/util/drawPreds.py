@@ -11,9 +11,32 @@ import drawVarious as DV
 
 
 class PredPlot:
-    def __init__(self, options, sz=3, lw1=0.9, lw2=0.3):
-        self.options = options
+    def __init__(self, fig, sz=3, lw1=0.9, lw2=0.3):
+        self.fig, self.traits, self.options, self.progress = fig, fig.traits, fig.options, fig.progress
         self.sz, self.lw1, self.lw2 = sz, lw1, lw2
+        
+
+        if self.progress.SAVESRC: 
+            if self.progress.out3 is None: self.progress.out3 = open(self.progress.src_file, 'w') 
+            w = self.progress.out3
+            w.write('%s,%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','PseudoDisease','DataType','Values')) 
+            
+
+
+
+
+
+
+    def draw_index_pair(self, axes): 
+        if self.options.indexTraits[1] in self.traits:   self.draw_odds(self.traits[self.options.indexTraits[1]], axes[0:4])
+        elif self.options.indexTraits[0] in self.traits: self.draw_odds(self.traits[self.options.indexTraits[0]], axes[0:4])
+        else:                                            self.draw_odds(None, axes[0:4])
+        if self.options.indexTraits[2] in self.traits:   self.draw_odds(self.traits[self.options.indexTraits[2]], axes[4:8])
+        elif self.options.indexTraits[3] in self.traits: self.draw_odds(self.traits[self.options.indexTraits[3]], axes[4:8])
+        else:                                            self.draw_odds(None, axes[4:8])
+        return
+  
+
 
 
     def draw_odds(self, T, axes, SPECIAL=False, fs1=9, fs2=6, fs3=5, clr1='blue', clr2='darkorange', clr3='orange', QT=False): 
@@ -21,7 +44,6 @@ class PredPlot:
         if T is None: 
             for ax in axes: DV.draw_blank(ax) 
             return
-
         ax = axes[0] 
         smartX = [4.0, 11.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 89.0, 96.0] 
         smartXl = ['$<5$', '5-15', '15-25', '25-35', '35-45', '45-55', '55-65', '65-75', '75-85', '85-95', '$>95$']
@@ -58,6 +80,17 @@ class PredPlot:
                 ax.set_yticks([]) 
             k_str = 'Prediction of '+k[0:5]+' '+k[5::]+'%' 
             ax.text(50, y2-ys, k_str,fontsize=fs2, ha='center',va='center') 
+            
+            if self.progress.SAVESRC: 
+                Xb = ";".join([str(int(x)) for x in p.X]) 
+                Ns = ";".join([str(x) for x in p.null]) 
+                Ys = ";".join([str(x) for x in p.Y]) 
+                Yi = ";".join(["-".join([str(round(y-c,4)),str(round(y+c,4))]) for y,c in zip(p.Y, p.ci)])
+                w = self.progress.out3
+                for n,v in [['Xbins',Xb],['ExpectedOdds',Ns],['ObservedOdds',Ys],['95%CI',Yi]]: 
+                    w.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id, "_".join(k_str.split('of ')[-1].split()),n,v)) 
+                
+
         return 
 
 

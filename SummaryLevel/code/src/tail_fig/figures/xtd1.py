@@ -115,7 +115,11 @@ class MyFigure:
         for i,k in enumerate([0.1,0.5,1,5,10]):
             axes = self.axes[i*4:4+i*4] 
             for j,ti in enumerate(self.exampleTraits): 
-                sp = SP.POPplot(axes[j], self.traits, ti,xLab=xLabs[j], yLab=yLabs[j], sz1=9,sz2=8,sz3=6)
+                
+
+
+
+                sp = SP.POPplot(axes[j], self, ti,xLab=xLabs[j], yLab=yLabs[j], sz1=9,sz2=8,sz3=6)
                 if k == 1: 
                     sp.draw_body('common', ALLOW_MISSING=False)
                     if sp.VALID: 

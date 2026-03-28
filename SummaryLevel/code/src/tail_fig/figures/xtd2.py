@@ -14,7 +14,8 @@ from util import drawVarious as DV
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None): 
-        self.options, self.traits, self.data, self.progress, self.figName = options, traits.members, traits, progress, figName
+        self.options, self.traits, self.data, self.figName = options, traits.members, traits, figName
+        self.progress = progress.update(self) 
         self.rep_color_key = {'rep': 'xkcd:purpley', 'poc': 'xkcd:barney', 'aou': 'xkcd:leaf green'} 
         self.fs0, self.fs1, self.fs2, self.fs3, self.fs4 = 20, 15, 10, 8, 5 
     
@@ -43,8 +44,8 @@ class MyFigure:
                         pred_pairs.append([T, self.axes[-4::]]) 
                 except: pass 
         self.fig.set_size_inches(self.WD, self.HT) 
+        dp = DP.PredPlot(self) 
         for T,axes in pred_pairs:
-            dp = DP.PredPlot(self.options) 
             dp.draw_odds(T, axes, QT=True) 
         try: 
             ax = self.axes[len(self.axes)-5] 

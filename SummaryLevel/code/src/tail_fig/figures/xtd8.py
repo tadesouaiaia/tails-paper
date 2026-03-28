@@ -158,7 +158,7 @@ class MyFigure:
         self.map3 = make_colormap(self.rc, self.rce) 
         index_plots, rare_plots = [], [] 
         for i,(idx,ti) in enumerate(zip([1,3,5,7],self.options.indexTraits)):
-            spp = SP.POPplot(self.axes[idx], self.traits, ti, sz1=20,sz2=18,sz3=12,fs1=10,fs2=8,fs3=6) 
+            spp = SP.POPplot(self.axes[idx], self, ti, sz1=20,sz2=18,sz3=12,fs1=10,fs2=8,fs3=6) 
             spp.draw_extreme_recovery() 
             index_plots.append(spp) 
             if ti in self.traits: 
@@ -168,7 +168,7 @@ class MyFigure:
        
 
         for i,(idx,ti) in enumerate(zip([0,2,4,6],self.options.indexTraits)):
-            rpp = SP.POPplot(self.axes[idx], self.traits, ti, sz1=20,sz2=18,sz3=12,fs1=10,fs2=8,fs3=6) 
+            rpp = SP.POPplot(self.axes[idx], self, ti, sz1=20,sz2=18,sz3=12,fs1=10,fs2=8,fs3=6) 
             rpp.draw_extreme_rares('A+B+burden', yc1=self.rc, yc2=self.rc, yc3=self.rce, ec1='k' ,ec2='k')
             rare_plots.append(rpp) 
 

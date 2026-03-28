@@ -13,23 +13,35 @@ import drawVarious as DV
 
 class ForestPlot:
     def __init__(self, axes, fig):
-        self.axes, self.traits, self.data, self.options = axes, fig.traits, fig.data, fig.options 
+        self.axes, self.traits, self.data, self.options, self.progress = axes, fig.traits, fig.data, fig.options, fig.progress 
 
 
 
     def draw_up_to_three(self): 
-        self.prs_types, self.pad = dd(list), 0.5 
+        self.prs_types, self.src_key, self.pad = dd(list), {}, 0.5 
         for ti,T in self.traits.items(): self.prs_types[T.group].append([T.vals['pop']['common-snp'], T]) 
         g_srt = sorted([[len(self.prs_types[k]),k] for k in self.prs_types], reverse=True)
         self.set_forests(self.axes[0], [g_srt[0][1]])  
         next_two = [x[1] for x in g_srt[1::]][0:2]  
         self.set_forests(self.axes[-1],next_two) 
+        if self.progress.SAVESRC: self.save_forest_src()  
         return self
 
 
+    def save_forest_src(self): 
+
+        w = self.progress.out3
+        w.write('%s,%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','Group','Tail','POPout-effectSize;95%CI-LowerBound;95CI-UpperBound'))
+        
+        for k,V in self.src_key.items(): 
+            for T,tL,tU in V: 
+                w.write('%s,%s,%s,%s,%s\n' %(self.progress.panel,T.id,k,'Lower',tL[0]+';'+tL[1][0]+';'+tL[1][1]))
+                w.write('%s,%s,%s,%s,%s\n' %(self.progress.panel,T.id,k,'Upper',tU[0]+';'+tU[1][0]+';'+tU[1][1]))
+
     def set_forests(self, ax, grps, fs1=7,fs2=5): 
         self.ax, self.yj, self.yp = ax, 2, 0 
-        for i,g in enumerate(grps):  self.draw_forest_dots(g, len(grps), i, sorted(self.prs_types[g], key = lambda X: X[-1].name.mini)) 
+        for i,g in enumerate(grps):  
+            self.src_key[g] = self.draw_forest_dots(g, len(grps), i, sorted(self.prs_types[g], key = lambda X: X[-1].name.mini)) 
         self.ax.axis('off') 
         if len(grps) == 1: 
             y1, y2 = self.yp, self.yp - 1.8*self.yj  
@@ -59,25 +71,19 @@ class ForestPlot:
 
 
     def draw_forest_dots(self, name, group_members, group_idx, grp, lc1='whitesmoke',fs1=7,fs2=6,fs3=5,lw1=1,lw2=0.25): 
-       
-
         if group_members == 1 and len(grp) > 40:                       grp, name = grp[0:40], 'Selected '+name 
         elif group_members > 1 and group_idx == 0 and len(grp) > 30:   grp, name = grp[0:30], 'Selected '+name
         elif group_members > 1 and group_idx == 1 and len(grp) > 15:   grp, name = grp[0:15], 'Selected '+name
-        
-        
         yTop = self.yp - self.yj*2 - self.yj*group_idx*0.65 
-         
-
-
         self.ax.text(0,yTop+0.2,name,ha='center',va='bottom',fontweight='bold',fontsize=fs1,zorder=2)  
         self.yp = yTop -0.8
         if len(grp) == 1: self.yp -= 10 
+        
+        plotted = [] 
         for i,(p,T) in enumerate(grp):
             e1 = [p.e1, p.e1 - p.j1, p.e1 + p.j1] 
             e2 = [p.e2, p.e2 - p.j2, p.e2 + p.j2] 
-            self.make_whisky(e1, p.f1, p.QC == 'PASS', T, -1)   
-            self.make_whisky(e2, p.f2, p.QC == 'PASS', T, 1)
+            plotted.append([T,self.make_whisky(e1,p.f1,p.QC=='PASS',T,-1),self.make_whisky(e2, p.f2, p.QC=='PASS', T, 1)]) 
             if len(T.name.mini) > 18:  self.ax.text(0,self.yp,T.name.mini[0:17]+'.',ha='center',va='center',fontsize=5) 
             else:                      self.ax.text(0,self.yp,T.name.mini,ha='center',va='center',fontsize=5) 
             RT = matplotlib.patches.Rectangle((-1.0, self.yp-0.65),2.0, 1.4, color=lc1, ec = lc1, lw = 0, alpha=0.9, zorder=0,clip_on=False)                                                                
@@ -86,7 +92,6 @@ class ForestPlot:
         
         self.yp += self.yj * 0.35 
         self.ax.plot([0-(self.pad+0.5),self.pad+0.5],[yTop, yTop], linestyle = '-', linewidth=lw2,color='k',clip_on=False) 
-        
         self.ax.arrow(0, self.yp,  -1.02, 0, linewidth=1, head_width=0.8, head_length=0.05, fc='k', ec='k',clip_on=False,zorder=0)
         self.ax.arrow(0, self.yp,   1.02, 0, linewidth=1, head_width=0.8, head_length=0.05, fc='k', ec='k',clip_on=False,zorder=0)
         self.ax.plot([0,0],[self.yp,self.yp-0.9], clip_on=False, linewidth=1,color='k') 
@@ -98,7 +103,7 @@ class ForestPlot:
                 if a == 0.5: self.ax.plot([m*(self.pad+a),m*(self.pad+a)],[self.yp,yTop], linestyle = '-', color = 'k', zorder=0, linewidth=lw2, clip_on=False) 
                 elif a == 0: self.ax.plot([m*(self.pad+a),m*(self.pad+a)],[self.yp,yTop], linestyle = '-', color = 'k', zorder=1, linewidth=lw2, alpha=1, clip_on=False) 
                 else:        self.ax.plot([m*(self.pad+a),m*(self.pad+a)],[self.yp,yTop], linestyle = '-', color = 'k', zorder=0, linewidth=0.1, alpha=0.1, clip_on=False) 
-        return
+        return plotted 
 
 
 
@@ -112,11 +117,11 @@ class ForestPlot:
         if FDR and QC: 
             self.ax.plot([locs[1],locs[2]],[self.yp,self.yp], color = T.group_color, clip_on=False, zorder=2, lw = LW) 
             self.ax.scatter(locs[0], self.yp, color = T.group_color, ec = T.group_color, clip_on=False, zorder=3, s=sz) 
-        else: self.ax.scatter(locs[0], self.yp, color = 'white', ec = T.group_color, lw=LW,clip_on=False, zorder=3, s=sz) 
-        return
+            return [str(abs(locs[0])),[str(vv) for vv in sorted([abs(locs[1]),abs(locs[2])])]]  
+        else: 
+            self.ax.scatter(locs[0], self.yp, color = 'white', ec = T.group_color, lw=LW,clip_on=False, zorder=3, s=sz) 
+            return [str(abs(locs[0])),['','']] 
 
-
-    
 
 
 

@@ -9,25 +9,10 @@ from util import drawLabels  as DL
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class MyFigure:
     def __init__(self, options, traits, progress,figName=None): 
-        self.options, self.data, self.traits,self.progress, self.figName = options, traits, traits.members, progress, figName
+        self.options, self.data, self.traits, self.figName = options, traits, traits.members,figName
+        self.progress = progress.update(self) 
         self.fs0, self.fs1, self.fs2, self.fs3, self.fs4 = 20, 15, 10, 7, 5
         self.sz1, self.sz2, self.sz3 = 15,10,8 
         self.lw1, self.lw2, self.lw3 = 1, 0.7, 0.5
@@ -75,7 +60,9 @@ class MyFigure:
             elif i == 21:   self.axes[i].set_title(x, x= 0.01, y = 0.93, fontsize=fs) 
 
         plt.subplots_adjust(left=0.01, bottom=-0.01, right=0.99, top=0.99,wspace=0.05, hspace=0.1) 
-
+        
+        self.progress.save() 
+        return
 
         if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
         else:                        figPath = self.options.out+'Fig4.pdf' 
@@ -83,11 +70,6 @@ class MyFigure:
         plt.clf() 
         self.progress.save('(Figure Saved: '+figPath+')')
         return 
-
-
-
-
-
 
 
 
@@ -100,18 +82,28 @@ class MyFigure:
     def create(self, fs=33):
         self.c1, self.c2 = 'blue', 'xkcd:shamrock green'
         self.rc1, self.rc2, self.rc3 = 'xkcd:squash', 'xkcd:reddish', 'pink' 
+        
+        self.progress.set_panel('a') 
         self.draw_four_trumpets(self.axes[0:4]) 
+        
+
+        self.progress.set_panel('b') 
         self.draw_rare_corrs(self.axes[4]) 
         DL.BoxKeys(self.axes[2]).add_trumpet_key('bottom-2') 
         DL.BoxKeys(self.axes[4]).add_rare_key('bottom',self.data) 
+        
+        self.progress.set_panel('c') 
         index_plots, rare_plots = [], [] 
         for i,(idx,ti) in enumerate(zip([8,12,16,20],self.options.indexTraits)): 
-            sp = SP.POPplot(self.axes[idx], self.traits, ti).draw_common_recovery() 
+            sp = SP.POPplot(self.axes[idx], self, ti).draw_common_recovery() 
             index_plots.append(sp) 
             self.axes[idx-2].set_title(self.traits[ti].name.mini, fontsize=self.fs3, x=1, y=0.90, ha='center') 
+        
+
+
         for i,(idx,ti) in enumerate(zip([5,9,13,17],self.options.indexTraits)):
             for j,(ax,k,c) in enumerate(zip(self.axes[idx:idx+3],['rareA','rareB','burden'],[self.rc1,self.rc2,self.rc3])): 
-                sp = SP.POPplot(ax, self.traits, ti).draw_body(k, yc1=c, yc2=c) 
+                sp = SP.POPplot(ax, self, ti).draw_body(k, yc1=c, yc2=c) 
                 sp.draw_tail()
                 sp.set_subtitle(k,fs=35) 
                 rare_plots.append(sp)

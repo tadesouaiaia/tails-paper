@@ -88,7 +88,9 @@ class EvoPlot:
                 rd_tmp = r_kept + [ti for ti in t_cands if ti not in rd] + rd + rd + rd + t_all 
                 r_data[i] = rd_tmp[0:4] 
         for j,rpd in enumerate(r_data):
-            lms_res =  [DS.draw_evo(self.axes[my_index+i], self.traits[ti], fs=self.fs4,lw=self.lw3,sz=self.sz1,NOTES=[j, i]) for i,ti in enumerate(rpd[0:4])] 
+            lms_res =  [DS.EvoScatter(self.axes[my_index+i], self.fig, ti).main_box(xp=j, yp=i) for i,ti in enumerate(rpd[0:4])] 
+
+            
             for i,lms in enumerate(lms_res):  
                 ax = self.axes[my_index+i] 
                 if i == 0:  

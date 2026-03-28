@@ -11,6 +11,8 @@ def fig_gen(args, fig_goals, command_line):
     from src.tail_fig.figGen import figGen
     out_dir = os.path.dirname(args.out) 
     if out_dir: os.makedirs(out_dir, exist_ok=True) 
+    src_dir = os.path.dirname(args.srcPath) 
+    if src_dir: os.makedirs(src_dir, exist_ok=True) 
     figGen(args, fig_goals, command_line).go() 
 
 
@@ -100,6 +102,8 @@ def parse_figs_args(argv):
     p.add_argument("--vals", required=True, nargs="+", type=argparse.FileType("r"))
     p.add_argument("--pts",  required=True, nargs="+", type=argparse.FileType("r"))
     p.add_argument("--silent",action="store_true",help="Suppress non-essential output")
+    p.add_argument("--saveSrc",action="store_true",help="Save src data") 
+    p.add_argument("--srcPath", type=str, default = 'output_src/',help="Path to store src data") 
     p.add_argument("--simPath", type=str, help="simulation results") 
     p.add_argument("--dpi", type=int, default=500, help="Figure DPI") 
     p.add_argument("--indexTraits", type=int, nargs=4, help="Four Index Traits", default=[30810, 30070, 30020, 20015]) 
@@ -168,6 +172,8 @@ def main(argv=None):
             figs_menu(figs_parser)
             return 0
         # Otherwise parse figs properly (requires vals/pts)
+        
+
         fig_args = parse_figs_args(rest)
         if os.path.isdir(fig_args.out) and not fig_args.out.endswith(os.sep):  fig_args.out += os.sep  
         

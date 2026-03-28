@@ -7,118 +7,59 @@ import drawVarious as DV
 
 
 
-
-def draw_evo(ax, T, NOTES=[1,1], fs = 40, sz=130, lw=0.3):
-    Y = T.pts['lrs'].Y
-    X = [stats.norm.ppf((xl+0.5)/100.0) for xl in range(len(Y))]
-    ax.scatter(X,Y, color = T.group_color, s = sz, edgecolor='lightgrey', alpha = 0.75, lw=lw, zorder = 1)
-    if T.vals['lrs'].model != 'Y~yInt':
-        pm = T.vals['lrs'].params 
-        yDash = [pm[0] + (x*pm[1]) + (x*x*pm[2]) for x in X]
-        ax.plot(X, yDash, color='k',linestyle='--',linewidth=lw,zorder=3)
-    xlab, ylab = None, None
-    fn = T.name.mini
-    if NOTES[0] == 0: ylab = 'Lifetime\nReproductive\nSuccess'
-    if NOTES[1] == 3: xlab = 'Trait Value (z)'
-    
-    lms = DV.AxLims(ax, xt = [], yt = [], xlab = xlab, ylab = ylab, xstretch = 1.4, ystretch = [1.15,2.0], fs = fs-0.25)
-    if T.ti == 30020: 
-        fn = 'Haemoglobin\nConc.'
-        ax.text(lms.xMin + lms.xHop, lms.yMax - lms.yStep/3.0, fn, ha = 'left', va ='top',fontsize=fs)
-    else: ax.text(lms.xMin + lms.xRange/2.0, lms.yMax - lms.yStep/3.0, fn, ha = 'center', va ='top',fontsize=fs)
-    return lms
-
-
-
-
-
-
-
-
-
-
-
-
-
-def draw_mini_evo(ax, T, NOTES=[1,1], fs = 40, sz=130, lw=0.3, MINI=False):
-    Y = T.pts['lrs'].Y
-    X = [stats.norm.ppf((xl+0.5)/100.0) for xl in range(len(Y))]
-    ax.scatter(X,Y, color = T.group_color, s = sz, edgecolor='lightgrey', alpha = 0.6, lw=lw, zorder = 1)
-
-    if T.vals['lrs'].model != 'Y~yInt':
-        pm = T.vals['lrs'].params 
-        yDash = [pm[0] + (x*pm[1]) + (x*x*pm[2]) for x in X]
-        ax.plot(X, yDash, color='k',linestyle='--',linewidth=lw*3,zorder=3)
-    
-    lms = DV.AxLims(ax, xt = [], yt = [], xstretch = [0.3,0.3], ystretch = [0.1,2.5], fs = fs)
-    xs, yp, fs = lms.xHop, lms.yMax - lms.yHop, 5
-    evo = T.vals['lrs'].evo.split('-') 
-    if 'pos' in evo:   loc = 'left'  
-    elif 'neg' in evo: loc = 'right'
-    else:              loc = 'center' 
-    if 'stabilising' in evo or 'diverging' in evo: 
-        if 'diverging' in evo: R1 = 'Disruptive' 
-        else:                  R1 = 'Stabilising' 
-        if 'pos' in evo:   ax.text(lms.xMin + xs, yp, R1+',\nPos', ha='left', va='top', fontsize=fs) 
-        elif 'neg' in evo: ax.text(lms.xMax - xs, yp, R1+',\nNeg', ha='right', va='top', fontsize=fs) 
-        else:              ax.text(lms.xMid, yp, R1, ha='center', va='top', fontsize=fs) 
-    elif 'pos' in evo:   ax.text(lms.xMin + xs, yp, 'Positive', ha='left', va='top', fontsize=fs) 
-    elif 'neg' in evo: ax.text(lms.xMax - xs, yp, 'Negative', ha='right', va='top', fontsize=fs) 
-    else: return lms
-    return lms 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class EvoScatter:
+    def __init__(self,ax,fig,ti): 
+        self.ax, self.fig = ax, fig 
+        try: 
+            self.VALID, self.NULL, self.T = True, False, fig.traits[ti] 
+            self.Y = self.T.pts['lrs'].Y 
+            self.X = [stats.norm.ppf((xl+0.5)/100.0) for xl in range(len(self.Y))]
+        except KeyError: 
+            self.VALID, self.NULL, self.T = False, True, 'NA' 
+            self.main_box, self.mini_box = self.null_box, self.null_box 
+
+
+    def null_box(self, xp=1, yp=1, xlab=None, ylab=None): 
+        lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = xlab, ylab = ylab, xstretch = 1.4, ystretch = [1.15,2.0], fs = self.fig.fs4-0.25)
+        return lms 
+
+
+    def main_box(self, xp=1,yp=1,xlab=None,ylab=None): 
+        self.ax.scatter(self.X,self.Y, color = self.T.group_color, s = self.fig.sz1, edgecolor='lightgrey', alpha = 0.75, lw=self.fig.lw3, zorder = 1)
+        if self.T.vals['lrs'].model != 'Y~yInt':
+            pm = self.T.vals['lrs'].params 
+            yDash = [pm[0] + (x*pm[1]) + (x*x*pm[2]) for x in self.X]
+            self.ax.plot(self.X, yDash, color='k',linestyle='--',linewidth=self.fig.lw3,zorder=3)
+        if xp == 0: ylab = 'Lifetime\nReproductive\nSuccess'
+        if yp == 3: xlab = 'Trait Value (z)'
+        lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = xlab, ylab = ylab, xstretch = 1.4, ystretch = [1.15,2.0], fs = self.fig.fs4-0.25)
+        if self.T.ti == 30020: self.ax.text(lms.xMin + lms.xHop, lms.yMax - lms.yStep/3.0, 'Haemoglobin\nConc.', ha = 'left', va ='top',fontsize=self.fig.fs4)
+        else:                  self.ax.text(lms.xMin + lms.xRange/2.0, lms.yMax - lms.yStep/3.0, self.T.name.mini, ha = 'center', va ='top',fontsize=self.fig.fs4)
+        return lms
+
+    def mini_box(self, fs=5, sz=6, lw=0.22): 
+        self.ax.scatter(self.X,self.Y, color = self.T.group_color, s = sz, edgecolor='lightgrey', alpha = 0.75, lw=lw, zorder = 1)
+        if self.T.vals['lrs'].model != 'Y~yInt':
+            pm = self.T.vals['lrs'].params 
+            yDash = [pm[0] + (x*pm[1]) + (x*x*pm[2]) for x in self.X]
+            self.ax.plot(self.X, yDash, color='k',linestyle='--',linewidth=lw,zorder=3)
+        lms = DV.AxLims(self.ax, xt = [], yt = [], xstretch = [0.3,0.3], ystretch = [0.1,2.5], fs = fs)
+        xs, yp, fs = lms.xHop, lms.yMax - lms.yHop, 5
+        evo = self.T.vals['lrs'].evo.split('-') 
+        if 'stabilising' in evo or 'diverging' in evo: 
+            if 'diverging' in evo: R1 = 'Disruptive' 
+            else:                  R1 = 'Stabilising' 
+            if 'pos' in evo:       self.ax.text(lms.xMin + xs, yp, R1+',\nPos', ha='left', va='top', fontsize=fs) 
+            elif 'neg' in evo:     self.ax.text(lms.xMax - xs, yp, R1+',\nNeg', ha='right', va='top', fontsize=fs) 
+            else:                  self.ax.text(lms.xMid, yp, R1, ha='center', va='top', fontsize=fs) 
+        elif 'pos' in evo:         self.ax.text(lms.xMin + xs, yp, 'Positive', ha='left', va='top', fontsize=fs) 
+        elif 'neg' in evo:         self.ax.text(lms.xMax - xs, yp, 'Negative', ha='right', va='top', fontsize=fs) 
+        else: return lms
+        return lms 
+
+
+
+        
 
 
 
@@ -136,16 +77,25 @@ def draw_mini_evo(ax, T, NOTES=[1,1], fs = 40, sz=130, lw=0.3, MINI=False):
 
 
 class POPplot:
-    def __init__(self,ax,traits,ti,xLab=None,yLab=None,alp=0.5,lw1=1,lw2=0.8,lw3=0.3,sz1=13,sz2=10,sz3=8,fs1=7.5,fs2=6,fs3=5): 
-        self.ax, self.xLab, self.yLab, self.alp = ax, xLab, yLab, alp 
+    def __init__(self,ax,fig,ti,xLab=None,yLab=None,alp=0.5,lw1=1,lw2=0.8,lw3=0.3,sz1=13,sz2=10,sz3=8,fs1=7.5,fs2=6,fs3=5,INIT=False): 
+        self.ax, self.fig, self.xLab, self.yLab, self.alp, self.INIT = ax, fig, xLab, yLab, alp, INIT 
         self.lw1,self.lw2,self.lw3 =lw1,lw2,lw3
         self.sz1,self.sz2,self.sz3 =sz1,sz2,sz3 
         self.fs1,self.fs2,self.fs3 =fs1,fs2,fs3    
         self.X, self.markers = [x for x in range(100)], [] 
         self.zrp1, self.zrp2 = 'NA', 'NA'  
-        if ti in traits: self.VALID, self.NULL, self.T = True, False, traits[ti] 
-        else:            self.VALID, self.NULL, self.T =  False, True, 'NA' 
-        
+        if ti in fig.traits: self.VALID, self.NULL, self.T = True, False, fig.traits[ti] 
+        else:                self.VALID, self.NULL, self.T = False, True, 'NA' 
+
+
+
+
+
+        #if self.fig.progress.SAVESRC: self.panel, self.out, self.SAVESRC = fig.progress.panel, fig.progress.out3, True 
+        #else:                         self.panel, self.out, self.SAVESRC = None, None, False 
+
+
+
 
     def draw_rep_popout(self, k, rc1='blue', yc1='blue', yc2='blue', TITLE=False): 
         self.rc1, self.yc1, self.yc2 = rc1, yc1, yc2 
@@ -172,7 +122,6 @@ class POPplot:
             if not BRIEF: 
                 self.label_popout()  
                 self.ax.set_title(self.T.name.cornerStyle, fontsize = self.fs1, loc='left', x=0.015, y= 0.875,va='top')
-
         else: 
             DV.draw_blank(self.ax) 
             self.lms = DV.AxLims(self.ax, xt=[], yt=[], xLim=[0,1],yLim=[0,1]) 
@@ -232,15 +181,32 @@ class POPplot:
             except AttributeError: pass 
             self.ax.scatter(self.X[1:99], self.Y[1:99],color=yc1,edgecolor=yc1,  alpha=self.alp,  zorder=1, lw=0.1, s = self.sz3) 
         except: 
+            self.Y, self.Ye = [0 for x in self.X], [0 for x in self.X] 
             if ALLOW_MISSING:
-                self.Y, self.Ye = [0 for x in self.X], [0 for x in self.X] 
                 xp = [x for x in self.X if x in [0,2,4,95,97,99] or x % 4 == 0] 
                 self.ax.scatter(xp, [0 for x in xp],color=yc1,edgecolor=yc1,alpha=0.5,zorder=1, s = self.sz3-1, lw=0.3) 
             else:
                 self.lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = self.xLab, ylab = self.yLab, ystretch=0.5, xstretch=0.75,fs = 45 ) 
                 self.NULL, self.VALID = True, False 
+        
+        if self.fig.progress.SAVESRC: self.save_body(p_type) 
         return self 
 
+
+
+
+    def save_body(self,p_type): 
+        
+
+        Xs = ";".join([str(x) for x in self.X]) 
+        Ys = ";".join([str(x) for x in self.Y]) 
+        Ye = ";".join([str(x) for x in self.Ye]) 
+        w = self.fig.progress.out3
+        if self.INIT: w.write('%s,%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','PRS-Type','Data','Values')) 
+        w.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,p_type,'Trait-Centiles',Xs)) 
+        w.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,p_type,'Observed-PRS',Ys)) 
+        w.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,p_type,'Expected-PRS',Ye)) 
+        return
 
 
     def draw_alt(self,p_type,yc1='blue',yc2='blue',ec1='orange',ec2='darkorange',rc1='xkcd:shamrock green',rc2='lime',alp=1,tailType='STANDARD', ALLOW_MISSING=False):  
@@ -614,13 +580,13 @@ class POPplot:
 
 
 class SibPlot:
-    def __init__(self,ax,traits,ti,xLab=None,yLab=None,alp=0.5,lw1=1,lw2=0.5,lw3=0.2,sz1=16,sz2=10,sz3=6,fs1=7.5,fs2=6,fs3=5): 
-        self.ax, self.xLab, self.yLab, self.alp = ax, xLab, yLab, alp 
+    def __init__(self,ax,fig,ti,xLab=None,yLab=None,alp=0.5,lw1=1,lw2=0.5,lw3=0.2,sz1=16,sz2=10,sz3=6,fs1=7.5,fs2=6,fs3=5): 
+        self.ax, self.fig, self.xLab, self.yLab, self.alp = ax, fig, xLab, yLab, alp 
         self.lw1,self.lw2,self.lw3 =lw1,lw2,lw3
         self.sz1,self.sz2,self.sz3 =sz1,sz2,sz3 
         self.fs1,self.fs2,self.fs3 =fs1,fs2,fs3    
-        if ti in traits: 
-            self.T, self.VALID = traits[ti], True 
+        if ti in fig.traits: 
+            self.T, self.VALID = fig.traits[ti], True 
             if 'sib' in self.T.pts and 'sib' in self.T.vals: self.NULL = False 
             else:                                             self.NULL = True 
         else:            
@@ -651,17 +617,6 @@ class SibPlot:
         self.lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = xLab, ylab = yLab, ystretch=0.5, xstretch=0.75,fs = self.fs2) 
         if LABEL: self.label_sibs("".join(self.markers[-2::])) 
         return
-
-
-
-
-
-    
-
-
-
-
-
 
 
 

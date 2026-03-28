@@ -4,7 +4,6 @@ if HERE not in sys.path: sys.path.insert(0, HERE)
 from util.Util   import *
 from util import drawScatter as SP
 from util import drawVarious as DV
-#from util import drawLabels  as DL
 from util import drawForest  as DF
 
 # Extended Data Figure: Detailed Replication # 
@@ -118,7 +117,7 @@ class MyFigure:
         for i,ti in enumerate(self.choices): 
             axes = self.axes[i*4:i*4+4]
             for i,(k,clr,ax) in enumerate(zip(my_reps, my_colors, axes)): 
-                sp = SP.POPplot(ax, self.traits, ti, sz1=15,sz2=10,sz3=8,lw1=1,lw2=0.5) 
+                sp = SP.POPplot(ax, self, ti, sz1=15,sz2=10,sz3=8,lw1=1,lw2=0.5) 
                 sp.draw_rep_popout(k, rc1=clr, yc1=clr, yc2=clr, TITLE=(i==0)) 
             self.ax_index += 4
         

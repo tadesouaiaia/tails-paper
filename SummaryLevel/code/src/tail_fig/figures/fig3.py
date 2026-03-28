@@ -183,10 +183,9 @@ class SibExtra:
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None):         
-        self.options, self.data, self.traits, self.progress = options, traits, self.extract_sib_traits(traits.members),progress
-        self.figName = figName 
-
-
+        self.options, self.data, self.traits, self.figName = options, traits, self.extract_sib_traits(traits.members),figName
+        self.progress = progress.update(self) 
+    
         self.colors = ['red','green','blue','purple','orange','lime'] 
         self.fs0, self.fs1, self.fs2, self.fs3, self.fs4 = 10, 7, 6, 5, 5 
         self.sz1, self.sz2, self.sz3 = 15,10,8
@@ -279,7 +278,8 @@ class MyFigure:
 
         plt.subplots_adjust(left=0.01, bottom=0.025, right=1.01, top=0.97,wspace=0.5, hspace=0.5) 
         
-
+        self.progress.save() 
+        return
         if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
         else:                        figPath = self.options.out+'Fig3.pdf' 
         plt.savefig(figPath, dpi=self.options.dpi) 
@@ -293,7 +293,7 @@ class MyFigure:
     def create(self): 
         self.draw_sib_schematic(self.axes[0:3]) 
         self.ax_index = 3 
-        for i,ti in enumerate(self.options.indexTraits): sp = SP.SibPlot(self.axes[self.ax_index+i], self.traits, ti).draw_sib_pair(i, LABEL=True) 
+        for i,ti in enumerate(self.options.indexTraits): sp = SP.SibPlot(self.axes[self.ax_index+i], self, ti).draw_sib_pair(i, LABEL=True) 
         self.add_h2_coord(self.axes[8]) 
         self.add_sib_pairs(self.axes[7]) 
         return 
