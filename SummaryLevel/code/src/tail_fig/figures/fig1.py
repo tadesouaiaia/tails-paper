@@ -6,98 +6,25 @@ from util.Util   import *
 from util import drawScatter as DS
 from util import drawVarious as DV
 from util import drawLabels  as DL
+from util import drawCartoon  as DC
 np.random.seed(45)  
 
 # Rare
 
 
-class FigLib: 
-    def __init__(self, options, AK={}):
-        self.options = options
-        self.fs1, self.fs2, self.fs3,self.fs4,self.fs5 = 12,10,8,7,5
-        self.sz1, self.sz2,self.sz3 = 15,9,8
-        self.lw1, self.lw2, self.lw3 = 1, 0.8,0.5
-
-
-    def make_square(self,ax,x1,x2,y1,y2,lw=1,ls='--',ap=0.3,color='k'):
-        ax.plot([x1,x2],[y1,y1],clip_on=False,color=color,lw=lw,linestyle=ls,alpha=ap)
-        ax.plot([x1,x2],[y2,y2],clip_on=False,color=color,lw=lw,linestyle=ls,alpha=ap)
-        ax.plot([x1,x1],[y1,y2],clip_on=False,color=color,lw=lw,linestyle=ls,alpha=ap)
-        ax.plot([x2,x2],[y1,y2],clip_on=False,color=color,lw=lw,linestyle=ls,alpha=ap)
-    
-
-    def make_dots(self, ax, x, YR, y_var = 1, c='red', stepsize=0.25, MAX=5):
-        y1, y2, y3, y4 = YR 
-        MS = MAX*MAX
-        for i,(a,b) in enumerate([[y1,y2],[y3,y4]]): 
-            while a <= b: 
-                yp = a + np.random.normal(0,y_var*0.02)     
-                a+= stepsize 
-                if yp*yp > MS: continue
-                elif yp > y2 and yp < y3: continue 
-                else: 
-                    xp = max(x + np.random.normal(0,0.05),-3.02)    
-                    sz = self.sz2 
-                    
-                    if xp < -1.5: ax.scatter(xp,yp, s=sz,alpha=0.65,color=c,lw=0.001,ec='red',clip_on=False) 
-                    else:         ax.scatter(xp,yp, s=sz,alpha=0.65,color='grey',lw=0.001,ec='grey',clip_on=False) 
-                    
-
-
-    #def draw_one_human(self, xp, yp, ax, s = 2, bc='k', c = 'red', rc2 = 'lime', risk1=0, risk2=0):
-    def make_human(self, xp, yp, ax, s = 2, bc='k', c = 'red', rc2 = 'lime', risk1=0, risk2=0):
-        #c = 'cyan'    
-        #c = bc 
-        head = matplotlib.patches.Circle((xp + s/4.0, yp+ s), s/2.5, facecolor=c, zorder=10,clip_on=False)
-        #left_arm = mpatches.Rectangle((xp+s*0.1, yp+ s*0.6), s*0.2, s, angle=120, facecolor=c,zorder=10)
-        #right_arm = mpatches.Rectangle((xp+s/2.0, yp+ s*0.7), s*0.2, s, angle=-120, facecolor=c,zorder=10)
-        left_arm = matplotlib.patches.Rectangle((xp+s*0.1, yp+ s*0.6), s*0.2, s*0.95, angle=135, facecolor=c,zorder=10,clip_on=False)
-        right_arm = matplotlib.patches.Rectangle((xp+s*0.55, yp+ s*0.7), s*0.2, s*0.95, angle=-135, facecolor=c,zorder=10,clip_on=False)
-        body = matplotlib.patches.Rectangle((xp, yp), s/2.0, s, facecolor=c, zorder=10,clip_on=False)
-        left_leg = matplotlib.patches.Rectangle((xp+s*0.25, yp+s*0.10), s*0.25, s, angle=150,facecolor=c,zorder=10,clip_on=False)
-        right_leg = matplotlib.patches.Rectangle((xp+s*0.50, yp+s*0.20), s*0.25, s, angle=-150,facecolor=c,zorder=10,clip_on=False)
-        ax.add_patch(head)
-        ax.add_patch(body)
-        ax.add_patch(left_arm)
-        ax.add_patch(right_arm)
-        ax.add_patch(left_leg)
-        ax.add_patch(right_leg)
-
-
-    def make_arrow(self, ax, a = (0,8), b = (-8,3), FLIP=False, txt='NA', STYLE='NA', SHIFT=False):  
-
-        # Define arrow properties
-        if STYLE in ['PEND']: arrowstyle = "Simple, tail_width=0.3, head_width=3, head_length=3"
-        else:                 arrowstyle = "Simple, tail_width=0.5, head_width=3, head_length=3"
-        
-        if FLIP: connectionstyle = "arc3,rad=.125"  # Adjust the curvature with 'rad'
-        else:    connectionstyle = "arc3,rad=-.125"  # Adjust the curvature with 'rad'
 
 
 
-        arrow_properties = {"arrowstyle": arrowstyle,"color": "k",}
-
-        # Define arrow start and end points
-        tail_position = a 
-        head_position = b 
-
-        # Create the arrow
-        arrow = matplotlib.patches.FancyArrowPatch(tail_position, head_position, linewidth=0.5, connectionstyle=connectionstyle, **arrow_properties)
-        # Add the arrow to the plot
-        ax.add_patch(arrow)
-        if txt != 'NA': 
-            if SHIFT: ax.text(a[0]+2,a[1]+1,txt,ha='center',va='bottom',fontsize=self.fs4-1, zorder=999) 
-            else: ax.text(a[0],a[1]+1,txt,ha='center',va='bottom',fontsize=self.fs4, zorder=999) 
 
 
-    def arrow_axes(self, ax, x_info, y_info): 
 
-        y1, y2, yl, YL = y_info  
-        x1, x2, xl, XL = x_info 
-        ax.arrow(x1, y1, x2-x1, 0,  linewidth=self.lw2,  head_width=0.15, head_length=5, fc='k', ec='k',clip_on=False,zorder=0)
-        ax.set_xlabel(xl,fontsize=self.fs3,labelpad=1) 
-        ax.arrow(x1, y1, 0, y2-y1-0.4,  linewidth=self.lw2,  head_width=3.3, head_length=0.25, fc='k', ec='k',clip_on=False,zorder=0)
-        ax.set_ylabel(yl,fontsize=self.fs3) 
+
+
+
+
+
+
+
 
 
 
@@ -106,7 +33,10 @@ class FigLib:
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None):
-        self.options, self.progress, self.lib, self.fig = options, progress, FigLib(options), matplotlib.pyplot.gcf() 
+        self.options, self.figName = options, figName 
+        self.lib = DC.FigLib(options) 
+
+        self.progress = progress.update(self) 
         self.common_color, self.rare_color = 'xkcd:ultramarine blue', 'xkcd:neon blue' 
         self.figName = figName
         self.fs1, self.fs2, self.fs3, self.fs4, self.fs5,self.fs6 = 11,9,8,7,6,5
@@ -163,6 +93,8 @@ class MyFigure:
 
     def finish(self):
         plt.subplots_adjust(left=0.04, bottom=0.005, right=0.999, top=0.88,wspace=0.6, hspace=0.02) 
+        self.progress.save() 
+        return
         if self.figName is not None: figPath = self.options.out+self.figName+'.pdf'
         else:                        figPath = self.options.out+'Fig1.pdf'
         plt.savefig(figPath, dpi=self.options.dpi)

@@ -10,6 +10,7 @@ import statsmodels
 import statsmodels.api 
 from scipy import stats 
 from collections import defaultdict as dd
+from matplotlib.colors import to_rgb, ListedColormap
 
 
 plt.rcParams['xtick.major.size'] = 2
@@ -25,77 +26,38 @@ plt.rcParams['axes.labelpad'] = 1
 
 
 
-def tmp_pval2(m1, w1, m2, w2,ti,i,j):
-    se1 = w1 / 1.96
-    se2 = w2 / 1.96
-    z = (m1 - m2) / np.sqrt(se1**2 + se2**2)
-    
-    if ti == 30240: 
-        print(i,j)
-
-    return 2 * (1 - stats.norm.cdf(abs(z)))
-
-def tmp_pval(m1, w1, m2, w2, ti='NA', i='NA',j='NA'):
-    se1 = w1 / 1.96
-    se2 = w2 / 1.96
-    z = (m2 - m1) / np.sqrt(se1**2 + se2**2)
-
-    if ti == 30240 and j == 0 and i ==1: 
-        return 0.0368241
-    return stats.norm.cdf(z)
 
 
 
-def tmp_rec(m1, m2):
-
-    diff = abs(m1-m2)
-    if m1 == m2: return 0.0
-    elif m1 < 0 and m2 < 0: return 'NA' 
-    elif m1 > 0 and m2 > 0 and m1 > m2:  return diff/m1
-    elif m2 < 0 and m1 > 0: return 1.0
-    elif m1 > 0 and m2 > 0 and m1 < m2: return -1*(diff/m1)
-    else:
-        print('wtf')
-        print(m1, m2)
-        sys.exit()
-    ### DO THIS NEXT ### 
-
-
-
-
-
-
-
+def make_colormap(color1, color2, n=10):
+    """
+    Create an n-color colormap between any two named or hex colors.
+    """
+    c1 = np.array(to_rgb(color1))
+    c2 = np.array(to_rgb(color2))
+    gradient = np.linspace(c1, c2, n+2)
+    return gradient.tolist()[-10::]
 
 def pearson_ci(x, y, alpha=0.05):
-    
     x = np.asarray(x)
     y = np.asarray(y)
-
     r,pv = stats.pearsonr(x, y)
     n = len(x)
-    
     # Fisher z-transform
     z = np.arctanh(r)
     se = 1 / np.sqrt(n - 3)
-    
     z_crit = stats.norm.ppf(1 - alpha/2)
-    
     lo_z = z - z_crit * se
     hi_z = z + z_crit * se
-    
     lo = np.tanh(lo_z)
     hi = np.tanh(hi_z)
-    
     return r,pv,lo, hi
-
 
 def spearman_ci(x, y, n_boot=1000, alpha=0.05):
     x = np.asarray(x)
     y = np.asarray(y)
     r,pv = stats.spearmanr(x, y)
     n = len(x)
-    
     boots = []
     for _ in range(n_boot):
         idx = np.random.randint(0, n, n)
@@ -103,23 +65,22 @@ def spearman_ci(x, y, n_boot=1000, alpha=0.05):
         yb = y[idx]
         rb, _ = stats.spearmanr(xb, yb)
         boots.append(rb)
-    
     lo = np.percentile(boots, 100 * alpha/2)
     hi = np.percentile(boots, 100 * (1 - alpha/2))
     return r, pv, lo, hi
 
-
 def mean_ci(x, alpha=0.05):
     x = np.asarray(x, dtype=float)
     x = x[np.isfinite(x)]
-    
     n = len(x)
     mean = np.mean(x)
     se = stats.sem(x)  # = std / sqrt(n)
-    
     t_crit = stats.t.ppf(1 - alpha/2, df=n-1)
-    
     lo = mean - t_crit * se
     hi = mean + t_crit * se
-    
     return mean, lo, hi
+
+
+
+
+

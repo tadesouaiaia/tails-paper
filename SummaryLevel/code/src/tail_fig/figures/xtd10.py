@@ -7,7 +7,8 @@ from util import drawSims    as DI
 
 class MyFigure:
     def __init__(self, options, traitData, progress, figName=None):
-        self.options, self.data, self.traits, self.progress, self.figName = options, traitData, traitData.members, progress, figName
+        self.options, self.data, self.traits, self.figName = options, traitData, traitData.members, figName
+        self.progress = progress.update(self) 
         self.fs0, self.fs1, self.fs2, self.fs3, self.fs4, self.fs5 = 12,10, 9,7.5,6, 5       
         self.lw1,self.lw2,self.lw3 = 1, 0.7,0.5
         self.sz1,self.sz2,self.sz3 = 20,15,10
@@ -23,7 +24,7 @@ class MyFigure:
         if self.options.simPath == None: 
             self.progress.error('Slim Simulation Results Not Provided (--simPath [PathToSimResult])\n                 Figure Cannot Create Simulation Panels')  
             return 
-        self.lib  =  DI.SlimLib(self.options, XTD=True)
+        self.lib  =  DI.SlimLib(self, XTD=True)
         self.SIM  =  self.lib.SLIM 
         if not self.SIM: self.progress.error('Invalid Slim Results (--simPath requires slim.dist.txt)\n                 Figure Cannot Create Simulation Panels')  
         return         
@@ -43,6 +44,9 @@ class MyFigure:
         for i,x in enumerate(['a','b','c','d','e','f','g','h']): 
             self.axes[i].set_title('$'+x+'$', x= -0.07, y=0.935, fontsize=13) 
         plt.subplots_adjust(left=0.06, bottom=0.03, right=0.96, top=0.97,wspace=0.3, hspace=0.7) 
+        self.progress.save() 
+        return 
+
         if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
         else:                        figPath = self.options.out+'Xtd9.pdf' 
         plt.savefig(figPath, dpi=self.options.dpi) 

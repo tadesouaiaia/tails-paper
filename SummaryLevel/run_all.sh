@@ -13,8 +13,7 @@
 # STEP 2) Make Figures 
 
 
-./code/tails.py gen all --in output_qc/qc.pass.txt --vals data/trait_data/vals/*.vals --pts data/trait_data/pts/*.pts  --simPath data/trait_sims/ --out output_figs/
-
+./code/tails.py gen all --in output_qc/qc.pass.txt --vals data/trait_data/vals/*.vals --pts data/trait_data/pts/*.pts  --simPath data/trait_sims/ --out output_figs/ --saveSrc
 
 echo "" 
 echo "All Individual Figures and Table FIles can be found in output_figs" 

@@ -15,7 +15,7 @@ class MyFigure:
         self.progress = progress.update(self) 
         self.fs0, self.fs1, self.fs2, self.fs3, self.fs4 = 20, 15, 10, 7, 5
         self.sz1, self.sz2, self.sz3 = 15,10,8 
-        self.lw1, self.lw2, self.lw3 = 1, 0.7, 0.5
+        self.lw1, self.lw2, self.lw3 = 1, 0.5, 0.2
         self.blockclr = 'whitesmoke' 
 
 
@@ -23,28 +23,20 @@ class MyFigure:
         self.ax_index, self.base = 0, 20   
         self.fig, self.axes = matplotlib.pyplot.gcf(), [] 
         self.rows, self.cols, self.WD, self.HT = 45, 75, 7.1, 6.6
-        rs1, cs1 = 6, 14 
+        rs1, rs2, cs1, cs2 = 6, 4, 14, 9 
+        xn1, xn2 = rs1*2+4, 26 
         for i in [0,rs1]: 
             for j in [4,cs1+4]: 
                 self.axes.append(plt.subplot2grid((self.rows,self.cols), (i,j), rowspan = rs1, colspan =cs1))
         self.axes.append(plt.subplot2grid((self.rows,self.cols), (0,cs1*2+12), rowspan = rs1*2-1, colspan =cs1*2+4))
-        
-        cs1 = 6 
-        xn, rs, cs = rs1*2+4, 4, 9
-        for rx in [xn, xn + rs+1]: 
-            for cx in [0, cs*4+2]: 
+        for rx in [xn1, xn1 + rs2+1]: 
+            for cx in [0, cs2*4+2]: 
                 for jp in range(4): 
-                    if jp < 3: self.axes.append(plt.subplot2grid((self.rows,self.cols), (rx,cx+jp*cs), rowspan = rs, colspan =cs))
-                    else:      self.axes.append(plt.subplot2grid((self.rows,self.cols), (rx,cx+jp*cs), rowspan = rs, colspan =cs+1))
-
-
-
-
-        xn = 26
-        rs, cs = self.rows - xn -1, cs1*3
-        cs = int((self.cols / 2))  
-        self.axes.append(plt.subplot2grid((self.rows,self.cols), (xn,0), rowspan = rs, colspan =cs))
-        self.axes.append(plt.subplot2grid((self.rows,self.cols), (xn,cs+1), rowspan = rs, colspan =cs))
+                    if jp < 3: self.axes.append(plt.subplot2grid((self.rows,self.cols), (rx,cx+jp*cs2), rowspan = rs2, colspan =cs2))
+                    else:      self.axes.append(plt.subplot2grid((self.rows,self.cols), (rx,cx+jp*cs2), rowspan = rs2, colspan =cs2+1))
+        rs, cs = self.rows - xn1 - 1, int((self.cols/2))
+        self.axes.append(plt.subplot2grid((self.rows,self.cols), (xn2,0), rowspan = rs, colspan =cs))
+        self.axes.append(plt.subplot2grid((self.rows,self.cols), (xn2,cs+1), rowspan = rs, colspan =cs))
         self.fig.set_size_inches(self.WD, self.HT) 
         return         
                                 
@@ -88,7 +80,7 @@ class MyFigure:
         
 
         self.progress.set_panel('b') 
-        self.draw_rare_corrs(self.axes[4]) 
+        self.draw_exome_popout_corrs(self.axes[4]) 
         DL.BoxKeys(self.axes[2]).add_trumpet_key('bottom-2') 
         DL.BoxKeys(self.axes[4]).add_rare_key('bottom',self.data) 
         
@@ -108,6 +100,9 @@ class MyFigure:
                 sp.set_subtitle(k,fs=35) 
                 rare_plots.append(sp)
         DL.BoxKeys(self.axes[15]).add_multi_key('bottom-4.25',clrs=[self.rc1,self.rc2,self.rc3,self.c1,self.c2])  
+        
+
+        self.progress.set_panel('d') 
         self.draw_tail_recovery([self.axes[-2],self.axes[-1]]) 
         DL.BoxKeys(self.axes[-2]).add_recovery_key(c1 = self.rc1, c2 = self.rc2, c3=self.rc3, c4='lime', RULE='LOWER') 
         DL.BoxKeys(self.axes[-2]).add_odds_key(c1 = self.c1, c2 = self.c2, RULE='LOWER') 
@@ -212,6 +207,13 @@ class MyFigure:
 
 
     def draw_tail_recovery(self,axes, PRINT=False, cMax=0.29, cScale=5.0, offScale = 1): 
+        
+        if self.progress.SAVESRC: 
+            w = self.progress.out3 
+            r_names = ['POPoutReduction(>0.1%)','POPoutReduction(>0.01%)','POPoutReduction(Burden)','Common-OR','Common-OR-CI','Common+Rare-OR','Common+Rare-OR-CI'] 
+            w.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' % tuple(['Panel','Trait-ID','Tail'] + r_names))
+
+
         TR = self.split_recovery_traits() 
         leftEnd, self.offset, STEP1, STEP2 = -0.5, 0.12,  1, 1.02 
         barHt, MID2, rightEnd = 7.5, self.offset + STEP2, 2*self.offset + STEP2 + 1.128 
@@ -227,12 +229,9 @@ class MyFigure:
                 self.ax.add_patch(matplotlib.patches.Rectangle((leftEnd, yp-8),1.38+self.offset*2, 12, color=self.blockclr, ec = 'k', lw = 0, alpha=0.9, zorder=0,clip_on=False))
                 self.ax.add_patch(matplotlib.patches.Rectangle((self.offset+STEP2, yp-8),rightEnd - (STEP2 + self.offset), 12, color=self.blockclr, ec = 'k', lw = 0, alpha=0.9, zorder=0,clip_on=False))
                 yl, yp = yp - 2, yp - 14 
-                ax.barh(yl,rTot,left=0+self.offset,height=barHt,facecolor='white',clip_on=False,alpha=0.95,lw=self.lw3,ec='k')
+                ax.barh(yl,rTot,left=0+self.offset,height=barHt,facecolor='white',clip_on=False,alpha=0.95,lw=self.lw2,ec='k')
                 my_offset, my_shrink = self.offset, 0 
                 r_vals, rSig = self.validate_fractions(rTot, T, ki) 
-                
-            
-
                 rec_results[rSig].append(rTot) 
                 rec_results['ALL'].append(rTot) 
                 for i,(val,clr) in enumerate(zip(r_vals,[self.rc1,self.rc2,self.rc3])): 
@@ -241,9 +240,6 @@ class MyFigure:
                 if rSig == 'True': 
                     if my_offset < 1.1: ax.scatter(my_offset+0.017, yl+0.35, color = 'k', marker= '*', lw = 0.2, zorder=990, s=self.sz2) 
                     else:               ax.scatter(my_offset-0.03, yl+1, color ='k', marker='*', lw = 0.2,zorder=990, s = self.sz2,clip_on=False) 
-                    #print()  
-                    #print(T.ti, T.name, k, rTot) 
-
 
                 rel_change, pts, cis = self.validate_odds(T, T.vals['odds'], ki) 
                 obs_odds.append(rel_change) 
@@ -252,8 +248,18 @@ class MyFigure:
                     sig_odds.append(rel_change) 
 
                 for pt,ci,clr in zip(pts, cis, [self.c1, self.c2]): 
-                    ax.scatter(pt+MID2, yl, color=clr,ec='k',s=self.sz2,lw=self.lw3/2.0,alpha=0.8,zorder=10) 
+                    ax.scatter(pt+MID2, yl, color=clr,ec='k',s=self.sz2,lw=self.lw3,alpha=0.8,zorder=10) 
                     ax.plot([pt+MID2-ci[0],pt+MID2+ci[1]],[yl,yl], color=clr,lw=self.lw2, alpha=0.6) 
+            
+
+                if self.progress.SAVESRC: 
+                    r_names = ['POPoutReduction(>0.1%)','POPoutReduction(>0.01%)','POPoutReduction(Burden)','Common-OR','Common-OR-CI','Common+Rare-OR','Common+Rare-OR-CI'] 
+                    w.write('%s,%s,%s,%s,%s,%s,' % tuple([self.progress.panel, T.id, k] + r_vals))
+                    w.write('%s,%s,' % tuple([str(round(pts[0],3)),str(round(pts[0]-cis[0][0],3))+'-'+str(round(pts[0]+cis[0][1],3))]))
+                    w.write('%s,%s\n' % tuple([str(round(pts[1],3)),str(round(pts[1]-cis[1][0],3))+'-'+str(round(pts[1]+cis[1][1],3))]))
+
+
+
             yp += 5 
             ax.set_xlim(leftEnd,rightEnd) 
             self.ax.set_yticks([]) 
@@ -299,7 +305,9 @@ class MyFigure:
 
 
 
-    def draw_rare_corrs(self, ax): 
+    def draw_exome_popout_corrs(self, ax): 
+        
+        if self.progress.SAVESRC: self.progress.out3.write('%s,%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','Tail','POPoutEffect','ExomeHits'))
         X,Y = [], [] 
         for ti,T in self.traits.items(): 
             pos, neg = 0, 0 
@@ -314,6 +322,9 @@ class MyFigure:
                     ax.scatter(x, y,marker = m, s=self.sz1,color=T.group_color, linewidth=0.1,alpha=0.8, ec = 'black', clip_on=False) 
                     X.append(x) 
                     Y.append(y) 
+                    if self.progress.SAVESRC: 
+                        if i == 0: self.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.progress.panel,T.id,'Lower',x,y)) 
+                        else:      self.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.progress.panel,T.id,'Upper',x,y)) 
                     if ti in self.options.indexTraits+[50,3581]: 
                         if x > 0.1 and x == max([e1,e2]): 
                             if y < 4: ax.text(x+0.005,y,T.name.mini, ha='left', va='top',fontsize=self.fs4, fontweight='bold') 
@@ -335,19 +346,21 @@ class MyFigure:
 
 
     def draw_four_trumpets(self, axes, rc = 'xkcd:cherry red'):
+        if self.progress.SAVESRC: self.progress.out3.write('%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','snpType','pairedValues(x=maf|y=beta)'))
         for i,ti in enumerate(self.options.indexTraits): 
             ax = axes[i]
             if ti not in self.traits: 
                 DV.draw_blank(ax) 
                 continue 
             T = self.traits[ti] 
-            for j,k in enumerate(['common','burden','rare']): 
+            for j,(k,c1,c2,lw) in enumerate(zip(['common','burden','rare'],['grey','white',rc],['grey',rc,rc],[self.lw3,self.lw2,self.lw2])): 
                 try: 
                     kd = T.pts['backman'][k]
                     mafs, betas = [math.log(x,self.base) for x in kd.mafs], kd.effects 
-                    if j == 0: ax.scatter(mafs,betas,s=[1+y*y*10 for y in betas], color = 'grey', linewidth=self.lw3, alpha=0.7) 
-                    elif j == 1: ax.scatter(mafs,betas,s=[1+y*y*10 for y in betas], edgecolor=rc, facecolor='white',linewidth=self.lw3, alpha=0.7) 
-                    elif j == 2: ax.scatter(mafs,betas,s=[1+y*y*10 for y in betas], facecolor=rc,linewidth=self.lw3, alpha=0.7) 
+                    ax.scatter(mafs,betas,s=[1+y*y*10 for y in betas],fc=c1, ec=c2,lw=lw, alpha=0.7) 
+                    if self.progress.SAVESRC: 
+                        pairs = ";".join([str(a)+'|'+str(b) for a,b in zip(kd.mafs, kd.effects)]) 
+                        self.progress.out3.write('%s,%s,%s,%s\n' % (self.progress.panel, T.ti, k+'Effects',pairs)) 
                 except KeyError: continue 
 
             if i in [2,3]: 

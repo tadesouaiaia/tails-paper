@@ -70,6 +70,8 @@ class EvoPlot:
 
 
     def plot_boxes(self, mc = 'k',lw=2,lc='blue',fs1=42):         
+        
+        if self.progress.SAVESRC:  self.progress.out3.write('%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','Type','Values'))
         my_index, self.axes, keep = self.fig.ax_index, self.fig.axes, [] 
         labels = ['No Selection\n('+str(self.evo_cnts['none'])+' Traits)\n$(\\beta=0,\gamma=0)$']
         labels.append('Stabilising\n('+str(self.evo_cnts['stabilising'])+' Traits)\n$(\\gamma<0)$')  
@@ -89,8 +91,6 @@ class EvoPlot:
                 r_data[i] = rd_tmp[0:4] 
         for j,rpd in enumerate(r_data):
             lms_res =  [DS.EvoScatter(self.axes[my_index+i], self.fig, ti).main_box(xp=j, yp=i) for i,ti in enumerate(rpd[0:4])] 
-
-            
             for i,lms in enumerate(lms_res):  
                 ax = self.axes[my_index+i] 
                 if i == 0:  
@@ -120,7 +120,10 @@ class EvoPlot:
         pLo, pHi, eLo, eHi = pop.p1, pop.p2, pop.e1, pop.e2 
         self.scorekeep['lo'].append(eLo)  
         self.scorekeep['hi'].append(eHi) 
-        if eLo < 0:              ax.barh(yp,-0.01,left=-1*LR,height=ht,color=clr,clip_on=False,alpha=baf) 
+        if eLo < 0: 
+            ax.barh(yp,-0.01,left=-1*LR,height=ht,color=clr,clip_on=False,alpha=baf) 
+            if self.progress.SAVESRC:  self.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id,'Lower',0,'')) 
+            
         else: 
             if pop.f1:  cx, ex = clr, 'k'
             else:       cx, ex = 'white', clr
@@ -129,8 +132,11 @@ class EvoPlot:
                 z1,z2=eLo-pop.j1, eLo+pop.j1 
                 ax.plot([min(-LR,-1*LR-z1),-1*LR-z2],[yp,yp],color='k',lw=0.7,clip_on=False) 
                 ax.plot([min(-LR,-1*LR-z1),-1*LR-z2],[yp,yp],color=clr,lw=0.5,clip_on=False) 
+                if self.progress.SAVESRC:  self.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id,'Lower',eLo,str(round(eLo-z1,3))+'|'+str(round(eLo+z1,3)))) 
+
         if eHi < 0: 
             ax.barh(yp,0.01,left=LR,height=ht,color=clr,clip_on=False,alpha=baf) 
+            if self.progress.SAVESRC:  self.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id,'Upper',0,'')) 
         else: 
             if pop.f2:  cx, ex = clr, 'k'
             else:       cx, ex = 'white', clr
@@ -140,6 +146,7 @@ class EvoPlot:
                 z1,z2=eHi-pop.j1, eHi+pop.j1 
                 ax.plot([max(LR,LR+z1),LR+z2],[yp,yp],color='k',lw=0.7,clip_on=False) 
                 ax.plot([max(LR,LR+z1),LR+z2],[yp,yp],color=clr,lw=0.5,clip_on=False) 
+                if self.progress.SAVESRC:  self.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id,'Upper',eHi,str(round(eHi-z1,3))+'|'+str(round(eHi+z1,3)))) 
         return yp - 0.3
 
 
@@ -174,7 +181,6 @@ class EvoPlot:
             if xL > xR:  
                 ax.barh(yp,-1*xL,left=-LR,height=BH,color='dimgrey',alpha=0.85,clip_on=False,lw=lw,ec='k') 
                 ax.barh(yp,xR,left=LR,height=BH,color='white',clip_on=False,lw=lw,ec='k') 
-
             else:        
                 ax.barh(yp,-1*xL,left=-LR,height=BH,color='white',clip_on=False,lw=lw,ec='k') 
                 ax.barh(yp,xR,left=LR,height=BH,color='dimgrey',alpha=0.85,clip_on=False,lw=lw,ec='k') 
@@ -190,9 +196,9 @@ class EvoPlot:
         if self.CI:
             ax.plot([(-1*xLL)-LR,(-1*xLH)-LR],[yp,yp],color='k',lw=2*lw,zorder=100) 
             ax.plot([xRL+LR,xRH+LR],[yp,yp],color='k',lw=2*lw,zorder=100) 
-        
-
-
+            if self.progress.SAVESRC: 
+                name, ci1, ci2= label.split('\n')[0], str(round(xLL,3))+'|'+str(round(xLH,3)), str(round(xRL,3))+'|'+str(round(xRH,3)) 
+                self.progress.add_to_src([[name,'Lower',xL,ci1],[name,'Upper',xR,ci2]])
         yp -= BH/1.5 
         self.add_arrows(ax,yp, INIT=False) 
         return yp        
@@ -234,13 +240,9 @@ class EvoPlot:
             ax.plot([x1,x1-xs*2],[ymid,ymid], color=color,clip_on=False,lw=lw) 
             return
 
-
-
-
-
-
-
     def plot_scores(self, axes, LR=0.015, PRINTPV=False, INIT=False): 
+        
+        if self.progress.SAVESRC: self.progress.start_src('%s,%s,%s,%s,%s\n',('Panel', 'Trait-ID/Category','Tail','Effect/Mean','Confidence Interval'))
         self.PRINTPV, yMin = PRINTPV, 10 
         if not self.PRINTPV: axes[0].text(-0.2,11.2,'$POPout$ Effects Stratified by Inferred Selection',fontsize=self.fs2+0.5,clip_on=False) 
         elif INIT:           axes[0].text(1.5,10.2,'$POPout$ Effects Stratified by Inferred Selection\n(Initial Models)',ha='center',fontsize=self.fs2-1,clip_on=False) 
@@ -261,7 +263,7 @@ class EvoPlot:
                 mQ = sorted(self.evo_groups[i]['quadratic'], key = lambda X: X[0]) 
                 for j,(eType, T) in enumerate(mQ): yp = self.quick_add(ax, yp, T)  
                 ax.plot([0,0],[yp+0.1,yp2],color='k',lw=0.4,clip_on=False)  
-                yp = self.add_group_means(ax, yp+0.1, 'Non-Direction Stabilizing') 
+                yp = self.add_group_means(ax, yp+0.1, 'Non-Directional Stabilising') 
             else: 
                 self.notate_line(ax, i, yp, 9.3, 'Directional\nOnly\n($\gamma$=0)','k', TOP=True) 
                 if len(mD) > 0:
@@ -298,6 +300,8 @@ class EvoPlot:
 
 
     def plot_health_tails(self, ax, clr = 'xkcd:dusty green',clr2='xkcd:dark sage', baf=0.95): 
+        
+        if self.progress.SAVESRC:  self.progress.out3.write('%s,%s,%s,%s\n' % ('Panel', 'Trait-Name','SpearmanR','Confidence Interval')) 
         TR, names  = [], ['Children\nFathered', 'Livebirths\n(Maternal)', 'Number of\nIllnesses', 'Miscarriages &\nStill Births', 'Paternal\nAge']
         for k in ['pkid','mkid','ill','msb','page']: 
             X, Y, Z = [], [], [] 
@@ -314,7 +318,6 @@ class EvoPlot:
         TK = dd(lambda: dd(list)) 
         xOffset, yOffset = 0, 0.1 
         for i,(S,pv,sL,sH) in enumerate(TR): 
-            n = names[i] 
             xp = i + 0.5 + i * 0.25 
             if S > 0: yp = yOffset 
             else:     yp = -yOffset 
@@ -322,12 +325,13 @@ class EvoPlot:
             if not self.CI: 
                 ax.bar(xp, S, bottom=yp, width=0.5, edgecolor='k', color=clr, clip_on=False)  
             else: 
-                
-                #print(n, pv,sL, sH) 
-
                 ax.bar(xp, S, bottom=yp, width=0.5, edgecolor='k', color=clr, alpha=baf,clip_on=False)  
                 if S > 0: ax.plot([xp,xp],[max(yOffset,sL+yOffset), yOffset+sH], lw=0.6,zorder=3,color=clr2,clip_on=False) 
                 else:     ax.plot([xp,xp],[min(-yOffset,-yOffset+sH),-yOffset+sL], lw=0.6,zorder=3,color=clr2,clip_on=False) 
+                
+                if self.progress.SAVESRC: 
+                    my_name = " ".join(names[i].split('\n')) 
+                    self.progress.out3.write('%s,%s,%s,%s\n' % (self.progress.panel,my_name,S,str(sL)+'|'+str(sH))) 
             if pv < 0.05: 
                 st = '*' 
                 if pv < 0.01: st+='*' 

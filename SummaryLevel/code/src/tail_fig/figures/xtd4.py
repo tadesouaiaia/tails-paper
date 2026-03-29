@@ -9,24 +9,16 @@ from util import drawVarious as DV
 # Extended Data Figure: All Tail Plots # 
 
 class MyFigure:
-    def __init__(self, options, traits, progress, figName=None): 
-        self.options, self.traits, self.data, self.progress, self.figName = options, traits.members, traits, progress, figName
-        self.C1 = 'xkcd:very light blue' 
-        self.C1 = 'xkcd:very light pink' 
-        self.C2 = 'xkcd:off white' 
+    def __init__(self, options, traits, progress, figName='allTails'): 
+        self.options, self.traits, self.data, self.figName = options, traits.members, traits, figName
+        self.progress = progress.update(self) 
 
-        self.E1, self.E2 = 'darkslategray','gray' 
-
-
-    
     def draw(self, step=75): 
         n, trait_ids = 2, [x[1] for x in sorted([[T.name.mini, T.ti] for T in self.traits.values()])] 
-        if self.figName is not None: 
-            if len(trait_ids) <= step: self.fignames = [self.figName+'.pdf'] 
-            else:                    self.fignames = [self.figName+'-1.pdf'] 
-        else: 
-            if len(trait_ids) <= step: self.fignames = ['table1.pdf'] 
-            else:                    self.fignames = ['table1-1.pdf'] 
+        if len(trait_ids) <= step: self.fignames = [self.figName+'.pdf'] 
+        else:                      self.fignames = [self.figName+'-1.pdf'] 
+        if self.progress.SAVESRC: 
+            if self.progress.out3 is None or self.progress.out3.closed: self.progress.out3 = open(self.progress.src_file, 'w')
         for i in range(0,len(trait_ids),step): 
             self.my_ids, self.my_len = trait_ids[i:i+step], len(trait_ids[i:i+step]) 
             self.setup() 
@@ -35,7 +27,7 @@ class MyFigure:
             self.fignames.append(self.fignames[-1].split('-')[0]+'-'+str(n)+'.pdf') 
             n+=1 
         figPath = self.options.out+self.fignames[0] 
-        self.progress.save('(Figure Saved: '+figPath+')')
+        self.progress.save() 
         return 
                                                     
 
@@ -81,10 +73,7 @@ class MyFigure:
         dt = DT.SummaryTable(self).initalize(self.axes[2],self.axes[3],c1=self.i1,c2=self.i2) 
         dt = DT.SummaryTable(self).initalize(self.axes[4],self.axes[5],c1=self.i1,c2=self.i2) 
         self.ax_index += 6 
-        
         count = 0 
-        
-        self.clr = self.C1
         self.clr = 'white' 
         for ti in self.my_ids: 
             T = self.traits[ti] 
@@ -94,13 +83,7 @@ class MyFigure:
             self.ax_index += 4 
             count += 1
             continue 
-            if count == 3: 
-                count = 0 
-                if self.clr == self.C1: self.clr = self.C2 
-                else:                   self.clr = self.C1 
-        
         for ax in self.axes[self.ax_index::]: ax.axis('off') 
-
         return self
 
 
@@ -109,86 +92,13 @@ class MyFigure:
     def draw_subplots(self, T, mp = 9.08, lw = 4):  
         subs = [] 
         axes = self.axes[self.ax_index+1::] 
-        subs.append(SP.POPplot(axes[0], self, T.ti, lw2=0.5, sz1=4, sz2=3, sz3=4.0, alp=0.3).draw_common_popout(MINI=True)) 
-        subs.append(SP.SibPlot(axes[1], self, T.ti, sz1=7, sz2=4, sz3=3, alp=0.3, fs2=5).draw_mini_sib_pair()) 
-        subs.append(SP.EvoScatter(axes[2], self, T.ti).mini_box(fs=5,sz=6,lw=0.22)) 
+        if self.progress.SAVESRC: 
+            subs.append(SP.POPplot(axes[0], self, T.ti, lw2=0.5, sz1=4, sz2=3, sz3=4.0, alp=0.3).draw_common_popout(MINI=True)) 
+            subs.append(SP.SibPlot(axes[1], self, T.ti, sz1=7, sz2=4, sz3=3, alp=0.3, fs2=5).draw_mini_sib_pair()) 
+            subs.append(SP.EvoScatter(axes[2], self, T.ti).mini_box(fs=5,sz=6,lw=0.22)) 
+        else: 
+            subs.append(SP.POPplot(axes[0], self, T.ti, lw2=0.5, sz1=4, sz2=3, sz3=4.0, alp=0.3).draw_common_popout(MINI=True)) 
+            subs.append(SP.SibPlot(axes[1], self, T.ti, sz1=7, sz2=4, sz3=3, alp=0.3, fs2=5).draw_mini_sib_pair()) 
+            subs.append(SP.EvoScatter(axes[2], self, T.ti).mini_box(fs=5,sz=6,lw=0.22)) 
         return
-        for i,lms in enumerate(subs): 
-            ax = lms.ax
-            xs, ys = lms.xHop, lms.yHop
-            xp1, yp1  = lms.xMin + xs*2, lms.yMin + ys*2 
-            xp2, yp2  = lms.xMax - xs*2, lms.yMax - ys*2 
-            if i == 0:
-                pp = 0 
-                for j,k in enumerate([Z.lower.popout['common-snp'], Z.upper.popout['common-snp']]):
-                    if k.e > 0 and k.fdr == True: pp += j+1 
-                if pp == 1:    ax.text(xp1, yp2, 'Lower Tail\nPOPout', ha='left', va='top',fontsize=20) 
-                elif pp == 2:  ax.text(xp2, yp1, 'Upper\nTail POPout', ha='right', va='bottom',fontsize=20) 
-                elif pp == 3:  ax.text(lms.xMid-xs*2, yp2, 'Dual Tail\nPOPout', ha='center', va='top', fontsize=20) 
-
-
-            elif i == 1: 
-                pp, pt = 0, []  
-                for j,k in enumerate([Z.lower.sib_pvs.key, Z.upper.sib_pvs.key]): 
-                    if k['meta'] > 0.05: continue 
-                    else: 
-                        if k['novo'] < 0.01 and k['novo'] < k['mend']: 
-                            pp += j+1 
-                            pt.append('novo') 
-                        elif k['mend'] < k['novo'] and k['mend'] < 0.01:  
-                            pp += j+1 
-                            pt.append('mend') 
-                        else: 
-                            pt.append('NA')
-                
-                if 'mend' in pt: ax.text(lms.xMid-xs*2, yp2, 'Mendelian\nUpper Tail', ha='center', va='top',fontsize=20) 
-                elif pp != 0: 
-                    if pp == 1:    ax.text(xp1, yp2, 'Lower Tail\nDiff', ha='left', va='top',fontsize=20) 
-                    elif pp == 2:  ax.text(xp2, yp1, 'Upper\nTail Diff', ha='right', va='bottom',fontsize=20) 
-                    elif pp == 3:  ax.text(lms.xMid-xs*2, yp2, 'Dual Tail\nDiffs', ha='center', va='top', fontsize=20) 
-            else: 
-                model, kind, direc = [Z.summary['evo'][kk] for kk in ['model','type','dir']]
-                if model == 'Y~yInt': continue 
-
-                elif T.ti == 3581: 
-                    ax.text(xp1, yp2, 'Distruptive,\nPos', ha='left', va='top',fontsize=20) 
-                
-                elif model == 'Y~yInt+X' and kind == 'linear': 
-                    if direc == 'positive': ax.text(xp1, yp2, 'Positive', ha='left', va='top',fontsize=20) 
-                    else:                   ax.text(xp2, yp2, 'Negative', ha='right', va='top',fontsize=20) 
-                
-                elif model == 'Y~yInt+X2' and kind == 'parabolic' and direc == 'stabilizing': 
-                    ax.text(lms.xMid-xs*2, yp2, 'Stabilising', ha='center', va='top', fontsize=20) 
-                elif model == 'Y~yInt+X+X2' and kind == 'quadratic': 
-                    if direc == 'positive': ax.text(xp1, yp2, 'Stabilising,\nPos', ha='left', va='top',fontsize=19) 
-                    else:                   ax.text(xp2, yp2, 'Stabilising,\nNeg', ha='right', va='top',fontsize=20) 
-                else: 
-                    self.progess.error('Unknown Evo Model: '+model) 
-
-
-
-        return
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

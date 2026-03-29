@@ -25,11 +25,23 @@ class EvoScatter:
 
 
     def main_box(self, xp=1,yp=1,xlab=None,ylab=None): 
+        
+
+        if self.fig.progress.SAVESRC: 
+            self.fig.progress.out3.write('%s,%s,%s,%s\n' % (self.fig.progress.panel, self.T.id,'TraitValues',";".join([str(round(x,4)) for x in self.X])))  
+            self.fig.progress.out3.write('%s,%s,%s,%s\n' % (self.fig.progress.panel, self.T.id,'LRS',";".join([str(round(x,4)) for x in self.Y])))  
+
+
         self.ax.scatter(self.X,self.Y, color = self.T.group_color, s = self.fig.sz1, edgecolor='lightgrey', alpha = 0.75, lw=self.fig.lw3, zorder = 1)
         if self.T.vals['lrs'].model != 'Y~yInt':
             pm = self.T.vals['lrs'].params 
             yDash = [pm[0] + (x*pm[1]) + (x*x*pm[2]) for x in self.X]
             self.ax.plot(self.X, yDash, color='k',linestyle='--',linewidth=self.fig.lw3,zorder=3)
+            if self.fig.progress.SAVESRC: 
+                self.fig.progress.out3.write('%s,%s,%s,%s\n' % (self.fig.progress.panel, self.T.id,'fitLine',";".join([str(round(x,4)) for x in yDash])))  
+        
+
+
         if xp == 0: ylab = 'Lifetime\nReproductive\nSuccess'
         if yp == 3: xlab = 'Trait Value (z)'
         lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = xlab, ylab = ylab, xstretch = 1.4, ystretch = [1.15,2.0], fs = self.fig.fs4-0.25)
@@ -193,11 +205,7 @@ class POPplot:
         return self 
 
 
-
-
     def save_body(self,p_type): 
-        
-
         Xs = ";".join([str(x) for x in self.X]) 
         Ys = ";".join([str(x) for x in self.Y]) 
         Ye = ";".join([str(x) for x in self.Ye]) 
@@ -207,6 +215,10 @@ class POPplot:
         w.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,p_type,'Observed-PRS',Ys)) 
         w.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,p_type,'Expected-PRS',Ye)) 
         return
+
+
+
+
 
 
     def draw_alt(self,p_type,yc1='blue',yc2='blue',ec1='orange',ec2='darkorange',rc1='xkcd:shamrock green',rc2='lime',alp=1,tailType='STANDARD', ALLOW_MISSING=False):  
@@ -241,6 +253,9 @@ class POPplot:
             self.ax.scatter(self.X[-1], self.Y[-1], marker='v', color=yc2, ec='k', zorder=4, s=self.sz1 * mp, lw=0.5) 
             self.ax.scatter(self.X[-1]+self.lms.xStep/2.0, self.Y[-1]+self.lms.yStep, marker='*',color='gold', lw=0.5, edgecolor='k', alpha=0.9, zorder=2, s = 1.5*self.sz1) 
         else: self.ax.scatter(self.X[-1], self.Y[-1], marker='^', color=yc2, ec='k', zorder=4, s=self.sz1 * mp, lw=0.5) 
+        
+
+        if self.fig.progress.SAVESRC: self.save_body(p_type) 
         return self 
     
 
@@ -580,8 +595,8 @@ class POPplot:
 
 
 class SibPlot:
-    def __init__(self,ax,fig,ti,xLab=None,yLab=None,alp=0.5,lw1=1,lw2=0.5,lw3=0.2,sz1=16,sz2=10,sz3=6,fs1=7.5,fs2=6,fs3=5): 
-        self.ax, self.fig, self.xLab, self.yLab, self.alp = ax, fig, xLab, yLab, alp 
+    def __init__(self,ax,fig,ti,xLab=None,yLab=None,alp=0.5,lw1=1,lw2=0.5,lw3=0.2,sz1=16,sz2=10,sz3=6,fs1=7.5,fs2=6,fs3=5,INIT=False): 
+        self.ax, self.fig, self.xLab, self.yLab, self.alp, self.INIT = ax, fig, xLab, yLab, alp, INIT 
         self.lw1,self.lw2,self.lw3 =lw1,lw2,lw3
         self.sz1,self.sz2,self.sz3 =sz1,sz2,sz3 
         self.fs1,self.fs2,self.fs3 =fs1,fs2,fs3    
@@ -600,7 +615,8 @@ class SibPlot:
         P = self.T.pts['sib'] 
         self.X, Y1, self.Y, self.se = P.X, P.sib1, P.sib2, P.se 
         self.Ye = [y*self.T.vals['sib'].h2_bod/2.0 for y in Y1] 
-        self.ax.plot(self.X[1:99], self.Ye[1:99], color=clr2, lw = self.lw1, zorder=0)
+        #self.ax.plot(self.X[1:99], self.Ye[1:99], color=clr2, lw = self.lw1, zorder=0)
+        self.ax.plot(self.X, self.Ye, color=clr2, lw = self.lw1, zorder=0)
         self.ax.scatter(self.X[1:99], self.Y[1:99], color=clr1, edgecolor = clr1, zorder=1,alpha=self.alp, s = self.sz2, lw=0.3) 
         self.markers = [] 
         for j,(x1,x2,clr,Z,sz) in enumerate([[0,1,clr2,self.Ye,100],[-1,-2,clr2,self.Ye,100],[0,1,clr3,self.Y,300],[-1,-2,clr3,self.Y,300]]): 
@@ -616,8 +632,32 @@ class SibPlot:
         if idx in [2,3]: xLab = 'Index Sibling Centile' 
         self.lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = xLab, ylab = yLab, ystretch=0.5, xstretch=0.75,fs = self.fs2) 
         if LABEL: self.label_sibs("".join(self.markers[-2::])) 
+        if self.fig.progress.SAVESRC: self.save_sib() 
         return
 
+
+    def save_sib(self): 
+        w = self.fig.progress.out3
+        if self.INIT: w.write('%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','Data','Values')) 
+        
+
+
+        Xs = ";".join([str(x) for x in self.X]) 
+        Ys = ";".join([str(x) for x in self.Y]) 
+        Ye = ";".join([str(x) for x in self.Ye]) 
+        w = self.fig.progress.out3
+        w.write('%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,'Index-Sib-Centiles',Xs)) 
+        w.write('%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,'Observed-Conditional-Sib',Ys)) 
+        w.write('%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,'Expected-Conditional-Sib',Ye)) 
+        return
+
+
+
+
+
+
+    def draw_alt(self,p_type,yc1='blue',yc2='blue',ec1='orange',ec2='darkorange',rc1='xkcd:shamrock green',rc2='lime',alp=1,tailType='STANDARD', ALLOW_MISSING=False):  
+        self.type, self.tailType, self.yc1, self.yc2, self.ec1, self.ec2, self.rc1, self.rc2 = p_type, tailType, yc1, yc2, ec1, ec2, rc1, rc2 
 
 
 

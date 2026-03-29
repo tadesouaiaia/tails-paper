@@ -25,7 +25,7 @@ class MyFigure:
         if self.options.simPath == None: 
             self.progress.warn('Slim Simulation Results Not Provided (--simPath [PathToSimResult])\n                 Figure Will Omit Slim Simulation Panels')  
             return 
-        self.lib  =  DI.SlimLib(self.options)
+        self.lib  =  DI.SlimLib(self)
         self.SIM  =  self.lib.SLIM 
         if not self.SIM: self.progress.warn('Invalid Slim Results (--simPath requires valid enrich/delta.csvs)\n                 Figure Will Omit Slim Simulation Panels')  
         return         
@@ -55,15 +55,22 @@ class MyFigure:
     
     def create(self):
         if self.SIM: 
+            self.progress.set_panel('a') 
             self.lib.plot_sim_curves(self.axes[0]) 
+            self.progress.set_panel('b') 
             self.lib.plot_sim_boxes(self.axes[1]) 
             self.ax_index = 2
+
+        self.progress.set_panel('c') 
         self.evo = DE.EvoPlot(self) 
         self.evo.classify() 
         self.evo.plot_boxes() 
         DL.BoxKeys(self.axes[self.ax_index+3]).add_group_key('bottom-4',self.data) 
         self.ax_index += 16
+        
+        self.progress.set_panel('d') 
         self.evo.plot_scores(self.axes[self.ax_index:self.ax_index+3]) 
+        self.progress.set_panel('e') 
         self.evo.plot_health_tails(self.axes[-1]) 
         return 
 

@@ -63,8 +63,9 @@ class SumStats:
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None):
-        self.options, self.data, self.traits, self.progress = options, traits, traits.members, progress
-        self.figName = figName
+        self.options, self.data, self.traits, self.figName = options, traits, traits.members, figName
+        self.progress = progress.update(self) 
+
         self.exampleTraits = self.get_valid_examples()
         self.fs1, self.fs2, self.fs3, self.fs4 = 10, 8, 7 , 5
 
@@ -106,19 +107,16 @@ class MyFigure:
         self.c1, self.c1e, self.c2, self.c2e = 'blue', 'cyan', 'xkcd:shamrock green', 'lime' 
         self.rc, self.rce = 'gold', 'xkcd:bright yellow' 
         xLabs, yLabs = [None,None,'Trait Centile','Trait Centile'],['PRS',None,'PRS',None]
-        self.locs = [0.1, 0.5, 1, 5, 10] 
-        self.names = ['0.1%','0.5%', '1%', '5%', '10%'] 
-        self.lookups = ['common@0.1','common@0.5','common-snp','common@5','common@10'] 
         self.locs = [10, 5, 1, 0.5, 0.1] 
         self.names = ['10%','5%','1%','0.5%','0.1%'] 
         self.lookups = ['common@10','common@5','common-snp','common@0.5','common@0.1'] 
+        
+
+        self.progress.set_panel('a') 
+
         for i,k in enumerate([0.1,0.5,1,5,10]):
             axes = self.axes[i*4:4+i*4] 
             for j,ti in enumerate(self.exampleTraits): 
-                
-
-
-
                 sp = SP.POPplot(axes[j], self, ti,xLab=xLabs[j], yLab=yLabs[j], sz1=9,sz2=8,sz3=6)
                 if k == 1: 
                     sp.draw_body('common', ALLOW_MISSING=False)
@@ -183,15 +181,12 @@ class MyFigure:
     def finish(self, fs =13):
         letters = ['$a$','$b$','$c$','$d$','$e$','$f$'] 
         for i,x in zip([0,20,25],['$a$','$b$','$c$']): 
-            if i == 0:   self.axes[i].set_title(x, x= -0.17, y = 0.98, fontsize=fs) 
+            if i == 0:   self.axes[i].set_title(x, x= -0.17, y = 0.80, fontsize=fs) 
             elif i == 20:   self.axes[i].set_title(x, x= -0.11, y = 0.97, fontsize=fs) 
             elif i == 25:   self.axes[i].set_title(x, x= -0.11, y = 0.97, fontsize=fs) 
-        plt.subplots_adjust(left=0.04, bottom=0.001, right=1.03, top=0.95,wspace=0.05, hspace=0.05) 
-        if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
-        else:                        figPath = self.options.out+'Sup4.pdf' 
-        plt.savefig(figPath, dpi=self.options.dpi) 
-        plt.clf() 
-        self.progress.save('(Figure Saved: '+figPath+')')
+        plt.subplots_adjust(left=0.04, bottom=0.001, right=1.03, top=0.96,wspace=0.05, hspace=0.05) 
+        
+        self.progress.save() 
         return
 
 

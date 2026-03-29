@@ -47,7 +47,10 @@ class RareSnp:
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName = None): 
-        self.options, self.traits, self.data, self.progress, self.figName = options, traits.members, traits, progress, figName
+        self.options, self.traits, self.data, self.figName = options, traits.members, traits, figName
+        self.progress = progress.update(self) 
+
+
         self.snpTraits = [T for T in self.traits.values() if 'snp' in T.lists] 
         self.determine_type(figName) 
         self.separateSnpsByType() 
@@ -84,9 +87,10 @@ class MyFigure:
     def draw(self): 
         self.setup() 
         self.create() 
-        self.finish(self.figName+'.pdf') 
-        figPath = self.options.out+self.figName+'.pdf' 
-        self.progress.save('(Figure Saved: '+figPath+')')
+        
+        self.finish() # self.figName+'.pdf') 
+        #figPath = self.options.out+self.figName+'.pdf' 
+        #self.progress.save('(Figure Saved: '+figPath+')')
         return
 
     def setup(self): 
@@ -121,10 +125,12 @@ class MyFigure:
         return self
 
 
-    def finish(self,fname):
+    def finish(self):
         plt.subplots_adjust(left=0.015, bottom=0.01, right=0.99, top=0.98,wspace=0.0,hspace=0.03) 
-        plt.savefig(self.options.out+fname, dpi=500) 
-        plt.clf() 
+        self.progress.save() 
+
+        #plt.savefig(self.options.out+fname, dpi=500) 
+        #plt.clf() 
 
 
 

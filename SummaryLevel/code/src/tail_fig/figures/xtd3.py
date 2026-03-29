@@ -11,8 +11,9 @@ from util import drawForest  as DF
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None): 
-        self.options, self.data, self.traits, self.progress, self.figName = options, traits, traits.members, progress, figName
+        self.options, self.data, self.traits, self.figName = options, traits, traits.members, figName
         self.exampleTraits = self.get_valid_examples() 
+        self.progress = progress.update(self) 
         self.fs0, self.fs1, self.fs2, self.fs3, self.fs4, self.fs5 = 20, 15, 10, 7, 6, 5
         self.sz1, self.sz2, self.sz3 = 15,10,8
         self.lw1, self.lw2, self.lw3 = 1, 0.7, 0.5
@@ -101,6 +102,10 @@ class MyFigure:
 
 
         plt.subplots_adjust(left=0.03, bottom=0.033, right=0.975, top=0.975,wspace=0.01, hspace=0.03) 
+        
+        self.progress.save() 
+        return
+
         if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
         else:                        figPath = self.options.out+'Sup1.pdf' 
         plt.savefig(figPath, dpi=self.options.dpi) 
@@ -114,13 +119,18 @@ class MyFigure:
         tk = ['Dual Tail Regression', 'Lower Tail Regression', 'Upper Tail Regression', 'No Tail Regression'] 
         self.rep_color, self.poc_color, self.aou_color  = 'xkcd:purpley', 'xkcd:barney','xkcd:leaf green'
         my_reps, my_colors = ['common','rep','poc','aou'], ['blue',self.rep_color, self.poc_color, self.aou_color] 
+       
+        
+        self.progress.set_panel('a') 
+
         for i,ti in enumerate(self.choices): 
             axes = self.axes[i*4:i*4+4]
-            for i,(k,clr,ax) in enumerate(zip(my_reps, my_colors, axes)): 
-                sp = SP.POPplot(ax, self, ti, sz1=15,sz2=10,sz3=8,lw1=1,lw2=0.5) 
-                sp.draw_rep_popout(k, rc1=clr, yc1=clr, yc2=clr, TITLE=(i==0)) 
+            for j,(k,clr,ax) in enumerate(zip(my_reps, my_colors, axes)): 
+                sp = SP.POPplot(ax, self, ti, sz1=15,sz2=10,sz3=8,lw1=1,lw2=0.5, INIT=(i+j==0)) 
+                sp.draw_rep_popout(k, rc1=clr, yc1=clr, yc2=clr, TITLE=(j==0)) 
             self.ax_index += 4
         
+        self.progress.set_panel('b') 
         self.ax_index = 16 
         self.corr_key, self.discovery_key = DF.ForestReps(self.axes[self.ax_index], self).create()         
         self.ax_index += 1 
@@ -163,6 +173,10 @@ class MyFigure:
     def draw_sims(self, ax1, ax2, fs = 7): 
         X, Cy, Ce, Ry, Re  = [self.sim_key[k] for k in ['---', 'repRate', 'repErr', 'pearsonR', 'pearsonErr']]
         for j,(ax,Y,E) in enumerate(zip([ax1,ax2],[Cy,Ry],[Ce,Re])):  
+            
+            if j == 0: self.progress.set_panel('c') 
+            else:      self.progress.set_panel('e') 
+
             ax.plot(X,Y,lw=2, color='k') 
             for i,x in enumerate(X): 
                 ax.scatter(x, Y[i], marker='s', color='k',s=13) 
@@ -184,8 +198,10 @@ class MyFigure:
 
     def draw_reps(self, ax1, ax2, fs = 8, fs2=7, CI=True): 
         for i,(k,c) in enumerate(zip(['rep','poc','aou'],self.my_colors)): 
-            yF, yT, yS = self.discovery_key[k] 
+            if i == 0: self.progress.set_panel('d') 
+            else:      self.progress.set_panel('f') 
             
+            yF, yT, yS = self.discovery_key[k] 
             yp, mSize = yF/yT, 'n~'+str(int(np.mean(yS) / 1000.0))+'k' 
             #ax1.bar(i,yp, color=c,width=0.7) 
             ax1.bar(i,yp, color=c, ec='k',lw=0.5,alpha=0.8,width=0.7) 

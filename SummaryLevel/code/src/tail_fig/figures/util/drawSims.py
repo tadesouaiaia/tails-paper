@@ -7,16 +7,16 @@ import drawLabels as DL
 
 
 class SlimLib: 
-    def __init__(self, options, XTD=False):
-        self.options, self.XTD = options, XTD
+    def __init__(self, fig, XTD=False):
+        self.fig, self.progress, self.options, self.XTD = fig, fig.progress, fig.options, XTD
         self.colors = ['dimgrey','xkcd:tea','cornflowerblue','xkcd:electric pink','springgreen','magenta','deeppink','pink','orange','gold','yellow']
         self.colors = ['dimgrey','xkcd:tea','cornflowerblue','xkcd:pumpkin orange','springgreen','magenta','deeppink','pink','orange','gold','yellow']
         self.c1, self.c2 = self.colors[0], self.colors[3] 
         self.fs1, self.fs2, self.fs3, self.fs4, self.fs5 = 10, 8, 7,6,5
         self.sz1, self.sz2,self.sz3 = 15,12,10
         self.lw1, self.lw2,self.lw3 = 1,0.8,0.6
-        if XTD: self.read_in_dists(options.simPath) 
-        else:   self.read_in_files(options.simPath) 
+        if XTD: self.read_in_dists(self.options.simPath) 
+        else:   self.read_in_files(self.options.simPath) 
 
     def read_in_dists(self, simPath): 
         self.SLIM = False  
@@ -96,7 +96,9 @@ class SlimLib:
 
 
 
-    def plot_sim_curves(self, ax, lw=2): 
+    def plot_sim_curves(self, ax, lw=1.5): 
+        
+        if self.progress.SAVESRC: self.progress.out3.write('%s,%s,%s,%s\n' % ('Panel', 'dataType','ptType','values')) 
         VK = {} 
         XP = [1,2,3,4,5,6,11,16,21,26,31,36,41,46,51,56,61,66,71,76,81,86,91,96,97,98,99,100] 
         for k in self.e_data.keys(): VK[k] = [round(self.e_data[k][x][0],4) for x in XP] 
@@ -116,7 +118,11 @@ class SlimLib:
             ax.plot([x1,x2],[yp,yp],lw=lw,color=c) 
             ax.text(x2+1,yp,txt,va='center',fontsize=self.fs3) 
             ax.plot(XP,Y,lw=lw,color=c)  
-            yp+=3 
+            yp+=3  
+            if self.progress.SAVESRC:
+                datatype = "".join("".join(txt.split('$')).split('\\'))
+                self.progress.out3.write('%s,%s,%s,%s\n' % (self.progress.panel, datatype,'Trait Quantiles',";".join([str(x) for x in XP]))) 
+                self.progress.out3.write('%s,%s,%s,%s\n' % (self.progress.panel, datatype,'Rare Enrichment',";".join([str(y) for y in Y]))) 
         ax.plot([-3,103],[1,1],linestyle='--', lw=3,color='dimgrey',zorder=0) 
         ax.set_xlim(-2,102) 
         ax.set_xlabel('Trait Quantiles',fontsize=self.fs2)  
@@ -127,7 +133,9 @@ class SlimLib:
 
 
 
-    def plot_sim_boxes(self, ax, c1 = 'red',c2='grey', sz=100): 
+    def plot_sim_boxes(self, ax): # c1 = 'red',c2='grey', sz=100): 
+        
+        if self.progress.SAVESRC: self.progress.out3.write('%s,%s,%s,%s\n' % ('Panel', 'dataType','ptType','values')) 
         self.c2 = 'xkcd:darkish red'
         X = [x for x in range(100)]
         dt = [np.random.normal(0,0.3,100) for i in range(36)] 
@@ -135,16 +143,25 @@ class SlimLib:
         s_data, n_data = [self.d_data['SELECT'][k] for k in keys], [self.d_data['NEUTRAL'][k] for k in keys] 
         s_err = [2*stats.sem(d) for d in s_data] 
         n_err = [2*stats.sem(d) for d in n_data] 
-        s_means = [np.mean(d) for d in s_data] 
-        n_means = [np.mean(d) for d in n_data] 
+        s_means = [round(np.mean(d),3) for d in s_data] 
+        n_means = [round(np.mean(d),3) for d in n_data] 
         xp = [i for i in range(len(keys))] 
-        ax.plot(keys,s_means, color=self.c2, lw=self.lw2) 
         ax.plot(keys,n_means, color=self.c1, lw=self.lw2) 
+        ax.plot(keys,s_means, color=self.c2, lw=self.lw2) 
+        self.progress.out3.write('%s,%s,%s,%s\n' % (self.progress.panel, 'Neutrality','Trait Quantiles',";".join([str(x) for x in keys]))) 
+        self.progress.out3.write('%s,%s,%s,%s\n' % (self.progress.panel, 'Neutrality','POPoutEffects',";".join([str(x) for x in n_means]))) 
+        self.progress.out3.write('%s,%s,%s,%s\n' % (self.progress.panel, 'Neutrality','ConfIntervals',";".join([str(round(s-e,3))+'|'+str(round(s+e,3)) for s,e in zip(n_means, n_err)]))) 
+        self.progress.out3.write('%s,%s,%s,%s\n' % (self.progress.panel, 'UnderSelection','Trait Quantiles',";".join([str(x) for x in keys]))) 
+        self.progress.out3.write('%s,%s,%s,%s\n' % (self.progress.panel, 'UnderSelection','POPoutEffects',";".join([str(x) for x in s_means]))) 
+        self.progress.out3.write('%s,%s,%s,%s\n' % (self.progress.panel, 'UnderSelection','ConfIntervals',";".join([str(round(s-e,3))+'|'+str(round(s+e,3)) for s,e in zip(s_means, s_err)]))) 
         for i,(x,s,n,se,ne) in enumerate(zip(keys,s_means, n_means, s_err, n_err)): 
             ax.scatter(x,s,color=self.c2,s=self.sz2,clip_on=False) 
             ax.plot([x,x],[s-se,s+se], color = self.c2,lw=self.lw2,clip_on=False)  
             ax.scatter(x,n,color=self.c1,s=self.sz2,clip_on=False) 
             ax.plot([x,x],[n-ne,n+ne], color = self.c1,lw=self.lw2,clip_on=False)  
+        
+
+
         xlocs = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35]
         ax.set_xlabel('Trait Quantiles', fontsize=self.fs2) 
         ax.set_ylabel('POPout Effects', fontsize=self.fs2) 

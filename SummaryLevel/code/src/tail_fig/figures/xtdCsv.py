@@ -210,11 +210,8 @@ class CsvOut:
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName='Csv'): 
-        self.options, self.traits, self.data, self.progress, self.figName = options, traits.members, traits, progress, figName
-        self.C1 = 'xkcd:very light blue' 
-        self.C1 = 'xkcd:very light pink' 
-        self.C2 = 'xkcd:off white' 
-        self.E1, self.E2 = 'darkslategray','gray' 
+        self.options, self.traits, self.data, self.figName = options, traits.members, traits, figName
+        self.progress = progress.update(self) 
 
 
     
@@ -222,12 +219,12 @@ class MyFigure:
         names = ['table-glossary.csv', 'table-traitSummaries.csv','table-commonTails.csv', 'table-rareTails.csv', 'table-rareSNPs.csv'] 
         paths = [self.options.out + n for n in names] 
         csv_key      = CsvOut(self.traits, paths[0]).write_full_glossary() 
-        summaries      = CsvOut(self.traits, paths[1]).write_summaries() 
+        summaries    = CsvOut(self.traits, paths[1]).write_summaries() 
         common_tails = CsvOut(self.traits, paths[2]).write_common_tests() 
         rare_tails   = CsvOut(self.traits, paths[3]).write_rare_tails() 
         snps         = CsvOut(self.traits, paths[4]).write_rares() 
         
-        self.progress.save('(Csv Tables Saved: '+",".join([p for p in paths])+')')
+        self.progress.save() #'(Csv Tables Saved: '+",".join([p for p in paths])+')')
                                                         
 
         

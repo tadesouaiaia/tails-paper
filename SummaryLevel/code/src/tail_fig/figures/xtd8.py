@@ -5,104 +5,16 @@ from util.Util   import *
 from util import drawScatter as SP
 from util import drawVarious as DV
 from util import drawLabels  as DL
-from matplotlib.colors import to_rgb, ListedColormap
 
 # Extended Data Figure: Analysis of the Tail and Extreme Tail 0.1% # 
-
-class PlotLabels:
-    def __init__(self, options): #trait_key, DRAW=True): 
-        self.options = options 
-
-
-    def add_indiv_key(self, ax, ck, RULE='LOWER',fs =8, fs2=6, fs3=5): 
-        xMin, xMax = ax.get_xlim() 
-        yMin, yMax = ax.get_ylim()
-        xs, ys = (xMax-xMin)/100.0, (yMax-yMin)/100.0
-        x1, x2 = xMin +3*xs, xMin + 95*xs
-        y1, yl, y2 = yMax - 20*ys, yMax - 20*ys, yMax +13*ys
-        clrs = [ck.c1, ck.c2, ck.rc, ck.rce,ck.c1,ck.c2,ck.c1e,ck.c2e] 
-        
-        maps = [ck.map1, ck.map2, ck.map3] 
-        DV.draw_square(ax, x1, x2, y1, y2) 
-        sz = 19
-        yjj = 21.5
-        if RULE == 'LOWER': ax.text(x1+xs*29, y2-ys*1.5, 'Lower Tail Bins',ha='center',va='top',fontsize=fs2) 
-        else:               ax.text(x1+xs*29, y2-ys*1.5, 'Upper Tail Bins',ha='center',va='top',fontsize=fs2) 
-        for i,xj in enumerate([1, 25, 47,67]): 
-            x = x1+xs*xj
-            if i < 3: 
-                xp, yp = x, y2-ys*yjj
-                for j,cm in enumerate(maps[i]): 
-                    rt = matplotlib.patches.Rectangle((xp+j*0.16,yp),0.16,0.02,color=cm)
-                    ax.add_patch(rt) 
-                if i == 0: ax.text(x+0.16*5, y2-ys*(yjj+2), 'Common PRS',ha='center',va='top',fontsize=fs3) 
-                elif i == 1: ax.text(x+0.16*5, y2-ys*(yjj+2), 'Rare${+}$Common PRS',ha='center',va='top',fontsize=fs3) 
-                elif i == 2: ax.text(x+0.16*5, y2-ys*(yjj+2), 'Rare PRS',ha='center',va='top',fontsize=fs3) 
-            else: 
-                ax.scatter(x,y2-ys*17, marker='*', color='k', ec= 'k', s=sz, zorder=5, clip_on=False) 
-                ax.text(x+xs*2.1, y2-ys*8.5, 'Sig. Dif (P$<$0.05)\nRelative to Common',ha='left',va='top',fontsize=fs3) 
-        return
-
-
-    def make_index_key(self, pp, ck, fs = 6): 
-        ax, lms = pp.ax, pp.lms 
-        xMin, yMin, xs, ys = lms.xMin, lms.yMin, lms.xStep, lms.yStep
-        x1, x2 = xMin - 33.2*xs, xMin + 9.6*xs
-        y1, yl, y2 = yMin - 4.35*ys, yMin - 3.25*ys, yMin - 2.1*ys
-        clrs = [ck.rc, ck.rce, ck.c1, ck.c1e,ck.c2, ck.c2e,ck.c2e] 
-        sz = 22
-        for i,xj in enumerate([0.15, 5.0, 11.33, 17.15,24.9,34.4]): 
-            x = x1+xs*xj
-            if i in [0,2]: 
-                ax.scatter(x,yl, marker='v', color=clrs[i], ec= 'k', lw=0.5,s=sz, zorder=5, clip_on=False) 
-                ax.scatter(x+0.5*xs,yl, marker='o', color=clrs[i], ec= 'k', lw=0.5,s=sz, zorder=5, clip_on=False) 
-                ax.scatter(x+1*xs,yl, marker='^', color=clrs[i], ec= 'k', lw=0.5,s=sz, zorder=5, clip_on=False) 
-            else: 
-                ax.scatter(x,yl, marker='v', color=clrs[i], ec= 'k', s=sz, lw=0.5,zorder=5, clip_on=False) 
-                ax.scatter(x+0.5*xs,yl, marker='^', color=clrs[i], ec= 'k', lw=0.5,s=sz, zorder=5, clip_on=False) 
-            if i == 0: ax.text(x+1.30*xs,yl,'Rare PRS',va='center',ha='left',fontsize=fs)
-            elif i == 1: ax.text(x+0.88*xs,yl,'Rare Tails (0.1%)',va='center',ha='left',fontsize=fs)
-            elif i == 2: ax.text(x+1.30*xs,yl,'Common PRS',va='center',ha='left',fontsize=fs)
-            elif i == 3: ax.text(x+0.8*xs,yl,'Common Tails (0.1%)',va='center',ha='left',fontsize=fs)
-            elif i == 4: ax.text(x+1.03*xs,yl,'Rare${+}$Common Tails (1%)',va='center',ha='left',fontsize=fs)
-            else: ax.text(x+0.9*xs,yl,'Rare${+}$Common Tails (0.1%)',va='center',ha='left',fontsize=fs)
-        DV.draw_square(ax, x1-5, x2+5, y1-ys*0.3, y2+ys*0.2) 
-        return  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def make_colormap(color1, color2, n=10):
-    """
-    Create an n-color colormap between any two named or hex colors.
-    """
-    c1 = np.array(to_rgb(color1))
-    c2 = np.array(to_rgb(color2))
-    gradient = np.linspace(c1, c2, n+2)
-    return gradient.tolist()[-10::]
 
 
 
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None):
-        self.options, self.data, self.traits, self.progress = options, traits, traits.members, progress
-        self.figName = figName
-        self.labels = PlotLabels(options) 
+        self.options, self.data, self.traits, self.figName = options, traits, traits.members, figName
+        self.progress = progress.update(self) 
         self.fs0, self.fs1, self.fs2, self.fs3, self.fs4, self.fs5 = 20, 15, 10, 7, 6, 5
         self.sz1, self.sz2, self.sz3 = 15,10,8
         self.lw1, self.lw2, self.lw3 = 1, 0.7, 0.5
@@ -157,14 +69,17 @@ class MyFigure:
         self.map2 = make_colormap(self.c2, self.c2e) 
         self.map3 = make_colormap(self.rc, self.rce) 
         index_plots, rare_plots = [], [] 
+        
+        self.progress.set_panel('a') 
         for i,(idx,ti) in enumerate(zip([1,3,5,7],self.options.indexTraits)):
             spp = SP.POPplot(self.axes[idx], self, ti, sz1=20,sz2=18,sz3=12,fs1=10,fs2=8,fs3=6) 
             spp.draw_extreme_recovery() 
             index_plots.append(spp) 
             if ti in self.traits: 
                 self.axes[idx].set_title(self.traits[ti].name.mini, x=0,y=0.97,va='center', fontsize=self.fs3) 
-
-        self.labels.make_index_key(index_plots[3], self) 
+        
+        DL.TailLabels(self.options).make_extreme_index_key(index_plots[3], self) 
+        #self.labels.make_index_key(index_plots[3], self) 
        
 
         for i,(idx,ti) in enumerate(zip([0,2,4,6],self.options.indexTraits)):
@@ -231,8 +146,11 @@ class MyFigure:
                 ax.set_xlim(xMin+0.1,xMax)  
                 ax.plot([xMin,xMax-0.2],[yMin, yMin], color='k', lw=1, clip_on=False) 
         
-        self.labels.add_indiv_key(axes[0], self, RULE="UPPER") 
-        self.labels.add_indiv_key(axes[2], self, RULE="LOWER") 
+        
+        DL.TailLabels(self.options).add_indiv_key(axes[0], self, RULE='UPPER') 
+        DL.TailLabels(self.options).add_indiv_key(axes[2], self, RULE='LOWER') 
+        #self.labels.add_indiv_key(axes[0], self, RULE="UPPER") 
+        #self.labels.add_indiv_key(axes[2], self, RULE="LOWER") 
         return
 
 
@@ -339,6 +257,11 @@ class MyFigure:
                 elif i == 13:   self.axes[i].set_title(x, x= -0.04, y = 1.03, fontsize=fs) 
             except: pass 
         plt.subplots_adjust(left=0.03, bottom=0.01, right=1.03, top=0.975,wspace=0.05, hspace=0.05) 
+        
+        self.progress.save() 
+        return
+
+
         if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
         else:                        figPath = self.options.out+'Sup1.pdf' 
         plt.savefig(figPath, dpi=self.options.dpi) 
