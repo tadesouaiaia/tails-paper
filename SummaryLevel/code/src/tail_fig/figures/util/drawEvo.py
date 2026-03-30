@@ -5,7 +5,6 @@ from Util import *
 import drawVarious as DV 
 import drawScatter as DS
 
-        
 
 class EvoPlot:
     def __init__(self, fig):
@@ -245,7 +244,7 @@ class EvoPlot:
         if self.progress.SAVESRC: self.progress.start_src('%s,%s,%s,%s,%s\n',('Panel', 'Trait-ID/Category','Tail','Effect/Mean','Confidence Interval'))
         self.PRINTPV, yMin = PRINTPV, 10 
         if not self.PRINTPV: axes[0].text(-0.2,11.2,'$POPout$ Effects Stratified by Inferred Selection',fontsize=self.fs2+0.5,clip_on=False) 
-        elif INIT:           axes[0].text(1.5,10.2,'$POPout$ Effects Stratified by Inferred Selection\n(Initial Models)',ha='center',fontsize=self.fs2-1,clip_on=False) 
+        elif INIT:           axes[0].text(1.5,10.2,'$POPout$ Effects Stratified by Inferred Selection\n(Top Models)',ha='center',fontsize=self.fs2-1,clip_on=False) 
         else:                axes[0].text(1.5,10.2,'$POPout$ Effects Stratified by Inferred Selection\n(Alternate Models)',ha='center',fontsize=self.fs2-1,clip_on=False) 
         labels = ['No Selection\n($\\beta$=0,$\gamma$=0)','Positive Directional\n($\\beta > 0$)','Negative Directional\n($\\beta < 0$)'] 
         for i,ax in enumerate(axes): 

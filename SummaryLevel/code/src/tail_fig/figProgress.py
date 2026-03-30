@@ -4,7 +4,7 @@ from figures.util.Util import *
 ##################################  PROGRESS STREAM  ########################################
 class Progress:
     def __init__(self, args, command_line, MODE='Generate Figures'): 
-        self.args, self.out_file = args, args.out+'runLog.txt' 
+        self.args, self.out_file = args, 'runLog.txt' 
         self.out1, self.out2, self.out3 = open(self.out_file, 'w'), sys.stderr, None 
         if args.silent: self.ACTIVE = False 
         else:           self.ACTIVE = True 

@@ -136,13 +136,17 @@ class MyFigure:
                 if self.progress.SAVESRC: 
                     fStr = ';'.join([str(round(fx,3)) for fx in P[k].fracs])    
                     cStr = ';'.join([str(round(fx - ci,3))+'-'+str(round(fx+ci,3)) for fx,ci in zip(P[k].fracs, P[k].binomialCI)])
-                
+                    
+                    if k == 'A+B+burden': knn = 'Rare PRS' 
+                    elif k == 'common': knn = 'Common PRS' 
+                    else:               knn = 'Rare+Common PRS' 
+
                     if tail == 'upper':  
-                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,k,'%SampleWithHighPRS',fStr)) 
-                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,k,'%SampleWithHighPRS-ConfidenceIntervals',cStr)) 
+                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,knn,'%SampleWithHighPRS',fStr)) 
+                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,knn,'%SampleWithHighPRS-ConfidenceIntervals',cStr)) 
                     else: 
-                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,k,'%SampleWithLowPRS',fStr)) 
-                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,k,'%SampleWithLowPRS-ConfidenceIntervals',cStr)) 
+                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,knn,'%SampleWithLowPRS',fStr)) 
+                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,knn,'%SampleWithLowPRS-ConfidenceIntervals',cStr)) 
             xMin, xMax = -0.8 , 9.5 
             yMin, yMax =   0,0.35 
             ax.set_ylim(yMin,yMax-0.05)  

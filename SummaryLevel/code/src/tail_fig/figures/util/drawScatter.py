@@ -91,6 +91,7 @@ class POPplot:
         self.lw1,self.lw2,self.lw3 =lw1,lw2,lw3
         self.sz1,self.sz2,self.sz3 =sz1,sz2,sz3 
         self.fs1,self.fs2,self.fs3 =fs1,fs2,fs3    
+        self.swap_key = {'poc': 'mlt', 'rep': 'rpt', 'aou': 'aou', 'ukb': 'ukb', 'UKB': 'UKB','A+B+burden': 'RarePRS'}
         self.X, self.markers = [x for x in range(100)], [] 
         self.zrp1, self.zrp2 = 'NA', 'NA'  
         if ti in fig.traits: self.VALID, self.NULL, self.T = True, False, fig.traits[ti] 
@@ -201,6 +202,8 @@ class POPplot:
         Ye = ";".join([str(x) for x in self.Ye]) 
         w = self.fig.progress.out3
         if self.INIT: w.write('%s,%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','PRS-Type','Data','Values')) 
+        if p_type in self.swap_key: p_type = self.swap_key[p_type] 
+
         w.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,p_type,'Trait-Centiles',Xs)) 
         w.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,p_type,'Observed-PRS',Ys)) 
         w.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,p_type,'Expected-PRS',Ye)) 

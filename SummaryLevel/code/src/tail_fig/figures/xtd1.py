@@ -5,6 +5,10 @@ from util.Util import *
 from util import drawScatter as SP
 from util import drawVarious as DV
 
+
+# Nom
+
+
 class SumStats:
     def __init__(self, betas, pvs): 
         self.betas, self.pvs = betas, pvs 
@@ -186,7 +190,7 @@ class MyFigure:
             lms1 = DV.AxLims(ax1,xlab = 'POPout Effect Size', ylab = 'Count', ystretch=0, xstretch=0,fs = 6, COMMANDS=['noSpines'], CORNERS=[['topRight',pt+'\nAvg='+SS.beta_avg,5]]) 
             lms2 = DV.AxLims(ax2,xlab = '$-log_{10}(P{-}Value)$', ylab = 'Count', ystretch=0, xstretch=0,fs = 6, COMMANDS=['noSpines'], CORNERS=[['topRight',pt+'#nom. sig='+str(SS.sig),5]]) 
         self.progress.report_result('Avg Effect Size Across Alt Bins (10%,5%,1%,0.5%,0.1%): '+str(",".join(sB)))
-        self.progress.report_result('Number Nom-Sig Across Alt Bins (10%,5%,1%,0.5%,0.1%): '+str(",".join(sP)))
+        self.progress.report_result('Number Non-Sig Across Alt Bins (10%,5%,1%,0.5%,0.1%): '+str(",".join(sP)))
 
 
 

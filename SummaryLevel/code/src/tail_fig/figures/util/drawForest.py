@@ -109,10 +109,18 @@ class ForestPlot:
         if FDR and QC: 
             self.ax.plot([locs[1],locs[2]],[self.yp,self.yp], color = T.group_color, clip_on=False, zorder=2, lw = LW) 
             self.ax.scatter(locs[0], self.yp, color = T.group_color, ec = T.group_color, clip_on=False, zorder=3, s=sz) 
-            return [str(pts[0]),[str(round(v,3)) for v in sorted(pts[1::])]] 
-        else: 
-            self.ax.scatter(locs[0], self.yp, color = 'white', ec = T.group_color, lw=LW,clip_on=False, zorder=3, s=sz) 
-            return [str(pts[0]),['','']] 
+        else: self.ax.scatter(locs[0], self.yp, color = 'white', ec = T.group_color, lw=LW,clip_on=False, zorder=3, s=sz) 
+        return [str(pts[0]),[str(round(v,3)) for v in sorted(pts[1::])]] 
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -123,7 +131,10 @@ class ForestPlot:
 class ForestReps:
     def __init__(self, ax, fig): 
         self.ax, self.fig, self.traits, self.data, self.options, self.progress = ax, fig, fig.traits, fig.data, fig.options, fig.progress 
-        
+        self.swap_key = {'poc': 'mlt', 'rep': 'rpt', 'aou': 'aou', 'ukb': 'ukb', 'UKB': 'UKB'} 
+
+
+
     def rep_whisky(self, pts, T, mp, marker = 'o', color='k', TYPE='UKB', QC=True, SIZE=9999, MIN = -0.23, MAX=0.58): 
         if TYPE == 'UKB': 
             locs = [(self.pad + p)*mp for p in pts]                                                                                                                                                                             
@@ -224,8 +235,8 @@ class ForestReps:
                 self.rep_whisky(e1, T, -1, 'o', c, TYPE=k, QC=QC, SIZE=size)
                 self.rep_whisky(e2, T,  1, 'o', c, TYPE=k, QC=QC, SIZE=size)  
                 if self.progress.SAVESRC: 
-                    w.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id, k, 'lower', ';'.join([str(round(xx,3)) for xx in e1]))) 
-                    w.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id, k, 'upper', ';'.join([str(round(xx,3)) for xx in e2]))) 
+                    w.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id, self.swap_key[k], 'lower', ';'.join([str(round(xx,3)) for xx in e1]))) 
+                    w.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id, self.swap_key[k], 'upper', ';'.join([str(round(xx,3)) for xx in e2]))) 
                 self.yp -= 0.25 
             self.yp -= 0.9
         self.yp += 1 * 0.79                                                                                                                                                                                           

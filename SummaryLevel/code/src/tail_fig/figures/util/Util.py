@@ -82,9 +82,15 @@ def mean_ci(x, alpha=0.05):
 
 
 def merge_csv_to_excel_sheets(goals,progress,args): 
-    import pandas as pd 
-    SK = dd(list)
     progress.start_step('\n  Merging CSV to Excel Sheets')
+    try: 
+        import pandas as pd 
+        import openpyxl 
+    except: 
+        sys.stderr.write('\n   Error: Missing Libraries\n    pandas and openpyxl are needed to merge csv to excel (skipping this step)\n') 
+        return 
+
+    SK = dd(list)
     for f in os.listdir(args.srcPath): SK[f.split('-')[0]].append(args.srcPath+f) 
     for k,KL in SK.items(): 
         progress.dot(3)  
@@ -102,7 +108,7 @@ def merge_csv_to_excel_sheets(goals,progress,args):
     if len(csv_tables) > 0:
         try: 
             CK = {c.split('-')[-1].split('.')[0]: args.out+c for c in csv_tables} 
-            with pd.ExcelWriter(args.xlsPath+'supplementalData.xlsx') as writer: 
+            with pd.ExcelWriter(args.xlsPath+'auxillaryData.xlsx') as writer: 
                 for k in ['traitSummaries', 'commonTails','rareTails','rareSNPs', 'glossary']:  
                     if k in CK: 
                         pd.read_csv(CK[k]).to_excel(writer, sheet_name = k, index=False) 

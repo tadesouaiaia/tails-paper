@@ -103,7 +103,7 @@ def parse_figs_args(argv):
     p.add_argument("--in", dest='infile',required=True, type=argparse.FileType("r"))
     p.add_argument("--vals", required=True, nargs="+", type=argparse.FileType("r"))
     p.add_argument("--pts",  required=True, nargs="+", type=argparse.FileType("r"))
-    p.add_argument("--figFormats",  default=['pdf','jpeg','tiff'], nargs="+", type=str)
+    p.add_argument("--figFormats",  default=['pdf','jpeg'], nargs="+", type=str)
     p.add_argument("--silent",action="store_true",help="Suppress non-essential output")
     p.add_argument("--saveSrc",action="store_true",help="Save src data") 
     p.add_argument("--makeSheets",action="store_true",help="Create Excel Sheets") 

@@ -3,13 +3,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
 
 from util.Util   import *
-#from util import drawForest as FP
 from util import drawScatter as SP
-#from util import drawPreds as DP
 from util import drawVarious as DV
 from util import drawLabels  as DL
 from util import drawCartoon  as DC
-
 
 
 
@@ -161,7 +158,7 @@ class MyFigure:
         xLab, yLab = '$POPout$ $P$-value ($-log_{10}P$)', '$STANDout$ $P$-value ($-log_{10}P$)'
         lms = DV.AxLims(self.ax,xlab=xLab,ylab=yLab,xLim=[min(X)-3,max(X)+5],yLim=[min(Y)-0.5,max(Y)+1],fs = self.fs2,COMMANDS=['nospines']) 
         R, pv = DV.add_scatter_corr(ax,X,Y, fs=7, INTERCEPT=False) 
-        self.progress.report_result('POPout/Standout Correlation: '+str(round(R,3))+', pv='+str(pv)) 
+        self.progress.report_result('POPout/STANDout Correlation: '+str(round(R,3))+', pv='+str(pv)) 
         x1, y1 = lms.xMax - lms.xStep * 3.6, lms.yMin + lms.yStep * 2 
         for i,(g,c) in enumerate(zip(self.data.group_names, self.data.group_colors)): 
             ax.scatter(x1,y1-lms.yHop*3.6*i,marker='s',color=c,s=self.sz1,ec='k', lw=0.5) 

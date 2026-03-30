@@ -37,6 +37,7 @@ The figure-generation code checks for the following Python modules:
 - `numpy`
 - `scipy`
 - `statsmodels`
+- `pandas` and `openpyxl` are required to merge csv to xls files (optional step)  
 
 Notes:
 - The QC stage is lighter, but in practice it is simplest to install the same environment for both stages.
@@ -44,7 +45,7 @@ Notes:
 A minimal install is typically:
 
 ```bash
-python3 -m pip install matplotlib numpy scipy statsmodels 
+python3 -m pip install matplotlib numpy scipy statsmodels pandas
 ```
 
 ## Quick start

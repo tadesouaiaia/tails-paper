@@ -7,7 +7,7 @@ from util import drawScatter as SP
 from util import drawVarious as DV
 from util import drawLabels  as DL
 
-
+# yo
 
 class MyFigure:
     def __init__(self, options, traits, progress,figName=None): 
@@ -51,17 +51,9 @@ class MyFigure:
             elif i == 5:   self.axes[i].set_title(x, x= 0.05, y = 1.05, fontsize=fs+5) 
             elif i == 21:   self.axes[i].set_title(x, x= 0.01, y = 0.93, fontsize=fs) 
 
-        plt.subplots_adjust(left=0.01, bottom=-0.01, right=0.99, top=0.99,wspace=0.05, hspace=0.1) 
-        
+        plt.subplots_adjust(left=0.01, bottom=0.0075, right=0.99, top=0.99,wspace=0.05, hspace=0.1) 
         self.progress.save() 
         return
-
-        if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
-        else:                        figPath = self.options.out+'Fig4.pdf' 
-        plt.savefig(figPath, dpi=self.options.dpi) 
-        plt.clf() 
-        self.progress.save('(Figure Saved: '+figPath+')')
-        return 
 
 
 
@@ -210,8 +202,8 @@ class MyFigure:
         
         if self.progress.SAVESRC: 
             w = self.progress.out3 
-            r_names = ['POPoutReduction(>0.1%)','POPoutReduction(>0.01%)','POPoutReduction(Burden)','Common-OR','Common-OR-CI','Common+Rare-OR','Common+Rare-OR-CI'] 
-            w.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' % tuple(['Panel','Trait-ID','Tail'] + r_names))
+            r_names = ['POPoutReduction(rare>0.1%)','POPoutReduction(rare>0.01%)','POPoutReduction(Burden)','POPoutReduction(SumTotal)','Common-OR','Common-OR-CI','Common+Rare-OR','Common+Rare-OR-CI'] 
+            w.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' % tuple(['Panel','Trait-ID','Tail'] + r_names))
 
 
         TR = self.split_recovery_traits() 
@@ -253,8 +245,7 @@ class MyFigure:
             
 
                 if self.progress.SAVESRC: 
-                    r_names = ['POPoutReduction(>0.1%)','POPoutReduction(>0.01%)','POPoutReduction(Burden)','Common-OR','Common-OR-CI','Common+Rare-OR','Common+Rare-OR-CI'] 
-                    w.write('%s,%s,%s,%s,%s,%s,' % tuple([self.progress.panel, T.id, k] + r_vals))
+                    w.write('%s,%s,%s,%s,%s,%s,%s' % tuple([self.progress.panel, T.id, k] + r_vals+[rTot]))
                     w.write('%s,%s,' % tuple([str(round(pts[0],3)),str(round(pts[0]-cis[0][0],3))+'-'+str(round(pts[0]+cis[0][1],3))]))
                     w.write('%s,%s\n' % tuple([str(round(pts[1],3)),str(round(pts[1]-cis[1][0],3))+'-'+str(round(pts[1]+cis[1][1],3))]))
 

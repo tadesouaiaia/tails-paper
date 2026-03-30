@@ -8,12 +8,14 @@ from util import drawForest  as DF
 
 # Extended Data Figure: Detailed Replication # 
 
+# poc 
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None): 
         self.options, self.data, self.traits, self.figName = options, traits, traits.members, figName
         self.exampleTraits = self.get_valid_examples() 
         self.progress = progress.update(self) 
+        self.swap_key = {'poc': 'mlt', 'rep': 'rpt', 'aou': 'aou', 'ukb': 'ukb', 'UKB': 'UKB'}
         self.fs0, self.fs1, self.fs2, self.fs3, self.fs4, self.fs5 = 20, 15, 10, 7, 6, 5
         self.sz1, self.sz2, self.sz3 = 15,10,8
         self.lw1, self.lw2, self.lw3 = 1, 0.7, 0.5
@@ -99,19 +101,10 @@ class MyFigure:
             elif i == 5: ax.text(xp,yp, letters[i], fontsize=fs, clip_on=False) 
             else:        ax.text(xp,yp, letters[i], fontsize=fs, clip_on=False) 
             continue
-
-
         plt.subplots_adjust(left=0.03, bottom=0.033, right=0.975, top=0.975,wspace=0.01, hspace=0.03) 
-        
         self.progress.save() 
         return
 
-        if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
-        else:                        figPath = self.options.out+'Sup1.pdf' 
-        plt.savefig(figPath, dpi=self.options.dpi) 
-        plt.clf() 
-        self.progress.save('(Figure Saved: '+figPath+')')
-        return
 
 
     def create(self,choices):  
@@ -206,10 +199,10 @@ class MyFigure:
             w = self.progress.out3    
             if i == 0: 
                 w.write('%s,%s,%s\n' % ('Panel', 'ReplicationType','Percent Replicated')) 
-                for k,v in rep_result[panel].items(): w.write('%s,%s,%s\n' % (panel, k, v)) 
+                for k,v in rep_result[panel].items(): w.write('%s,%s,%s\n' % (panel, self.swap_key[k], v)) 
             else: 
                 w.write('%s,%s,%s,%s\n' % ('Panel', 'ReplicationType','Pearson Correlation','95% Confidence Interval')) 
-                for k,v in rep_result[panel].items(): w.write('%s,%s,%s,%s\n' % (panel, k, v[0], v[1])) 
+                for k,v in rep_result[panel].items(): w.write('%s,%s,%s,%s\n' % (panel, self.swap_key[k], v[0], v[1])) 
         return
 
     def draw_reps(self, ax1, ax2, fs = 8, fs2=7, CI=True): 
