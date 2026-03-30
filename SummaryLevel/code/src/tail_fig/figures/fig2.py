@@ -9,24 +9,15 @@ from util import drawPreds as DP
 from util import drawVarious as DV 
 from util import drawLabels  as DL 
 
-
-
-
-
-
-
-
-
-
-
 class MyFigure:
     def __init__(self, options, traits, progress, figName='main2'): 
         self.options, self.traits, self.data, self.figName = options, traits.members, traits, figName #progress.update(self) 
         self.progress = progress.update(self) 
         self.rep_color_key = {'rep': 'xkcd:purpley', 'poc': 'xkcd:barney', 'aou': 'xkcd:leaf green'} 
         self.fs0, self.fs1, self.fs2, self.fs3, self.fs4 = 20, 15, 10, 8, 5 
+        self.name_swap = {'rep': 'rpt', 'poc': 'mlt', 'aou': 'aou'} 
 
-    
+
     def draw(self): 
         self.setup() 
         self.create() 
@@ -51,27 +42,20 @@ class MyFigure:
         self.axes.append(plt.subplot2grid((self.rows,self.cols), (rs2+16,cs1*2+9), rowspan = self.rows-(rs2+16), colspan =self.cols-(cs1*2+17)))
         self.fig.set_size_inches(self.WD, self.HT) 
         return self       
-   
 
     def create(self):
         xLabs, yLabs, popRes = [None,None,'Trait Centile','Trait Centile'],['PRS',None,'PRS',None], [] 
-        
         self.progress.set_panel('a') 
         for i,ti in enumerate(self.options.indexTraits): 
             sp = SP.POPplot(self.axes[i], self, ti, xLab=xLabs[i], yLab=yLabs[i], INIT=(i==0)) 
             sp.draw_common_popout() 
         DL.BoxKeys(self.axes[2]).add_popout_key('bottom-2') 
-        
-        
         self.ax_index += len(self.options.indexTraits) 
         self.progress.set_panel('b') 
         fp = FP.ForestPlot(self.axes[self.ax_index: self.ax_index+2], self).draw_up_to_three()   
-        
         self.progress.set_panel('c') 
         dp = DP.PredPlot(self).draw_index_pair(self.axes[self.ax_index+2:self.ax_index+10])  
         DL.BoxKeys(self.axes[-3]).add_prediction_key('bottom-2') 
-        
-
         self.progress.set_panel('d') 
         self.create_reps(self.axes[-1]) 
         return
@@ -120,7 +104,7 @@ class MyFigure:
         rems = sorted([k+'(Total/QC/5k): '+str(V['TOTAL'])+','+str(V['QC'])+','+str(V['5k']) for k,V in rep_removes.items()]) 
         kept = ",".join([str(len(PD[k]['xL'])) for k in ['aou','poc','rep']]) 
         self.progress.report_result('Replication Removals: '+', '.join(rems))  
-        self.progress.report_result('Replication Kept: aou,poc,rep: '+kept) 
+        self.progress.report_result('Replication Kept: aou,mlt,rpt: '+kept) 
         return PD 
 
 
@@ -137,7 +121,7 @@ class MyFigure:
             ax.scatter(PD[k]['xH'], PD[k]['yH'], marker='^', color = clr, s= 12, ec='k',lw=0.1, zorder=10) 
             R,Rpv = DV.add_scatter_corr(ax, PD[k]['X'], PD[k]['Y'], clr=clr, fs=fs+1, lw=1.5, EXTEND=xe, REP=k) 
             ss_str = ' (Avg SampleSize: '+str(round(np.mean(PD[k]['S']),1))+') '
-            self.progress.report_result('Replication on '+k+' '+str(len(PD[k]['xL']))+' Traits, R='+str(round(R,3))+', p='+str(Rpv)+ss_str) 
+            self.progress.report_result('Replication on '+self.name_swap[k]+' '+str(len(PD[k]['xL']))+' Traits, R='+str(round(R,3))+', p='+str(Rpv)+ss_str) 
         x1,x2 = -0.26, 0.76
         x1,x2 = -0.26, 0.78
         y1,y2 = -0.4, 0.64
@@ -155,11 +139,46 @@ class MyFigure:
 
         if self.progress.SAVESRC: 
             w = self.progress.out3
-            w.write('%s,%s,%s\n' % ('Panel', 'DataSet','ReplicationEffects'))
+            #w.write('%s,%s,%s\n' % ('Panel', 'DataSet','ReplicationEffects'))
+            w.write('%s,%s,%s,%s,%s,%s,%s\n' % ('Panel','Trait-ID','Tail','UKB-Euro-POPoutEffect','RepeatMeasure-RepEffect','Multi-Ancestry-RepEffect','AOU-RepEffect')) 
             Tk, trait_ids = dd(list), sorted([k for k in self.rep_src.keys()]) 
             for ti in trait_ids:
                 if len(self.rep_src[ti].keys()) == 1: continue 
-                for opt in ['ukb','rep', 'poc', 'aou']: 
-                    if opt in self.rep_src[ti]: Tk[opt].extend([str(v) for v in self.rep_src[ti][opt]]) 
-                    else:                       Tk[opt].extend(['',''])
-            for k in Tk.keys(): w.write('%s,%s,%s\n' % (self.progress.panel,k,';'.join(Tk[k]))) 
+                RP = self.rep_src[ti] 
+                for i,tail in enumerate(['lower','upper']): 
+                    r_data = [self.progress.panel, ti, tail] 
+                    for k in ['ukb','rep','poc','aou']: 
+                        if k in self.rep_src[ti]: r_data.append(self.rep_src[ti][k][i]) 
+                        else:                     r_data.append('NA') 
+
+                    w.write('%s,%s,%s,%s,%s,%s,%s\n' % tuple(r_data)) 
+                        
+
+                #if len(self.rep_src[ti].keys()) == 1: continue 
+                #for opt in ['ukb','rep', 'poc', 'aou']: 
+                #    if opt in self.rep_src[ti]: Tk[opt].extend([str(v) for v in self.rep_src[ti][opt]]) 
+                #    else:                       Tk[opt].extend(['',''])
+            #for k in Tk.keys(): w.write('%s,%s,%s\n' % (self.progress.panel,k,';'.join(Tk[k]))) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

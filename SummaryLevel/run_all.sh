@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# STEP 0) make output dirs 
-
-#mkdir -p output_qc 
-#mkdir -p output_figs 
-
-
 # STEP 1) Run QC
 
 ./code/tails.py qc run --in data/namedTraits.txt --qcFile data/qc/txt/*.txt --useStandardFilters --dupeFile data/qc/gcorr.mat --configFile data/qc/config.txt --out output_qc/qc 
