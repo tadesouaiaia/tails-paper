@@ -132,7 +132,7 @@ class EvoPlot:
                 z1,z2=eLo-pop.j1, eLo+pop.j1 
                 ax.plot([min(-LR,-1*LR-z1),-1*LR-z2],[yp,yp],color='k',lw=0.7,clip_on=False) 
                 ax.plot([min(-LR,-1*LR-z1),-1*LR-z2],[yp,yp],color=clr,lw=0.5,clip_on=False) 
-                if self.progress.SAVESRC:  self.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id,'Lower',eLo,str(round(eLo-z1,3))+'|'+str(round(eLo+z1,3)))) 
+                if self.progress.SAVESRC:  self.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id,'Lower',eLo,str(round(z1,3))+'|'+str(round(z2,3)))) 
 
         if eHi < 0: 
             ax.barh(yp,0.01,left=LR,height=ht,color=clr,clip_on=False,alpha=baf) 
@@ -143,10 +143,10 @@ class EvoPlot:
             ax.barh(yp,eHi,left=LR,height=ht,color=cx,ec=ex,lw=0.33,clip_on=False,alpha=baf) 
             
             if self.CI: 
-                z1,z2=eHi-pop.j1, eHi+pop.j1 
+                z1,z2=eHi-pop.j2, eHi+pop.j2
                 ax.plot([max(LR,LR+z1),LR+z2],[yp,yp],color='k',lw=0.7,clip_on=False) 
                 ax.plot([max(LR,LR+z1),LR+z2],[yp,yp],color=clr,lw=0.5,clip_on=False) 
-                if self.progress.SAVESRC:  self.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id,'Upper',eHi,str(round(eHi-z1,3))+'|'+str(round(eHi+z1,3)))) 
+                if self.progress.SAVESRC:  self.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id,'Upper',eHi,str(round(z1,3))+'|'+str(round(z2,3)))) 
         return yp - 0.3
 
 

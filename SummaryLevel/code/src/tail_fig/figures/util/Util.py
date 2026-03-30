@@ -81,6 +81,31 @@ def mean_ci(x, alpha=0.05):
     return mean, lo, hi
 
 
+def merge_csv_to_excel_sheets(goals,progress,args): 
+    import pandas as pd 
+    SK = dd(list)
+    progress.start_step('\n  Merging CSV to Excel Sheets')
+    for f in os.listdir(args.srcPath): SK[f.split('-')[0]].append(args.srcPath+f) 
+    for k,KL in SK.items(): 
+        progress.dot(3)  
+        #if k not in goals: continue 
+        KL.sort() 
+        try: 
+            with pd.ExcelWriter(args.xlsPath+k+'.xlsx') as writer: 
+                for st in KL: 
+                    cand = st.split('-')[-1].split('.csv')[0] 
+                    try: pd.read_csv(st).to_excel(writer, sheet_name=cand, index=False)
+                    except: continue 
+        except IndexError: continue 
+    csv_tables = [f for f in os.listdir(args.out) if f.split('.')[-1] == 'csv'] 
+    progress.dot(3)  
+    if len(csv_tables) > 0:
+        try: 
+            CK = {c.split('-')[-1].split('.')[0]: args.out+c for c in csv_tables} 
+            with pd.ExcelWriter(args.xlsPath+'supplementalData.xlsx') as writer: 
+                for k in ['traitSummaries', 'commonTails','rareTails','rareSNPs', 'glossary']:  
+                    if k in CK: 
+                        pd.read_csv(CK[k]).to_excel(writer, sheet_name = k, index=False) 
 
-
-
+        except IndexError: pass  
+    progress.show('...Complete (xlsx sheets saved: '+args.xlsPath+')') 

@@ -65,7 +65,6 @@ class MyFigure:
     def __init__(self, options, traits, progress, figName=None):
         self.options, self.data, self.traits, self.figName = options, traits, traits.members, figName
         self.progress = progress.update(self) 
-
         self.exampleTraits = self.get_valid_examples()
         self.fs1, self.fs2, self.fs3, self.fs4 = 10, 8, 7 , 5
 
@@ -113,7 +112,6 @@ class MyFigure:
         
 
         self.progress.set_panel('a') 
-
         for i,k in enumerate([0.1,0.5,1,5,10]):
             axes = self.axes[i*4:4+i*4] 
             for j,ti in enumerate(self.exampleTraits): 
@@ -144,9 +142,28 @@ class MyFigure:
             SK[loc] = SumStats(effects,pvs) 
         self.ax_index = 20        
         self.draw_bins(SK, self.axes[20::]) 
+        if self.progress.SAVESRC: self.save_bins(SK) 
         return 
 
+    def save_bins(self, LK): 
+        self.progress.set_panel('b') 
+        w = self.progress.out3
+        w.write('%s,%s,%s,%s\n' % ('Panel', 'POPout-TailSize','DataType','Values'))
+        for i,(name,loc) in enumerate(zip(self.names,self.locs)): 
+            if loc in LK:
+                w.write('%s,%s,%s,%s\n' % (self.progress.panel,name,'POPoutEffectSize-bins',";".join([str(b) for b in LK[loc].binnedB[0]])))
+                w.write('%s,%s,%s,%s\n' % (self.progress.panel,name,'POPoutEffectSize-cnts',";".join([str(b) for b in LK[loc].binnedB[1]])))
+        self.progress.set_panel('c') 
+        w = self.progress.out3
+        w.write('%s,%s,%s,%s\n' % ('Panel', 'POPout-TailSize','DataType','Values'))
+        for i,(name,loc) in enumerate(zip(self.names,self.locs)): 
+            if loc in LK:
+                w.write('%s,%s,%s,%s\n' % (self.progress.panel,name,'POPoutLogP-bins',";".join([str(b) for b in LK[loc].binnedP[0]])))
+                w.write('%s,%s,%s,%s\n' % (self.progress.panel,name,'POPoutLogP-cnts',";".join([str(b) for b in LK[loc].binnedP[1]])))
+        return 
     
+
+
     
 
 
@@ -162,7 +179,6 @@ class MyFigure:
                 for j,(x,y) in enumerate(zip(X,Y)): 
                     if j == 0:  
                         ax2.bar(0,Y[0],width=X[0],align='edge',color='white',ec='darkgreen') 
-                        #ax2.plot([1.3,1.3],[0,max(Y)+1], color='k', linestyle='--') 
                     elif j == 1: ax2.bar(X[j-1],Y[1],width=X[1]-X[0],align='edge',color='green',ec='darkgreen') 
                     else:        ax2.bar(x-2,y,width=2,align='edge',color='green',ec='darkgreen') 
             sB.append(str(SS.beta_avg)) 

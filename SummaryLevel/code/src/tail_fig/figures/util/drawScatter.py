@@ -25,23 +25,16 @@ class EvoScatter:
 
 
     def main_box(self, xp=1,yp=1,xlab=None,ylab=None): 
-        
-
         if self.fig.progress.SAVESRC: 
             self.fig.progress.out3.write('%s,%s,%s,%s\n' % (self.fig.progress.panel, self.T.id,'TraitValues',";".join([str(round(x,4)) for x in self.X])))  
             self.fig.progress.out3.write('%s,%s,%s,%s\n' % (self.fig.progress.panel, self.T.id,'LRS',";".join([str(round(x,4)) for x in self.Y])))  
-
-
         self.ax.scatter(self.X,self.Y, color = self.T.group_color, s = self.fig.sz1, edgecolor='lightgrey', alpha = 0.75, lw=self.fig.lw3, zorder = 1)
         if self.T.vals['lrs'].model != 'Y~yInt':
             pm = self.T.vals['lrs'].params 
             yDash = [pm[0] + (x*pm[1]) + (x*x*pm[2]) for x in self.X]
-            self.ax.plot(self.X, yDash, color='k',linestyle='--',linewidth=self.fig.lw3,zorder=3)
+            self.ax.plot(self.X, yDash, color='k',linestyle='--',linewidth=self.fig.lw1,zorder=3)
             if self.fig.progress.SAVESRC: 
                 self.fig.progress.out3.write('%s,%s,%s,%s\n' % (self.fig.progress.panel, self.T.id,'fitLine',";".join([str(round(x,4)) for x in yDash])))  
-        
-
-
         if xp == 0: ylab = 'Lifetime\nReproductive\nSuccess'
         if yp == 3: xlab = 'Trait Value (z)'
         lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = xlab, ylab = ylab, xstretch = 1.4, ystretch = [1.15,2.0], fs = self.fig.fs4-0.25)
@@ -49,13 +42,17 @@ class EvoScatter:
         else:                  self.ax.text(lms.xMin + lms.xRange/2.0, lms.yMax - lms.yStep/3.0, self.T.name.mini, ha = 'center', va ='top',fontsize=self.fig.fs4)
         return lms
 
-    def mini_box(self, fs=5, sz=6, lw=0.22): 
+    def mini_box(self, fs=5, sz=6, lw=9.6): 
+        if self.fig.progress.SAVESRC: 
+            self.fig.progress.out3.write('%s,%s,%s,%s\n' % (self.fig.progress.panel, self.T.id,'TraitValues',";".join([str(round(x,4)) for x in self.X])))  
+            self.fig.progress.out3.write('%s,%s,%s,%s\n' % (self.fig.progress.panel, self.T.id,'LRS',";".join([str(round(x,4)) for x in self.Y])))  
         self.ax.scatter(self.X,self.Y, color = self.T.group_color, s = sz, edgecolor='lightgrey', alpha = 0.75, lw=lw, zorder = 1)
         if self.T.vals['lrs'].model != 'Y~yInt':
             pm = self.T.vals['lrs'].params 
             yDash = [pm[0] + (x*pm[1]) + (x*x*pm[2]) for x in self.X]
-            self.ax.plot(self.X, yDash, color='k',linestyle='--',linewidth=lw,zorder=3)
-        lms = DV.AxLims(self.ax, xt = [], yt = [], xstretch = [0.3,0.3], ystretch = [0.1,2.5], fs = fs)
+            self.ax.plot(self.X, yDash, color='k',linestyle='--',linewidth=3*lw,zorder=3)
+            if self.fig.progress.SAVESRC: self.fig.progress.out3.write('%s,%s,%s,%s\n' % (self.fig.progress.panel, self.T.id,'fitLine',";".join([str(round(x,4)) for x in yDash])))  
+        lms = DV.AxLims(self.ax, xt = [], yt = [], xstretch = [0.3,0.3], ystretch = [0.1,3.3], fs = fs)
         xs, yp, fs = lms.xHop, lms.yMax - lms.yHop, 5
         evo = self.T.vals['lrs'].evo.split('-') 
         if 'stabilising' in evo or 'diverging' in evo: 
@@ -101,14 +98,6 @@ class POPplot:
 
 
 
-
-
-        #if self.fig.progress.SAVESRC: self.panel, self.out, self.SAVESRC = fig.progress.panel, fig.progress.out3, True 
-        #else:                         self.panel, self.out, self.SAVESRC = None, None, False 
-
-
-
-
     def draw_rep_popout(self, k, rc1='blue', yc1='blue', yc2='blue', TITLE=False): 
         self.rc1, self.yc1, self.yc2 = rc1, yc1, yc2 
         if self.VALID:  
@@ -129,7 +118,8 @@ class POPplot:
             self.draw_tail()
             if MINI: 
                 self.lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = None, ylab = None, xstretch = [1.1,1.3], ystretch = [1.1,1.0], fs = 8)
-                if self.T.qc['misc'].r2 > 0.01:  self.label_popout_by_fdr(MINI=True, lw=0.4,fs=5)  
+                #if self.T.qc['misc'].r2 > 0.01:  
+                self.label_popout_by_fdr(MINI=True, lw=0.4,fs=5)  
                 return self 
             if not BRIEF: 
                 self.label_popout()  
@@ -156,7 +146,7 @@ class POPplot:
         if self.VALID: 
             self.draw_body('common')
             self.draw_tail(RECOVERY=True)
-            self.draw_extreme_tail(eclr = 'cyan', rclr='lime',RECOVERY=True)
+            self.draw_extreme_tail(eclr = 'cyan', rclr='lime',RECOVERY=True, prs_type='common')
             self.label_recovery(EXTREME=True)
             self.set_subtitle('EXTREME_RECOVERY')
         else:  
@@ -170,7 +160,7 @@ class POPplot:
         if self.VALID: 
             self.draw_body('A+B+burden', yc1=self.yc1,yc2=self.yc2,ec1=self.ec1,ec2=self.ec2)
             self.draw_tail(HIDE_EXPECTED=True) 
-            self.draw_extreme_tail(eclr = self.yc3) 
+            self.draw_extreme_tail(eclr = self.yc3, prs_type=k) 
             self.set_subtitle() 
         else:  
             DV.draw_blank(self.ax) 
@@ -275,42 +265,65 @@ class POPplot:
             if Z[x1] > Z[x2]: self.markers.append('^') 
             else:             self.markers.append('v') 
             if j < 2: 
-                if HIDE_EXPECTED: continue 
-                self.ax.scatter(self.X[x1], Z[x1], marker=self.markers[-1], color=clr, ec='k', lw = 0.1, zorder=0, s= self.sz2) 
-            else:
-                if not RECOVERY: self.ax.scatter(self.X[x1], Z[x1], marker=self.markers[-1], color=clr, ec ='k', zorder=4, s= self.sz1, lw=0.2) 
-                else: 
-                    if j == 2: 
-                        jp = self.Y[0] - self.Ye[0] 
-                        self.ax.scatter(self.X[x1]-jump, Z[x1], marker=self.markers[-1], color=clr, ec = 'k', zorder=4, s= self.sz1, lw=0.2) 
-                        try: rv1 = self.T.vals['recovery']['combo'].total1
-                        except: rv1 = 'NA'
-                        if rv1 == 'NA': 
-                            self.ax.scatter(self.X[x1]-jump*1.5, self.Y[x1], marker = self.markers[-1],color = rc1, ec = 'k', zorder = 5, s = self.sz1, lw=0.2)
-                        else:           
-                            self.zrp1 = self.Y[x1]-jp*rv1  
-                            self.ax.scatter(self.X[x1]-jump,  self.Y[x1]-jp*rv1, marker = self.markers[-1],color = rc1, ec = 'k', zorder = 5, s = self.sz1, lw=0.2)
-                    else: 
-                        jp = self.Ye[x1] - self.Y[x1]
-                        self.ax.scatter(self.X[x1]+0.5, Z[x1], marker=self.markers[-1], color=clr, ec ='k', zorder=4, s= self.sz1, lw=0.2) 
-                        try: rv2 = self.T.vals['recovery']['combo'].total2
-                        except: rv2 = 'NA'
-                        if rv2 == 'NA': 
-                            self.ax.scatter(self.X[-1]+jump*1.5, self.Y[x1], marker = self.markers[-1], color = rc1,ec = 'k', zorder = 5, s = self.sz1, lw= 0.2)
-                        else:           
-                            self.zrp2 = self.Y[x1]+jp*rv2  
-                            self.ax.scatter(self.X[x1]+jump, self.Y[x1]+jp*rv2, marker = self.markers[-1], color = rc1, ec = 'k', zorder = 5, s = self.sz1, lw=0.2)
+                if not HIDE_EXPECTED: self.ax.scatter(self.X[x1], Z[x1], marker=self.markers[-1], color=clr, ec='k', lw = 0.1, zorder=0, s= self.sz2) 
+            else: self.ax.scatter(self.X[x1], Z[x1], marker=self.markers[-1], color=clr, ec ='k', zorder=4, s= self.sz1, lw=0.2) 
+
+        if RECOVERY and 'combo' in self.T.vals['recovery'] and 'combo' in self.T.vals['pop']: 
+            j1, j2, rD, rK = self.Y[0]-self.Ye[0], self.Ye[-1]-self.Y[-1], [], self.T.vals['recovery']['combo'] 
+            if j1>0 and rK.total1 != 'NA': 
+                rD.append([self.X[0], self.Y[0]-j1*rK.total1]) 
+                self.ax.scatter(rD[-1][0],  rD[-1][1], marker = self.markers[-2],color = rc1, ec = 'k', zorder = 5, s = self.sz1, lw=0.2)
+            if j1>0 and rK.total2 != 'NA': 
+                rD.append([self.X[-1], self.Y[-1]+j2*rK.total2]) 
+                self.ax.scatter(rD[-1][0],  rD[-1][1], marker = self.markers[-1],color = rc1, ec = 'k', zorder = 5, s = self.sz1, lw=0.2)
+            if self.fig.progress.SAVESRC: 
+                Xs = ";".join([str(rd[0]) for rd in rD]) 
+                Ys = ";".join([str(rd[1]) for rd in rD])
+                self.fig.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,'Common+Rare-1%-Recovery','Trait-Centiles',Xs)) 
+                self.fig.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,'Common+Rare-1%-Recovery','Relative-PRS',Ys)) 
         return self  
 
 
 
-    def draw_extreme_tail(self,eclr='k',rclr='lime',RECOVERY=None,jump=5): 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def draw_extreme_tail(self,eclr='k',rclr='lime',RECOVERY=None,hop=3,jump=3.6, prs_type='common'): 
         Y = self.T.pts['epop'][self.type].yObs 
         yL, yM, yH = Y[0:9], Y[9:109], Y[109::] 
         mL, mH = yL[0] / yM[0] , yH[-1]/ yM[-1] 
         self.z1, self.z2 = self.Y[0]*mL, self.Y[-1]*mH      
-        self.ax.scatter(self.X[0]-jump,self.z1, color=eclr, s = self.sz2+3, ec ='k', marker=self.markers[-2],lw=0.5)
-        self.ax.scatter(self.X[-1]+jump,self.z2, color=eclr, s = self.sz2+3, ec = 'k', marker=self.markers[-1],lw=0.5)  
+        Xs, Zs = '0.1;99.9', str(self.z1)+';'+str(self.z2) 
+        self.ax.scatter(self.X[0]-hop,self.z1, color=eclr, s = self.sz2+3, ec ='k', marker=self.markers[-2],lw=0.5)
+        self.ax.scatter(self.X[-1]+hop,self.z2, color=eclr, s = self.sz2+3, ec = 'k', marker=self.markers[-1],lw=0.5)  
+        if self.fig.progress.SAVESRC: 
+            if prs_type != 'common': 
+                self.fig.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,'RarePRS-0.1%','Trait-Centiles',Xs)) 
+                self.fig.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,'RarePRS-0.1%','Relative-PRS',Zs)) 
+            else: 
+                self.fig.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,'CommonPRS-0.1%','Trait-Centiles',Xs)) 
+                self.fig.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,'CommonPRS-0.1%','Relative-PRS',Zs)) 
+
+
+
+
         y1, y2 = self.ax.get_ylim() 
         if self.z1 < y1 or self.z2 > y2: 
             yMin,yMax = min(self.z1,y1), max(self.z2,y2) 
@@ -321,16 +334,18 @@ class POPplot:
                 r1, r2 = self.T.vals['recovery']['combo@0.1'].total1, self.T.vals['recovery']['combo@0.1'].total2
                 pop = self.T.vals['pop']['common-snp'] 
                 dist1, dist2 = self.z1 - self.Ye[0], self.Ye[-1] - self.z2 
-                if pop.e1 > 0 and pop.f1: 
-                    rp =    self.z1 - (dist1*r1) 
-                    self.ax.scatter(self.X[0]-jump, rp , color=rclr,  s= self.sz2+5, ec='k', lw=0.5,marker=self.markers[-2]) 
-                else: 
-                    self.ax.scatter(self.X[0]-jump-0.5, self.z1 - dist1/100.0, color=rclr,  lw=0.5, s= self.sz2+5, ec='k', marker=self.markers[-2]) 
-                if pop.e2 > 0 and pop.f2: 
-                    rp = self.z2 + (dist2*r2)
-                    self.ax.scatter(self.X[-1]+jump, rp , color=rclr,  s= self.sz2+5, ec='k', lw=0.5, marker=self.markers[-1]) 
-                else: 
-                    self.ax.scatter(self.X[-1]+jump+0.5, self.z2 + dist2/100.0, color=rclr,  lw=0.5, s= self.sz2+5, ec='k', marker=self.markers[-1]) 
+                
+                rp1, rp2 = self.z1, self.z2 
+                if pop.e1 > 0 and pop.f1: rp1 = self.z1 - (dist1*r1) 
+                if pop.e2 > 0 and pop.f2: rp2 = self.z2 - (dist2*r2) 
+                self.ax.scatter(self.X[0]-jump,  rp1, color=rclr,  s= self.sz2+3, marker=self.markers[-2],lw=0.5,ec='k') 
+                self.ax.scatter(self.X[-1]+jump, rp2, color=rclr,  s= self.sz2+3, marker=self.markers[-1],lw=0.5,ec='k') 
+                
+
+                if self.fig.progress.SAVESRC: 
+                    self.fig.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,'Common+Rare-0.1%-Recovery','Trait-Centiles',Xs)) 
+                    self.fig.progress.out3.write('%s,%s,%s,%s,%s\n' % (self.fig.progress.panel,self.T.id,'Common+Rare-0.1%-Recovery','Relative-PRS',str(rp1)+';'+str(rp2))) 
+                
             self.lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = self.xLab, ylab = self.yLab, ystretch=0.5, xstretch=0.95,fs = 45 ) 
         return self
 
@@ -405,27 +420,26 @@ class POPplot:
         el = matplotlib.patches.Ellipse((50, yLo), 0, 0, angle=0, alpha=0.0,fc=None,ec='black',zorder=0,linewidth=0.1,fill=False)
         if R1: 
             if EXTREME:
-
-                el2 = matplotlib.patches.Ellipse((-5, (self.z1+self.zrp1)/2.0), 10, 4.5*self.lms.yStep, angle=0, alpha=1,fc='red',ec='black',linestyle='--',zorder=10,linewidth=self.lw2,fill=False)
+                el2 = matplotlib.patches.Ellipse((-3, (self.z1+self.Ye[0])/2.0), 10, 4.5*self.lms.yStep, angle=0, alpha=1,fc='red',ec='black',linestyle='--',zorder=10,linewidth=self.lw3,fill=False)
                 self.ax.add_patch(el2)
-                AP=dict(arrowstyle=astr,linewidth=self.lw3,mutation_scale=1.0,color='k',patchB=el,shrinkB=0,connectionstyle=cs1)
+                AP=dict(arrowstyle=astr,linewidth=self.lw3,mutation_scale=2.0,color='k',patchB=el,shrinkB=0,connectionstyle=cs1)
                 self.ax.annotate("",xy=(5, yLo+self.lms.yHop*2), xycoords='data',xytext=(55,yLo+self.lms.yHop),textcoords='data',arrowprops=AP)
             else: 
-                el2 = matplotlib.patches.Ellipse((x1+self.lms.xStep*0.3, yLo+self.lms.yStep*2.0), 10,3.0*self.lms.yStep, angle=0, alpha=1,fc='red',ec='black',linestyle='--',zorder=10,linewidth=0.2,fill=False)
+                el2 = matplotlib.patches.Ellipse((x1+self.lms.xStep*0.5, yLo+self.lms.yStep*2.0), 10,3.0*self.lms.yStep, angle=0, alpha=1,fc='red',ec='black',linestyle='--',zorder=10,linewidth=0.2,fill=False)
                 self.ax.add_patch(el2)
                 AP=dict(arrowstyle=astr,linewidth=self.lw3,mutation_scale=1.5,color='k',patchB=el,shrinkB=0,connectionstyle=cs1)
                 self.ax.annotate("",xy=(xLo-self.lms.xStep*4.65, yLo+self.lms.yHop*4), xycoords='data',xytext=(xLo-self.lms.xStep,yLo+self.lms.yHop),textcoords='data',arrowprops=AP)
         if R2: 
-            if EXTREME: 
-                el2 = matplotlib.patches.Ellipse((99+5, (self.z2+self.zrp2)/2.0), 10, self.lms.yStep + (self.Ye[-1]-self.z2), angle=0, alpha=1,fc='red',ec='black',linestyle='--',zorder=10,linewidth=self.lw2,fill=False)
+            if EXTREME:
+                el2 = matplotlib.patches.Ellipse((99+3, (self.z2+self.Ye[-1])/2.0), 10, self.lms.yStep + (self.Ye[-1]-self.z2), angle=0, alpha=1,fc='red',ec='black',linestyle='--',zorder=10,linewidth=self.lw3,fill=False)
                 self.ax.add_patch(el2)
-                AP=dict(arrowstyle=astr,linewidth=self.lw3,mutation_scale=1.0,color='k',patchB=el,shrinkB=0,connectionstyle=cs2)
+                AP=dict(arrowstyle=astr,linewidth=self.lw3,mutation_scale=2.0,color='k',patchB=el,shrinkB=0,connectionstyle=cs2)
                 self.ax.annotate("",xy=(105, yHi-self.lms.yHop*2.5), xycoords='data',xytext=(97,yHi-3.3*self.lms.yStep),textcoords='data',arrowprops=AP)
             else: 
                 el2 = matplotlib.patches.Ellipse((x2-self.lms.xStep*0.5, yLo+self.lms.yStep*5.5), 13, 3.5*self.lms.yStep, angle=0, alpha=1,fc='red',ec='black',linestyle='--',zorder=10,linewidth=0.2,fill=False)
                 self.ax.add_patch(el2)
-                AP=dict(arrowstyle=astr,linewidth=self.lw3,mutation_scale=2.0,color='k',patchB=el,shrinkB=0,connectionstyle=cs2)
-                self.ax.annotate("",xy=(xHi+self.lms.xStep*1.6, yHi+self.lms.yHop*1.0), xycoords='data',xytext=(xHi+self.lms.xStep*1.25,yHi-2.8*self.lms.yStep),textcoords='data',arrowprops=AP)
+                AP=dict(arrowstyle=astr,linewidth=self.lw3,mutation_scale=1.5,color='k',patchB=el,shrinkB=0,connectionstyle=cs2)
+                self.ax.annotate("",xy=(xHi+self.lms.xStep*1.8, yHi-self.lms.yHop*0.9), xycoords='data',xytext=(xHi+self.lms.xStep*1.35,yHi-2.6*self.lms.yStep),textcoords='data',arrowprops=AP)
         
         if not EXTREME: self.ax.text(xLo+self.lms.xStep*1.75,yLo+self.lms.yStep*0.75,'POPout\nReduction',fontsize=self.fs3,ha='center',va='center')
         elif not R1: self.ax.text(xLo+self.lms.xStep*1.75,yLo+self.lms.yStep*0.75,'POPout\nReduction\n(Upper 0.1%)',fontsize=self.fs3,ha='center',va='center')
@@ -518,37 +532,7 @@ class POPplot:
     
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     def label_reps(self, lw=0.4, fs=5): 
-        
         if self.NULL or not self.VALID: 
             self.lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = self.xLab, ylab = self.yLab, ystretch=0.5, xstretch=0.75,fs = 45 ) 
             return 
@@ -580,6 +564,21 @@ class POPplot:
             self.ax.annotate("",xy=(xHi+self.lms.xStep*1.0, yHi+self.lms.yHop*1.25), xycoords='data',xytext=(xHi+self.lms.xStep*0.5,yHi-2.5*self.lms.yStep),textcoords='data',arrowprops=AP)
         self.ax.text(xLo+self.lms.xStep*1.5,yLo+self.lms.yStep*0.5,SCALE,fontsize=fs,ha='center',va='center')
         return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -639,9 +638,6 @@ class SibPlot:
     def save_sib(self): 
         w = self.fig.progress.out3
         if self.INIT: w.write('%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','Data','Values')) 
-        
-
-
         Xs = ";".join([str(x) for x in self.X]) 
         Ys = ";".join([str(x) for x in self.Y]) 
         Ye = ";".join([str(x) for x in self.Ye]) 
@@ -738,14 +734,13 @@ class SibPlot:
         xLab, yLab = None, None 
         
         
-        self.lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = xLab, ylab = yLab, xstretch = [0.5,1.1], ystretch = [1.3,0.5], fs = 10)
+        self.lms = DV.AxLims(self.ax, xt = [], yt = [], xlab = xLab, ylab = yLab, xstretch = [0.5,1.1], ystretch = [1.5,0.5], fs = 10)
         f1, f2 = self.T.vals['pop']['common-snp'].f1, self.T.vals['pop']['common-snp'].f2  
         m1, m2 = self.T.vals['sib'].meta1, self.T.vals['sib'].meta2 
+        if self.fig.progress.SAVESRC: self.save_sib() 
         if self.T.vals['sib'].h2_bod > 0.45 and self.T.qc['sampleSize'].sibs > 5500 and (m1 < 0.005 or m2 < 0.005): STAND = True 
         elif (f1 and m1 < 0.05) or (f2 and m2<0.05): STAND = True  
         else: return 
-        
-
         x1, x2 = self.X[0] - self.lms.xStep/2, self.X[-1] + self.lms.xStep/2
         x1a, x1b, x2a, x2b = x1 - self.lms.xHop, x1 + self.lms.xHop, x2 - self.lms.xHop, x2 + self.lms.xHop 
         yLo, yHi = self.lms.yMin + self.lms.yStep, self.lms.yMax - self.lms.yStep*5

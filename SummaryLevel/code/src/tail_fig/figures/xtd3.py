@@ -119,10 +119,7 @@ class MyFigure:
         tk = ['Dual Tail Regression', 'Lower Tail Regression', 'Upper Tail Regression', 'No Tail Regression'] 
         self.rep_color, self.poc_color, self.aou_color  = 'xkcd:purpley', 'xkcd:barney','xkcd:leaf green'
         my_reps, my_colors = ['common','rep','poc','aou'], ['blue',self.rep_color, self.poc_color, self.aou_color] 
-       
-        
         self.progress.set_panel('a') 
-
         for i,ti in enumerate(self.choices): 
             axes = self.axes[i*4:i*4+4]
             for j,(k,clr,ax) in enumerate(zip(my_reps, my_colors, axes)): 
@@ -137,17 +134,18 @@ class MyFigure:
 
         if self.POP_SIM: 
             self.draw_sims(self.axes[self.ax_index], self.axes[self.ax_index+2]) 
-            self.draw_reps(self.axes[self.ax_index+1], self.axes[self.ax_index+3]) 
+            if self.progress.SAVESRC: self.save_sim_src() 
+            rep_result = self.draw_reps(self.axes[self.ax_index+1], self.axes[self.ax_index+3]) 
+            if self.progress.SAVESRC: self.save_rep_src(rep_result) 
         else: 
-            self.draw_reps(self.axes[self.ax_index], self.axes[self.ax_index+1]) 
+            #if self.progress.SAVESRC: self.save_rep_src() 
+            rep_result = self.draw_reps(self.axes[self.ax_index], self.axes[self.ax_index+1]) 
         self.draw_key(self.axes[self.ax_index]) 
 
 
 
     def draw_key(self, ax, sz=35, fs=7.33): 
         lms = DV.AxLims(ax) 
-
-
         y1, y2, ys, xs = lms.yMax + 5*lms.yStep, lms.yMax + 6*lms.yStep, lms.yStep, lms.xStep 
         x1,x2,x3,x4 = [lms.xMin + lms.xStep * i for i in [-0.05,5.65,12.25,17.8]]
         DV.draw_square(ax,x1-xs*0.5,x4+xs*3.3,y1-ys*1.2,y2+ys*0.7)
@@ -168,15 +166,23 @@ class MyFigure:
         return
 
 
+    def save_sim_src(self): 
+        X, Cy, Ce, Ry, Re  = [self.sim_key[k] for k in ['---', 'repRate', 'repErr', 'pearsonR', 'pearsonErr']]
+        self.progress.set_panel('c') 
+        w = self.progress.out3    
+        w.write('%s,%s,%s,%s\n' % ('Panel', 'Target Bootstrap Size','Percent Replicated','95% Confidence Interval')) 
+        for x,y,e in zip(X,Cy,Ce): w.write('%s,%s,%s,%s\n' % (self.progress.panel,int(x),y,str(round(y-e,3))+'-'+str(round(y+e,3)))) 
+        self.progress.set_panel('e') 
+        w = self.progress.out3    
+        w.write('%s,%s,%s,%s\n' % ('Panel', 'Target Bootstrap Size','Pearson R','95% Confidence Interval')) 
+        for x,y,e in zip(X,Ry,Re): w.write('%s,%s,%s,%s\n' % (self.progress.panel,int(x),y,str(round(y-e,3))+'-'+str(round(y+e,3)))) 
+        return
+
 
 
     def draw_sims(self, ax1, ax2, fs = 7): 
         X, Cy, Ce, Ry, Re  = [self.sim_key[k] for k in ['---', 'repRate', 'repErr', 'pearsonR', 'pearsonErr']]
         for j,(ax,Y,E) in enumerate(zip([ax1,ax2],[Cy,Ry],[Ce,Re])):  
-            
-            if j == 0: self.progress.set_panel('c') 
-            else:      self.progress.set_panel('e') 
-
             ax.plot(X,Y,lw=2, color='k') 
             for i,x in enumerate(X): 
                 ax.scatter(x, Y[i], marker='s', color='k',s=13) 
@@ -194,21 +200,55 @@ class MyFigure:
                 ax.set_ylabel('Pearson Correlation',fontsize=fs)  
         return
 
-
+    def save_rep_src(self, rep_result): 
+        for i,panel in enumerate(['d','f']): 
+            self.progress.set_panel(panel) 
+            w = self.progress.out3    
+            if i == 0: 
+                w.write('%s,%s,%s\n' % ('Panel', 'ReplicationType','Percent Replicated')) 
+                for k,v in rep_result[panel].items(): w.write('%s,%s,%s\n' % (panel, k, v)) 
+            else: 
+                w.write('%s,%s,%s,%s\n' % ('Panel', 'ReplicationType','Pearson Correlation','95% Confidence Interval')) 
+                for k,v in rep_result[panel].items(): w.write('%s,%s,%s,%s\n' % (panel, k, v[0], v[1])) 
+        return
 
     def draw_reps(self, ax1, ax2, fs = 8, fs2=7, CI=True): 
+        
+        rep_result = dd(lambda: {}) 
         for i,(k,c) in enumerate(zip(['rep','poc','aou'],self.my_colors)): 
             if i == 0: self.progress.set_panel('d') 
             else:      self.progress.set_panel('f') 
             
             yF, yT, yS = self.discovery_key[k] 
             yp, mSize = yF/yT, 'n~'+str(int(np.mean(yS) / 1000.0))+'k' 
-            #ax1.bar(i,yp, color=c,width=0.7) 
             ax1.bar(i,yp, color=c, ec='k',lw=0.5,alpha=0.8,width=0.7) 
             ax1.text(i, yp, mSize, ha='center', va='bottom',fontsize=fs2, fontweight='bold') 
             X,Y = self.corr_key[k]
-            #R, pv = stats.pearsonr(X,Y)  
+            
             R,pv,rL,rH = pearson_ci(X,Y) 
+            
+            rep_result['d'][k] = yp 
+            rep_result['f'][k] = [round(R,3),str(round(rL,3))+'-'+str(round(rH,3))] 
+
+
+    def draw_reps(self, ax1, ax2, fs = 8, fs2=7, CI=True): 
+        
+        rep_result = dd(lambda: {}) 
+        for i,(k,c) in enumerate(zip(['rep','poc','aou'],self.my_colors)): 
+            if i == 0: self.progress.set_panel('d') 
+            else:      self.progress.set_panel('f') 
+            
+            yF, yT, yS = self.discovery_key[k] 
+            yp, mSize = yF/yT, 'n~'+str(int(np.mean(yS) / 1000.0))+'k' 
+            ax1.bar(i,yp, color=c, ec='k',lw=0.5,alpha=0.8,width=0.7) 
+            ax1.text(i, yp, mSize, ha='center', va='bottom',fontsize=fs2, fontweight='bold') 
+            X,Y = self.corr_key[k]
+            
+            R,pv,rL,rH = pearson_ci(X,Y) 
+            
+            rep_result['d'][k] = yp 
+            rep_result['f'][k] = [round(R,3),str(round(rL,3))+'-'+str(round(rH,3))] 
+
             ax2.bar(i,R, color=c, ec='k',lw=0.5,alpha=0.8,width=0.7) 
             CI = True 
             if CI: ax2.plot([i,i],[rL,rH], color=c, zorder=99) 
@@ -231,5 +271,5 @@ class MyFigure:
             ax.set_xticklabels(['Repeated','Multi\nAncestry','All Of\nUs'],fontsize=fs) 
             ax.set_yticks([0,0.2,0.4,0.6,0.8,1]) 
             ax.set_yticklabels(['0',0.2,0.4,0.6,0.8,'']) 
-
+        return rep_result 
 

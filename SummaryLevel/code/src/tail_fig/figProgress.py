@@ -12,6 +12,9 @@ class Progress:
         self.show('\nUKB GEN:  '+command_line+'\n')
         self.show('      Mode:  '+MODE+'\n') 
 
+    
+    def dot(self, dots=1): self.show("".join(['.' for i in range(dots)]))
+
     def show(self, msg, space=''):
         if space == 'NA': myspace = '' 
         else:             myspace = self.space
@@ -28,15 +31,6 @@ class Progress:
         self.INIT = False 
         return
 
-        if self.INIT: 
-            if STEP<0: self.show('\n'+self.spl+msg)  
-            elif STEP==0: self.show('\n'+self.spl+msg+'...')  
-            else: self.show(self.spl+msg+'...')  
-            self.INIT = False
-        else:
-            if STEP<0: self.show(self.spl+msg)  
-            else: self.show(self.spl+msg+'...')  
-
     def report_result(self, msg=None): 
         self.show('\n'+self.spl+'   Reporting Result: '+msg) 
         self.INIT = True 
@@ -47,21 +41,20 @@ class Progress:
     
     def warn(self, msg = 'FAIL', ws=0):  self.show('\n\n'+self.spl+'FigureWarning: '+msg+'\n')
     
-    def finish(self, NEW=False): self.show('\n\n'+self.spl+'Pipeline Finished\n\n') 
+    def finish(self, NEW=False): 
+        self.show('\n'+self.spl+'Pipeline Finished\n') 
 
     def update(self, fig): 
-        self.fig, self.options, name, opts = fig, fig.options, fig.figName, fig.options
+        self.fig, self.options, self.SAVESRC, name, opts = fig, fig.options, fig.options.saveSrc, fig.figName, fig.options
         self.fig_prefix,self.src_prefix,self.src_file = opts.out+name,opts.srcPath+name+'-src',opts.srcPath+name+'-src.csv'
-        self.figFiles = {'pdf': self.fig_prefix +'.'+k for k in ['pdf']}    
-        self.pdfPath    = self.fig_prefix+'.pdf'
-        self.SAVESRC = self.options.saveSrc         
+        self.figFiles = {ending: self.fig_prefix +'.'+ending for ending in self.options.figFormats} 
         return self 
 
-    def save(self): 
-        if self.INIT: self.show('\n'+self.spl+'  Complete (Figure Saved: '+self.pdfPath+')\n')  
-        else:         self.show('....Complete (Figure Saved: '+self.pdfPath+')\n')  
-        self.INIT = False 
-        plt.savefig(self.pdfPath, dpi = self.options.dpi) 
+    def save(self,NULL=False): 
+        if self.INIT: self.show('\n'+self.spl+'  Complete (Figure Saved: '+self.fig_prefix+')\n')  
+        else:         self.show('....Complete (Figure Saved: '+self.fig_prefix+')\n')  
+        if NULL: return 
+        for k,fn in self.figFiles.items(): plt.savefig(fn, dpi = self.options.dpi) 
         plt.clf() 
         if self.out3 is not None: self.out3.close() 
         return 

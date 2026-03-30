@@ -17,8 +17,14 @@ class MyFigure:
         n, trait_ids = 2, [x[1] for x in sorted([[T.name.mini, T.ti] for T in self.traits.values()])] 
         if len(trait_ids) <= step: self.fignames = [self.figName+'.pdf'] 
         else:                      self.fignames = [self.figName+'-1.pdf'] 
+        
         if self.progress.SAVESRC: 
-            if self.progress.out3 is None or self.progress.out3.closed: self.progress.out3 = open(self.progress.src_file, 'w')
+            self.pop_handle = open(self.progress.src_prefix+'-POPout.csv','w') 
+            self.pop_handle.write('%s,%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','PRS-Type','Data','Values'))
+            self.sib_handle = open(self.progress.src_prefix+'-STANDout.csv','w') 
+            self.sib_handle.write('%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','Data','Values'))
+            self.evo_handle = open(self.progress.src_prefix+'-UnderSelection.csv','w') 
+            self.evo_handle.write('%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','Type','Values'))
         for i in range(0,len(trait_ids),step): 
             self.my_ids, self.my_len = trait_ids[i:i+step], len(trait_ids[i:i+step]) 
             self.setup() 
@@ -27,7 +33,7 @@ class MyFigure:
             self.fignames.append(self.fignames[-1].split('-')[0]+'-'+str(n)+'.pdf') 
             n+=1 
         figPath = self.options.out+self.fignames[0] 
-        self.progress.save() 
+        self.progress.save(NULL=True) 
         return 
                                                     
 
@@ -93,12 +99,20 @@ class MyFigure:
         subs = [] 
         axes = self.axes[self.ax_index+1::] 
         if self.progress.SAVESRC: 
+            
+
+            self.progress.out3, self.progress.panel = self.pop_handle, 'POPout'
             subs.append(SP.POPplot(axes[0], self, T.ti, lw2=0.5, sz1=4, sz2=3, sz3=4.0, alp=0.3).draw_common_popout(MINI=True)) 
+            #self.sib_handle = open(self.progress.src_prefix+'-STANDout.csv','w') 
+            #self.evo_handle = open(self.progress.src_prefix+'-Selection.csv','w') 
+            self.progress.out3, self.progress.panel = self.sib_handle, 'STANDout'
             subs.append(SP.SibPlot(axes[1], self, T.ti, sz1=7, sz2=4, sz3=3, alp=0.3, fs2=5).draw_mini_sib_pair()) 
-            subs.append(SP.EvoScatter(axes[2], self, T.ti).mini_box(fs=5,sz=6,lw=0.22)) 
+            #
+            self.progress.out3, self.progress.panel = self.evo_handle, 'Selection'
+            subs.append(SP.EvoScatter(axes[2], self, T.ti).mini_box(fs=5,sz=6,lw=0.25)) 
         else: 
             subs.append(SP.POPplot(axes[0], self, T.ti, lw2=0.5, sz1=4, sz2=3, sz3=4.0, alp=0.3).draw_common_popout(MINI=True)) 
             subs.append(SP.SibPlot(axes[1], self, T.ti, sz1=7, sz2=4, sz3=3, alp=0.3, fs2=5).draw_mini_sib_pair()) 
-            subs.append(SP.EvoScatter(axes[2], self, T.ti).mini_box(fs=5,sz=6,lw=0.22)) 
+            subs.append(SP.EvoScatter(axes[2], self, T.ti).mini_box(fs=5,sz=6,lw=0.33)) 
         return
 

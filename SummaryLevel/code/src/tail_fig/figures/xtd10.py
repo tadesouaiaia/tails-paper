@@ -38,7 +38,6 @@ class MyFigure:
         self.fig.set_size_inches(self.WD, self.HT) 
         self.ax_index, self.xLoc, self.fq1, self.fq2 = 0, 1, 24, 22 
 
-
     def finish(self,fs=22):
         lms = DV.AxLims(self.axes[0]) 
         for i,x in enumerate(['a','b','c','d','e','f','g','h']): 
@@ -46,12 +45,3 @@ class MyFigure:
         plt.subplots_adjust(left=0.06, bottom=0.03, right=0.96, top=0.97,wspace=0.3, hspace=0.7) 
         self.progress.save() 
         return 
-
-        if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
-        else:                        figPath = self.options.out+'Xtd9.pdf' 
-        plt.savefig(figPath, dpi=self.options.dpi) 
-        plt.clf() 
-        self.progress.save('(Figure Saved: '+figPath+')')
-        return            
-
-

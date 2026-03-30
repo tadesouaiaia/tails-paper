@@ -121,7 +121,7 @@ class CsvOut:
             X = {} 
             X['trait'] = ti 
             X['aou-name']  = T.name.aou 
-            X['full-name'] = T.name.flat  
+            X['full-name'] = " ".join(T.name.flat.split(',')) 
             X['short-name'] = T.name.mini  
             X['h2'], X['r2'] = [T.qc['misc'].key[k] for k in ['h2','r2']] 
             X['targetSize'], X['sibSize'] = [T.qc['sampleSize'].key[k] for k in ['target','sibs']] 

@@ -1,4 +1,7 @@
+/SummaryLevel/old/ 
 /SummaryLevel/output_figs/ 
+/SummaryLevel/output_src/ 
+/SummaryLevel/output_xls/ 
 /SummaryLevel/output_qc/
 /SummaryLevel/run_all_w_latex.sh
 /SummaryLevel/xtended_latex_src/ 

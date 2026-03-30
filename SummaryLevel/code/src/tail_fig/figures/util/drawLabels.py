@@ -263,7 +263,10 @@ class TailLabels:
         x1, x2 = xMin +3*xs, xMin + 95*xs
         y1, yl, y2 = yMax - 20*ys, yMax - 20*ys, yMax +13*ys
         clrs = [ck.c1, ck.c2, ck.rc, ck.rce,ck.c1,ck.c2,ck.c1e,ck.c2e] 
-        maps = [ck.map1, ck.map2, ck.map3] 
+        
+
+
+        #maps = [ck.map1, ck.map2, ck.map3] 
         DV.draw_square(ax, x1, x2, y1, y2) 
         sz = 19
         yjj = 21.5
@@ -273,7 +276,7 @@ class TailLabels:
             x = x1+xs*xj
             if i < 3: 
                 xp, yp = x, y2-ys*yjj
-                for j,cm in enumerate(maps[i]): 
+                for j,cm in enumerate(ck.color_maps[i]): 
                     rt = matplotlib.patches.Rectangle((xp+j*0.16,yp),0.16,0.02,color=cm)
                     ax.add_patch(rt) 
                 if i == 0: ax.text(x+0.16*5, y2-ys*(yjj+2), 'Common PRS',ha='center',va='top',fontsize=fs3) 

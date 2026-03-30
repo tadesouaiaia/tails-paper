@@ -65,9 +65,13 @@ class MyFigure:
         
         self.c1, self.c1e, self.c2, self.c2e = 'blue', 'cyan', 'xkcd:shamrock green', 'lime' 
         self.rc, self.rce = 'gold', 'xkcd:bright yellow' 
-        self.map1 = make_colormap(self.c1, self.c1e) 
-        self.map2 = make_colormap(self.c2, self.c2e) 
-        self.map3 = make_colormap(self.rc, self.rce) 
+        
+
+        self.color_maps = [make_colormap(a, b) for a,b in [[self.c1,self.c1e],[self.c2,self.c2e],[self.rc,self.rce]]]
+
+        #self.map1 = make_colormap(self.c1, self.c1e) 
+        #self.map2 = make_colormap(self.c2, self.c2e) 
+        #self.map3 = make_colormap(self.rc, self.rce) 
         index_plots, rare_plots = [], [] 
         
         self.progress.set_panel('a') 
@@ -79,15 +83,14 @@ class MyFigure:
                 self.axes[idx].set_title(self.traits[ti].name.mini, x=0,y=0.97,va='center', fontsize=self.fs3) 
         
         DL.TailLabels(self.options).make_extreme_index_key(index_plots[3], self) 
-        #self.labels.make_index_key(index_plots[3], self) 
        
 
         for i,(idx,ti) in enumerate(zip([0,2,4,6],self.options.indexTraits)):
             rpp = SP.POPplot(self.axes[idx], self, ti, sz1=20,sz2=18,sz3=12,fs1=10,fs2=8,fs3=6) 
             rpp.draw_extreme_rares('A+B+burden', yc1=self.rc, yc2=self.rc, yc3=self.rce, ec1='k' ,ec2='k')
             rare_plots.append(rpp) 
-
         
+        self.progress.set_panel('b') 
         if self.TAIL_INDIVS: self.draw_tail_indivs(self.axes[8:12])
 
         self.draw_extreme_dists(self.axes[-2], self.axes[-1]) 
@@ -111,21 +114,35 @@ class MyFigure:
 
 
     def draw_tail_indivs(self, axes, upper=[30070, 20015], lower=[30020,20015]): 
+        
+        if self.progress.SAVESRC:
+            wss,wpp = self.progress.out3, self.progress.panel 
+            wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,'Trait-ID','Tail','PRS-Type','Data-Type','Values'))
+
         bw,bj = 0.20, 0.23 
         my_bin_locs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] 
         colors = [self.c1, self.c2, self.rc] 
-        maps   = [self.map1, self.map2, self.map3]
         kTypes = ['common','combo','A+B+burden'] 
         for i,(tail,ti,T,P) in enumerate(self.tail_traits): 
+            if self.progress.SAVESRC: wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,'all','Bins',';'.join(self.TK[tail]['bn'])))
             ax = axes[i] 
             x0 = -0.2
             for m,k in enumerate(kTypes): 
-                fd, fc = P[k].fracs, P[k].binomialCI 
                 for  j,(fr,ci) in enumerate(zip(P[k].fracs, P[k].binomialCI)): 
-                    ax.bar(x0+j, fr, width=bw, color=maps[m][j], ec = colors[m],lw=1, clip_on=False) 
+                    ax.bar(x0+j, fr, width=bw, color=self.color_maps[m][j], ec = colors[m],lw=1, clip_on=False) 
                     ax.plot([x0+j,x0+j],[fr-ci, fr+ci],zorder=10,color='k',lw=0.5,clip_on=False) 
                     if m > 0 and fr - ci > P[kTypes[m-1]].fracs[j]: ax.scatter(x0+j, fr+ci+0.01, marker='*', ec = colors[m], lw=1, color='k', s= 10, clip_on=False, zorder=100) 
                 x0 += 0.23 
+                if self.progress.SAVESRC: 
+                    fStr = ';'.join([str(round(fx,3)) for fx in P[k].fracs])    
+                    cStr = ';'.join([str(round(fx - ci,3))+'-'+str(round(fx+ci,3)) for fx,ci in zip(P[k].fracs, P[k].binomialCI)])
+                
+                    if tail == 'upper':  
+                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,k,'%SampleWithHighPRS',fStr)) 
+                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,k,'%SampleWithHighPRS-ConfidenceIntervals',cStr)) 
+                    else: 
+                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,k,'%SampleWithLowPRS',fStr)) 
+                        wss.write('%s,%s,%s,%s,%s,%s\n' % (wpp,T.id,tail,k,'%SampleWithLowPRS-ConfidenceIntervals',cStr)) 
             xMin, xMax = -0.8 , 9.5 
             yMin, yMax =   0,0.35 
             ax.set_ylim(yMin,yMax-0.05)  
@@ -149,8 +166,6 @@ class MyFigure:
         
         DL.TailLabels(self.options).add_indiv_key(axes[0], self, RULE='UPPER') 
         DL.TailLabels(self.options).add_indiv_key(axes[2], self, RULE='LOWER') 
-        #self.labels.add_indiv_key(axes[0], self, RULE="UPPER") 
-        #self.labels.add_indiv_key(axes[2], self, RULE="LOWER") 
         return
 
 
@@ -202,10 +217,20 @@ class MyFigure:
         wx = 0.05 
         bp1 = ax1.boxplot([box_data['e1'], box_data['e2']], vert=True, patch_artist=True, positions = [xx1,xx2],widths=wx) #patch_artist=True, notch='False') #orientation='horizontal')
         bp2 = ax2.boxplot([box_data['r1'], box_data['r2']], vert=True, patch_artist=True, positions = [xx1,xx2],widths=wx) 
+        if self.progress.SAVESRC:
+            self.progress.set_panel('c') 
+            wss,wpp = self.progress.out3, self.progress.panel 
+            wss.write('%s,%s,%s\n' % (wpp,'Tail Size','SignificantPOPoutEffects'))
+            wss.write('%s,%s,%s\n' % (wpp,'1%',";".join([str(zz) for zz in box_data['e1']])))
+            wss.write('%s,%s,%s\n' % (wpp,'0.1%',";".join([str(zz) for zz in box_data['e2']])))
+            self.progress.set_panel('d') 
+            wss,wpp = self.progress.out3, self.progress.panel 
+            wss.write('%s,%s,%s\n' % (wpp,'Tail Size','POPoutReductions'))
+            wss.write('%s,%s,%s\n' % (wpp,'1%',";".join([str(zz) for zz in box_data['r1']])))
+            wss.write('%s,%s,%s\n' % (wpp,'0.1%',";".join([str(zz) for zz in box_data['r2']])))
+
         ax1.set_ylabel('POPout Effect Size', fontsize=self.fs4) 
         colors = ['blue','blue','cyan','cyan']  
-        
-
         for j,(ax,bp) in enumerate(zip([ax1,ax2],[bp1,bp2])):
             if j == 0: 
                 yMin, yMax, my_colors = -0.31, 1.26, ['blue','cyan'] 
@@ -246,9 +271,7 @@ class MyFigure:
 
 
     def finish(self, fs =13):
-        letters = ['$a$','$b$','$c$','$d$','$e$','$f$'] 
-
-
+        #letters = ['$a$','$b$','$c$','$d$','$e$','$f$'] 
         for i,x in zip([0,8,12,13],['$a$','$b$','$c$','$d$','$e$','$g$','$h$']): 
             try: 
                 if i == 0:   self.axes[i].set_title(x, x= -0.06, y = 0.98, fontsize=fs) 
@@ -260,80 +283,6 @@ class MyFigure:
         
         self.progress.save() 
         return
-
-
-        if self.figName is not None: figPath = self.options.out+self.figName+'.pdf' 
-        else:                        figPath = self.options.out+'Sup1.pdf' 
-        plt.savefig(figPath, dpi=self.options.dpi) 
-        plt.clf() 
-        self.progress.save('(Figure Saved: '+figPath+')')
-        return
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

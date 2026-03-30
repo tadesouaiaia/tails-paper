@@ -49,5 +49,7 @@ class figGen:
                 if gn in ['5','6','7']: mod = importlib.import_module(f"figures.xtdSnp")
                 else: mod = importlib.import_module(f"figures.xtd{gn}")
                 fig = mod.MyFigure(self.args, self.traits, self.progress, figName=goal).draw()
+        
+        if self.args.makeSheets: merge_csv_to_excel_sheets(self.fig_goals, self.progress, self.args)  
         self.progress.finish(NEW=True) 
         return

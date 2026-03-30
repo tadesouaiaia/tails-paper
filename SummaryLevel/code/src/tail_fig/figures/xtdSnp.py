@@ -2,55 +2,12 @@ import sys, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
 from util.Util   import * 
-from util import drawSnps as DT
-
-MK = {'0.1%-1%': '<1%', '0.01%-0.1%': '<0.01%', '~0.1%': '~0.1%', '~0.01%': '~0.01%','~1%': '~1%'} 
-SK = {'3_prime_utr': '3pUTR', '5_prime_utr': '5pUTR','missense-snp': 'missense','synonymous-snp': 'synonymous','missense-indel': 'missense'} 
-
-class RareSnp:
-    def __init__(self, loc, s, group = 'rare'): 
-        self.loc, self.group = loc, group
-        self.hits, self.genes, self.annos = [], s.gene.split(';'), s.annos.split(';') 
-        s.maf = MK[s.maf]        
-        if len(self.genes) > 1: self.genes = ',\n'.join(self.genes) 
-        else:                   self.genes = self.genes[0] 
-        for i in range(len(self.annos)): 
-            if len(self.annos[i].split('_')) == 1: continue 
-            x = self.annos[i].split("_") 
-            if 'related_disorder' in self.annos[i] and x[-1] == 'disorder': self.annos[i] = self.annos[i].split('_disorder')[0]  
-            elif x[0] in ['familial','hereditary','recessive']: self.annos[i] = "_".join(x[1::])
-            else: continue 
-        self.annos = sorted(list(set(self.annos)) , key = lambda X: len(X)) 
-        self.annos = [a.capitalize() for a in self.annos] 
-        if self.group == 'burden': 
-            self.add = self.add_burden 
-            self.masks, self.mafs = [s.type], [s.maf] 
-        else:                     
-            self.add = self.add_rare 
-            self.rs, self.type, self.maf = s.rs, s.type, s.maf
-            if self.type in SK: self.type = SK[self.type] 
-            if len(self.type.split(';')) > 1: self.type = '\n'.join(self.type.split(';')) 
-
-    def add_burden(self, T, k): 
-        self.hits.append([k.beta, k.pv, T])  
-        self.masks.append(k.type) 
-        self.mafs.append(k.maf) 
-    
-    def add_rare(self, T, k): 
-        self.hits.append([k.beta, k.pv, T])  
-
-
-
-
-
-
+from util import drawSnps as DS
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName = None): 
         self.options, self.traits, self.data, self.figName = options, traits.members, traits, figName
         self.progress = progress.update(self) 
-
-
         self.snpTraits = [T for T in self.traits.values() if 'snp' in T.lists] 
         self.determine_type(figName) 
         self.separateSnpsByType() 
@@ -63,21 +20,19 @@ class MyFigure:
         elif req  == 3 or req % 4 == 3:  self.my_type = 'other_burdens' 
         return 
 
-
-
     def separateSnpsByType(self): 
         self.snps = {} 
         for T in self.snpTraits: 
             if self.my_type == 'annotated_rares': 
                 snps = [s for s in T.lists['snp'] if s.rs.upper() != 'BURDEN' and s.annos != 'NA'] 
                 for s in snps: 
-                    if s.loc not in self.snps: self.snps[s.loc] = RareSnp(s.loc, s) 
+                    if s.loc not in self.snps: self.snps[s.loc] = DS.RareSnp(s.loc, s) 
                     self.snps[s.loc].add(T, s) 
             else:   
                 if self.my_type == 'annotated_burdens': snps = [s for s in T.lists['snp'] if s.rs.upper() == 'BURDEN' and s.annos != 'NA'] 
                 else:                                   snps = [s for s in T.lists['snp'] if s.rs.upper() == 'BURDEN' and s.annos == 'NA'] 
                 for s in snps: 
-                    if s.loc not in self.snps: self.snps[s.loc] = RareSnp(s.loc, s, 'burden') 
+                    if s.loc not in self.snps: self.snps[s.loc] = DS.RareSnp(s.loc, s, 'burden') 
                     self.snps[s.loc].add(T, s) 
         sorted_snps = sorted([s for s in self.snps.values()], key = lambda X: len(X.hits), reverse=True)  
         if self.my_type == 'annotated_rares': self.my_data = self.process_rares(sorted_snps) 
@@ -87,10 +42,7 @@ class MyFigure:
     def draw(self): 
         self.setup() 
         self.create() 
-        
-        self.finish() # self.figName+'.pdf') 
-        #figPath = self.options.out+self.figName+'.pdf' 
-        #self.progress.save('(Figure Saved: '+figPath+')')
+        self.finish() 
         return
 
     def setup(self): 
@@ -116,7 +68,7 @@ class MyFigure:
         self.ax_index,self.xLoc,self.fq1,self.fq2 = 0, 1, 24, 22                
 
     def create(self): 
-        dt = DT.SnpTable(self, self.my_type).initialize(self.axes[0:3],c1=self.i1,c2=self.i2) 
+        dt = DS.SnpTable(self, self.my_type).initialize(self.axes[0:3],c1=self.i1,c2=self.i2) 
         self.ax_index += 3 
         count = 0 
         for i,snp_data in enumerate(self.my_data): 
@@ -129,13 +81,6 @@ class MyFigure:
         plt.subplots_adjust(left=0.015, bottom=0.01, right=0.99, top=0.98,wspace=0.0,hspace=0.03) 
         self.progress.save() 
 
-        #plt.savefig(self.options.out+fname, dpi=500) 
-        #plt.clf() 
-
-
-
-
-
     def process_hits(self, s): 
         DN,UP = [], [] 
         for beta,pv,T  in s.hits: 
@@ -145,9 +90,6 @@ class MyFigure:
         UP.sort(reverse=True, key=lambda X: X[0]) 
         hits = [[x[1].name.snp for x in DN],[x[1].name.snp for x in UP]] 
         return hits 
-
-            
-
 
     def process_rares(self, snps): 
         p_key, p_data = dd(list), [] 
@@ -171,11 +113,7 @@ class MyFigure:
         my_rows = R1 + R2  
         random.shuffle(my_rows) 
         return my_rows 
-
-
-
-
-
+    
     def process_burdens(self, snps): 
         p_key, p_data = dd(list), [] 
         for s in snps: 
@@ -199,7 +137,6 @@ class MyFigure:
                 if i % 2 != 0 and k < len(R2): 
                     rd.append(R2[k]) 
                     k+= 1 
-        
             return rd 
         else: 
             random.shuffle(raw_data)

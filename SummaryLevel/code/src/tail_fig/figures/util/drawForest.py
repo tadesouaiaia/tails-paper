@@ -14,11 +14,10 @@ import drawVarious as DV
 class ForestPlot:
     def __init__(self, axes, fig):
         self.axes, self.traits, self.data, self.options, self.progress = axes, fig.traits, fig.data, fig.options, fig.progress 
-
+        self.prs_types, self.src_key, self.pad = dd(list), {}, 0.5 
 
 
     def draw_up_to_three(self): 
-        self.prs_types, self.src_key, self.pad = dd(list), {}, 0.5 
         for ti,T in self.traits.items(): self.prs_types[T.group].append([T.vals['pop']['common-snp'], T]) 
         g_srt = sorted([[len(self.prs_types[k]),k] for k in self.prs_types], reverse=True)
         self.set_forests(self.axes[0], [g_srt[0][1]])  
@@ -32,7 +31,6 @@ class ForestPlot:
 
         w = self.progress.out3
         w.write('%s,%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','Group','Tail','POPout-effectSize;95%CI-LowerBound;95CI-UpperBound'))
-        
         for k,V in self.src_key.items(): 
             for T,tL,tU in V: 
                 w.write('%s,%s,%s,%s,%s\n' %(self.progress.panel,T.id,k,'Lower',tL[0]+';'+tL[1][0]+';'+tL[1][1]))
@@ -106,43 +104,15 @@ class ForestPlot:
         return plotted 
 
 
-
-
-
     def make_whisky(self, pts, FDR, QC, T, mp, TYPE = 'UKB', sz=9, LW=0.8):  
-        
-        if T.ti == 845:  pts = [p for p in pts]
-        else:            pts = [-0.25 if p < -0.25 else p for p in pts]
         locs = [(self.pad + p)*mp for p in pts]
         if FDR and QC: 
             self.ax.plot([locs[1],locs[2]],[self.yp,self.yp], color = T.group_color, clip_on=False, zorder=2, lw = LW) 
             self.ax.scatter(locs[0], self.yp, color = T.group_color, ec = T.group_color, clip_on=False, zorder=3, s=sz) 
-            return [str(abs(locs[0])),[str(vv) for vv in sorted([abs(locs[1]),abs(locs[2])])]]  
+            return [str(pts[0]),[str(round(v,3)) for v in sorted(pts[1::])]] 
         else: 
             self.ax.scatter(locs[0], self.yp, color = 'white', ec = T.group_color, lw=LW,clip_on=False, zorder=3, s=sz) 
-            return [str(abs(locs[0])),['','']] 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            return [str(pts[0]),['','']] 
 
 
 
@@ -154,18 +124,12 @@ class ForestReps:
     def __init__(self, ax, fig): 
         self.ax, self.fig, self.traits, self.data, self.options, self.progress = ax, fig, fig.traits, fig.data, fig.options, fig.progress 
         
-                
-
-
-
-    def rep_whisky(self, pts, T, mp, marker = 'o', color='k', TYPE='UKB', QC=True, SIZE=9999, MIN = -0.24, MAX=0.58): 
+    def rep_whisky(self, pts, T, mp, marker = 'o', color='k', TYPE='UKB', QC=True, SIZE=9999, MIN = -0.23, MAX=0.58): 
         if TYPE == 'UKB': 
-            pts = [-0.15 if p < -0.15 else p for p in pts]                                                                                                                                                                      
             locs = [(self.pad + p)*mp for p in pts]                                                                                                                                                                             
             self.ax.plot([locs[1],locs[2]],[self.yp,self.yp], color = color, clip_on=False, zorder=5, lw = 1)                                                                                                           
             self.ax.scatter(locs[0], self.yp, color = color, ec = color, lw=0.7, clip_on=False, zorder=6, s=10) 
         else:
-            MIN = -0.23 
             M1, M2, locs = False, False, [] 
             for p in pts: 
                 if p >= MIN and p <= MAX: locs.append((self.pad+p)*mp) 
@@ -180,9 +144,6 @@ class ForestReps:
             self.ax.plot([locs[1],locs[2]],[self.yp,self.yp], color = color, clip_on=False, zorder=2, lw = 1)       
             if QC and SIZE > 5000:  mark, c1, c2, c3 = 'o', color, color, color
             else:   mark, c1, c2, c3 = 's', 'white', color, color
-            
-
-
             if not CLASH: self.ax.scatter(locs[0], self.yp, marker = mark, color = c1, ec = c2, lw =0.7, clip_on=False, zorder=3, s=10) 
             else:         c3 = 'white' 
             if mp == 1: 
@@ -191,7 +152,6 @@ class ForestReps:
             else: 
                 if M1: self.ax.scatter(locs[1], self.yp, marker= '>', color=c3, ec=color, zorder=4, lw=0.7, s = 10, clip_on=False) 
                 if M2: self.ax.scatter(locs[2], self.yp, marker= '<', color=color, ec = color, zorder=4, lw=0.7, s = 10, clip_on=False) 
-                
             return
 
 
@@ -237,7 +197,12 @@ class ForestReps:
 
 
     def create(self, fs1 = 10, fs2 = 9, fs3=8, fs4=7, fs5=6, apad=0.05): 
-        
+
+        if self.progress.SAVESRC: 
+            w = self.progress.out3
+            w.write('%s,%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','ReplicationType','Tail','POPout-effectSize;95%CI-LowerBound;95CI-UpperBound'))
+
+
         self.mvals, self.pad = [0,0.5], 0.5 
         lc1 = 'whitesmoke' 
         self.yp, yTop = 0.25, 1  
@@ -258,6 +223,9 @@ class ForestReps:
                 e1,e2,k,QC,size = pd 
                 self.rep_whisky(e1, T, -1, 'o', c, TYPE=k, QC=QC, SIZE=size)
                 self.rep_whisky(e2, T,  1, 'o', c, TYPE=k, QC=QC, SIZE=size)  
+                if self.progress.SAVESRC: 
+                    w.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id, k, 'lower', ';'.join([str(round(xx,3)) for xx in e1]))) 
+                    w.write('%s,%s,%s,%s,%s\n' % (self.progress.panel, T.id, k, 'upper', ';'.join([str(round(xx,3)) for xx in e2]))) 
                 self.yp -= 0.25 
             self.yp -= 0.9
         self.yp += 1 * 0.79                                                                                                                                                                                           

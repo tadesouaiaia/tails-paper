@@ -1,9 +1,50 @@
 import sys, os 
-
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
 import drawVarious as DV 
 from Util import * 
+
+
+
+ 
+MK = {'0.1%-1%':'<1%','0.01%-0.1%':'<0.01%','~0.1%':'~0.1%','~0.01%':'~0.01%','~1%':'~1%'} 
+SK = {'3_prime_utr':'3pUTR','5_prime_utr':'5pUTR','missense-snp':'missense','synonymous-snp':'synonymous','missense-indel':'missense'} 
+
+
+class RareSnp:
+    def __init__(self, loc, s, group = 'rare'): 
+        #self.loc, self.group = loc, group
+        self.loc, self.group, self.hits, self.genes, self.annos = loc, group, [], s.gene.split(';'), s.annos.split(';') 
+        s.maf = MK[s.maf]        
+        if len(self.genes) > 1: self.genes = ',\n'.join(self.genes) 
+        else:                   self.genes = self.genes[0] 
+        for i in range(len(self.annos)): 
+            if len(self.annos[i].split('_')) == 1: continue 
+            x = self.annos[i].split("_") 
+            if 'related_disorder' in self.annos[i] and x[-1] == 'disorder': self.annos[i] = self.annos[i].split('_disorder')[0]  
+            elif x[0] in ['familial','hereditary','recessive']: self.annos[i] = "_".join(x[1::])
+            else: continue 
+        #self.annos = sorted(list(set(self.annos)) , key = lambda X: len(X)) 
+        #self.annos = [a.capitalize() for a in self.annos] 
+        self.annos = [a.capitalize() for a in sorted(list(set(self.annos)) , key = lambda X: len(X))]
+        if self.group == 'burden': 
+            self.add, self.masks, self.mafs = self.add_burden, [s.type], [s.maf] 
+        else:                     
+            self.add = self.add_rare 
+            self.rs, self.type, self.maf = s.rs, s.type, s.maf
+            if self.type in SK: self.type = SK[self.type] 
+            if len(self.type.split(';')) > 1: self.type = '\n'.join(self.type.split(';')) 
+
+    def add_burden(self, T, k): 
+        self.hits.append([k.beta, k.pv, T])  
+        self.masks.append(k.type) 
+        self.mafs.append(k.maf) 
+    
+    def add_rare(self, T, k): self.hits.append([k.beta, k.pv, T])  
+
+
+
+
 
 
 
@@ -180,7 +221,7 @@ class SnpTable:
             elif i == 1: self.add_row(['Traits with Genome-Wide Sig-Effects'], COLORS=[c2],X=(0,100), Y=(0,100), FS=7, WIDTHS=[100], STYLE='HORZ', TITLE=True)
             elif i == 2: self.add_row(['ClinVar Phenotypes'], COLORS=[c2],X=(0,100), Y=(0,100), FS=7, WIDTHS=[100], STYLE='HORZ', TITLE=True)
             self.ax.axis('off') 
-        axes[1].set_title('Annotated Rare Variants', ha = 'center', fontsize = 8, fontweight='bold',y=0.95,x=0.05) 
+        #axes[1].set_title('Annotated Rare Variants', ha = 'center', fontsize = 8, fontweight='bold',y=0.95,x=0.05) 
         return self 
     
     def initialize_burden(self,axes, c1 = 'gray', c2 = 'red', fs1=9, fs2=7, fs3 = 18):
@@ -192,7 +233,7 @@ class SnpTable:
             elif i == 1: self.add_row(['Traits with Genome-Wide Sig-Effects'], COLORS=[c2],X=(0,100), Y=(0,100), FS=7, WIDTHS=[100], STYLE='HORZ', TITLE=True)
             elif i == 2: self.add_row(['ClinVar Phenotypes'], COLORS=[c2],X=(0,100), Y=(0,100), FS=7, WIDTHS=[100], STYLE='HORZ', TITLE=True)
             self.ax.axis('off') 
-        axes[1].set_title('Annotated Burden Variants', ha = 'center', fontsize = 8, fontweight='bold',x=0.5, y=0.90) 
+        #axes[1].set_title('Annotated Burden Variants', ha = 'center', fontsize = 8, fontweight='bold',x=0.5, y=0.90) 
         return self
 
 
@@ -206,7 +247,8 @@ class SnpTable:
             elif i == 2: self.add_row(['Traits with GWS Descreasing Alleles'], COLORS=[c2],X=(0,100), Y=(0,100), FS=7, WIDTHS=[100], STYLE='HORZ', TITLE=True)
             self.ax.axis('off') 
         
-        axes[1].set_title('Unannotated Burden Variants', ha = 'center', fontsize = 8, fontweight='bold',x=0.05, y=0.90) 
+        #axes[1].set_title('Unannotated Burden Variants', ha = 'center', fontsize = 8, fontweight='bold',x=0.05, y=0.90) 
         return self
+
 
 

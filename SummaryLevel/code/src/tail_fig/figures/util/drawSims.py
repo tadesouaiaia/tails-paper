@@ -185,23 +185,28 @@ class SlimLib:
 
 
     def plot_dists(self, axes, c1 = 'red',c2='grey', sz=100): 
-        self.colors = [['#1b9e77','#d95f02','#7570b3'],['#1b9e77','#d95f02','#7570b3','#e7298a']]
-        
         self.colors = [['blue','xkcd:pumpkin orange','xkcd:tea'],['#1b9e77','gold','#7570b3','#e7298a']]
-        
-
-
         self.styles = ['-','--',':','-'] 
         opts = [['10k', '50k', '100k'],['gamma(u=0.05)', 'gamma(u=0.1)', 'gamma(u=0.2)', 'gaussian']]
-        
+        panels, p_idx = 'abcdefgh', 0 
+
         for i,et in enumerate(['EnrichmentByTime', 'EnrichmentByDist']): 
             for j,dt in enumerate(['Weak,1,All', 'Weak,1,Large', 'Strong,1,Large', 'Strong,0.05,Large']): 
                 d1, d2, d3 = dt.split(',') 
                 d_title = d1+' Selection, MAF < '+d2+'%,\n'+d3+' Effects' 
                 ax = axes[i*4:i*4+4][j] 
+                if self.progress.SAVESRC: 
+                    px = panels[p_idx] 
+                    p_idx+=1 
+                    self.progress.set_panel(px) 
+                    w = self.progress.out3 
+                    w.write('%s,%s,%s,%s\n' % ('Panel', 'axType','valType','values')) 
+                    Xs = ";".join([str(int(xs)) for xs in self.s_data[et][dt][opts[i][0]]['X']]) 
+                    w.write('%s,%s,%s,%s\n' % (px, 'Trait Quantiles','X-Range',Xs)) 
                 for ki,k in enumerate(opts[i]): 
                     X, Y = self.s_data[et][dt][k]['X'], self.s_data[et][dt][k]['Y'] 
                     ax.plot(X, Y, color=self.colors[i][ki], linewidth=self.lw1*2, alpha=0.7, linestyle=self.styles[ki], label=k) 
+                    if self.progress.SAVESRC: w.write('%s,%s,%s,%s\n' % (px, 'Rare Enrichement',k,";".join([str(y) for y in Y]))) 
                 lms = DV.AxLims(ax, yLim=[0,12], COMMANDS=['nospines'], xlab='Trait Quantiles',ylab='Rare Enrichment', fs=self.fs2) 
                 ax.plot([lms.xMin, lms.xMax],[1,1], linestyle='--', color='k') 
                 ax.text(lms.xMid, lms.yMax - 2*lms.yStep, d_title, ha='center', va='center', fontsize=self.fs2)  
@@ -228,10 +233,24 @@ class SlimLib:
 
 
     def plot_pops(self, axes, c1 = 'red',c2='grey', sz=100): 
+        panels = 'abcdefgh'
         for i,k in enumerate(['gamma0.05,Weak', 'gamma0.05,Strong', 'gamma0.1,Weak', 'gamma0.1,Strong', 'gamma0.2,Weak', 'gamma0.2,Strong', 'gaussian,Weak', 'gaussian,Strong']): 
             ax = axes[i] 
+            if self.progress.SAVESRC: 
+                px = panels[i] 
+                self.progress.set_panel(px) 
+                w = self.progress.out3 
+                w.write('%s,%s,%s,%s,%s\n' % ('Panel', 'Condition','axType','valType','values')) 
+                Xs = ";".join([str(int(xs)) for xs in self.s_data['POPoutByDist'][k]['Neutrality']['X']]) 
+                w.write('%s,%s,%s,%s,%s\n' % (px, 'All','Trait Quantiles','X-Range',Xs)) 
+
             for j,(t,c) in enumerate(zip(['Neutrality','Selection'],['grey','darkred'])):  
                 X,Y,yL,yH = [self.s_data['POPoutByDist'][k][t][z] for z in ['X','Y','yL','yH']] 
+                if self.progress.SAVESRC: 
+                    w.write('%s,%s,%s,%s,%s\n' % (px, t, 'POPout Effects','Averages',';'.join([str(y) for y in Y]))) 
+                    w.write('%s,%s,%s,%s,%s\n' % (px, t, 'POPout Effects','ConfidenceIntervals',';'.join([str(yl)+'|'+str(yh) for yl,yh in zip(yL,yH)])))
+                
+
                 ax.scatter(X,Y, color=c, s = self.sz3, zorder=4) 
                 for x,y1,y2 in zip(X,yL,yH): 
                     ax.plot([x,x],[y1,y2], lw= self.lw2, zorder=2, color=c) 
