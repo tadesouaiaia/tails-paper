@@ -44,7 +44,7 @@ SummaryLevel/docs/manual/tailsManual.pdf
 - scipy
 - matplotlib
 - statsmodels
-- bash
+- pandas, openpyxl [ optional, for creating xls output ] 
 
 ---
 

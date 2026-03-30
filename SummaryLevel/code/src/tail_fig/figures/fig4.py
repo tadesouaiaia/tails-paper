@@ -50,7 +50,6 @@ class MyFigure:
             elif i == 4:   self.axes[i].set_title(x, x= -0.1, y = 0.85, fontsize=fs) 
             elif i == 5:   self.axes[i].set_title(x, x= 0.05, y = 1.05, fontsize=fs+5) 
             elif i == 21:   self.axes[i].set_title(x, x= 0.01, y = 0.93, fontsize=fs) 
-
         plt.subplots_adjust(left=0.01, bottom=0.0075, right=0.99, top=0.99,wspace=0.05, hspace=0.1) 
         self.progress.save() 
         return
@@ -168,12 +167,13 @@ class MyFigure:
                 rp = (c2 - (lp)) * 0.25 
                 c2 = lp + rp 
             pts.append(pt) 
-            cis.append([c1,c2]) 
-        
+            cis.append([c1,c2])  
         z1, z2 =odd_raw[0], odd_raw[2] 
-
         rel_change = (z2-z1)/z1 
-        return rel_change, pts, cis 
+        tR = [odd_raw[0],odd_raw[0]-odd_raw[1],odd_raw[0]+odd_raw[1],odd_raw[2],odd_raw[2]-odd_raw[3],odd_raw[2]+odd_raw[3]]
+        tR = [str(round(rr,3)) for rr in tR] 
+        tR = [tR[0], tR[1]+'-'+tR[2], tR[3], tR[4]+'-'+tR[5]]
+        return tR, rel_change, pts, cis 
 
 
     def odds_vs_r2_progress(self, all_pairs, sig_pairs): 
@@ -233,7 +233,7 @@ class MyFigure:
                     if my_offset < 1.1: ax.scatter(my_offset+0.017, yl+0.35, color = 'k', marker= '*', lw = 0.2, zorder=990, s=self.sz2) 
                     else:               ax.scatter(my_offset-0.03, yl+1, color ='k', marker='*', lw = 0.2,zorder=990, s = self.sz2,clip_on=False) 
 
-                rel_change, pts, cis = self.validate_odds(T, T.vals['odds'], ki) 
+                print_odds, rel_change, pts, cis = self.validate_odds(T, T.vals['odds'], ki) 
                 obs_odds.append(rel_change) 
                 if rSig == 'True': 
                     sig_traits.append(T) 
@@ -245,9 +245,11 @@ class MyFigure:
             
 
                 if self.progress.SAVESRC: 
-                    w.write('%s,%s,%s,%s,%s,%s,%s' % tuple([self.progress.panel, T.id, k] + r_vals+[rTot]))
-                    w.write('%s,%s,' % tuple([str(round(pts[0],3)),str(round(pts[0]-cis[0][0],3))+'-'+str(round(pts[0]+cis[0][1],3))]))
-                    w.write('%s,%s\n' % tuple([str(round(pts[1],3)),str(round(pts[1]-cis[1][0],3))+'-'+str(round(pts[1]+cis[1][1],3))]))
+                    w.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' % tuple([self.progress.panel, T.id, k] + r_vals+[rTot]+print_odds))
+                    
+
+                    #w.write('%s,%s,' % tuple([str(round(pts[0],3)),str(round(pts[0]-cis[0][0],3))+'-'+str(round(pts[0]+cis[0][1],3))]))
+                    #w.write('%s,%s\n' % tuple([str(round(pts[1],3)),str(round(pts[1]-cis[1][0],3))+'-'+str(round(pts[1]+cis[1][1],3))]))
 
 
 

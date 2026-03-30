@@ -223,8 +223,7 @@ class MyFigure:
         common_tails = CsvOut(self.traits, paths[2]).write_common_tests() 
         rare_tails   = CsvOut(self.traits, paths[3]).write_rare_tails() 
         snps         = CsvOut(self.traits, paths[4]).write_rares() 
-        
-        self.progress.save() #'(Csv Tables Saved: '+",".join([p for p in paths])+')')
+        self.progress.save(NULL=True) #'(Csv Tables Saved: '+",".join([p for p in paths])+')')
                                                         
 
         

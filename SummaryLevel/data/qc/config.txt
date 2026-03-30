@@ -1,6 +1,6 @@
 
 remove pre 2139,2754,2764            # remove LRS traits 
-remove pre 20153,20154,20258         # remove FEV-PRED traits 
+remove pre 20153,20154,20258         # remove predicted traits 
 remove post 23116,23117,4103,30080   # remove manual traits 
 #keep   30810,30020,30070,20015      # keep any traits you want (eg. index traits) 
 

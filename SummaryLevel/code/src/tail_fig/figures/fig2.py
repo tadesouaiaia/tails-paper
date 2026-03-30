@@ -9,6 +9,9 @@ from util import drawPreds as DP
 from util import drawVarious as DV 
 from util import drawLabels  as DL 
 
+
+# Removals 
+
 class MyFigure:
     def __init__(self, options, traits, progress, figName='main2'): 
         self.options, self.traits, self.data, self.figName = options, traits.members, traits, figName #progress.update(self) 
@@ -101,7 +104,7 @@ class MyFigure:
                         rep_removes[k]['TOTAL'] += 1 
                 except KeyError: continue 
             if len(RK['X']) > MIN_REPS: PD[k] = RK  
-        rems = sorted([k+'(Total/QC/5k): '+str(V['TOTAL'])+','+str(V['QC'])+','+str(V['5k']) for k,V in rep_removes.items()]) 
+        rems = sorted([self.name_swap[k]+'(Total/QC/5k): '+str(V['TOTAL'])+','+str(V['QC'])+','+str(V['5k']) for k,V in rep_removes.items()]) 
         kept = ",".join([str(len(PD[k]['xL'])) for k in ['aou','poc','rep']]) 
         self.progress.report_result('Replication Removals: '+', '.join(rems))  
         self.progress.report_result('Replication Kept: aou,mlt,rpt: '+kept) 
