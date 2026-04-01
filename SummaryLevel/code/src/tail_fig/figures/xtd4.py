@@ -18,6 +18,10 @@ class MyFigure:
         if len(trait_ids) <= step: self.fignames = [self.figName+'.pdf'] 
         else:                      self.fignames = [self.figName+'-1.pdf'] 
         
+        if len(trait_ids) <= step: self.fig_prefixes = [self.options.out+self.figName] 
+        else:                      self.fig_prefixes = [self.options.out+self.figName+'-1.pdf'] 
+        
+        
         if self.progress.SAVESRC: 
             self.pop_handle = open(self.progress.src_prefix+'-POPout.csv','w') 
             self.pop_handle.write('%s,%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','PRS-Type','Data','Values'))
@@ -31,8 +35,8 @@ class MyFigure:
             self.create() 
             self.finish() 
             self.fignames.append(self.fignames[-1].split('-')[0]+'-'+str(n)+'.pdf') 
+            self.fig_prefixes.append(self.options.out+self.fignames[-1].split('-')[0]+'-'+str(n)) 
             n+=1 
-        figPath = self.options.out+self.fignames[0] 
         self.progress.save(NULL=True) 
         return 
                                                     
@@ -69,7 +73,7 @@ class MyFigure:
 
     def finish(self):
         plt.subplots_adjust(left=0.015, bottom=0.01, right=0.985, top=0.98,wspace=0.0,hspace=0.03) 
-        plt.savefig(self.options.out+self.fignames[-1],dpi=600)  
+        for ff in self.options.figFormats: plt.savefig(self.fig_prefixes[-1]+'.'+ff, dpi=500) 
         plt.clf() 
 
 
@@ -103,11 +107,8 @@ class MyFigure:
 
             self.progress.out3, self.progress.panel = self.pop_handle, 'POPout'
             subs.append(SP.POPplot(axes[0], self, T.ti, lw2=0.5, sz1=4, sz2=3, sz3=4.0, alp=0.3).draw_common_popout(MINI=True)) 
-            #self.sib_handle = open(self.progress.src_prefix+'-STANDout.csv','w') 
-            #self.evo_handle = open(self.progress.src_prefix+'-Selection.csv','w') 
             self.progress.out3, self.progress.panel = self.sib_handle, 'STANDout'
             subs.append(SP.SibPlot(axes[1], self, T.ti, sz1=7, sz2=4, sz3=3, alp=0.3, fs2=5).draw_mini_sib_pair()) 
-            #
             self.progress.out3, self.progress.panel = self.evo_handle, 'Selection'
             subs.append(SP.EvoScatter(axes[2], self, T.ti).mini_box(fs=5,sz=6,lw=0.25)) 
         else: 

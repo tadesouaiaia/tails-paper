@@ -108,7 +108,7 @@ def merge_csv_to_excel_sheets(goals,progress,args):
     if len(csv_tables) > 0:
         try: 
             CK = {c.split('-')[-1].split('.')[0]: args.out+c for c in csv_tables} 
-            with pd.ExcelWriter(args.xlsPath+'auxillaryData.xlsx') as writer: 
+            with pd.ExcelWriter(args.xlsPath+'auxiliaryData.xlsx') as writer: 
                 for k in ['traitSummaries', 'commonTails','rareTails','rareSNPs', 'glossary']:  
                     if k in CK: 
                         pd.read_csv(CK[k]).to_excel(writer, sheet_name = k, index=False) 

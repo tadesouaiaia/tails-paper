@@ -119,7 +119,6 @@ class MyFigure:
             found += t_found 
             negs += n_found 
             nots += z_found 
-
             if 'snp' not in T.lists.keys(): 
                 nosnps += t_found
                 continue 
@@ -127,8 +126,14 @@ class MyFigure:
 
             p = T.vals['pop']['common-snp'] 
             r = T.vals['recovery']['combo']   
-            if p.e1 > 0 and p.f1 and r.total1 != 'NA': TR['Lower'].append([r.total1, T]) 
-            if p.e2 > 0 and p.f2 and r.total2 != 'NA': TR['Upper'].append([r.total2, T]) 
+            FOUND=False 
+            if p.e1 > 0 and p.f1 and r.total1 != 'NA': 
+                FOUND=True 
+                TR['Lower'].append([r.total1, T]) 
+            if p.e2 > 0 and p.f2 and r.total2 != 'NA': 
+                FOUND=True 
+                TR['Upper'].append([r.total2, T]) 
+
         self.progress.report_result('Total of '+str(found+negs+nots)+' Trait Tails, '+str(nots)+' (no FDR-SIG POPout), '+str(negs)+' (Neg POPout), '+str(found)+' (Pos POPout)')  
         self.progress.report_result('In '+str(yessnps)+' of '+str(found)+' Tails w/Sig +POPout, (>0.01%) GWAS-SIG snps located and tested for reduction (via common+rare PRS)') 
         return TR 
@@ -216,6 +221,8 @@ class MyFigure:
             tail_data = sorted(TR[k], key = lambda X: X[0], reverse=True) 
 
             for rTot,T in tail_data: 
+                
+
                 if T not in obs_traits: obs_traits.append(T) 
                 self.ax.text(-0.235,yp-2.5,T.name.mini[0:15],fontsize=self.fs4, ha='center',va='center') 
                 self.ax.add_patch(matplotlib.patches.Rectangle((leftEnd, yp-8),1.38+self.offset*2, 12, color=self.blockclr, ec = 'k', lw = 0, alpha=0.9, zorder=0,clip_on=False))
@@ -285,8 +292,6 @@ class MyFigure:
                 elif pos < 12:         self.ax.text(x, yp -3, '15', ha='center', color='k',va='top', fontsize=self.fs4) 
                 else:         self.ax.text(x, yp -3, '20', ha='center', color='k',va='top', fontsize=self.fs4) 
         rLen, rPos, rSig = len(rec_results['ALL']), [r for r in rec_results['ALL'] if r > 0], rec_results['True'] 
-        
-
         self.odds_vs_r2_progress([obs_traits, obs_odds],[sig_traits, sig_odds]) 
         self.progress.report_result(str(rLen)+' Tails Tested for Reduction: '+str(len(rPos))+' >0, '+str(len(rSig))+' Significant')  
         self.progress.report_result('Mean Reduction (all,pos,sig): '+', '.join([str(round(np.mean(x),3)) for x in [rec_results['ALL'],rPos,rSig]])) 
