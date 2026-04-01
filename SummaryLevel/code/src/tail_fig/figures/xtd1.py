@@ -120,9 +120,11 @@ class MyFigure:
         self.locs = [10, 5, 1, 0.5, 0.1] 
         self.names = ['10%','5%','1%','0.5%','0.1%'] 
         self.lookups = ['common@10','common@5','common-snp','common@0.5','common@0.1'] 
-        
+         
 
         self.progress.set_panel('a') 
+        self.progress.out3.write('%s,%s,%s,%s,%s\n' % tuple(['Panel','Trait-ID','PRS-Type','Data','Values'])) 
+
         for i,k in enumerate([0.1,0.5,1,5,10]):
             axes = self.axes[i*4:4+i*4] 
             for j,ti in enumerate(self.exampleTraits): 
