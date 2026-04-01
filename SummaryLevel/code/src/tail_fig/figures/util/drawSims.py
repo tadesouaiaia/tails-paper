@@ -133,8 +133,7 @@ class SlimLib:
 
 
 
-    def plot_sim_boxes(self, ax): # c1 = 'red',c2='grey', sz=100): 
-        
+    def plot_sim_boxes(self, ax): 
         if self.progress.SAVESRC: self.progress.out3.write('%s,%s,%s,%s\n' % ('Panel', 'dataType','ptType','values')) 
         self.c2 = 'xkcd:darkish red'
         X = [x for x in range(100)]

@@ -1,14 +1,10 @@
 import sys, os                                                                                                                                                                                                                                                                               
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
-
 from util.Util   import *
-from util import drawScatter as SP
+from util import drawScatter as DS
 from util import drawVarious as DV
-from util import drawLabels  as DL
 from util import drawCartoon  as DC
-
-
 
 
 class MyFigure:
@@ -32,7 +28,6 @@ class MyFigure:
         self.lib.make_fake_sibs(ax2, TYPE='NOVO') 
         self.lib.make_fake_sibs(ax3, TYPE='MEND') 
 
-    # SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP #
     def setup(self): 
         self.fig, self.axes = matplotlib.pyplot.gcf(), [] 
         self.rows, self.cols, self.WD, self.HT = 60,73, 7.1,5 
@@ -68,7 +63,7 @@ class MyFigure:
         self.draw_sib_schematic(self.axes[0:3]) 
         self.ax_index = 3 
         self.progress.set_panel('b') 
-        for i,ti in enumerate(self.options.indexTraits): sp = SP.SibPlot(self.axes[self.ax_index+i], self, ti, INIT=(i==0)).draw_sib_pair(i, LABEL=True) 
+        for i,ti in enumerate(self.options.indexTraits): sp = DS.SibPlot(self.axes[self.ax_index+i], self, ti, INIT=(i==0)).draw_sib_pair(i, LABEL=True) 
         self.progress.set_panel('c') 
         self.add_sib_pairs(self.axes[7]) 
         self.progress.set_panel('d') 
@@ -124,20 +119,7 @@ class MyFigure:
         return T,X,Y 
 
 
-
-
-
-
-
-
-        
-
-
-
-
-
     def add_sib_pairs(self, ax): 
-        
         if self.progress.SAVESRC: self.progress.out3.write('%s,%s,%s,%s,%s\n' % ('Panel', 'Trait-ID','Tail','-log(POPout-P)','-log(STANDOUT-P)'))
         self.ax, X,Y,cnt = ax, [],[],0 
         for ti,T in self.traits.items(): 
@@ -148,13 +130,10 @@ class MyFigure:
             m1,m2 = [T.vals['sib'].key[k] for k in ['mend1','mend2']]
             b1,b2 = [T.vals['sib'].key[k] for k in ['meta1','meta2']]
             meta1, meta2 = -math.log(self.get_meta_p(d1,m1),10), -math.log(self.get_meta_p(d2,m2),10)
-            #for i,(x,y) in enumerate([[p2,meta2],[p1,meta1]]):  
             for i,(x,y) in enumerate([[p1,meta1],[p2,meta2]]):  
                 self.scatter_sib(x, y, i, T) 
                 X.append(x) 
                 Y.append(y) 
-                
-
         xLab, yLab = '$POPout$ $P$-value ($-log_{10}P$)', '$STANDout$ $P$-value ($-log_{10}P$)'
         lms = DV.AxLims(self.ax,xlab=xLab,ylab=yLab,xLim=[min(X)-3,max(X)+5],yLim=[min(Y)-0.5,max(Y)+1],fs = self.fs2,COMMANDS=['nospines']) 
         R, pv = DV.add_scatter_corr(ax,X,Y, fs=7, INTERCEPT=False) 
@@ -188,8 +167,8 @@ class MyFigure:
         eps = 1e-300
         p_mend = max(min(p_mend, 1.0), eps)
         p_denovo = max(min(p_denovo, 1.0), eps)
-        stat = -2.0 * (math.log(p_mend) + math.log(p_denovo))  # ~ chi2(df=4) under null
-        meta_p = stats.chi2.sf(stat, df=4)  # survival function = 1 - CDF, numerically stable
+        stat = -2.0 * (math.log(p_mend) + math.log(p_denovo))  
+        meta_p = stats.chi2.sf(stat, df=4)
         return meta_p
         
 

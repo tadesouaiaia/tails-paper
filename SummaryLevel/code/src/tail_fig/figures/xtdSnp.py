@@ -72,7 +72,7 @@ class MyFigure:
         self.ax_index += 3 
         count = 0 
         for i,snp_data in enumerate(self.my_data): 
-            dt.add_snp(self.axes[self.ax_index: self.ax_index+3], snp_data, i, len(self.my_data)) # self.clr) 
+            dt.add_snp(self.axes[self.ax_index: self.ax_index+3], snp_data, i, len(self.my_data)) 
             self.ax_index += 3
         return self
 

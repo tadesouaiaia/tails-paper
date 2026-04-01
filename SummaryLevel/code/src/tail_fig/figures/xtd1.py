@@ -5,10 +5,6 @@ from util.Util import *
 from util import drawScatter as SP
 from util import drawVarious as DV
 
-
-# Nom
-
-
 class SumStats:
     def __init__(self, betas, pvs): 
         self.betas, self.pvs = betas, pvs 
@@ -64,6 +60,17 @@ class SumStats:
                 else: xx = round(e,1) 
                 C[xx] += 1 
             return SIG, C 
+
+
+
+
+
+
+
+
+
+
+
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None):
@@ -166,11 +173,6 @@ class MyFigure:
                 w.write('%s,%s,%s,%s\n' % (self.progress.panel,name,'POPoutLogP-cnts',";".join([str(b) for b in LK[loc].binnedP[1]])))
         return 
     
-
-
-    
-
-
     def draw_bins(self, LK, axes): 
         sB, sP, ax_index = [], [], 20 
         for i,(name,loc) in enumerate(zip(self.names,self.locs)): 
@@ -192,12 +194,6 @@ class MyFigure:
         self.progress.report_result('Avg Effect Size Across Alt Bins (10%,5%,1%,0.5%,0.1%): '+str(",".join(sB)))
         self.progress.report_result('Number Non-Sig Across Alt Bins (10%,5%,1%,0.5%,0.1%): '+str(",".join(sP)))
 
-
-
-
-
-
-
     def finish(self, fs =13):
         letters = ['$a$','$b$','$c$','$d$','$e$','$f$'] 
         for i,x in zip([0,20,25],['$a$','$b$','$c$']): 
@@ -205,75 +201,6 @@ class MyFigure:
             elif i == 20:   self.axes[i].set_title(x, x= -0.11, y = 0.97, fontsize=fs) 
             elif i == 25:   self.axes[i].set_title(x, x= -0.11, y = 0.97, fontsize=fs) 
         plt.subplots_adjust(left=0.04, bottom=0.001, right=1.03, top=0.96,wspace=0.05, hspace=0.05) 
-        
         self.progress.save() 
         return
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

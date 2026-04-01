@@ -1,20 +1,10 @@
-#!/usr/bin/python3
-
 import sys, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
-
 from util.Util   import * 
 from util import drawScatter as SP 
 from util import drawTables as DT
 from util import drawVarious as DV 
-
-
-
-
-# standout
-
-
 
 LK = {} 
 LK["trait"]= "UKB Trait ID"
@@ -38,8 +28,6 @@ LK["lower-0.1%-reduction"]= "Lower Tail (0.1%) Common+Rare Variant PRS POPout % 
 LK["lower-1%-pop-effect"]= "Lower Tail (1%) Common Variant PRS POPout effect size"
 LK["lower-1%-pop-fdr"]= "Lower Tail (1%) Common Variant PRS POPout pvalue 5%-FDR Test"
 LK["lower-1%-reduction"]= "Lower Tail (1%) Common+Rare Variant PRS POPout % reduction to POPOut effect"
-#LK["lower-OR"]= "Lower Tail (1%) Odds Ratio: Odds of 1% Trait Value, Given 1% Common PRS Value"
-#LK["lower-OR-CI"]= "Lower Tail (1%) 95% Confidence Interval for Common PRS Odds Ratio"
 LK["lower-OR-CI-combinedPRS"]= "Lower Tail (1%) 95% Confidence Interval for Common+Rare PRS Odds Ratio"
 LK["lower-OR-CI-commonPRS"]= "Lower Tail (1%) 95% Confidence Interval for Common PRS Odds Ratio"
 LK["lower-OR-combinedPRS"]= "Lower Tail (1%) Odds Ratio: Odds of 1% Trait Value, Given 1% Common+Rare PRS Value"
@@ -62,8 +50,6 @@ LK["upper-0.1%-reduction"]= "Upper Tail (0.1%) Common+Rare Variant PRS POPout % 
 LK["upper-1%-pop-effect"]= "Upper Tail (1%) Common Variant PRS POPout effect size"
 LK["upper-1%-pop-fdr"]= "Upper Tail (1%) Common Variant PRS POPout pvalue 5%-FDR Test"
 LK["upper-1%-reduction"]= "Upper Tail (1%) Common+Rare Variant PRS POPout % reduction to POPOut effect"
-#LK["upper-OR"]= "Upper Tail (1%) Odds Ratio: Odds of 1% Trait Value, Given 1% Common PRS Value"
-#LK["upper-OR-CI"]= "Upper Tail (1%) 95% Confidence Interval for Common PRS Odds Ratio"
 LK["upper-OR-CI-combinedPRS"]= "Upper Tail (1%) 95% Confidence Interval for Common+Rare PRS Odds Ratio"
 LK["upper-OR-CI-commonPRS"]= "Upper Tail (1%) 95% Confidence Interval for Common PRS Odds Ratio"
 LK["upper-OR-combinedPRS"]= "Upper Tail (1%) Odds Ratio: Odds of 1% Trait Value, Given 1% Common+Rare PRS Value"
@@ -77,7 +63,6 @@ LK["upper-recP"]= "Upper Tail (1%) Common+Rare Variant PRS POPout % reduction pv
 LK["upper-standout-pv"]= "Upper Tail (1%) Sibling Standout Pvalue"
 
 
-#print(LK.keys()) 
 
 
 
@@ -137,10 +122,8 @@ class CsvOut:
     def write_common_tests(self): 
         pop_keys = [['p1','e1','j1','f1','QC'],['p2','e2','j2','f2','QC']]
         sib_keys = [['meta1'],['meta2']]
-        #odd_keys = [['odds-1','ci-1'],['odds-99','ci-99']]
         pop_names = ['pop-pv','pop-effect','pop-CI','pop-fdr','pop-QC'] 
         sib_names = ['standout-pv'] 
-        #odd_names = ['OR','OR-CI'] 
         all_names = pop_names + sib_names 
         header = ['trait'] + ['lower-'+n for n in all_names]+['upper-'+n for n in all_names] 
         self.w.write(','.join(header)+'\n') 
@@ -223,7 +206,7 @@ class MyFigure:
         common_tails = CsvOut(self.traits, paths[2]).write_common_tests() 
         rare_tails   = CsvOut(self.traits, paths[3]).write_rare_tails() 
         snps         = CsvOut(self.traits, paths[4]).write_rares() 
-        self.progress.save(NULL=True) #'(Csv Tables Saved: '+",".join([p for p in paths])+')')
+        self.progress.save(NULL=True) 
                                                         
 
         

@@ -19,10 +19,6 @@ class MyFigure:
         self.sz1, self.sz2, self.sz3 = 15,10,8
         self.lw1, self.lw2, self.lw3 = 1, 0.7, 0.5
 
-
-
-
-
     def draw(self): 
         self.test_tails() 
         self.setup() 
@@ -65,15 +61,8 @@ class MyFigure:
         
         self.c1, self.c1e, self.c2, self.c2e = 'blue', 'cyan', 'xkcd:shamrock green', 'lime' 
         self.rc, self.rce = 'gold', 'xkcd:bright yellow' 
-        
-
         self.color_maps = [make_colormap(a, b) for a,b in [[self.c1,self.c1e],[self.c2,self.c2e],[self.rc,self.rce]]]
-
-        #self.map1 = make_colormap(self.c1, self.c1e) 
-        #self.map2 = make_colormap(self.c2, self.c2e) 
-        #self.map3 = make_colormap(self.rc, self.rce) 
         index_plots, rare_plots = [], [] 
-        
         self.progress.set_panel('a') 
         for i,(idx,ti) in enumerate(zip([1,3,5,7],self.options.indexTraits)):
             spp = SP.POPplot(self.axes[idx], self, ti, sz1=20,sz2=18,sz3=12,fs1=10,fs2=8,fs3=6) 
@@ -83,8 +72,6 @@ class MyFigure:
                 self.axes[idx].set_title(self.traits[ti].name.mini, x=0,y=0.97,va='center', fontsize=self.fs3) 
         
         DL.TailLabels(self.options).make_extreme_index_key(index_plots[3], self) 
-       
-
         for i,(idx,ti) in enumerate(zip([0,2,4,6],self.options.indexTraits)):
             rpp = SP.POPplot(self.axes[idx], self, ti, sz1=20,sz2=18,sz3=12,fs1=10,fs2=8,fs3=6) 
             rpp.draw_extreme_rares('A+B+burden', yc1=self.rc, yc2=self.rc, yc3=self.rce, ec1='k' ,ec2='k')
@@ -219,7 +206,7 @@ class MyFigure:
         xMin, xMax = 0, 0.35
         xx1, xx2 = 0.08,0.26
         wx = 0.05 
-        bp1 = ax1.boxplot([box_data['e1'], box_data['e2']], vert=True, patch_artist=True, positions = [xx1,xx2],widths=wx) #patch_artist=True, notch='False') #orientation='horizontal')
+        bp1 = ax1.boxplot([box_data['e1'], box_data['e2']], vert=True, patch_artist=True, positions = [xx1,xx2],widths=wx) 
         bp2 = ax2.boxplot([box_data['r1'], box_data['r2']], vert=True, patch_artist=True, positions = [xx1,xx2],widths=wx) 
         if self.progress.SAVESRC:
             self.progress.set_panel('c') 
@@ -266,16 +253,7 @@ class MyFigure:
             ax.set_xlabel('Tail Size',fontsize=self.fs3, labelpad=-3, x=0.45) 
         return
 
-
-
-
-
-
-
-
-
     def finish(self, fs =13):
-        #letters = ['$a$','$b$','$c$','$d$','$e$','$f$'] 
         for i,x in zip([0,8,12,13],['$a$','$b$','$c$','$d$','$e$','$g$','$h$']): 
             try: 
                 if i == 0:   self.axes[i].set_title(x, x= -0.06, y = 0.98, fontsize=fs) 
@@ -287,12 +265,4 @@ class MyFigure:
         
         self.progress.save() 
         return
-
-
-
-
-
-
-
-
 

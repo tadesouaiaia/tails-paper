@@ -8,7 +8,6 @@ from util import drawForest  as DF
 
 # Extended Data Figure: Detailed Replication # 
 
-# poc 
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName=None): 
@@ -88,7 +87,7 @@ class MyFigure:
 
     def finish(self,fs=20):
         letters = ['$a$','$b$','$c$','$d$','$e$','$f$','$g$','$h$'] 
-        for i,ax in enumerate([self.axes[0], self.axes[16],self.axes[17],self.axes[18],self.axes[19],self.axes[20]]): #,self.axes[16]]): # self.axes[6], self.axes[10], self.axes[12],self.axes[13]]): 
+        for i,ax in enumerate([self.axes[0], self.axes[16],self.axes[17],self.axes[18],self.axes[19],self.axes[20]]): 
             lms = DV.AxLims(ax) 
             xs, ys = lms.xHop*0.5, lms.yHop*0.5
             xp = lms.xMin - xs * 10 
@@ -131,7 +130,6 @@ class MyFigure:
             rep_result = self.draw_reps(self.axes[self.ax_index+1], self.axes[self.ax_index+3]) 
             if self.progress.SAVESRC: self.save_rep_src(rep_result) 
         else: 
-            #if self.progress.SAVESRC: self.save_rep_src() 
             rep_result = self.draw_reps(self.axes[self.ax_index], self.axes[self.ax_index+1]) 
         self.draw_key(self.axes[self.ax_index]) 
 

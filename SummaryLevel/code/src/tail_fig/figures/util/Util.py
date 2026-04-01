@@ -100,7 +100,10 @@ def merge_csv_to_excel_sheets(goals,progress,args):
             with pd.ExcelWriter(args.xlsPath+k+'.xlsx') as writer: 
                 for st in KL: 
                     cand = st.split('-')[-1].split('.csv')[0] 
-                    try: pd.read_csv(st).to_excel(writer, sheet_name=cand, index=False)
+                    if k[0:4] == 'main': my_cand = 'Figure '+k[-1]+cand 
+                    elif k[0:3] == 'xtd':   my_cand = 'Extended Data '+k[3::]+cand 
+                    elif k[0:3] == 'sup':   my_cand = 'Supplementary Fig '+k[3::]+cand 
+                    try: pd.read_csv(st).iloc[:, 1:].to_excel(writer, sheet_name=my_cand, index=False)
                     except: continue 
         except IndexError: continue 
     csv_tables = [f for f in os.listdir(args.out) if f.split('.')[-1] == 'csv'] 

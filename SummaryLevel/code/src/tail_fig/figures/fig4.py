@@ -1,13 +1,11 @@
 import sys, os                                                                                                                                                                                                                                                                               
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path: sys.path.insert(0, HERE)
-
 from util.Util   import *
 from util import drawScatter as SP
 from util import drawVarious as DV
 from util import drawLabels  as DL
 
-# yo
 
 class MyFigure:
     def __init__(self, options, traits, progress,figName=None): 

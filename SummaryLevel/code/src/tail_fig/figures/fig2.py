@@ -10,11 +10,10 @@ from util import drawVarious as DV
 from util import drawLabels  as DL 
 
 
-# Removals 
 
 class MyFigure:
     def __init__(self, options, traits, progress, figName='main2'): 
-        self.options, self.traits, self.data, self.figName = options, traits.members, traits, figName #progress.update(self) 
+        self.options, self.traits, self.data, self.figName = options, traits.members, traits, figName 
         self.progress = progress.update(self) 
         self.rep_color_key = {'rep': 'xkcd:purpley', 'poc': 'xkcd:barney', 'aou': 'xkcd:leaf green'} 
         self.fs0, self.fs1, self.fs2, self.fs3, self.fs4 = 20, 15, 10, 8, 5 
@@ -72,7 +71,7 @@ class MyFigure:
             if i == 0: ax.text(xp-1.5*xs, yp-ys, letters[i], fontsize=self.fs1, fontweight='bold', ha='left', va='bottom', clip_on=False) 
             elif i == 1: 
                 ax.text(xp, yp+yh, letters[i], fontsize=self.fs1, fontweight='bold', ha='left', va='bottom', clip_on=False) 
-                ax.text(xp+xs*6,yp+yh*1.5,'UKB $POPout$ Analysis (EUR)',fontsize=self.fs2+0.6,ha='center',va='bottom',clip_on=False) #fontweight='bold') 
+                ax.text(xp+xs*6,yp+yh*1.5,'UKB $POPout$ Analysis (EUR)',fontsize=self.fs2+0.6,ha='center',va='bottom',clip_on=False) 
             else: ax.text(xp-xs, yp, letters[i], fontsize=self.fs1, fontweight='bold', ha='left', va='bottom', clip_on=False) 
         plt.subplots_adjust(left=0.03, bottom=0.04, right=1.02, top=0.98,wspace=0.01, hspace=0.05) 
         self.progress.save() 
@@ -142,7 +141,6 @@ class MyFigure:
 
         if self.progress.SAVESRC: 
             w = self.progress.out3
-            #w.write('%s,%s,%s\n' % ('Panel', 'DataSet','ReplicationEffects'))
             w.write('%s,%s,%s,%s,%s,%s,%s\n' % ('Panel','Trait-ID','Tail','UKB-Euro-POPoutEffect','RepeatMeasure-RepEffect','Multi-Ancestry-RepEffect','AOU-RepEffect')) 
             Tk, trait_ids = dd(list), sorted([k for k in self.rep_src.keys()]) 
             for ti in trait_ids:
@@ -156,32 +154,4 @@ class MyFigure:
 
                     w.write('%s,%s,%s,%s,%s,%s,%s\n' % tuple(r_data)) 
                         
-
-                #if len(self.rep_src[ti].keys()) == 1: continue 
-                #for opt in ['ukb','rep', 'poc', 'aou']: 
-                #    if opt in self.rep_src[ti]: Tk[opt].extend([str(v) for v in self.rep_src[ti][opt]]) 
-                #    else:                       Tk[opt].extend(['',''])
-            #for k in Tk.keys(): w.write('%s,%s,%s\n' % (self.progress.panel,k,';'.join(Tk[k]))) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

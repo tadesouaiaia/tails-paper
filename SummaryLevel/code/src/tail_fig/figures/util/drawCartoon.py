@@ -105,8 +105,8 @@ class FigLib:
         else:
             xj = 60 
             ax.set_xlim(-33,37.5)  
-        ax.plot(self.Xn[xj::], Yf[xj::], color=self.distcolor, linewidth=1, zorder=5)# clip_on=False) 
-        ax.fill(self.Xn[xj::], Yf[xj::], color=self.distcolor, alpha=self.alpha)#, clip_on=False) 
+        ax.plot(self.Xn[xj::], Yf[xj::], color=self.distcolor, linewidth=1, zorder=5)
+        ax.fill(self.Xn[xj::], Yf[xj::], color=self.distcolor, alpha=self.alpha)
         ax.axis('off') 
         self.add_inset(ax, TYPE)        
         y,sz = 4, 1.45
@@ -143,7 +143,6 @@ class FigLib:
         elif TYPE=='NOVO': 
             ax.text(0,-0.8, '$De$ $Novo$\nTail Architecture', fontsize=fs1, ha='center', va='top') 
             txt1 = 'Sibs\nNormally\nDistributed' 
-            #self.make_arrow(ax, a = (tx,ty), b = (1,14), txt = txt1,FLIP=True) 
             self.make_arrow(ax, a = (tx,ty+7.5), b = (13,34), txt=txt1) 
         elif TYPE == 'MEND': 
             ax.text(0,-0.8, 'Mendelian-like\nTail Architecture', fontsize=fs1, ha='center', va='top') 
@@ -181,18 +180,10 @@ class FigLib:
             ax.fill(self.Xi, Yp, color='grey', alpha=1, zorder=10,clip_on=False)  
         elif TYPE == 'NOVO': 
             Yp = [self.yi+(y*182) for y in stats.norm.pdf(self.Xi, self.xm, 5.8)]  
-            #ax.plot(self.Xi, Yp, clip_on=False) 
             ax.fill(self.Xi, Yp, color='red', alpha=1, zorder=10,clip_on=False)  
         else: 
             Yp = [self.yi+(y*85) for y in stats.norm.pdf(self.Xi, self.xm, 5)]  
             ax.fill(self.Xi, Yp, color='purple', alpha=1, zorder=10,clip_on=False)  
             Yp = [self.yi+(y*50) for y in stats.norm.pdf(self.Xi, self.xm+self.xm*0.53, 1.3)]  
             ax.fill(self.Xi, Yp, color='purple', alpha=1, zorder=10,clip_on=False)  
-
-
-
-
-
-
-
 

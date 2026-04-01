@@ -12,7 +12,7 @@ def draw_square(ax,x1,x2,y1,y2,clr='k',lw=0.4):
 
 def draw_blank(ax): 
     draw_square(ax, 0,1,0,1,lw=1) 
-    rect = Rectangle((0, 0 ), 1,1,facecolor='lightgrey', edgecolor='k', linewidth=1, alpha=0.15) #zorder=5)
+    rect = Rectangle((0, 0 ), 1,1,facecolor='lightgrey', edgecolor='k', linewidth=1, alpha=0.15) 
     ax.add_patch(rect)
     lms = AxLims(ax, xt=[], yt=[], xLim=[0,1], yLim=[0,1]) 
     return
@@ -69,7 +69,7 @@ def add_scatter_corr(ax, X, Y, fs=9, clr ='k', lw=0.8, INTERCEPT=True, EXTEND=0,
 
 
 class AxLims:
-    def __init__(self,ax, xLim = [], yLim = [], xt = None, yt = None, xlab = None, ylab = None, ystretch = 0, xstretch=0, fs = 9, CORNERS=[], COMMANDS=[]): #AX_NOTES = [], COMMANDS=[]): 
+    def __init__(self,ax, xLim = [], yLim = [], xt = None, yt = None, xlab = None, ylab = None, ystretch = 0, xstretch=0, fs = 9, CORNERS=[], COMMANDS=[]): 
         self.ax = ax 
         if len(xLim) == 2: ax.set_xlim(xLim[0], xLim[1]) 
         if len(yLim) == 2: ax.set_ylim(yLim[0], yLim[1]) 

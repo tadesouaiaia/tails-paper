@@ -5,13 +5,6 @@ from Util import *
 import drawVarious as DV
 
 
-
-
-
-
-
-
-
 class BoxKeys:
     def __init__(self,ax,lw1=1,lw2=0.8,lw3=0.3,sz1=15,sz2=10,sz3=5,fs1=7.5,fs2=6,fs3=5):
         self.ax, self.lms = ax, DV.AxLims(ax) 
@@ -125,7 +118,7 @@ class BoxKeys:
         for i,(x,c,n) in enumerate(zip(xp, clrs, names)): 
             x+= xh*5*i 
             self.ax.scatter(x, yl, marker='o', edgecolor=c[1], color=c[0], lw=0.2, clip_on=False, zorder=10, s = self.sz1+5) 
-            self.ax.text(x+ xh*1.5, yl, n, fontsize=self.fs3, va='center') #fontweight='bold')  
+            self.ax.text(x+ xh*1.5, yl, n, fontsize=self.fs3, va='center') 
             x+= xh*10
         return
 
@@ -158,7 +151,7 @@ class BoxKeys:
             elif i == 3: x -= 10*xh 
             elif i == 4: x -= 17*xh
             self.ax.scatter(x, yl, marker='o', edgecolor='k', color=c, lw=0.2, clip_on=False, zorder=10, s = self.sz2) 
-            self.ax.text(x+ xh*1.8, yl, n, fontsize=self.fs3, va='center') #fontweight='bold')  
+            self.ax.text(x+ xh*1.8, yl, n, fontsize=self.fs3, va='center') 
         return
 
 
@@ -221,38 +214,8 @@ class BoxKeys:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class TailLabels:
-    def __init__(self, options): #trait_key, DRAW=True): 
+    def __init__(self, options): 
         self.options = options 
 
     def add_indiv_key(self, ax, ck, RULE='LOWER',fs =8, fs2=6, fs3=5): 
@@ -262,10 +225,6 @@ class TailLabels:
         x1, x2 = xMin +3*xs, xMin + 95*xs
         y1, yl, y2 = yMax - 20*ys, yMax - 20*ys, yMax +13*ys
         clrs = [ck.c1, ck.c2, ck.rc, ck.rce,ck.c1,ck.c2,ck.c1e,ck.c2e] 
-        
-
-
-        #maps = [ck.map1, ck.map2, ck.map3] 
         DV.draw_square(ax, x1, x2, y1, y2) 
         sz = 19
         yjj = 21.5
@@ -311,21 +270,6 @@ class TailLabels:
             else: ax.text(x+0.9*xs,yl,'Rare${+}$Common Tails (0.1%)',va='center',ha='left',fontsize=fs)
         DV.draw_square(ax, x1-5, x2+5, y1-ys*0.3, y2+ys*0.2) 
         return  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -124,17 +124,8 @@ class BicTable:
         self.w2 = [25,13,20,10,15,17] 
         w1 = [25,43,32] 
         w2 = [25,13,20,10,15,17] 
-         
-
         self.ax = ax1 
         self.draw_lead('Nested Alternatives') 
-
-        #yA, yB, yC = 72, 93, 100
-        #self.add_row(['Trait'], X = (0,w1[0]), Y = (yA, yC), FS = fs1, WIDTHS = [w1[0]], TITLE=True, ALPHA=alp,STYLE='BLOCK')
-        #self.add_row(['Top Model','Alternate Model'],X=(w1[0],100), Y = (yB,yC), FS=fs3, WIDTHS=w1[1:3], STYLE="HORZ") 
-        #labs = ['Model','Selective\nPressure','Model\nConfidence\n(LRT P-Value)','Model','Selective\nPressure'] 
-        #self.add_row(labs,  X = (w1[0],100), Y = (yA, yB), FS = fs3, WIDTHS = w2[1::]) 
-
         yp, yj = 63, 7
         kD = sorted(self.K['NESTED']) 
         for i,(name,T,models,eqns,dirs,pv) in enumerate(kD): 
@@ -143,10 +134,7 @@ class BicTable:
             if i + 1 < len(kD): self.add_row(tr, X = (0,100), Y = (yp, yp+yj), FS = fs3, WIDTHS = w2, STYLE='MID') 
             else:               self.add_row(tr, X = (0,100), Y = (yp, yp+yj), FS = fs3, WIDTHS = w2, STYLE='BOTTOM') 
             yp -= yj
-            
         self.close_table() 
-
-
         self.ax = ax2 
         self.draw_lead('Complex Alternatives') 
         yp, yj = 60, 10
@@ -157,9 +145,7 @@ class BicTable:
             if i + 1 < len(kD): self.add_row(tr, X = (0,100), Y = (yp, yp+yj), FS = fs3, WIDTHS = self.w2, STYLE='MID') 
             else:               self.add_row(tr, X = (0,100), Y = (yp, yp+yj), FS = fs3, WIDTHS = self.w2, STYLE='BOTTOM') 
             yp -= yj
-        
         self.close_table() 
-
         return
 
             
@@ -209,7 +195,7 @@ class SummaryTable:
                 if LINECOLOR != 'k':
                     cw, ch = row._cells[cell]._width, row._cells[cell]._height
                     cx, cy = row._cells[cell]._x0, row._cells[cell]._y0
-                    rect = matplotlib.patches.Rectangle((cx+0.1 , 2 ), cw-0.2, 97,facecolor='white', edgecolor=LINECOLOR, linewidth=1) #zorder=5)
+                    rect = matplotlib.patches.Rectangle((cx+0.1 , 2 ), cw-0.2, 97,facecolor='white', edgecolor=LINECOLOR, linewidth=1) 
         self.rows.append(row) 
 
 
@@ -296,7 +282,7 @@ class SnpTable:
                 if LINECOLOR != 'k':
                     cw, ch = row._cells[cell]._width, row._cells[cell]._height
                     cx, cy = row._cells[cell]._x0, row._cells[cell]._y0
-                    rect = matplotlib.patches.Rectangle((cx+0.1 , 2 ), cw-0.2, 97,facecolor='white', edgecolor=LINECOLOR, linewidth=6) #zorder=5)
+                    rect = matplotlib.patches.Rectangle((cx+0.1 , 2 ), cw-0.2, 97,facecolor='white', edgecolor=LINECOLOR, linewidth=6) 
         self.rows.append(row) 
 
 
@@ -339,17 +325,9 @@ class SnpTable:
             self.ax.set_ylim(0,100) 
             ek = 'darkslategray'
             self.ax.axis('off') 
-            #self.ax.plot([0,100],[101,101],color=ek,linewidth=4,clip_on=False)
-            #self.ax.plot([0,100],[0,0],color=ek,linewidth=4,clip_on=False)
-            #self.ax.plot([0,0],[0,101],color=ek,linewidth=4,clip_on=False)
-            #self.ax.plot([100,100],[0,101],color=ek,linewidth=4,clip_on=False)
-        
-
         if self.type == 'annotated_rares': axes[1].set_title('Annotated Rare Variants', ha = 'center', fontsize = fs1, fontweight='bold',x=0.35) 
         elif self.type == 'annotated_burdens': axes[1].set_title('Annotated Burden Variants', ha = 'center', fontsize = fs1, fontweight='bold',x=0.35) 
         else:                                  axes[1].set_title('Unannotated Burden Variants', ha = 'center', fontsize = fs1, fontweight='bold',x=0.35) 
-
-
         return self 
 
 
@@ -374,14 +352,9 @@ class SnpTable:
 
     def add_snp(self, axes, s, clr = 'white',ALP=0.3, fs1=30, fs2=24):         
         self.clr = clr 
-        
-
-        
         if s.group == 'rare': d1 = [s.loc,s.rs, s.maf, s.type, s.genes] 
         else:                 d1 = [s.loc,len(s.masks), s.mafs[0], 'Burden',s.genes]             
         self.ax = axes[0]  
-        
-
         wx = 0 
         fzd = [fs1+2, fs1+5, fs1+5, fs1+4, fs1+6] 
         for i,(fs, d,w) in enumerate(zip(fzd, d1,self.snp_widths)): 
@@ -459,60 +432,6 @@ class SnpTable:
         
 
 
-
-            
-            
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-        
-
 class CompTable:
     def __init__(self, ax, options, clr='white'): 
         self.options = options 
@@ -550,14 +469,6 @@ class CompTable:
                 cell.visible_edges = 'horizontal'
                 cell.set_linewidth(0.2)
         
-        #for cell in row.get_celld().values():
-        #    cell.visible_edges = ''
-
-
-        #table_props = row.properties()
-        #if ALPHA > 0: 
-            #    for cell in row._cells: row._cells[cell].set_alpha(ALPHA)
-        #self.rows.append(row) 
 
 
     def initialize(self, fs1 = 10, fs2 = 9, fs3 = 8, fs4=7, c1='white', c2='white'): 
@@ -625,12 +536,6 @@ class CompTable:
         self.ax.axis('off') 
         return
             
-            
-            
-
-
-
-
 
     def get_my_key(self, traits): 
         K = {} 
@@ -654,26 +559,6 @@ class CompTable:
                     else:       my_data.append(str(round(p,3))+'\n(stabilising)') 
             K[T.ti] = my_data
         return K
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
