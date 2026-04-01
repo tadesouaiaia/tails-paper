@@ -36,7 +36,7 @@ class BoxKeys:
             xL, xR = xa + xs * x_buffers[0], xb - (xs*x_buffers[0])+((span-1)*self.lms.xRange) 
             jp = ((xR - xL))/n 
             xp = [xL + x_buffers[1]*xh + (jp*i) for i in range(n)] 
-            DV.draw_square(self.ax, xL, xR, y1, y2, clr='k', lw=0.5) 
+            DV.draw_square(self.ax, xL, xR, y1, y2, clr='k', lw=0.3) 
             return xp,yl  
         else: 
             print('unsupported') 
@@ -148,17 +148,16 @@ class BoxKeys:
         return
 
     def add_multi_key(self, loc, clrs): 
-
         xs,xh  = self.lms.xStep, self.lms.xHop
         ys,yh  = self.lms.yStep, self.lms.yHop
-        xp,yl = self.get_points(loc, 5, y_buffers=[0.60,2.6], x_buffers=[0.1,2]) 
+        xp,yl = self.get_points(loc, 5, y_buffers=[0.90,2.9], x_buffers=[0.1,2]) 
         names = ['Rare PRS (<1%)','Rare PRS (<0.1%)','Burden PRS','Common PRS','Common+Rare PRS (Tails)'] 
         for i,(x,c,n) in enumerate(zip(xp, clrs, names)): 
             if i == 1:   x -= 2*xh 
             elif i == 2: x += 0.5*xh 
             elif i == 3: x -= 10*xh 
             elif i == 4: x -= 17*xh
-            self.ax.scatter(x, yl, marker='o', edgecolor='k', color=c, lw=0.2, clip_on=False, zorder=10, s = self.sz1) 
+            self.ax.scatter(x, yl, marker='o', edgecolor='k', color=c, lw=0.2, clip_on=False, zorder=10, s = self.sz2) 
             self.ax.text(x+ xh*1.8, yl, n, fontsize=self.fs3, va='center') #fontweight='bold')  
         return
 

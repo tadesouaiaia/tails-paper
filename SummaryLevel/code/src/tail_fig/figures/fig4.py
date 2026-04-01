@@ -255,8 +255,6 @@ class MyFigure:
                     w.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' % tuple([self.progress.panel, T.id, k] + r_vals+[rTot]+print_odds))
                     
 
-                    #w.write('%s,%s,' % tuple([str(round(pts[0],3)),str(round(pts[0]-cis[0][0],3))+'-'+str(round(pts[0]+cis[0][1],3))]))
-                    #w.write('%s,%s\n' % tuple([str(round(pts[1],3)),str(round(pts[1]-cis[1][0],3))+'-'+str(round(pts[1]+cis[1][1],3))]))
 
 
 
@@ -275,7 +273,7 @@ class MyFigure:
                         self.ax.plot([xa-0.009,xa+0.01],[y1+2,y1-3],clip_on=False,lw=self.lw3,color='k') 
                         self.ax.plot([xb-0.009,xb+0.01],[y1+2,y1-3],clip_on=False,lw=self.lw3,color='k') 
                     else:
-                        self.ax.plot([x1,x2],[y1, y1], linestyle = '-', linewidth=self.lw1,color='k',clip_on=False)
+                        self.ax.plot([x1,x2],[y1, y1], linestyle = '-', linewidth=self.lw3,color='k',clip_on=False)
             ax.text(self.offset+0.3,yp-18,k+' Tail POPout Reduction', va='top',ha='center',fontsize=self.fs3-1)
             ax.text(self.offset+1.65,yp-18,k+' Tail Odds Ratios', va='top',ha='center',fontsize=self.fs3-1) 
             for i,a in enumerate([-0.1,0,0.20,0.40,0.60,0.8]): 
